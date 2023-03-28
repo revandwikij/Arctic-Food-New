@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pembeli', function (Blueprint $table) {
-            $table->id();
+            $table->id("Id_User");
+            $table->integer('Id_Alamat');
+            $table->string('Username');
+            $table->enum('Jenis_kelamin', ['L','P']);
+            $table->string('Email');
+            $table->string('No_Telp');
             $table->timestamps();
         });
     }
