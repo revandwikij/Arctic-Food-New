@@ -10,7 +10,7 @@
     </div>
     <p
         style='line-height: undefined; letter-spacing: 0%; text-transform: none; text-align: left; vertical-align: top; font-family: Inter; font-size: 30px; color: rgba(0, 0, 0, 1); font-weight: 400; width: 100%; height: 100%'>
-        username</p>
+       contoh username</p>
     <div
         style='opacity: 1; transform: rotate(3.975692877889816e-16deg); mix-blend-mode: normal; border-color: rgba(NaN, NaN, NaN, undefined); border-width: 2px; border-style: solid; border-style: solid; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; align-items: inherit; border-radius: 15px'>
     </div>
