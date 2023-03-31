@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/rateit.css" />
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -50,17 +51,70 @@
         <div class="container">
           <div class="header-top-inner">
             <div class="cnt-account">
-              <ul class="list-unstyled">
-                <li class="myaccount">
-                  <a href="#"><span>My Account</span></a>
-                </li>
-                <li class="header_cart hidden-xs">
-                  <a href="#"><span>My Cart</span></a>
-                </li>
-                <li class="login">
-                  <a href="#"><span>Login</span></a>
-                </li>
-              </ul>
+                <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header text-center">
+                      <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                      <div class="md-form mb-5">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" id="defaultForm-email" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                      </div>
+
+                      <div class="md-form mb-4">
+                        <i class="fas fa-lock prefix grey-text"></i>
+                        <input type="password" id="defaultForm-pass" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <button class="btn btn-default">Login</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <a href="" class="" data-toggle="modal" data-target="#modalLoginForm">Login</a>
+              </div>
+
+                {{-- <input type="checkbox" id="show">
+                <label for="show" class="">Login</label>
+                <div class="coba">
+                    <label for="show" class="close-btn fas fa-times" title="close"></label>
+                    <div class="text">
+                       Login Form
+                    </div>
+                    <form action="#">
+                       <div class="data">
+                          <label>Email or Phone</label>
+                          <input type="text" required>
+                       </div>
+                       <div class="data">
+                          <label>Password</label>
+                          <input type="password" required>
+                       </div>
+                       <div class="forgot-pass">
+                          <a href="#">Forgot Password?</a>
+                       </div>
+                       <div class="btn">
+                          <div class="inner"></div>
+                          <button type="submit">login</button>
+                       </div>
+                       <div class="signup-link">
+                          Not a member? <a href="#">Signup now</a>
+                       </div>
+                    </form>
+                 </div>
+              </div> --}}
             </div>
               <!-- /.list-unstyled -->
             </div>
@@ -268,7 +322,7 @@
                                   <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
                                   <li><a href="checkout.html">Checkout</a></li>
                                   <li><a href="contact.html">Contact</a></li>
-                                  <li><a href="sign-in.html">Sign In</a></li>
+                                  <li><a href="sign-in.html"><b>Sign In</b></a></li>
                                 </ul>
                               </div>
                             </div>
@@ -1395,6 +1449,8 @@
           <!-- ============================================== CONTENT ============================================== -->
           <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
             <!-- ========================================== SECTION – HERO ========================================= -->
+            <div class="center">
+
 
             <div id="hero">
               <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
