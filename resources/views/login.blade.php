@@ -46,7 +46,7 @@
             <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
             <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
             <li class="check"><a href="#"><span>Checkout</span></a></span></li> --}}
-            <li class="login"><a href="/signin"><span>Login</span></a></li>
+            <li class="login"><a href="/login"><span>Login</span></a></li>
           </ul>
         </div>
         <!-- /.cnt-account -->
@@ -84,7 +84,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
           <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="home.html"> <img src="assets/images/logo.png" alt="logo"> </a> </div>
+          <div class="logo"> <a href="/"> <img src="assets/images/logo.png" alt="logo"> </a> </div>
           <!-- /.logo -->
           <!-- ============================================================= LOGO : END ============================================================= --> </div>
         <!-- /.logo-holder -->
@@ -187,7 +187,7 @@
             <div class="nav-outer">
               <ul class="nav navbar-nav">
                 <li class="active dropdown">
-                  <a href="home.html">Home</a>
+                  <a href="/">Home</a>
                 </li>
                 <li class="dropdown">
                   <a
@@ -202,12 +202,12 @@
                         <div class="row">
                           <div class="col-xs-12 col-menu">
                             <ul class="links">
-                              <li><a href="home.html">Home</a></li>
+                              <li><a href="/">Home</a></li>
                               <li><a href="category.html">Category</a></li>
                               <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
                               <li><a href="checkout.html">Checkout</a></li>
                               <li><a href="contact.html">Contact</a></li>
-                              <li><a href="/signin"><b>Sign In</b></a></li>
+                              <li><a href="/login"><b>Sign In</b></a></li>
                             </ul>
                           </div>
                         </div>
@@ -242,7 +242,7 @@
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="home.html">Home</a></li>
+				<li><a href="/">Home</a></li>
 				<li class='active'>Login</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
@@ -261,14 +261,14 @@
 		<a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
 		<a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
 	</div>
-	<form class="register-form outer-top-xs" role="form">
+	<form class="register-form outer-top-xs" role="form" action="/signin/verif">
 		<div class="form-group">
-		    <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-		    <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" >
+		    <label class="info-title" for="Email">Email Address <span>*</span></label>
+		    <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="email" required>
 		</div>
 	  	<div class="form-group">
 		    <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
-		    <input type="password" class="form-control unicase-form-control text-input" id="exampleInputPassword1" >
+		    <input type="password" class="form-control unicase-form-control text-input" id="exampleInputPassword1" name="password" required>
 		</div>
 		<div class="radio outer-xs">
 		  	<label>
