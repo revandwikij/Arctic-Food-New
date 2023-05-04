@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,9 @@ Route::get('/signin', function () {
 });
 
 Route::resource('barang', BarangController::class);
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::get('/signin/verif', [LoginController::class, 'validasi'] );
+Route::get('/logout', [LoginController::class, 'logout'] );

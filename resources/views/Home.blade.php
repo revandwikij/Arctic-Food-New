@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <meta name="keywords" content="MediaCenter, Template, eCommerce" />
     <meta name="robots" content="all" />
-    <title></title>
+    <title>Projek</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -57,7 +57,8 @@
                 <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
                 <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
                 <li class="check"><a href="#"><span>Checkout</span></a></span></li> --}}
-                <li class="login"><a href="/signin"><span>Login</span></a></li>
+                <li class="login"><a href="/login"><span>Login</span></a></li>
+                <li class="login"><a href="/logout"><span>Logout</span></a></li>
               </ul>
             </div>
             <!-- /.cnt-account -->
@@ -158,7 +159,7 @@
             <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
               <!-- ============================================================= LOGO ============================================================= -->
               <div class="logo">
-                <a href="home.html">
+                <a href="/">
                   <img src="" alt="logo" />LOGO
                 </a>
               </div>
@@ -322,7 +323,7 @@
                 <div class="nav-outer">
                   <ul class="nav navbar-nav">
                     <li class="active dropdown">
-                      <a href="home.html">Home</a>
+                      <a href="/">Home</a>
                     </li>
                     <li class="dropdown">
                       <a
@@ -337,12 +338,12 @@
                             <div class="row">
                               <div class="col-xs-12 col-menu">
                                 <ul class="links">
-                                  <li><a href="home.html">Home</a></li>
+                                  <li><a href="/">Home</a></li>
                                   <li><a href="category.html">Category</a></li>
                                   <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
                                   <li><a href="checkout.html">Checkout</a></li>
                                   <li><a href="contact.html">Contact</a></li>
-                                  <li><a href="/signin"><b>Sign In</b></a></li>
+                                  <li><a href="/login"><b>Sign In</b></a></li>
                                 </ul>
                               </div>
                             </div>
