@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/rateit.css" />
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
     <link rel="stylesheet" href="assets/css/login.css" />
+    <link rel="stylesheet" href="assets/css/coba.css" />
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -51,70 +52,94 @@
         <div class="container">
           <div class="header-top-inner">
             <div class="cnt-account">
-                <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
+              <ul class="list-unstyled">
+                {{-- <li class="myaccount"><a href="#"><span>My Account</span></a></li>
+                <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
+                <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
+                <li class="check"><a href="#"><span>Checkout</span></a></span></li> --}}
+                <li class="login"><a href="/signin"><span>Login</span></a></li>
+              </ul>
+            </div>
+            <!-- /.cnt-account -->
+
+            <div class="cnt-block">
+              <ul class="list-unstyled list-inline">
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">USD</a></li>
+                    <li><a href="#">INR</a></li>
+                    <li><a href="#">GBP</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">German</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <!-- /.list-unstyled -->
+            </div>
+            <!-- /.cnt-cart -->
+            <div class="clearfix"></div>
+          </div>
+          <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
+      </div>
+
+              <!-- Coba Coba -->
+              {{-- <div class="container">
+                <a href="" type="" class="" data-toggle="modal" data-target="#loginModal">
+                  Login
+                </a>
+              </div>
+
+              <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
-                    <div class="modal-header text-center">
-                      <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                    <div class="modal-header border-bottom-0">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body mx-3">
-                      <div class="md-form mb-5">
-                        <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="email" id="defaultForm-email" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                    <div class="modal-body">
+                      <div class="form-title text-center">
+                        <h4>Login</h4>
                       </div>
+                      <div class="d-flex flex-column text-center">
+                        <form action="" method="">
+                          <div class="form-group">
+                            <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                          </div>
+                          <button type="button" class="btn btn-info btn-block btn-round">Login</button>
+                        </form>
 
-                      <div class="md-form mb-4">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="defaultForm-pass" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                        <div class="text-center text-muted delimiter">or use a social network</div>
+                        <div class="d-flex justify-content-center social-buttons">
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                          </button>
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                          </button>
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                          </button>
+                        </di>
                       </div>
-
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                      <button class="btn btn-default">Login</button>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="text-center">
-                <a href="" class="" data-toggle="modal" data-target="#modalLoginForm">Login</a>
-              </div>
-
-                {{-- <input type="checkbox" id="show">
-                <label for="show" class="">Login</label>
-                <div class="coba">
-                    <label for="show" class="close-btn fas fa-times" title="close"></label>
-                    <div class="text">
-                       Login Form
+                    <div class="modal-footer d-flex justify-content-center">
+                      <div class="signup-section">Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.</div>
                     </div>
-                    <form action="#">
-                       <div class="data">
-                          <label>Email or Phone</label>
-                          <input type="text" required>
-                       </div>
-                       <div class="data">
-                          <label>Password</label>
-                          <input type="password" required>
-                       </div>
-                       <div class="forgot-pass">
-                          <a href="#">Forgot Password?</a>
-                       </div>
-                       <div class="btn">
-                          <div class="inner"></div>
-                          <button type="submit">login</button>
-                       </div>
-                       <div class="signup-link">
-                          Not a member? <a href="#">Signup now</a>
-                       </div>
-                    </form>
-                 </div>
+                </div>
               </div> --}}
+
             </div>
               <!-- /.list-unstyled -->
             </div>
@@ -183,12 +208,7 @@
                             >
                           </li>
                           <li role="presentation">
-                            <a
-                              role="menuitem"
-                              tabindex="-1"
-                              href="category.html"
-                              >- </a
-                            >
+                            <a role="menuitem"tabindex="-1"href="category.html">- </a>
                           </li>
                         </ul>
                       </li>
@@ -322,7 +342,7 @@
                                   <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
                                   <li><a href="checkout.html">Checkout</a></li>
                                   <li><a href="contact.html">Contact</a></li>
-                                  <li><a href="sign-in.html"><b>Sign In</b></a></li>
+                                  <li><a href="/signin"><b>Sign In</b></a></li>
                                 </ul>
                               </div>
                             </div>
@@ -5115,5 +5135,6 @@
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/coba.js"></script>
   </body>
 </html>

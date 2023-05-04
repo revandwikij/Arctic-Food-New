@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembeli', function (Blueprint $table) {
-            $table->id("Id_User");
+        Schema::create('pelanggan', function (Blueprint $table) {
+            $table->id('Id_Pelanggan');
             $table->integer('Id_Alamat');
             $table->string('Username');
             $table->enum('Jenis_kelamin', ['L','P']);
             $table->string('Email');
+            $table->string('Password');
             $table->string('No_Telp');
             $table->timestamps();
+
+            $table->foreign('Id_Alamat')->references('alamat')->on('Id_Alamat')->onDelete('cascade');
         });
     }
 
