@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pelangganController;
 
 
 /*
@@ -32,3 +33,5 @@ Route::get('/login', function () {
 
 Route::get('/signin/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
+
+Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
