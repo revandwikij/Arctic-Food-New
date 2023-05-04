@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,5 @@ Route::get('/', function () {
 Route::get('/signin', function () {
     return view('sign-in');
 });
+
+Route::resource('barang', BarangController::class);

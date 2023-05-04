@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('No_Telp');
             $table->timestamps();
 
-            $table->foreign('Id_Alamat')->references('alamat')->on('Id_Alamat')->onDelete('cascade');
+            // $table->foreign('Id_Alamat')->references('alamat')->on('Id_Alamat')->onDelete('cascade');
         });
     }
 
