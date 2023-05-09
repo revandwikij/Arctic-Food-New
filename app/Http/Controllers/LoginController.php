@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -14,12 +14,12 @@ class pelangganSeeder extends Seeder
     public function run(): void
     {
         pelanggan::create([
-            'Id_Alamat' => '2432',
-            'Username' => 'admin123',
-            'Jenis_Kelamin' => 'L',
-            'Email' => 'admin22@gmail.com',
-            'Password' => 'adminpassword1',
-            'No_Telp' => '0899890769',
+            'Id_Alamat' => '248',
+            'Username' => 'admin183',
+            'Jenis_kelamin' => 'P',
+            'Email' => 'admin999@gmail.com',
+            'Password' => 'adminpassword2',
+            'No_Telp' => '0899980769',
             'created_at' => date('Y-m-d H:i:s', time()),
             'updated_at' => date('Y-m-d H:i:s', time())
         ]);

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Data Pelanggan</title>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary">
@@ -16,7 +16,7 @@
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
-  <button type="button" class="btn btn-primary">Tambah data</button>
+  {{-- <button type="button" class="btn btn-primary">Tambah data</button> --}}
 </nav>
 
 <table class="table">
@@ -37,7 +37,7 @@
       <th scope="row">{{$item['Id_Pelanggan']}}</th>
       <td>{{$item['Id_Alamat']}}</td>
       <td>{{$item['Username']}}</td>
-      <td>{{$item['Jenis_Kelamin']}}</td>
+      <td>{{$item['Jenis_kelamin']}}</td>
       <td>{{$item['Email']}}</td>
       <td>{{$item['Password']}}</td>
       <td>{{$item['No_Telp']}}</td>

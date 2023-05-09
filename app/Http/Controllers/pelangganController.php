@@ -10,5 +10,12 @@ class pelangganController extends Controller
     {
         $data_pelanggan=pelanggan::all();
         return view('pelanggan/TampilPelanggan',compact('data_pelanggan'));
+
+    }
+
+    public function tambah()
+    {
+
+        
     }
 }

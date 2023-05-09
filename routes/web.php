@@ -22,16 +22,12 @@ Route::get('/', function () {
     return view('Home');
 });
 
-Route::get('/signin', function () {
-    return view('sign-in');
-});
-
 Route::resource('barang', BarangController::class);
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/signin/verif', [LoginController::class, 'validasi'] );
+Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
 
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
