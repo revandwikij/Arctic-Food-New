@@ -23,11 +23,18 @@ Route::get('/', function () {
 });
 
 Route::resource('barang', BarangController::class);
+
+//login
 Route::get('/login', function () {
     return view('login');
 })->name('login');
-
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
+
+//logout
 Route::get('/logout', [LoginController::class, 'logout'] );
 
+//register
+Route::post('/register/validasi', [LoginController::class, 'register']);
+
+//
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
