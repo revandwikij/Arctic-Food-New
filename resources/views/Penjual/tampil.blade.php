@@ -78,7 +78,7 @@
                             <td>{{$data->Keterangan_Barang}} </td>
                             <td>{{$data->Harga}} </td>
                             <td>
-                                <a href ="/Ubah" class="btn btn-primary mb-5">Tambah Produk</a>
+                                <a href ="/Ubah" class="btn btn-secondary">Edit</a>
                                 <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> 
                             </td>
                     </tr>
