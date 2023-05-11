@@ -6,6 +6,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,6 @@ Route::get('/Tambah', [BarangController::class, 'create']);
 Route::get('/Ubah', [BarangController::class, 'edit']);
 Route::post('/Form', [BarangController::class, 'store']);
 Route::post('/Edit', [BarangController::class, 'update']);
+
+//
+Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
