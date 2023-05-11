@@ -25,10 +25,15 @@ Route::get('/signin', function () {
     return view('sign-in');
 });
 
-Route::resource('barang', BarangController::class);
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 Route::get('/signin/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
+Route::get('/Barang', [BarangController::class, 'index']);
+Route::get('/Tambah', [BarangController::class, 'create']);
+Route::get('/Ubah', [BarangController::class, 'edit']);
+Route::post('/Form', [BarangController::class, 'store']);
+Route::post('/Edit', [BarangController::class, 'update']);
