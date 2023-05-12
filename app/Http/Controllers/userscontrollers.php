@@ -40,6 +40,8 @@ class userscontrollers extends Controller
             'level' => 'required',
         ]);
 
+
+
         $users = new users();
         $users->name = $request->name;
         $users->email = $request->email;
@@ -83,7 +85,7 @@ class userscontrollers extends Controller
         $users->name = $request->name,
         $users->email = $request->email,
         // if ($request->password)
-            $users->password = Hash::make($request->password),
+        $users->password = Hash::make($request->password),
         $users->level = $request->level,
         $users->save(),
 
