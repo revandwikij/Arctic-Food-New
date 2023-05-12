@@ -78,9 +78,12 @@
                             <td>{{$data->Keterangan_Barang}} </td>
                             <td>{{$data->Harga}} </td>
                             <td>
-                                <a href ="/Ubah" class="btn btn-secondary">Edit</a>
-                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> 
+
+                                <a href ="Ubah/{{$data->Id_Barang}}" class="btn btn-secondary">Edit</a>
+                                <a href="Hapus/{{ $data->Id_Barang }}" class="btn btn-sm btn-danger" method="post"><i class="fa fa-trash"></i></a></button> 
+                                
                             </td>
+
                     </tr>
                      @endforeach    
                     </tbody>

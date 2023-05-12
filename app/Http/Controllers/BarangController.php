@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -71,9 +72,10 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Id_Barang)
     {
-        return view ('Penjual.edit')->with(['barang' => Barang::find($id), ]);
+	    $barang = DB::table('barang')->where('Id_Barang',$Id_Barang)->get();
+	    return view('Penjual.edit',['barang' => $barang]);
     }
 
     /**
@@ -83,9 +85,11 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+
         $request->validate([
+            'Id_Barang' => 'required',
             'Id_Kategori' => 'required',
             'Nama_Barang' => 'required',
             'Stok' => 'required',
@@ -93,15 +97,17 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-        $Barang = Barang::find($id);
-        $Barang->Id_Kategori = $request->Id_Kategori;
-        $Barang->Nama_Barang = $request->Nama_Barang;
-        $Barang->Stok = $request->Stok;
-        $Barang->Harga = $request->Harga;
-        $Barang->Keterangan_Barang = $request->Keterangan_Barang;
-        $Barang->save();
+        
+	DB::table('barang')->where('Id_Barang',$request->Id_Barang)->update([
+		'Id_Barang' => $request->Id_Barang,
+        'Id_Kategori' => $request->Id_Kategori,
+        'Nama_Barang' => $request->Nama_Barang,
+        'Stok' => $request->Stok,
+        'Harga' => $request->Harga,
+        'Keterangan_Barang' => $request->Keterangan_Barang
+	]);
 
-        return redirect('/Barang');
+	    return redirect('/Barang');
     }
 
     /**
@@ -110,8 +116,12 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Id_Barang)
     {
-        //
+        // menghapus data pegawai berdasarkan id yang dipilih
+	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
+		
+	// alihkan halaman ke halaman pegawai
+	return redirect('/Barang');;
     }
 }

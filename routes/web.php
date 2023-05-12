@@ -35,9 +35,10 @@ Route::get('/signin/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
 Route::get('/Barang', [BarangController::class, 'index']);
 Route::get('/Tambah', [BarangController::class, 'create']);
-Route::get('/Ubah', [BarangController::class, 'edit']);
+Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
 Route::post('/Form', [BarangController::class, 'store']);
 Route::post('/Edit', [BarangController::class, 'update']);
+Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
 
 //
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
