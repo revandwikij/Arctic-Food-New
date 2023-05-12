@@ -4,8 +4,8 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\pelangganController;
+use App\Http\Controllers\userscontrollers;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +22,7 @@ Route::get('/', function () {
     return view('Home');
 });
 
-Route::get('/signin', function () {
-    return view('sign-in');
-});
+// Route::resource('barang', BarangController::class);
 
 
 Route::get('/login', function () {
@@ -42,3 +40,11 @@ Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
 
 //
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
+
+//INI LOGIN-USERS
+Route::get('/users', [userscontrollers::class, 'index']);
+Route::get('/tambah', [userscontrollers::class, 'create']);
+Route::post('/bikin', [userscontrollers::class, 'store']);
+Route::get('/hapus', [userscontrollers::class, 'destroy']);
+// Route::get('/users/create', [userscontrollers::class, 'create']);
+
