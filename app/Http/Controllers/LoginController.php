@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelUser;
+use App\Models\User;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,7 @@ class LoginController extends Controller
 
             return redirect()->intended('/');
         }
-        return "Email atau Password anda salah";
+        return "Email atau password anda salah";
     }
 
     //logout
@@ -39,27 +41,36 @@ class LoginController extends Controller
     //register
     public function register(Request $request)
     {
-        $data['title'] = 'Register';
+        // $data['title'] = 'Register';
         // return view('user/register', $data);
 
-        $request->validate([
-            'email' => 'required',
-            'username' => 'required|unique:tb_user',
-            'jenkel'=>'required',
-            'no_telp'=>'required',
-            'password' => 'required',
-            'password_confirm' => 'required|same:password',
-        ]);
+        // $this->validate($request,[
+        //     'email' => 'required',
+        //     'username' => 'required',
+        //     'jenkel'=>'required',
+        //     'No_telp'=>'required',
+        //     'password' => 'required',
+        //     'password_confirm' => 'required|same:password',
+        // ]);
 
-        $user = new User([
-            'email' => $request->email,
-            'username' => $request->username,
-            'jenkel' => $request->jenkel,
-            'no_telp' => $request->no_telp,
-            'password' => Hash::make($request->password),
-        ]);
+        // $user = new User([
+        //     'email' => $request->email,
+        //     'username' => $request->username,
+        //     'jenkel' => $request->jenkel,
+        //     'No_telp' => $request->No_telp,
+        //     'password' => Hash::make($request->password),
+        // ]);
+        // $user->save();
+
+        // return redirect()->route('/')->with('success', 'Registration success. Please login!');
+
+        $user = new ModelUser();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->jenkel = $request->jenkel;
+        $user->no_telp = $request->No_telp;
+        $user->password = bcrypt($request->password);
         $user->save();
-
-        return redirect()->route('/')->with('success', 'Registration success. Please login!');
+        return redirect('/')->with('alert-success','Kamu berhasil Register');
     }
 }
