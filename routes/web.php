@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pelangganController;
-
+use App\Http\Controllers\userscontrollers;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +38,6 @@ Route::post('/register/validasi', [LoginController::class, 'register']);
 
 //
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
+
+//INI LOGIN-USERS
+Route::get('users', [userscontrollers::class, 'user']);

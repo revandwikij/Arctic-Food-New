@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -44,7 +46,7 @@ class LoginController extends Controller
 
         $request->validate([
             'email' => 'required',
-            'username' => 'required|unique:tb_user',
+            'username' => 'required|unique:user',
             'jenkel'=>'required',
             'no_telp'=>'required',
             'password' => 'required',
