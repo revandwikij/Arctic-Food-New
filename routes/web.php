@@ -40,4 +40,4 @@ Route::post('/register/validasi', [LoginController::class, 'register']);
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
 
 //INI LOGIN-USERS
-Route::get('users', [userscontrollers::class, 'user']);
+Route::get('users', [userscontrollers::class, 'index']);
