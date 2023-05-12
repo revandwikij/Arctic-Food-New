@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class userscontrollers extends Controller
@@ -15,17 +16,16 @@ class userscontrollers extends Controller
      */
     public function index()
     {
+        $users = users::all();
 
-        return view('users.index')->with([
-            'users' => users::all(),
-        ]);
+        return view('users.index', ['users' => $users]);
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-            return view('users.create');
+        return view('users.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class userscontrollers extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show()
     {
         //
     }
@@ -78,12 +78,17 @@ class userscontrollers extends Controller
             'level' => 'required',
         ]);
 
-        $users->name = $request->name;
-        $users->email = $request->email;
-        if ($request->password)
-            $users->password = Hash::make($request->password);
-        $users->level = $request->level;
-        $users->save();
+        DB::table('users')->where('id', $request->id)->update([
+
+        $users->name = $request->name,
+        $users->email = $request->email,
+        // if ($request->password)
+            $users->password = Hash::make($request->password),
+        $users->level = $request->level,
+        $users->save(),
+
+        ]);
+
         return redirect('users')->with('success', 'Ubah Data Berhasil');
     }
 

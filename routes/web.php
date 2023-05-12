@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('Home');
 });
 
-Route::resource('barang', BarangController::class);
+// Route::resource('barang', BarangController::class);
 
 //login
 Route::get('/login', function () {
@@ -40,4 +40,9 @@ Route::post('/register/validasi', [LoginController::class, 'register']);
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
 
 //INI LOGIN-USERS
-Route::get('users', [userscontrollers::class, 'index']);
+Route::get('/users', [userscontrollers::class, 'index']);
+Route::get('/tambah', [userscontrollers::class, 'create']);
+Route::post('/bikin', [userscontrollers::class, 'store']);
+Route::get('/hapus', [userscontrollers::class, 'destroy']);
+// Route::get('/users/create', [userscontrollers::class, 'create']);
+
