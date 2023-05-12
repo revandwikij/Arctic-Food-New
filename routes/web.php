@@ -24,17 +24,19 @@ Route::get('/', function () {
 
 // Route::resource('barang', BarangController::class);
 
-//login
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
-Route::post('/login/verif', [LoginController::class, 'validasi'] );
 
-//logout
+Route::get('/signin/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
-
-//register
-Route::post('/register/validasi', [LoginController::class, 'register']);
+Route::get('/Barang', [BarangController::class, 'index']);
+Route::get('/Tambah', [BarangController::class, 'create']);
+Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
+Route::post('/Form', [BarangController::class, 'store']);
+Route::post('/Edit', [BarangController::class, 'update']);
+Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
 
 //
 Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
