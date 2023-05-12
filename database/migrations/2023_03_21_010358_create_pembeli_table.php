@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id('Id_Pelanggan');
             $table->integer('Id_Alamat');
             $table->string('Username');
-            $table->enum('Jenis_kelamin', ['L','P']);
             $table->string('Email');
-            $table->string('Password');
+            $table->enum('Jenkel', ['L','P']);
             $table->string('No_Telp');
+            $table->string('Password');
             $table->timestamps();
 
             // $table->foreign('Id_Alamat')->references('alamat')->on('Id_Alamat')->onDelete('cascade');
