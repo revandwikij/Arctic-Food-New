@@ -53,9 +53,9 @@
           <div class="header-top-inner">
             <div class="cnt-account">
               <ul class="list-unstyled">
-                <li class="myaccount"><a href="#"><span>My Account</span></a></li>
+                <li class="myaccount"><a href="#"><span>Akun Saya</span></a></li>
                 <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
-                <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
+                <li class="header_cart hidden-xs"><a href="#"><span>Keranjang</span></a></li>
                 <li class="check"><a href="#"><span>Checkout</span></a></span></li>
                 <li class="login"><a href="/login"><span>Login</span></a></li>
               </ul>
@@ -64,18 +64,16 @@
 
             <div class="cnt-block">
               <ul class="list-unstyled list-inline">
-                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">IDR</span><b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li><a href="#">IDR</a></li>
                     <li><a href="#">USD</a></li>
-                    <li><a href="#">INR</a></li>
-                    <li><a href="#">GBP</a></li>
                   </ul>
                 </li>
-                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Indonesia </span><b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li><a href="#">Indonesia</a></li>
                     <li><a href="#">English</a></li>
-                    <li><a href="#">French</a></li>
-                    <li><a href="#">German</a></li>
                   </ul>
                 </li>
               </ul>
@@ -179,7 +177,7 @@
                           class="dropdown-toggle"
                           data-toggle="dropdown"
                           href="category.html"
-                          >Categories <b class="caret"></b
+                          >Kategori <b class="caret"></b
                         ></a>
                         <ul class="dropdown-menu" role="menu">
                           <li class="menu-header"></li>
@@ -188,7 +186,7 @@
                               role="menuitem"
                               tabindex="-1"
                               href="category.html"
-                              >- </a
+                              >- Fashion </a
                             >
                           </li>
                           <li role="presentation">
@@ -196,9 +194,9 @@
                               role="menuitem"
                               tabindex="-1"
                               href="category.html"
-                              >- </a
+                              >- Kuliner </a
                             >
-                          </li>
+                          {{-- </li>
                           <li role="presentation">
                             <a
                               role="menuitem"
@@ -209,11 +207,11 @@
                           </li>
                           <li role="presentation">
                             <a role="menuitem"tabindex="-1"href="category.html">- </a>
-                          </li>
+                          </li> --}}
                         </ul>
                       </li>
                     </ul>
-                    <input class="search-field" placeholder="Search here..." />
+                    <input class="search-field" placeholder="Cari disini..." />
                     <a class="search-button" href="#"></a>
                   </div>
                 </form>
@@ -338,8 +336,8 @@
                               <div class="col-xs-12 col-menu">
                                 <ul class="links">
                                   <li><a href="/">Home</a></li>
-                                  <li><a href="category.html">Category</a></li>
-                                  <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
+                                  {{-- <li><a href="category.html">Category</a></li> --}}
+                                  {{-- <li><a href="shopping-cart.html">Shopping Cart Summary</a></li> --}}
                                   <li><a href="checkout.html">Checkout</a></li>
                                   <li><a href="contact.html">Contact</a></li>
                                   <li><a href="/login"><b>Sign In</b></a></li>
@@ -379,7 +377,7 @@
           <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
             <!-- ================================== TOP NAVIGATION ================================== -->
             <div class="side-menu animate-dropdown outer-bottom-xs">
-              <div class="head">
+              {{-- <div class="head">
                 <i class="icon fa fa-align-justify fa-fw"></i> Categories
               </div>
               <nav class="yamm megamenu-horizontal">
@@ -405,7 +403,7 @@
                   <!-- /.menu-item -->
                 </ul>
                 <!-- /.nav -->
-              </nav>
+              </nav> --}}
               <!-- /.megamenu-horizontal -->
             </div>
             <!-- /.side-menu -->
@@ -413,7 +411,7 @@
 
             <!-- ============================================== HOT DEALS ============================================== -->
             <div class="sidebar-widget hot-deals outer-bottom-xs">
-              <h3 class="section-title">Hot deals</h3>
+              <h3 class="section-title">Penawaran Menarik</h3>
               <div
                 class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
                 <div class="item">
@@ -484,7 +482,7 @@
                           <button
                             class="btn btn-primary cart-btn"
                             type="button">
-                            Add to cart
+                            Tambah keranjang
                           </button>
                         </div>
                       </div>
@@ -663,7 +661,7 @@
             <!-- ============================================== SPECIAL OFFER ============================================== -->
 
             <div class="sidebar-widget outer-bottom-small">
-              <h3 class="section-title">Special Offer</h3>
+              <h3 class="section-title">Penawaran Khusus</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div
                   class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -1002,7 +1000,7 @@
             <!-- ============================================== SPECIAL OFFER : END ============================================== -->
             <!-- ============================================== PRODUCT TAGS ============================================== -->
             <div class="sidebar-widget product-tag">
-              <h3 class="section-title">Product tags</h3>
+              <h3 class="section-title">Produk Tag</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div class="tag-list">
                   <a class="item" title="Phone" href="category.html">Phone</a>
@@ -1036,7 +1034,7 @@
             <!-- ============================================== SPECIAL DEALS ============================================== -->
 
             <div class="sidebar-widget outer-bottom-small">
-              <h3 class="section-title">Special Deals</h3>
+              <h3 class="section-title">Penawaran Spesial</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div
                   class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -1375,27 +1373,6 @@
             </div>
             <!-- /.sidebar-widget -->
             <!-- ============================================== SPECIAL DEALS : END ============================================== -->
-            <!-- ============================================== NEWSLETTER ============================================== -->
-            <div class="sidebar-widget newsletter outer-bottom-small">
-              <h3 class="section-title">Newsletters</h3>
-              <div class="sidebar-widget-body outer-top-xs">
-                <p>Sign Up for Our Newsletter!</p>
-                <form>
-                  <div class="form-group">
-                    <label class="sr-only" for="exampleInputEmail1"
-                      >Email address</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      placeholder="Subscribe to our newsletter" />
-                  </div>
-                  <button class="btn btn-primary">Subscribe</button>
-                </form>
-              </div>
-              <!-- /.sidebar-widget-body -->
-            </div>
             <!-- /.sidebar-widget -->
             <!-- ============================================== NEWSLETTER: END ============================================== -->
 
@@ -1405,17 +1382,14 @@
                 <div class="item">
                   <div class="avatar">
                     <img
-                      src="assets/images/testimonials/member1.png"
+                      src="assets/css/images/rep.jpg"
                       alt="Image" />
                   </div>
                   <div class="testimonials">
-                    <em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                    mollis. Nunc condime tum metus eud molest sed consectetuer.
-                    Sed quia non numquam eius modi tempora incidunt ut labore et
-                    dolore magnam aliquam quaerat.<em>"</em>
+                    <em>"</em> zài ālābóyǔ zhōng ， zhègecí láiyuányú sobaroyasbiru zhègecí ，yìsīshìchíyǒu。érjiù éryán ， nàixīn shìzài miànduì yíqiè bùxǐhuan hé tǎoyàn de shìqing shí bìmiǎn gèzhǒng kùnnan 、 bēishāng huò kèzhì.<em>"</em>
                   </div>
                   <div class="clients_author">
-                    John Doe <span>Abc Company</span>
+                    Revan D. J. <span>UMKM Company</span>
                   </div>
                   <!-- /.container-fluid -->
                 </div>
@@ -1536,7 +1510,7 @@
             <!-- ============================================== SCROLL TABS ============================================== -->
             <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
               <div class="more-info-tab clearfix">
-                <h3 class="new-product-title pull-left">New Products</h3>
+                <h3 class="new-product-title pull-left">Produk Baru</h3>
                 <ul
                   class="nav nav-tabs nav-tab-line pull-right"
                   id="new-products-1">
@@ -1545,7 +1519,7 @@
                       data-transition-type="backSlide"
                       href="#all"
                       data-toggle="tab"
-                      >All</a
+                      >Semua</a
                     >
                   </li>
                   <li>
@@ -1553,23 +1527,23 @@
                       data-transition-type="backSlide"
                       href="#smartphone"
                       data-toggle="tab"
-                      >Clothing</a
+                      >Baju</a
                     >
                   </li>
-                  <li>
+                  {{-- <li>
                     <a
                       data-transition-type="backSlide"
                       href="#laptop"
                       data-toggle="tab"
                       >Electronics</a
-                    >
+                    > --}}
                   </li>
                   <li>
                     <a
                       data-transition-type="backSlide"
                       href="#apple"
                       data-toggle="tab"
-                      >Shoes</a
+                      >Sepatu</a
                     >
                   </li>
                 </ul>
@@ -3583,7 +3557,7 @@
             <!-- ============================================== FEATURED PRODUCTS ============================================== -->
             <section class="section featured-product">
               <div class="row">
-                <div class="col-lg-3">
+                {{-- <div class="col-lg-3">
                   <h3 class="section-title">Electronics & Digital</h3>
                   <ul class="sub-cat">
                     <li><a href="#">Computers</a></li>
@@ -3597,7 +3571,7 @@
                     <li><a href="#">Washing Machines</a></li>
                     <li><a href="#">Office Electronics</a></li>
                   </ul>
-                </div>
+                </div> --}}
                 <div class="col-lg-9">
                   <div
                     class="owl-carousel homepage-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -4140,7 +4114,7 @@
 
             <!-- ============================================== BLOG SLIDER ============================================== -->
             <section class="section latest-blog outer-bottom-vs">
-              <h3 class="section-title">Latest form Blog</h3>
+              <h3 class="section-title">Berita Terbaru</h3>
               <div class="blog-slider-container outer-top-xs">
                 <div class="owl-carousel blog-slider custom-carousel">
                   <div class="item">
@@ -4319,7 +4293,7 @@
 
             <!-- ============================================== FEATURED PRODUCTS ============================================== -->
             <section class="section new-arriavls">
-              <h3 class="section-title">Featured Products</h3>
+              <h3 class="section-title">Produk Unggulan</h3>
               <div
                 class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
                 <div class="item item-carousel">
@@ -4911,27 +4885,22 @@
           <li>
             <div class="feature-box">
               <div class="icon-truck"></div>
-              <div class="content-blocks">We ship worldwide</div>
+              <div class="content-blocks">1 Hari Proses</div>
             </div>
           </li>
           <li>
             <div class="feature-box">
               <div class="icon-support"></div>
-              <div class="content-blocks">call +1 800 789 0000</div>
+              <div class="content-blocks">Hub +62 896 5608 8434</div>
             </div>
           </li>
           <li>
             <div class="feature-box">
               <div class="icon-money"></div>
-              <div class="content-blocks">Money Back Guarantee</div>
+              <div class="content-blocks">Uang Kembali</div>
             </div>
           </li>
-          <li>
-            <div class="feature-box">
-              <div class="icon-return"></div>
-              <div class="content">30 days return</div>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -4957,7 +4926,7 @@
                         </span>
                       </div>
                       <div class="media-body">
-                        <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+                        <p>Smkn 11 Bandung</p>
                       </div>
                     </li>
                     <li class="media">
@@ -4977,7 +4946,7 @@
                         </span>
                       </div>
                       <div class="media-body">
-                        <span><a href="#">marazzo@themesground.com</a></span>
+                        <span><a href="#">rey@gmail.com</a></span>
                       </div>
                     </li>
                   </ul>
