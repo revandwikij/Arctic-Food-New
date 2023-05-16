@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/rateit.css" />
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
-    <link rel="stylesheet" href="assets/css/login.css" />
-    <link rel="stylesheet" href="assets/css/coba.css" />
+    {{-- <link rel="stylesheet" href="assets/css/login.css" /> --}}
+    {{-- <link rel="stylesheet" href="assets/css/coba.css" /> --}}
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -5135,6 +5135,6 @@
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/coba.js"></script>
+    {{-- <script src="assets/js/coba.js"></script> --}}
   </body>
 </html>
