@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
@@ -51,3 +52,5 @@ Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
+
+Route::get('/admin', [AdminController::class, 'home']);

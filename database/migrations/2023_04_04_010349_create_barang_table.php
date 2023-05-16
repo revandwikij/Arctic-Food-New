@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('NIB');
             $table->integer('Id_Kategori');
             $table->string('Nama_Barang');
+            $table->string('Foto_Barang');
             $table->integer('Harga');
             $table->integer('Stok');
             $table->string('Keterangan_Barang');
