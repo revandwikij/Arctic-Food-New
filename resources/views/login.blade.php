@@ -262,7 +262,7 @@
 		<a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
 		<a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
 	</div>
-	<form action="{{route('users.index')}}" method="post">
+	<form action="/login/verif" method="post">
         @csrf
 		<div class="form-group">
 		    <label class="info-title" for="Email">Email Address <span>*</span></label>

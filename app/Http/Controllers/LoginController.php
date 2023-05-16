@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function validasi(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -66,6 +66,10 @@ class LoginController extends Controller
 
         users::create([
             'id' => $request->id,
+            'username' => $request->username,
+            'password' => $request->password,
+            // 'username' => $request->username,
+            // 'username' => $request->username,
         ]);
     }
 }

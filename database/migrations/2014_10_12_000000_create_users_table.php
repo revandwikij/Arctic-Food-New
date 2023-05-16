@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('Jenkel', ['L','P']);
-            $table->string('No_Telp');
             $table->string('password');
             $table->string('level');
             $table->rememberToken();
