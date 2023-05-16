@@ -6,7 +6,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.html">GoUMKM</a>
+        <a class="navbar-brand" href="index.html"><img src="assets/images/Go-logo.png" alt="logo" width="300px" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,13 +14,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item m-auto">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="/admin">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category.html">Categories</a>
+                    <a class="nav-link" href="category.html">Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="product.html">Barang  </a>
+                    <a class="nav-link" href="product.html">Barang</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="contact.html">Laporan</a>
@@ -57,6 +57,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Id Barang</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">Id Kategori</th>
                             <th scope="col">Nama Produk</th>
                             <th scope="col">Stok</th>
@@ -71,7 +72,14 @@
                     @foreach ($barang as $data)
                     
                     <tr>
+                            
                             <td>{{$data->Id_Barang}} </td>
+                            <td>
+                                @if ($data->Foto_Barang)
+                                <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
+                                    
+                                @endif
+                            </td>
                             <td>{{$data->Id_Kategori}} </td>
                             <td>{{$data->Nama_Barang}} </td>
                             <td>{{$data->Stok}} </td>

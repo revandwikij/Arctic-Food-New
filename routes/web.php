@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
@@ -53,3 +54,5 @@ Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
+
+Route::get('/admin', [AdminController::class, 'home']);

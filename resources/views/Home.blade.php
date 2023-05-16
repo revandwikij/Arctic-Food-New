@@ -256,7 +256,7 @@
                         <div class="col-xs-7">
                           <h3 class="name">
                             <a href="index8a95.html?page-detail"
-                              >Simple Product</a
+                              >Simple Product</a                  
                             >
                           </h3>
                           <div class="price">$600.00</div>

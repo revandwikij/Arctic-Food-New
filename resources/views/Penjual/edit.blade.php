@@ -14,13 +14,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item m-auto">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="/admin">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="category.html">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="product.html">Barang  </a>
+                    <a class="nav-link" href="product.html">Order</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="contact.html">Laporan</a>
@@ -57,7 +57,7 @@
                 <form action="/Edit" class="form-card" method="POST">
                 {{ csrf_field() }}
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Id_Barang<span class="text-danger"> *</span></label> <input type="text" id="Id_Barang" name="Id_Barang" value="{{$data->Id_Barang}}" placeholder="Masukan Id Baru" > </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Id_Barang<span class="text-danger"> *</span></label> <input type="text" id="Id_Barang" name="Id_Barang" value="{{$data->Id_Barang}}" placeholder="Masukan Id Baru" readonly> </div>
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Keterangan Barang<span class="text-danger"> *</span></label> <input type="text" id="Keterangan_Barang" name="Keterangan_Barang" value="{{$data->Keterangan_Barang}}"> </div>
                     </div>
 
