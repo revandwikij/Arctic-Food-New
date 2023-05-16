@@ -24,12 +24,16 @@ Route::get('/', function () {
 
 // Route::resource('barang', BarangController::class);
 
-
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/signin/verif', [LoginController::class, 'validasi'] );
+Route::get('/test', function () {
+    return view('welcome');
+})->name('login');
+
+
+Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::get('/logout', [LoginController::class, 'logout'] );
 Route::get('/Barang', [BarangController::class, 'index']);
 Route::get('/Tambah', [BarangController::class, 'create']);
@@ -48,4 +52,3 @@ Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
-
