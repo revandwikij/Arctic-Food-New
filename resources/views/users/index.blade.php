@@ -44,7 +44,6 @@
                 @foreach ($users as $no => $hasil)
 
                 <tr>
-                    <th>{{ $no+1}}</th>
                     <td>{{ $hasil->id}}</td>
                     <td>{{ $hasil->name}}</td>
                     <td>{{ $hasil->email}}</td>

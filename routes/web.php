@@ -45,7 +45,7 @@ Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
 Route::get('/users', [userscontrollers::class, 'index']);
 Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
-Route::get('/hapus', [userscontrollers::class, 'destroy']);
+Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 

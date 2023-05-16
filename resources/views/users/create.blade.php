@@ -35,8 +35,14 @@
             </div>
 
             <label>Level <span class="text-danger">*</span></label>
-            
-                <input class="form-control" type="text" name="level" value="{{ old('level') }}" />
+
+            <div class="form-group">
+                <select class="form-control" type="text" name="level" value="{{ old('level') }}" >
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+
              </div>
             <div class="form-group">
                 <button class="btn btn-primary">Simpan</button>

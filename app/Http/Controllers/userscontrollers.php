@@ -64,9 +64,8 @@ class userscontrollers extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit')->with([
-            'users' => users::find($id),
-         ]);
+        $users = DB::table('users')->where('id',$id)->get();
+        return view('users.edit',['users'=>$users]);
     }
 
     /**
