@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModelUser;
+use App\Models\pelanggan;
 use App\Models\User;
 use App\Models\users;
 use Illuminate\Auth\Events\Logout;
@@ -64,7 +65,7 @@ class LoginController extends Controller
         // $user->save();
         // return redirect('/')->with('alert-success','Kamu berhasil Register');
 
-        users::create([
+        pelanggan::create([
             'id' => $request->id,
             'username' => $request->username,
             'password' => $request->password,

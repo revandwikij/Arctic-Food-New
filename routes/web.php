@@ -30,7 +30,7 @@ Route::get('/login', function () {
 
 Route::get('/test', function () {
     return view('welcome');
-})->name('login');
+});
 
 
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
@@ -51,4 +51,5 @@ Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
+Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
