@@ -30,7 +30,7 @@ Route::get('/login', function () {
 
 Route::get('/test', function () {
     return view('welcome');
-})->name('login');
+});
 
 
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
