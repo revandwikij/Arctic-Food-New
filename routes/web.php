@@ -63,3 +63,5 @@ Route::get('/admin', [AdminController::class, 'home']);
 // Register
 Route::post('/regis/verif', [LoginController::class, 'register'] );
 Route::post('/logout', [LoginController::class, 'logout'] );
+
+Route::post('/regis/verif', [LoginController::class, 'register'] );

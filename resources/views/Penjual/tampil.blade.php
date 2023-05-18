@@ -19,10 +19,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="category.html">Order</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="product.html">Barang</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="contact.html">Laporan</a>
                 </li>
                 <li class="nav-item">
@@ -84,11 +84,11 @@
                             <td>{{$data->Nama_Barang}} </td>
                             <td>{{$data->Stok}} </td>
                             <td>{{$data->Keterangan_Barang}} </td>
-                            <td>{{$data->Harga}} </td>
+                            <td>Rp. {{ number_format($data->Harga) }} </td>
                             <td>
 
                                 <a href ="Ubah/{{$data->Id_Barang}}" class="btn btn-secondary">Edit</a>
-                                <a href="Hapus/{{ $data->Id_Barang }}" class="btn btn-sm btn-danger" method="post"><i class="fa fa-trash"></i></a></button> 
+                               <button onclick="return confirm('Hapus Data?')"  class="btn btn-sm btn-danger"><a href="Hapus/{{ $data->Id_Barang }}" method="post"><i class="fa fa-trash"></i></button></a>
                                 
                             </td>
 
