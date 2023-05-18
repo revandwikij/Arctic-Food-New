@@ -21,19 +21,20 @@ use App\Http\Controllers\userscontrollers;
 
 Route::get('/', function () {
     return view('Home');
-});
-
-// Route::resource('barang', BarangController::class);
-
+})->middleware('auth');
 Route::get('/login', function () {
-    return view('login');
+    return view('sign-in');
 })->name('login');
 
 Route::get('/test', function () {
     return view('register');
 });
+Route::get('/p', function () {
+    return view('coba');
+});
+
 Route::get('/coba', function () {
-    return view('sign-in');
+    return view('keranjang');
 });
 
 
@@ -58,9 +59,7 @@ Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
-<<<<<<< HEAD
+Route::get('/admin', [AdminController::class, 'home']);
 // Register
 Route::post('/regis/verif', [LoginController::class, 'register'] );
-=======
-Route::get('/admin', [AdminController::class, 'home']);
->>>>>>> 34122d79d5d6bdde17148f7391602043beaeae97
+Route::post('/logout', [LoginController::class, 'logout'] );

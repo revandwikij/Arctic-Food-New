@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/animate.min.css" />
 <link rel="stylesheet" href="assets/css/rateit.css" />
 <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
 {{-- <link rel="stylesheet" href="assets/css/login.css" /> --}}
 {{-- <link rel="stylesheet" href="assets/css/coba.css" /> --}}
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\pelanggan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,8 @@ return new class extends Migration
                 INSERT INTO users
                 set username = new.username,
                 email = new.email,
-                password = new.password;
+                password = new.password,
+                level = "pelanggan";
             END
         ');
     }

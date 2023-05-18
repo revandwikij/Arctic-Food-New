@@ -5,11 +5,9 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              <li class="myaccount"><a href="#"><span>My Account</span></a></li>
-              <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
+              <li class="myaccount"><a href="#"><span>Profile</span></a></li>
               <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
-              <li class="check"><a href="#"><span>Checkout</span></a></span></li>
-              <li class="login"><a href="/login"><span>Login</span></a></li>
+              <li class="login"><a href="/logout"><span>Logout</span></a></li>
             </ul>
           </div>
           <!-- /.cnt-account -->

@@ -38,7 +38,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/coba');
     }
 
     //register
@@ -59,6 +59,6 @@ class LoginController extends Controller
             'password' =>'required|confirmed|min:8'
         ]);
 
-        return redirect('/');
+        return redirect('/p');
     }
 }
