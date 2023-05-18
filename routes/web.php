@@ -29,7 +29,10 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/test', function () {
-    return view('welcome');
+    return view('register');
+});
+Route::get('/coba', function () {
+    return view('sign-in');
 });
 
 
@@ -51,3 +54,6 @@ Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
+
+// Register
+Route::post('/regis/verif', [LoginController::class, 'register'] );

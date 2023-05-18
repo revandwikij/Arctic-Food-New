@@ -42,35 +42,23 @@ class LoginController extends Controller
     }
 
     //register
-    public function register(Request $request, $id)
+    public function register(Request $request)
     {
-        // $data['title'] = 'Register';
-        // return view('user/register', $data);
 
-        // $request->validate([
-        //     'email' => 'required',
-        //     'username' => 'required|unique:tb_user',
-        //     'jenkel'=>'required',
-        //     'no_telp'=>'required',
-        //     'password' => 'required',
-        //     'password_confirm' => 'required|same:password',
-        // ]);
-
-        // $user = new ModelUser();
-        // $user->username = $request->username;
-        // $user->email = $request->email;
-        // $user->jenkel = $request->jenkel;
-        // $user->no_telp = $request->No_telp;
-        // $user->password = bcrypt($request->password);
-        // $user->save();
-        // return redirect('/')->with('alert-success','Kamu berhasil Register');
 
         pelanggan::create([
             'id' => $request->id,
             'username' => $request->username,
-            'password' => $request->password,
-            // 'username' => $request->username,
-            // 'username' => $request->username,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'email' => $request->email,
+            'jenkel' => $request->jenkel,
+            'no_telp' => $request->no_telp
         ]);
+
+        $request->validate([
+            'password' =>'required|confirmed|min:8'
+        ]);
+
+        return redirect('/');
     }
 }
