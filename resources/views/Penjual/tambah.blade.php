@@ -17,12 +17,12 @@
                     <a class="nav-link" href="/admin">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category.html">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.html">Order</a>
+                    <a class="nav-link" href="category.html">Pesanan</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="product.html">Barang</a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" href="contact.html">Laporan</a>
                 </li>
                 <li class="nav-item">
@@ -55,7 +55,7 @@
                 @csrf
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Produk<span class="text-danger"> *</span></label> <input type="text" id="Nama_Barang" name="Nama_Barang" placeholder="Masukan Produk Terbaru" onblur="validate(1)"> </div>
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Keterangan Barang<span class="text-danger"> *</span></label> <input type="text" id="Keterangan_Barang" name="Keterangan_Barang" onblur="validate(2)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Keterangan Barang<span class="text-danger"> *</span></label><textarea id="Keterangan_Barang" name="Keterangan_Barang" cols="30" rows="10"></textarea> </div>
                     </div>
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ID Kategori<span class="text-danger"> *</span></label> <input type="text" id="Id_Kategori" name="Id_Kategori" placeholder="" onblur="validate(3)"> </div>

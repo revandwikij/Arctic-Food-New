@@ -51,6 +51,7 @@ class BarangController extends Controller
         $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
+        
 
         $Barang = new Barang;
         $Barang->Id_Kategori = $request->Id_Kategori;
@@ -105,16 +106,22 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
-            'Foto_Barang' => 'required',
             'Keterangan_Barang' => 'required',
         ]);
+
+         $Foto_Barang = $request->file('Foto_Barang');
+         $Foto_Ekstensi = $Foto_Barang->extension();
+        $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+        $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
+        $Foto['Foto_Barang'] = $Foto_Nama;
+        
 
         
 	DB::table('barang')->where('Id_Barang',$request->Id_Barang)->update([
 		'Id_Barang' => $request->Id_Barang,
         'Id_Kategori' => $request->Id_Kategori,
         'Nama_Barang' => $request->Nama_Barang,
-        'Foto_Barang' => $request->Foto_Barang,
+        'Foto_Barang' => $Foto_Nama,
         'Stok' => $request->Stok,
         'Harga' => $request->Harga,
         'Keterangan_Barang' => $request->Keterangan_Barang

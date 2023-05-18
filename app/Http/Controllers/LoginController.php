@@ -52,7 +52,7 @@ class LoginController extends Controller
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,
             'jenkel' => $request->jenkel,
-            'no_telp' => $request->no_telp
+            'no_telp' => $request->no_telp,
         ]);
 
         $request->validate([
