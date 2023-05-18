@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
@@ -52,8 +53,14 @@ Route::get('/tampil.pelanggan', [pelangganController::class, 'index']);
 Route::get('/users', [userscontrollers::class, 'index']);
 Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
+Route::post('/hapus', [userscontrollers::class, 'destroy']);
+Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
+<<<<<<< HEAD
 // Register
 Route::post('/regis/verif', [LoginController::class, 'register'] );
+=======
+Route::get('/admin', [AdminController::class, 'home']);
+>>>>>>> 34122d79d5d6bdde17148f7391602043beaeae97

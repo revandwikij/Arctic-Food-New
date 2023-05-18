@@ -5,7 +5,330 @@
 @section('content')
 <body class="cnt-home">
     <!-- ============================================== HEADER ============================================== -->
+    <header class="header-style-1">
+      <!-- ============================================== TOP MENU ============================================== -->
+      <div class="top-bar animate-dropdown">
+        <div class="container">
+          <div class="header-top-inner">
+            <div class="cnt-account">
+              <ul class="list-unstyled">
+                <li class="myaccount"><a href="#"><span>My Account</span></a></li>
+                <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
+                <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
+                <li class="check"><a href="#"><span>Checkout</span></a></span></li>
+                <li class="login"><a href="/login"><span>Login</span></a></li>
+              </ul>
+            </div>
+            <!-- /.cnt-account -->
 
+            <div class="cnt-block">
+              <ul class="list-unstyled list-inline">
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">USD</a></li>
+                    <li><a href="#">INR</a></li>
+                    <li><a href="#">GBP</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">German</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <!-- /.list-unstyled -->
+            </div>
+            <!-- /.cnt-cart -->
+            <div class="clearfix"></div>
+          </div>
+          <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
+      </div>
+
+              <!-- Coba Coba -->
+              {{-- <div class="container">
+                <a href="" type="" class="" data-toggle="modal" data-target="#loginModal">
+                  Login
+                </a>
+              </div>
+
+              <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-title text-center">
+                        <h4>Login</h4>
+                      </div>
+                      <div class="d-flex flex-column text-center">
+                        <form action="" method="">
+                          <div class="form-group">
+                            <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                          </div>
+                          <button type="button" class="btn btn-info btn-block btn-round">Login</button>
+                        </form>
+
+                        <div class="text-center text-muted delimiter">or use a social network</div>
+                        <div class="d-flex justify-content-center social-buttons">
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                          </button>
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                          </button>
+                          <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                          </button>
+                        </di>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <div class="signup-section">Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.</div>
+                    </div>
+                </div>
+              </div> --}}
+
+            </div>
+              <!-- /.list-unstyled -->
+            </div>
+            <!-- /.cnt-cart -->
+            <div class="clearfix"></div>
+          </div>
+          <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.header-top -->
+      <!-- ============================================== TOP MENU : END ============================================== -->
+      <div class="main-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+              <!-- ============================================================= LOGO ============================================================= -->
+              <div class="logo">
+                <a href="/">
+                  <img src="assets/images/Go-logo.png" alt="logo" width="300px" />
+                </a>
+              </div>
+              <!-- /.logo -->
+              <!-- ============================================================= LOGO : END ============================================================= -->
+            </div>
+            <!-- /.logo-holder -->
+
+            <div class="col-lg-7 col-md-6 col-sm-8 col-xs-12 top-search-holder">
+              <!-- /.contact-row -->
+              <!-- ============================================================= SEARCH AREA ============================================================= -->
+              <div class="search-area">
+                <form>
+                  <div class="control-group">
+                    <ul class="categories-filter animate-dropdown">
+                      <li class="dropdown">
+                        <a
+                          class="dropdown-toggle"
+                          data-toggle="dropdown"
+                          href="category.html"
+                          >Categories <b class="caret"></b
+                        ></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li class="menu-header"></li>
+                          <li role="presentation">
+                            <a
+                              role="menuitem"
+                              tabindex="-1"
+                              href="category.html"
+                              >- </a
+                            >
+                          </li>
+                          <li role="presentation">
+                            <a
+                              role="menuitem"
+                              tabindex="-1"
+                              href="category.html"
+                              >- </a
+                            >
+                          </li>
+                          <li role="presentation">
+                            <a
+                              role="menuitem"
+                              tabindex="-1"
+                              href="category.html"
+                              >- </a
+                            >
+                          </li>
+                          <li role="presentation">
+                            <a role="menuitem"tabindex="-1"href="category.html">- </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <input class="search-field" placeholder="Search here..." />
+                    <a class="search-button" href="#"></a>
+                  </div>
+                </form>
+              </div>
+              <!-- /.search-area -->
+              <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+            </div>
+            <!-- /.top-search-holder -->
+
+            <div
+              class="col-lg-2 col-md-3 col-sm-4 col-xs-12 animate-dropdown top-cart-row">
+              <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+
+              <div class="dropdown dropdown-cart">
+                <a
+                  href="#"
+                  class="dropdown-toggle lnk-cart"
+                  data-toggle="dropdown">
+                  <div class="items-cart-inner">
+                    <div class="basket">
+                      <div class="basket-item-count">
+                        <span class="count">2</span>
+                      </div>
+                      <div class="total-price-basket">
+
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="cart-item product-summary">
+                      <div class="row">
+                        <div class="col-xs-4">
+                          <div class="image">
+                            <a href="detail.html"
+                              ><img src="assets/images/products/p4.jpg" alt=""
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="col-xs-7">
+                          <h3 class="name">
+                            <a href="index8a95.html?page-detail"
+                              >Simple Product</a
+                            >
+                          </h3>
+                          <div class="price">$600.00</div>
+                        </div>
+                        <div class="col-xs-1 action">
+                          <a href="#"><i class="fa fa-trash"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.cart-item -->
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="clearfix cart-total">
+                      <div class="pull-right">
+                        <span class="text">Sub Total :</span
+                        ><span class="price">$600.00</span>
+                      </div>
+                      <div class="clearfix"></div>
+                      <a
+                        href="checkout.html"
+                        class="btn btn-upper btn-primary btn-block m-t-20"
+                        >Checkout</a
+                      >
+                    </div>
+                    <!-- /.cart-total-->
+                  </li>
+                </ul>
+                <!-- /.dropdown-menu-->
+              </div>
+              <!-- /.dropdown-cart -->
+
+              <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+            </div>
+            <!-- /.top-cart-row -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.main-header -->
+
+      <!-- ============================================== NAVBAR ============================================== -->
+      <div class="header-nav animate-dropdown">
+        <div class="container">
+          <div class="yamm navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+              <button
+                data-target="#mc-horizontal-menu-collapse"
+                data-toggle="collapse"
+                class="navbar-toggle collapsed"
+                type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="nav-bg-class">
+              <div
+                class="navbar-collapse collapse"
+                id="mc-horizontal-menu-collapse">
+                <div class="nav-outer">
+                  <ul class="nav navbar-nav">
+                    <li class="active dropdown">
+                      <a href="/">Home</a>
+                    </li>
+                    <li class="dropdown">
+                      <a
+                        href="#"
+                        class="dropdown-toggle"
+                        data-hover="dropdown"
+                        data-toggle="dropdown"
+                        >Pages</a>
+                      <ul class="dropdown-menu pages">
+                        <li>
+                          <div class="yamm-content">
+                            <div class="row">
+                              <div class="col-xs-12 col-menu">
+                                <ul class="links">
+                                  <li><a href="/">Home</a></li>
+                                  <li><a href="category.html">Category</a></li>
+                                  <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
+                                  <li><a href="checkout.html">Checkout</a></li>
+                                  <li><a href="contact.html">Contact</a></li>
+                                  <li><a href="/login"><b>Sign In</b></a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="dropdown navbar-right special-menu">
+                      <a href="#">Get 30% off on selected items</a>
+                    </li>
+                  </ul>
+                  <!-- /.navbar-nav -->
+                  <div class="clearfix"></div>
+                </div>
+                <!-- /.nav-outer -->
+              </div>
+              <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.nav-bg-class -->
+          </div>
+          <!-- /.navbar-default -->
+        </div>
+        <!-- /.container-class -->
+      </div>
+      <!-- /.header-nav -->
+      <!-- ============================================== NAVBAR : END ============================================== -->
+    </header>
 
     <!-- ============================================== HEADER : END ============================================== -->
     <div class="body-content outer-top-vs" id="top-banner-and-menu">
@@ -15,7 +338,7 @@
           <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
             <!-- ================================== TOP NAVIGATION ================================== -->
             <div class="side-menu animate-dropdown outer-bottom-xs">
-              <div class="head">
+              {{-- <div class="head">
                 <i class="icon fa fa-align-justify fa-fw"></i> Categories
               </div>
               <nav class="yamm megamenu-horizontal">
@@ -41,7 +364,7 @@
                   <!-- /.menu-item -->
                 </ul>
                 <!-- /.nav -->
-              </nav>
+              </nav> --}}
               <!-- /.megamenu-horizontal -->
             </div>
             <!-- /.side-menu -->
@@ -49,7 +372,7 @@
 
             <!-- ============================================== HOT DEALS ============================================== -->
             <div class="sidebar-widget hot-deals outer-bottom-xs">
-              <h3 class="section-title">Hot deals</h3>
+              <h3 class="section-title">Penawaran Menarik</h3>
               <div
                 class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
                 <div class="item">
@@ -120,7 +443,7 @@
                           <button
                             class="btn btn-primary cart-btn"
                             type="button">
-                            Add to cart
+                            Tambah keranjang
                           </button>
                         </div>
                       </div>
@@ -299,7 +622,7 @@
             <!-- ============================================== SPECIAL OFFER ============================================== -->
 
             <div class="sidebar-widget outer-bottom-small">
-              <h3 class="section-title">Special Offer</h3>
+              <h3 class="section-title">Penawaran Khusus</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div
                   class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -638,7 +961,7 @@
             <!-- ============================================== SPECIAL OFFER : END ============================================== -->
             <!-- ============================================== PRODUCT TAGS ============================================== -->
             <div class="sidebar-widget product-tag">
-              <h3 class="section-title">Product tags</h3>
+              <h3 class="section-title">Produk Tag</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div class="tag-list">
                   <a class="item" title="Phone" href="category.html">Phone</a>
@@ -672,7 +995,7 @@
             <!-- ============================================== SPECIAL DEALS ============================================== -->
 
             <div class="sidebar-widget outer-bottom-small">
-              <h3 class="section-title">Special Deals</h3>
+              <h3 class="section-title">Penawaran Spesial</h3>
               <div class="sidebar-widget-body outer-top-xs">
                 <div
                   class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -1011,27 +1334,6 @@
             </div>
             <!-- /.sidebar-widget -->
             <!-- ============================================== SPECIAL DEALS : END ============================================== -->
-            <!-- ============================================== NEWSLETTER ============================================== -->
-            <div class="sidebar-widget newsletter outer-bottom-small">
-              <h3 class="section-title">Newsletters</h3>
-              <div class="sidebar-widget-body outer-top-xs">
-                <p>Sign Up for Our Newsletter!</p>
-                <form>
-                  <div class="form-group">
-                    <label class="sr-only" for="exampleInputEmail1"
-                      >Email address</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      placeholder="Subscribe to our newsletter" />
-                  </div>
-                  <button class="btn btn-primary">Subscribe</button>
-                </form>
-              </div>
-              <!-- /.sidebar-widget-body -->
-            </div>
             <!-- /.sidebar-widget -->
             <!-- ============================================== NEWSLETTER: END ============================================== -->
 
@@ -1041,17 +1343,14 @@
                 <div class="item">
                   <div class="avatar">
                     <img
-                      src="assets/images/testimonials/member1.png"
+                      src="assets/css/images/rep.jpg"
                       alt="Image" />
                   </div>
                   <div class="testimonials">
-                    <em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                    mollis. Nunc condime tum metus eud molest sed consectetuer.
-                    Sed quia non numquam eius modi tempora incidunt ut labore et
-                    dolore magnam aliquam quaerat.<em>"</em>
+                    <em>"</em> zài ālābóyǔ zhōng ， zhègecí láiyuányú sobaroyasbiru zhègecí ，yìsīshìchíyǒu。érjiù éryán ， nàixīn shìzài miànduì yíqiè bùxǐhuan hé tǎoyàn de shìqing shí bìmiǎn gèzhǒng kùnnan 、 bēishāng huò kèzhì.<em>"</em>
                   </div>
                   <div class="clients_author">
-                    John Doe <span>Abc Company</span>
+                    Revan D. J. <span>UMKM Company</span>
                   </div>
                   <!-- /.container-fluid -->
                 </div>
@@ -1172,7 +1471,7 @@
             <!-- ============================================== SCROLL TABS ============================================== -->
             <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
               <div class="more-info-tab clearfix">
-                <h3 class="new-product-title pull-left">New Products</h3>
+                <h3 class="new-product-title pull-left">Produk Baru</h3>
                 <ul
                   class="nav nav-tabs nav-tab-line pull-right"
                   id="new-products-1">
@@ -1181,7 +1480,7 @@
                       data-transition-type="backSlide"
                       href="#all"
                       data-toggle="tab"
-                      >All</a
+                      >Semua</a
                     >
                   </li>
                   <li>
@@ -1189,23 +1488,23 @@
                       data-transition-type="backSlide"
                       href="#smartphone"
                       data-toggle="tab"
-                      >Clothing</a
+                      >Baju</a
                     >
                   </li>
-                  <li>
+                  {{-- <li>
                     <a
                       data-transition-type="backSlide"
                       href="#laptop"
                       data-toggle="tab"
                       >Electronics</a
-                    >
+                    > --}}
                   </li>
                   <li>
                     <a
                       data-transition-type="backSlide"
                       href="#apple"
                       data-toggle="tab"
-                      >Shoes</a
+                      >Sepatu</a
                     >
                   </li>
                 </ul>
@@ -3219,7 +3518,7 @@
             <!-- ============================================== FEATURED PRODUCTS ============================================== -->
             <section class="section featured-product">
               <div class="row">
-                <div class="col-lg-3">
+                {{-- <div class="col-lg-3">
                   <h3 class="section-title">Electronics & Digital</h3>
                   <ul class="sub-cat">
                     <li><a href="#">Computers</a></li>
@@ -3233,7 +3532,7 @@
                     <li><a href="#">Washing Machines</a></li>
                     <li><a href="#">Office Electronics</a></li>
                   </ul>
-                </div>
+                </div> --}}
                 <div class="col-lg-9">
                   <div
                     class="owl-carousel homepage-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -3776,7 +4075,7 @@
 
             <!-- ============================================== BLOG SLIDER ============================================== -->
             <section class="section latest-blog outer-bottom-vs">
-              <h3 class="section-title">Latest form Blog</h3>
+              <h3 class="section-title">Berita Terbaru</h3>
               <div class="blog-slider-container outer-top-xs">
                 <div class="owl-carousel blog-slider custom-carousel">
                   <div class="item">
@@ -3955,7 +4254,7 @@
 
             <!-- ============================================== FEATURED PRODUCTS ============================================== -->
             <section class="section new-arriavls">
-              <h3 class="section-title">Featured Products</h3>
+              <h3 class="section-title">Produk Unggulan</h3>
               <div
                 class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
                 <div class="item item-carousel">
@@ -4547,27 +4846,22 @@
           <li>
             <div class="feature-box">
               <div class="icon-truck"></div>
-              <div class="content-blocks">We ship worldwide</div>
+              <div class="content-blocks">1 Hari Proses</div>
             </div>
           </li>
           <li>
             <div class="feature-box">
               <div class="icon-support"></div>
-              <div class="content-blocks">call +1 800 789 0000</div>
+              <div class="content-blocks">Hub +62 896 5608 8434</div>
             </div>
           </li>
           <li>
             <div class="feature-box">
               <div class="icon-money"></div>
-              <div class="content-blocks">Money Back Guarantee</div>
+              <div class="content-blocks">Uang Kembali</div>
             </div>
           </li>
-          <li>
-            <div class="feature-box">
-              <div class="icon-return"></div>
-              <div class="content">30 days return</div>
-            </div>
-          </li>
+
         </ul>
       </div>
     </div>
@@ -4576,6 +4870,175 @@
 
     <!-- ============================================================= FOOTER ============================================================= -->
 
+                <div class="module-body">
+                  <ul class="toggle-footer" style"">
+                    <li class="media">
+                      <div class="pull-left">
+                        <span class="icon fa-stack fa-lg">
+                          <i
+                            class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </div>
+                      <div class="media-body">
+                        <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+                      </div>
+                    </li>
+                    <li class="media">
+                      <div class="pull-left">
+                        <span class="icon fa-stack fa-lg">
+                          <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </div>
+                      <div class="media-body">
+                        <p>+ (888) 123-4567 / + (888) 456-7890</p>
+                      </div>
+                    </li>
+                    <li class="media">
+                      <div class="pull-left">
+                        <span class="icon fa-stack fa-lg">
+                          <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </div>
+                      <div class="media-body">
+                        <span><a href="#">marazzo@themesground.com</a></span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.module-body -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <div class="module-heading">
+                <h4 class="module-title">Customer Service</h4>
+              </div>
+              <!-- /.module-heading -->
+
+              <div class="module-body">
+                <ul class="list-unstyled">
+                  <li class="first">
+                    <a href="#" title="Contact us">My Account</a>
+                  </li>
+                  <li><a href="#" title="About us">Order History</a></li>
+                  <li><a href="#" title="faq">FAQ</a></li>
+                  <li><a href="#" title="Popular Searches">Specials</a></li>
+                  <li class="last">
+                    <a href="#" title="Where is my order?">Help Center</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.module-body -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <div class="module-heading">
+                <h4 class="module-title">Corporation</h4>
+              </div>
+              <!-- /.module-heading -->
+
+              <div class="module-body">
+                <ul class="list-unstyled">
+                  <li class="first">
+                    <a title="Your Account" href="#">About us</a>
+                  </li>
+                  <li><a title="Information" href="#">Customer Service</a></li>
+                  <li><a title="Addresses" href="#">Company</a></li>
+                  <li><a title="Addresses" href="#">Investor Relations</a></li>
+                  <li class="last">
+                    <a title="Orders History" href="#">Advanced Search</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.module-body -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <div class="module-heading">
+                <h4 class="module-title">Why Choose Us</h4>
+              </div>
+              <!-- /.module-heading -->
+
+              <div class="module-body">
+                <ul class="list-unstyled">
+                  <li class="first">
+                    <a href="#" title="About us">Shopping Guide</a>
+                  </li>
+                  <li><a href="#" title="Blog">Blog</a></li>
+                  <li><a href="#" title="Company">Company</a></li>
+                  <li>
+                    <a href="#" title="Investor Relations"
+                      >Investor Relations</a
+                    >
+                  </li>
+                  <li class="last">
+                    <a href="contact-us.html" title="Suppliers">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.module-body -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright-bar">
+        <div class="container">
+          <div class="col-xs-12 col-sm-4 no-padding social">
+            <ul class="link">
+              <li class="fb pull-left">
+                <a target="_blank" rel="nofollow" href="#" title="Facebook"></a>
+              </li>
+              <li class="tw pull-left">
+                <a target="_blank" rel="nofollow" href="#" title="Twitter"></a>
+              </li>
+              <li class="googleplus pull-left">
+                <a
+                  target="_blank"
+                  rel="nofollow"
+                  href="#"
+                  title="GooglePlus"></a>
+              </li>
+              <li class="rss pull-left">
+                <a target="_blank" rel="nofollow" href="#" title="RSS"></a>
+              </li>
+              <li class="pintrest pull-left">
+                <a
+                  target="_blank"
+                  rel="nofollow"
+                  href="#"
+                  title="PInterest"></a>
+              </li>
+              <li class="linkedin pull-left">
+                <a target="_blank" rel="nofollow" href="#" title="Linkedin"></a>
+              </li>
+              <li class="youtube pull-left">
+                <a target="_blank" rel="nofollow" href="#" title="Youtube"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-4 no-padding copyright">
+            <a target="_blank" href="https://www.templateshub.net"
+              >Templates Hub</a
+            >
+          </div>
+          <div class="col-xs-12 col-sm-4 no-padding">
+            <div class="clearfix payment-methods">
+              <ul>
+                <li><img src="assets/images/payments/1.png" alt="" /></li>
+                <li><img src="assets/images/payments/2.png" alt="" /></li>
+                <li><img src="assets/images/payments/3.png" alt="" /></li>
+                <li><img src="assets/images/payments/4.png" alt="" /></li>
+                <li><img src="assets/images/payments/5.png" alt="" /></li>
+              </ul>
+            </div>
+            <!-- /.payment-methods -->
+          </div>
+        </div>
+      </div>
+    </footer>
     <!-- ============================================================= FOOTER : END============================================================= -->
 
     <!-- For demo purposes – can be removed on production -->

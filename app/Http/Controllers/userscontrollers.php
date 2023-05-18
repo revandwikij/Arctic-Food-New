@@ -40,6 +40,8 @@ class userscontrollers extends Controller
             'level' => 'required',
         ]);
 
+
+
         $users = new users();
         $users->name = $request->name;
         $users->email = $request->email;
@@ -62,9 +64,8 @@ class userscontrollers extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit')->with([
-            'users' => users::find($id),
-         ]);
+        $users = DB::table('users')->where('id',$id)->get();
+        return view('users.edit',['users'=>$users]);
     }
 
     /**
@@ -83,7 +84,7 @@ class userscontrollers extends Controller
         $users->name = $request->name,
         $users->email = $request->email,
         // if ($request->password)
-            $users->password = Hash::make($request->password),
+        $users->password = Hash::make($request->password),
         $users->level = $request->level,
         $users->save(),
 

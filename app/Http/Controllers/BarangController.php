@@ -18,6 +18,8 @@ class BarangController extends Controller
         return view ('Penjual.tampil')->with(['barang' => Barang::all(), ]);
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,16 +43,25 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
+            'Foto_Barang' => 'required',
             'Keterangan_Barang' => 'required',
         ]);
+
+        $Foto_Barang = $request->file('Foto_Barang');
+        $Foto_Ekstensi = $Foto_Barang->extension();
+        $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+        $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
 
         $Barang = new Barang;
         $Barang->Id_Kategori = $request->Id_Kategori;
         $Barang->Nama_Barang = $request->Nama_Barang;
-        $Barang->Stok = $request->Stok;
+        $Barang->Foto_Barang = $Foto_Nama;
+         $Barang->Stok = $request->Stok;
         $Barang->Harga = $request->Harga;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
         $Barang->save();
+
+
 
         return redirect('/Barang');
     }
@@ -94,6 +105,7 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
+            'Foto_Barang' => 'required',
             'Keterangan_Barang' => 'required',
         ]);
 
@@ -102,6 +114,7 @@ class BarangController extends Controller
 		'Id_Barang' => $request->Id_Barang,
         'Id_Kategori' => $request->Id_Kategori,
         'Nama_Barang' => $request->Nama_Barang,
+        'Foto_Barang' => $request->Foto_Barang,
         'Stok' => $request->Stok,
         'Harga' => $request->Harga,
         'Keterangan_Barang' => $request->Keterangan_Barang
