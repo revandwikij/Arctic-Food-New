@@ -30,7 +30,10 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/test', function () {
-    return view('welcome');
+    return view('register');
+});
+Route::get('/coba', function () {
+    return view('sign-in');
 });
 
 
@@ -55,4 +58,5 @@ Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
-Route::get('/admin', [AdminController::class, 'home']);
+
+Route::post('/regis/verif', [LoginController::class, 'register'] );

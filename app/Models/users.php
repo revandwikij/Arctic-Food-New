@@ -14,7 +14,7 @@ class users extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
         'level',

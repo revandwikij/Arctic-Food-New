@@ -1,91 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Meta -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <meta name="keywords" content="MediaCenter, Template, eCommerce" />
-    <meta name="robots" content="all" />
-    <title>Projek</title>
+@extends('layouting.home.master')
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+@section('title', 'Home')
 
-    <!-- Customizable CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/blue.css" />
-    <link rel="stylesheet" href="assets/css/owl.carousel.css" />
-    <link rel="stylesheet" href="assets/css/owl.transitions.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/rateit.css" />
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
-    {{-- <link rel="stylesheet" href="assets/css/login.css" /> --}}
-    {{-- <link rel="stylesheet" href="assets/css/coba.css" /> --}}
-
-    <!-- Icons/Glyphs -->
-    <link rel="stylesheet" href="assets/css/font-awesome.css" />
-
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Barlow:200,300,300i,400,400i,500,500i,600,700,800"
-      rel="stylesheet" />
-    <link
-      href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
-      rel="stylesheet"
-      type="text/css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800"
-      rel="stylesheet"
-      type="text/css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-      rel="stylesheet"
-      type="text/css" />
-  </head>
-  <body class="cnt-home">
+@section('content')
+<body class="cnt-home">
     <!-- ============================================== HEADER ============================================== -->
-    <header class="header-style-1">
-      <!-- ============================================== TOP MENU ============================================== -->
-      <div class="top-bar animate-dropdown">
-        <div class="container">
-          <div class="header-top-inner">
-            <div class="cnt-account">
-              <ul class="list-unstyled">
-                <li class="myaccount"><a href="#"><span>Akun Saya</span></a></li>
-                <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
-                <li class="header_cart hidden-xs"><a href="#"><span>Keranjang</span></a></li>
-                <li class="check"><a href="#"><span>Checkout</span></a></span></li>
-                <li class="login"><a href="/login"><span>Login</span></a></li>
-              </ul>
-            </div>
-            <!-- /.cnt-account -->
 
-            <div class="cnt-block">
-              <ul class="list-unstyled list-inline">
-                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">IDR</span><b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">IDR</a></li>
-                    <li><a href="#">USD</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Indonesia </span><b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Indonesia</a></li>
-                    <li><a href="#">English</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <!-- /.list-unstyled -->
-            </div>
-            <!-- /.cnt-cart -->
-            <div class="clearfix"></div>
-          </div>
-          <!-- /.header-top-inner -->
-        </div>
-        <!-- /.container -->
-      </div>
 
               <!-- Coba Coba -->
               {{-- <div class="container">
@@ -4908,13 +4828,6 @@
     <!-- ============================================== INFO BOXES : END ============================================== -->
 
     <!-- ============================================================= FOOTER ============================================================= -->
-    <footer id="footer" class="footer color-bg">
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="address-block">
-                <!-- /.module-heading -->
 
                 <div class="module-body">
                   <ul class="toggle-footer" style"">
@@ -4926,7 +4839,7 @@
                         </span>
                       </div>
                       <div class="media-body">
-                        <p>Smkn 11 Bandung</p>
+                        <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
                       </div>
                     </li>
                     <li class="media">
@@ -4946,7 +4859,7 @@
                         </span>
                       </div>
                       <div class="media-body">
-                        <span><a href="#">rey@gmail.com</a></span>
+                        <span><a href="#">marazzo@themesground.com</a></span>
                       </div>
                     </li>
                   </ul>
@@ -5091,19 +5004,6 @@
 
     <!-- For demo purposes – can be removed on production : End -->
 
-    <!-- JavaScripts placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap-hover-dropdown.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/echo.min.js"></script>
-    <script src="assets/js/jquery.easing-1.3.min.js"></script>
-    <script src="assets/js/bootstrap-slider.min.js"></script>
-    <script src="assets/js/jquery.rateit.min.js"></script>
-    <script src="assets/js/lightbox.min.js"></script>
-    <script src="assets/js/bootstrap-select.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
-    {{-- <script src="assets/js/coba.js"></script> --}}
+
   </body>
-</html>
+@endsection

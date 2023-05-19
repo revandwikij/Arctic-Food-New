@@ -287,7 +287,7 @@
 <div class="col-md-6 col-sm-6 create-new-account">
 	<h4 class="checkout-subtitle">Create a new account</h4>
 	<p class="text title-tag-line">Create your new account.</p>
-	<form class="register-form outer-top-xs" role="form" action="/register/validasi" method="post">
+	<form class="register-form outer-top-xs" role="form" action="/regis/verif" method="post">
 		@csrf
         <div class="form-group">
 	    	<label class="info-title" for="Email">Email Address <span>*</span></label>
@@ -295,7 +295,7 @@
 	  	</div>
         <div class="form-group">
 		    <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
-		    <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="name" required>
+		    <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="username" required>
 		</div>
         <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Jenis Kelamin <span>*</span></label>
