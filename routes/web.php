@@ -60,3 +60,4 @@ Route::get('/hapus', [userscontrollers::class, 'destroy']);
 
 
 Route::post('/regis/verif', [LoginController::class, 'register'] );
+Route::get('/admin', [AdminController::class, 'home'] );
