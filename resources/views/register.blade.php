@@ -7,7 +7,7 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Event Registration Form</h2>
+                    <h2 class="title">Register</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="/regis/verif">
@@ -58,10 +58,7 @@
                         </div>
                         <div>
                             <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
-                            {{-- <p>Sudah Punya Akun Klik<a href="/coba">Disini</a></p> --}}
-                            <a href="/coba" class="btn btn--radius-2 btn--red" type="submit">Sudah Punya Akun?</a>
-                        </div>
-                        <div>
+                            <a href="/login" class="btn btn--radius-2 btn--red" type="submit">Sudah Punya Akun?</a>
                         </div>
                     </form>
                 </div>

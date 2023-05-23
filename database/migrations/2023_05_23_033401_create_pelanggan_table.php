@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id('Id_Pelanggan');
-            // $table->integer('Id_Alamat');
+            // $table->integer('Id_Alamat');  x
             $table->string('username');
             $table->string('email');
             $table->enum('jenkel', ['L','P']);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembeli');
+        Schema::dropIfExists('pelanggan');
     }
 };

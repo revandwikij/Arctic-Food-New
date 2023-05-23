@@ -59,6 +59,6 @@ class LoginController extends Controller
             'password' =>'required|confirmed|min:8'
         ]);
 
-        return redirect('/');
+        return to_route('/login');
     }
 }
