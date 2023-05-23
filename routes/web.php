@@ -7,6 +7,8 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\userscontrollers;
+use App\Http\Controllers\ViewController;
+use Illuminate\Auth\Events\Login;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,16 +21,11 @@ use App\Http\Controllers\userscontrollers;
 |
 */
 
-Route::get('/', function () {
-    return view('Home');
-})->middleware('auth');
-Route::get('/login', function () {
-    return view('sign-in');
-})->name('login');
+Route::get('/', [ViewController::class, 'home'])->middleware('auth');
+Route::get('/login', [ViewController::class, 'login'])->name('login');
+Route::get('/regis', [ViewController::class, 'regis']);
+Route::get('/profile', [ViewController::class, 'profile']);
 
-Route::get('/test', function () {
-    return view('register');
-});
 Route::get('/p', function () {
     return view('coba');
 });
@@ -37,9 +34,6 @@ Route::get('/coba', function () {
     return view('keranjang');
 });
 
-
-Route::post('/login/verif', [LoginController::class, 'validasi'] );
-Route::get('/logout', [LoginController::class, 'logout'] );
 Route::get('/Barang', [BarangController::class, 'index']);
 Route::get('/Tambah', [BarangController::class, 'create']);
 Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
@@ -59,9 +53,10 @@ Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
+// Admin
 Route::get('/admin', [AdminController::class, 'home']);
-// Register
-Route::post('/regis/verif', [LoginController::class, 'register'] );
-Route::post('/logout', [LoginController::class, 'logout'] );
 
+// Login - Register - Logout
+Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::post('/regis/verif', [LoginController::class, 'register'] );
+Route::get('/logout', [LoginController::class, 'logout']);

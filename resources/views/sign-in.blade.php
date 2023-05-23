@@ -30,7 +30,7 @@
                         </div>
                     </div>
                         <button class="btn btn--radius-2 btn--red" type="submit">Login</button>
-                        <a href="/test" class="btn btn--radius-2 btn--red" type="submit" style="a{text-decoration:none;}">Belum Punya Akun</a>
+                        <a href="/regis" class="btn btn--radius-2 btn--red" type="submit" style="a{text-decoration:none;}">Belum Punya Akun</a>
                     </div>
                 </form>
             </div>

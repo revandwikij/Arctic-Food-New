@@ -16,7 +16,7 @@ class pelangganSeeder extends Seeder
         pelanggan::create([
             'Id_Alamat' => '248',
             'Username' => 'admin183',
-            'Jenis_kelamin' => 'P',
+            'jenkel' => 'P',
             'Email' => 'admin999@gmail.com',
             'Password' => 'adminpassword2',
             'No_Telp' => '0899980769',

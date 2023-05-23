@@ -18,7 +18,7 @@ class BarangController extends Controller
         return view ('Penjual.tampil')->with(['barang' => Barang::all(), ]);
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,13 +51,13 @@ class BarangController extends Controller
         $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
-        
+
 
         $Barang = new Barang;
         $Barang->Id_Kategori = $request->Id_Kategori;
         $Barang->Nama_Barang = $request->Nama_Barang;
         $Barang->Foto_Barang = $Foto_Nama;
-         $Barang->Stok = $request->Stok;
+        $Barang->Stok = $request->Stok;
         $Barang->Harga = $request->Harga;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
         $Barang->save();
@@ -109,14 +109,14 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-         $Foto_Barang = $request->file('Foto_Barang');
-         $Foto_Ekstensi = $Foto_Barang->extension();
+        $Foto_Barang = $request->file('Foto_Barang');
+        $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
         $Foto['Foto_Barang'] = $Foto_Nama;
-        
 
-        
+
+
 	DB::table('barang')->where('Id_Barang',$request->Id_Barang)->update([
 		'Id_Barang' => $request->Id_Barang,
         'Id_Kategori' => $request->Id_Kategori,
@@ -140,7 +140,7 @@ class BarangController extends Controller
     {
         // menghapus data pegawai berdasarkan id yang dipilih
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
-		
+
 	// alihkan halaman ke halaman pegawai
 	return redirect('/Barang');;
     }
