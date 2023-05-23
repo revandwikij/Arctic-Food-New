@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('Id_Pelanggan');
             $table->integer('Id_Barang');
             $table->integer('Kuantitas');  //value nya jadi 5
-            $table->integer('Total_Harga');
+            $table->integer('Sub_Total');
+            $table->integer('Total');
             $table->timestamps();
         });
     }
