@@ -4,10 +4,6 @@
 
 @section('content')
 <body class="cnt-home">
-    <!-- ============================================== HEADER ============================================== -->
-     
-
-    <!-- ============================================== HEADER : END ============================================== -->
     <div class="body-content outer-top-vs" id="top-banner-and-menu">
       <div class="container">
         <div class="row">
@@ -4544,14 +4540,5 @@
     </div>
     <!-- /.info-boxes -->
     <!-- ============================================== INFO BOXES : END ============================================== -->
-
-    
-    <!-- ============================================================= FOOTER : END============================================================= -->
-
-    <!-- For demo purposes – can be removed on production -->
-
-    <!-- For demo purposes – can be removed on production : End -->
-
-
   </body>
 @endsection
