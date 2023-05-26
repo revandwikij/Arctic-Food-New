@@ -22,7 +22,7 @@
             <form action="/ganti" class="form-card" method="POST">
             {{ csrf_field() }}
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Name<span class="text-danger"> *</span></label> <input type="text" id="name" name="name" value="{{$data->name}}" placeholder="Masukan Nama" > </div>
+                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Name<span class="text-danger"> *</span></label> <input type="text" id="name" name="username" value="{{$data->name}}" placeholder="Masukan Nama" > </div>
                 </div>
 
                 <div class="row justify-content-between text-left">

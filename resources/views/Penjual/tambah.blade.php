@@ -26,7 +26,7 @@
                     <a class="nav-link" href="contact.html">Laporan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Kontak</a>
+                    <a class="nav-link" href="/users">Data Pelanggan</a>
                 </li>
             </ul>
 

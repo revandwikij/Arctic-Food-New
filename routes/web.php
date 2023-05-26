@@ -62,7 +62,14 @@ Route::get('/bayar', [PaymentController::class, 'bayar']);
 // Admin
 Route::get('/admin', [AdminController::class, 'home']);
 
+// Penjual
+
+
+
+
+
 // Login - Register - Logout
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::post('/regis/verif', [LoginController::class, 'register'] );
+Route::get('/admin', [AdminController::class, 'home'] );
 Route::get('/logout', [LoginController::class, 'logout']);

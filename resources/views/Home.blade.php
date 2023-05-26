@@ -1145,6 +1145,9 @@
             <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
               <div class="more-info-tab clearfix">
                 <h3 class="new-product-title pull-left">Produk Baru</h3>
+                @foreach ($barang as $b)
+
+                @endforeach
                 <ul
                   class="nav nav-tabs nav-tab-line pull-right"
                   id="new-products-1">
