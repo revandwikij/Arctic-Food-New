@@ -4,10 +4,6 @@
 
 @section('content')
 <body class="cnt-home">
-<<<<<<< HEAD
-    <!-- ============================================== HEADER : END ============================================== -->
-=======
->>>>>>> afcf676c66841acc9509bed761ca9fe38b322a4e
     <div class="body-content outer-top-vs" id="top-banner-and-menu">
       <div class="container">
         <div class="row">
@@ -49,7 +45,7 @@
 
             <!-- ============================================== HOT DEALS ============================================== -->
             <div class="sidebar-widget hot-deals outer-bottom-xs">
-              <h3 class="section-title">Penawaran Menarik</h3>
+
               <div
                 class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
                 <div class="item">
