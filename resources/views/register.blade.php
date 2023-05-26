@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
+                            z<button class="btn btn--radius-2 btn--red" type="submit">Register</button>
                             <a href="/login" class="btn btn--radius-2 btn--red" type="submit">Sudah Punya Akun?</a>
                         </div>
                     </form>
