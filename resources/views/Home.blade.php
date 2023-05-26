@@ -45,7 +45,7 @@
 
             <!-- ============================================== HOT DEALS ============================================== -->
             <div class="sidebar-widget hot-deals outer-bottom-xs">
-              <h3 class="section-title">Penawaran Menarik</h3>
+
               <div
                 class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
                 <div class="item">

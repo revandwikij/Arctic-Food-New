@@ -5296,6 +5296,7 @@ font-family: FontAwesome;
   padding: 20px 0px;
   display: block;
 }
+
 .shopping-cart .estimate-ship-tax table thead tr th .estimate-title {
   font-size: 18px;
   color: #555;
@@ -5337,6 +5338,7 @@ font-family: FontAwesome;
 .shopping-cart .cart-shopping-total table thead tr th .cart-sub-total {
   color: #555;
   margin-bottom: 7px;
+
 }
 .shopping-cart .cart-shopping-total table tbody tr td {
   padding: 24px 20px;
@@ -5384,7 +5386,7 @@ font-family: FontAwesome;
 .shopping-cart .cart-shopping-total table thead tr th .cart-sub-total,
 .shopping-cart .cart-shopping-total table thead tr th .cart-grand-total {
   font-size: 18px;
-  font-weight:600
+  font-weight:600;
 }
 .shopping-cart-table table tbody tr td .quant-input {
   display: inline-block;
