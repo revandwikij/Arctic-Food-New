@@ -44,8 +44,6 @@ class LoginController extends Controller
     //register
     public function register(Request $request)
     {
-
-
         pelanggan::create([
             'id' => $request->id,
             'username' => $request->username,
@@ -59,6 +57,6 @@ class LoginController extends Controller
             'password' =>'required|confirmed|min:8'
         ]);
 
-        return to_route('/login');
+        return redirect('/login');
     }
 }
