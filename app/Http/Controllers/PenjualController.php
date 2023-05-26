@@ -12,7 +12,7 @@ class PenjualController extends Controller
      */
     public function index()
     {
-        return view()->with(['penjual' => Penjual::all(), ]);
+        return view('Seller.index')->with(['penjual' => Penjual::all(), ]);
     }
 
     /**
@@ -20,7 +20,7 @@ class PenjualController extends Controller
      */
     public function create()
     {
-        //
+        return view ('Seller.tambah');
     }
 
     /**
@@ -28,7 +28,23 @@ class PenjualController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Nama_Toko' => 'required',
+            'Email' => 'required',
+            'No_Telp' => 'required',
+            'Alamat_Toko' => 'required',
+            'Kategori_Usaha' => 'required',
+        ]);
+
+        $Penjual = new Penjual;
+        $Penjual->NIB = $request->NIB;
+        $Penjual->Nama_Toko = $request->Nama_Toko;
+        $Penjual->No_Telp = $request->No_Telp;
+        $Penjual->Alamat_Toko = $request->Alamat_Toko;
+        $Penjual->Kategori_Usaha = $request->Kategori_Usaha;
+        $Penjual->save();
+
+        return redirect('/index');
     }
 
     /**
