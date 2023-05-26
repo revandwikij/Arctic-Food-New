@@ -5,8 +5,8 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              <li class="myaccount"><a href="#"><span>Profile</span></a></li>
-              <li class="header_cart hidden-xs"><a href="/cart"><span>My Cart</span></a></li>
+              <li class="myaccount"><a href="#"><span>Profil</span></a></li>
+              <li class="header_cart hidden-xs"><a href="/cart"><span>Keranjang</span></a></li>
               <li class="login"><a href="/logout"><span>Logout</span></a></li>
             </ul>
           </div>
