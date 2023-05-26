@@ -4,6 +4,10 @@
 
 @section('content')
 <body class="cnt-home">
+<<<<<<< HEAD
+    <!-- ============================================== HEADER : END ============================================== -->
+=======
+>>>>>>> afcf676c66841acc9509bed761ca9fe38b322a4e
     <div class="body-content outer-top-vs" id="top-banner-and-menu">
       <div class="container">
         <div class="row">

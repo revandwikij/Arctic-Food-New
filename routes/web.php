@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,8 @@ Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
+Route::get('/cart', [KeranjangController::class, 'cart']);
+
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
 // Admin

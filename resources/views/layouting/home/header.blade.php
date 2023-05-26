@@ -1,14 +1,90 @@
 <header class="header-style-1">
     <!-- ============================================== TOP MENU ============================================== -->
     <div class="top-bar animate-dropdown">
-        <div class="container">
-            <div class="header-top-inner">
-                <div class="cnt-account">
-                    <ul class="list-unstyled">
-                        <li class="myaccount"><a href="/profile"><span>Profile</span></a></li>
-                        <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
-                        <li class="login"><a href="/logout"><span>Logout</span></a></li>
-                    </ul>
+      <div class="container">
+        <div class="header-top-inner">
+          <div class="cnt-account">
+            <ul class="list-unstyled">
+              <li class="myaccount"><a href="#"><span>My Account</span></a></li>
+              <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
+              <li class="header_cart hidden-xs"><a href="/cart"><span>My Cart</span></a></li>
+              <li class="check"><a href="#"><span>Checkout</span></a></span></li>
+              <li class="login"><a href="/login"><span>Login</span></a></li>
+            </ul>
+          </div>
+          <!-- /.cnt-account -->
+
+          <div class="cnt-block">
+            <ul class="list-unstyled list-inline">
+              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">USD</a></li>
+                  <li><a href="#">INR</a></li>
+                  <li><a href="#">GBP</a></li>
+                </ul>
+              </li>
+              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">English</a></li>
+                  <li><a href="#">French</a></li>
+                  <li><a href="#">German</a></li>
+                </ul>
+              </li>
+            </ul>
+            <!-- /.list-unstyled -->
+          </div>
+          <!-- /.cnt-cart -->
+          <div class="clearfix"></div>
+        </div>
+        <!-- /.header-top-inner -->
+      </div>
+      <!-- /.container -->
+    </div>
+
+            <!-- Coba Coba -->
+            {{-- <div class="container">
+              <a href="" type="" class="" data-toggle="modal" data-target="#loginModal">
+                Login
+              </a>
+            </div>
+
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-title text-center">
+                      <h4>Login</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                      <form action="" method="">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                        </div>
+                        <button type="button" class="btn btn-info btn-block btn-round">Login</button>
+                      </form>
+
+                      <div class="text-center text-muted delimiter">or use a social network</div>
+                      <div class="d-flex justify-content-center social-buttons">
+                        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+                          <i class="fab fa-twitter"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+                          <i class="fab fa-facebook"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                          <i class="fab fa-linkedin"></i>
+                        </button>
+                      </di>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="clearfix"></div>
