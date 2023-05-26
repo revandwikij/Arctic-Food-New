@@ -63,21 +63,21 @@
                             <th scope="col">Stok</th>
                             <th scope="col" >Keterangan Barang</th>
                             <th scope="col" >Harga</th>
-                            
+
                         </tr>
                     </thead>
-                   
+
                     <tbody>
-                       
+
                     @foreach ($barang as $data)
-                    
+
                     <tr>
-                            
+
                             <td>{{$data->Id_Barang}} </td>
                             <td>
                                 @if ($data->Foto_Barang)
                                 <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
-                                    
+
                                 @endif
                             </td>
                             <td>{{$data->Id_Kategori}} </td>
@@ -89,11 +89,11 @@
 
                                 <a href ="Ubah/{{$data->Id_Barang}}" class="btn btn-secondary">Edit</a>
                                <button onclick="return confirm('Hapus Data?')"  class="btn btn-sm btn-danger"><a href="Hapus/{{ $data->Id_Barang }}" method="post"><i class="fa fa-trash"></i></button></a>
-                                
+
                             </td>
 
                     </tr>
-                     @endforeach    
+                     @endforeach
                     </tbody>
                   <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a>
                   </table>
@@ -102,7 +102,7 @@
     </div>
 </div>
 
- 
+
             <div class="col-12 copyright mt-3">
                 <p class="float-left">
                     <a href="#">Back to top</a>
@@ -111,4 +111,3 @@
             </div>
         </div>
     </div>
-</footer>
