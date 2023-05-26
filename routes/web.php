@@ -68,4 +68,5 @@ Route::get('/admin', [AdminController::class, 'home']);
 // Login - Register - Logout
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::post('/regis/verif', [LoginController::class, 'register'] );
+Route::get('/admin', [AdminController::class, 'home'] );
 Route::get('/logout', [LoginController::class, 'logout']);
