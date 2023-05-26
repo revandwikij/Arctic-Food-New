@@ -43,6 +43,10 @@
                 <input id="paypal" name="payment-method" type="radio" />
               </div>
 
+              <div class="form__radio">
+                <input type='text' maxlength="100" style="width: 500px" minlength="10" placeholder='Titip Salam....' />
+              </div>
+
             </div>
           </fieldset>
 

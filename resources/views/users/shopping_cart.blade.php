@@ -40,10 +40,15 @@
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="#">Home</a></li>
-				<li class='active'>Shopping Cart</li>
+				<li><a href="/ ">Dasbor</a></li>
+				<li class='active'>Keranjang</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
+        <div class="logo">
+            <a href="/">
+                <img src="assets/images/Go-logo.png" alt="logo" width="300px" />
+            </a>
+        </div>
 	</div><!-- /.container -->
 </div><!-- /.breadcrumb -->
 
