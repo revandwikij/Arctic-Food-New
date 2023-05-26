@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id('Id_Pesanan');
             $table->integer('Id_Pelanggan');
-            $table->string('Id_Pembelian');
-            $table->date('Tgl_Pembayaran');
             $table->integer('Total_Harga');
+            $table->date('Tgl_Pembayaran');
             $table->enum('Metode_Pembayaran', ['Transfer Bank','COD']);
             $table->timestamps();
         });

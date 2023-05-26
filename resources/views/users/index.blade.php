@@ -45,7 +45,7 @@
 
                 <tr>
                     <td>{{ $hasil->id}}</td>
-                    <td>{{ $hasil->name}}</td>
+                    <td>{{ $hasil->username}}</td>
                     <td>{{ $hasil->email}}</td>
                     <td>{{ $hasil->level}}</td>
 

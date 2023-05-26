@@ -59,6 +59,12 @@ Route::get('/cart', [KeranjangController::class, 'cart']);
 // Admin
 Route::get('/admin', [AdminController::class, 'home']);
 
+// Penjual
+
+
+
+
+
 // Login - Register - Logout
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::post('/regis/verif', [LoginController::class, 'register'] );
