@@ -5,7 +5,7 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              <li class="myaccount"><a href="#"><span>Profil</span></a></li>
+              <li class="myaccount"><a href="/profil"><span>Profil</span></a></li>
               <li class="header_cart hidden-xs"><a href="/cart"><span>Keranjang</span></a></li>
               <li class="login"><a href="/logout"><span>Logout</span></a></li>
             </ul>
@@ -163,7 +163,7 @@
                                         <span class="text">Sub Total :</span><span class="price">$600.00</span>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html"
+                                    <a href="/bayar"
                                         class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
                                 </div>
                                 <!-- /.cart-total-->

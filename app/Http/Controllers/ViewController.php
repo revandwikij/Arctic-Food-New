@@ -32,4 +32,10 @@ class ViewController extends Controller
         $kategoris = kategori::all();
         return view('profile', compact('kategoris'), compact('barang'));
     }
+    public function cart()
+    {
+        $barang = Barang::all();
+        $kategoris = kategori::all();
+        return view('users.shopping_cart', compact('kategoris'), compact('barang'));
+    }
 }

@@ -8,9 +8,12 @@ use App\Http\Controllers\PaymentController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pelangganController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userscontrollers;
 use App\Http\Controllers\ViewController;
+use App\Models\pelanggan;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +56,10 @@ Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
-Route::get('/cart', [KeranjangController::class, 'cart']);
+Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/bayar', [PaymentController::class, 'bayar']);
+Route::get('/profil', [ProfileController::class, 'profil']);
+
 
 
 // Route::get('/users/create', [userscontrollers::class, 'create']);
@@ -70,6 +75,23 @@ Route::get('/admin', [AdminController::class, 'home']);
 
 // Login - Register - Logout
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
-Route::post('/regis/verif', [LoginController::class, 'register'] );
 Route::get('/admin', [AdminController::class, 'home'] );
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/regis/verif', [LoginController::class, 'register'] );
+
+// Route::post('/regis/verif', function (Request $request) {
+//     pelanggan::create([
+//         'id' => $request->id,
+//         'username' => $request->username,
+//         'password' => password_hash($request->password, PASSWORD_DEFAULT),
+//         'email' => $request->email,
+//         'jenkel' => $request->jenkel,
+//         'no_telp' => $request->no_telp,
+//     ]);
+
+//     $request->validate([
+//         'password' =>'required|confirmed|min:8'
+//     ]);
+
+//     return redirect('/login');
+// });

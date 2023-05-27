@@ -19,8 +19,7 @@
 
             <div class="card">
               <address>
-                Nama<br />
-                Bumi Asri, Marga Asri II C, BLOK B-103
+                <input class="card-title card" type="text" style="width: 500px" minlength="10px" autocomplete="off">
               </address>
             </div>
           </div>
@@ -76,7 +75,7 @@
           <div>
             <button class="button button--full" type="submit"><svg class="icon">
                 <use xlink:href="#icon-shopping-bag" />
-              </svg>Bayar Sekarang</button>
+              </svg> Bayar Sekarang</button>
           </div>
         </form>
       </div>

@@ -1156,12 +1156,11 @@
                               <div class="product">
                                 <div class="product-image">
                                   <div class="image">
-                                    <a href="detail.html">
-                                      <img
-                                        src=" {{ $b->Foto_Barang }}
-                                        alt=""
-                                        class="hover-image" />
-                                    </a>
+                                    @if ($b->Foto_Barang)
+                            <a class="entry-thumbnail" href="detail.html">
+                                <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
+                            </a>
+                            @endif
                                   </div>
                                   <!-- /.image -->
 
