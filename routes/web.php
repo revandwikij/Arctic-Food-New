@@ -56,9 +56,9 @@ Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
-Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/bayar', [PaymentController::class, 'bayar']);
-Route::get('/profil', [ProfileController::class, 'profil']);
+Route::get('/cart', [ViewController::class, 'cart']);
+Route::get('/profil', [ViewController::class, 'profil']);
 
 
 

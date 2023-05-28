@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="assets/css/profil.css">
 </head>
 <body>
-	<section class="py-5 my-5">
+    @foreach ($pelanggan as $p)
+    <section class="py-5 my-5">
 		<div class="container">
 			{{-- <h1 class="mb-5">Profil Saya</h1> --}}
 			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
@@ -210,6 +211,8 @@
 			</div>
 		</div>
 	</section>
+    @endforeach
+
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

@@ -198,12 +198,15 @@
                 <div class="nav-bg-class">
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav list-inline list-unstyled">
                                 <li class="active dropdown">
-                                    <a href="/">Home</a>
+                                    <a href="/">Dasboard</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-hover="dropdown"
+                                <li class="">
+                                    <a>@yield('form')</a>
+                                </li>
+                                {{-- <li class="dropdown"> --}}
+                                    {{-- <a href="#" class="dropdown-toggle" data-hover="dropdown"
                                         data-toggle="dropdown">Pages</a>
                                     <ul class="dropdown-menu pages">
                                         <li>
@@ -227,7 +230,7 @@
                                 </li>
                                 <li class="dropdown navbar-right special-menu">
                                     <a href="#">Get 30% off on selected items</a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>

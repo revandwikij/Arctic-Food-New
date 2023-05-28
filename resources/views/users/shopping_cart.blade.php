@@ -3,18 +3,15 @@
 @section('title', 'Cart')
 
 @section('content')
-<body class="cnt-home">
-    <!-- ============================================== HEADER ============================================== -->
-
-    <!-- ============================================== HEADER : END ============================================== -->
     <div class="breadcrumb">
-        <div class="container">
+        @section('form', 'Keranjang')
+        {{-- <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="/ ">Dasboard</a></li>
                     <li class='active'>Keranjang</li>
                 </ul>
-        </div><!-- /.container -->
+        </div><!-- /.container --> --}}
     </div><!-- /.breadcrumb -->
 
     <div class="body-content outer-top-xs">
