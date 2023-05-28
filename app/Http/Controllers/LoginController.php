@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelUser;
 use App\Models\pelanggan;
+use App\Models\Penjual;
 use App\Models\User;
 use App\Models\users;
 use Illuminate\Auth\Events\Logout;
@@ -41,7 +42,7 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    //register
+    //register pembeli
     public function register(Request $request)
     {
         pelanggan::create([

@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pelangganController;
+use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userscontrollers;
 use App\Http\Controllers\ViewController;
@@ -59,6 +60,8 @@ Route::get('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/bayar', [PaymentController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/profil', [ViewController::class, 'profil']);
+Route::get('/add', [ViewController::class, 'tambahadmin']);
+Route::post('/tambahadmin', [PenjualController::class, 'store']);
 
 
 

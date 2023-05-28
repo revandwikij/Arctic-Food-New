@@ -44,4 +44,9 @@ class ViewController extends Controller
         $kategoris = kategori::all();
         return view('users.profile', compact('kategoris'), compact('barang'), compact('pelanggan'));
     }
+
+    public function tambahadmin()
+    {
+        return view('Penjual.tambahadmin');
+    }
 }
