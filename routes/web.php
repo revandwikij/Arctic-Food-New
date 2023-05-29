@@ -69,6 +69,7 @@ Route::post('/tambahadmin', [PenjualController::class, 'store']);
 
 // Admin
 Route::get('/admin', [AdminController::class, 'home']);
+Route::get('/pesan', [PesanController::class, 'index']);
 
 // Penjual
 

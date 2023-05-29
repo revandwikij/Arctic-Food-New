@@ -293,7 +293,7 @@
             <!-- ============================================== HOT DEALS: END ============================================== -->
 
             <!-- ============================================== SPECIAL OFFER ============================================== -->
-            @foreach ($barang as $b)
+            {{-- @foreach ($barang as $b) --}}
 
             <div class="sidebar-widget outer-bottom-small">
               <h3 class="section-title">Penawaran Khusus</h3>
@@ -307,7 +307,7 @@
                           <div class="row product-micro-row">
                             <div class="col col-xs-5">
                               <div class="product-image">
-                                <div class="image">
+                                {{-- <div class="image">
                                 @if ($b->Foto_Barang)
                                     <a href="detail.html">
                                         <a class="entry-thumbnail" href="detail.html">
@@ -315,7 +315,7 @@
                                         </a>
                                     </a>
                                 @endif
-                                </div>
+                                </div> --}}
                                 <!-- /.image -->
                               </div>
                               <!-- /.product-image -->
@@ -634,7 +634,7 @@
               <!-- /.sidebar-widget-body -->
             </div>
 
-            @endforeach
+            {{-- @endforeach --}}
 
             <!-- /.sidebar-widget -->
             <!-- ============================================== SPECIAL OFFER : END ============================================== -->
@@ -1148,182 +1148,33 @@
             <!-- ========================================= SECTION – HERO : END ========================================= -->
 
             <!-- ============================================== SCROLL TABS ============================================== -->
-            @foreach ($barang as $b)
-            <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
-              <div class="more-info-tab clearfix">
-                <h3 class="new-product-title pull-left">Produk Baru</h3>
-                <div class="tab-content outer-top-xs">
-                    <div class="tab-pane in active" id="all">
-                      <div class="product-slider">
-                        <div
-                          class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                          <div class="item item-carousel">
-                            <div class="products">
-                              <div class="product">
-                                <div class="product-image">
-                                  <div class="image">
-                                @if ($b->Foto_Barang)
-                                    <a href="detail.html">
-                                        <a class="entry-thumbnail" href="detail.html">
-                                            <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
-                                        </a>
-                                    </a>
-                                @endif
-                                  </div>
-                                  <!-- /.image -->
-
-                                  <div class="tag new"><span>new</span></div>
-                                </div>
-                                <!-- /.product-image -->
-
-                                <div class="product-info text-left">
-                                  <h3 class="name">
-                                    <a href="detail.html">{{ $b->Nama_Barang }}</a>
-                                  </h3>
-                                  <div class="rating rateit-small"></div>
-                                  <div class="description"></div>
-                                  <div class="product-price">
-                                    <span class="price"> $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-                                  </div>
-                                  <!-- /.product-price -->
-                                </div>
-                                <!-- /.product-info -->
-                                <div class="cart clearfix animate-effect">
-                                  <div class="action">
-                                    <ul class="list-unstyled">
-                                      <li class="add-cart-button btn-group">
-                                        <button
-                                          data-toggle="tooltip"
-                                          class="btn btn-primary icon"
-                                          type="button"
-                                          title="Add Cart">
-                                          <i class="fa fa-shopping-cart"></i>
-                                        </button>
-                                        <button
-                                          class="btn btn-primary cart-btn"
-                                          type="button">
-                                          Add to cart
-                                        </button>
-                                      </li>
-                                      <li class="lnk wishlist">
-                                        <a
-                                          data-toggle="tooltip"
-                                          class="add-to-cart"
-                                          href="detail.html"
-                                          title="Wishlist">
-                                          <i class="icon fa fa-heart"></i>
-                                        </a>
-                                      </li>
-                                      <li class="lnk">
-                                        <a
-                                          data-toggle="tooltip"
-                                          class="add-to-cart"
-                                          href="detail.html"
-                                          title="Compare">
-                                          <i
-                                            class="fa fa-signal"
-                                            aria-hidden="true"></i>
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <!-- /.action -->
-                                </div>
-                                <!-- /.cart -->
-                              </div>
-                              <!-- /.product -->
-                            </div>
-                            <!-- /.products -->
-                          </div>
-                <!-- /.nav-tabs -->
-              </div>
-
-                      {{-- <div class="item item-carousel">
-                        <div class="products">
-                          <div class="product">
-                            <div class="product-image">
-                              <div class="image">
-                                @if ($b->Foto_Barang)
-                                        <a class="entry-thumbnail" href="detail.html">
-                                            <img src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
-                                        </a>
-                                    @endif
-                              </div>
-                              <!-- /.image -->
-                            </div>
-                            <!-- /.product-image -->
-
-                            <div class="product-info text-left">
-                              <h3 class="name">
-                                <a href="detail.html">{{ $b->Nama_Barang }}</a>
-                              </h3>
-                              <div class="rating rateit-small"></div>
-                              <div class="description"></div>
-                              <div class="product-price">
-                                <span class="price"> $450.99 </span>
-                                <span class="price-before-discount">$ 800</span>
-                              </div>
-                              <!-- /.product-price -->
-                            </div>
-                            <!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                              <div class="action">
-                                <ul class="list-unstyled">
-                                  <li class="add-cart-button btn-group">
-                                    <button
-                                      class="btn btn-primary icon"
-                                      data-toggle="dropdown"
-                                      type="button">
-                                      <i class="fa fa-shopping-cart"></i>
-                                    </button>
-                                    <button
-                                      class="btn btn-primary cart-btn"
-                                      type="button">
-                                      Add to cart
-                                    </button>
-                                  </li>
-                                  <li class="lnk wishlist">
-                                    <a
-                                      class="add-to-cart"
-                                      href="detail.html"
-                                      title="Wishlist">
-                                      <i class="icon fa fa-heart"></i>
-                                    </a>
-                                  </li>
-                                  <li class="lnk">
-                                    <a
-                                      class="add-to-cart"
-                                      href="detail.html"
-                                      title="Compare">
-                                      <i
-                                        class="fa fa-signal"
-                                        aria-hidden="true"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <!-- /.action -->
-                            </div>
-                            <!-- /.cart -->
-                          </div>
-                          <!-- /.product -->
-                        </div>
-                        <!-- /.products -->
-                      </div> --}}
-                    </div>
-                    <!-- /.home-owl-carousel -->
+           
+            @foreach($barang as $b)
+              <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                  @if ($b->Foto_Barang)
+                  <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
+                  @endif
+                 
+                  <div class="card-body">
+                    <h5 class="card-title">{{$b->Nama_Barang}}</h5>
+                    <p class="card-text">
+                      <strong>Stok :</strong>{{$b->Stok}}
+                      <br>
+                      <strong>Harga :</strong>{{number_format($b->Harga)}}
+                    </p>
+                   <button> <a href="/pesan/{Id_Barang}" class="btn btn-primary">Masukan eranjang</a></button>
                   </div>
-                  <!-- /.product-slider -->
                 </div>
               </div>
-              <!-- /.tab-content -->
-            </div>
-            <!-- /.scroll-tabs -->
+            @endforeach
+            
+            
+             <!-- /.scroll-tabs -->
 
             <!-- ============================================== SCROLL TABS : END ============================================== -->
 
-            @endforeach
+          
             <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
           </div>
           <!-- /.homebanner-holder -->
@@ -1475,5 +1326,7 @@
     </div>
     <!-- /.info-boxes -->
     <!-- ============================================== INFO BOXES : END ============================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
+
 @endsection
