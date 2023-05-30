@@ -109,7 +109,7 @@
                 <div class="profile-name">Revan Dwiki</div>
                 <div class="name-job">Penjual</div>
             </div>
-            <a href="/Log-Out"><i class='bx bx-log-out' href="/Log-Out"></i></a>
+            <a href="/logout"><i class='bx bx-log-out' href="/logout"></i></a>
             </div>
         </li>
     </ul>

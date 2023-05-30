@@ -12,7 +12,7 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::all();
+        $barang = Barang::paginate(20);
         $kategoris = kategori::all();
         return view('Home', compact('kategoris'), compact('barang'), compact('pelanggan'));
     }

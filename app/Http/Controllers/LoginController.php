@@ -25,9 +25,22 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            if (Auth::user()->level == 'pelanggan')
+            {
+                return redirect()->intended('/');
+            }
+            else if (Auth::user()->level == 'penjual')
+            {
+                return redirect()->intended('/admin');
+            } 
+            else
+            {
+                return "Email atau password anda salah";
+            }
+
+           
         }
-        return "Email atau password anda salah";
+        
     }
 
     //logout
