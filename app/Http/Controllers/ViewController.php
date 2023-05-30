@@ -49,4 +49,11 @@ class ViewController extends Controller
     {
         return view('Penjual.tambahadmin');
     }
+    public function detail()
+    {
+        $pelanggan = pelanggan::all();
+        $barang = Barang::all();
+        $kategoris = kategori::all();
+        return view('users.detail', compact('kategoris'), compact('barang'), compact('pelanggan'));
+    }
 }

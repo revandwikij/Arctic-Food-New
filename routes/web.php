@@ -61,6 +61,7 @@ Route::get('/bayar', [PaymentController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
+Route::get('/detail', [ViewController::class, 'detail']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 
 
