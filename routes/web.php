@@ -12,6 +12,7 @@ use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userscontrollers;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\PesanController;
 use App\Models\pelanggan;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
+Route::get('/pesan/{Id_Barang}', [PesanController::class, 'index']);
 
 
 
@@ -69,7 +71,7 @@ Route::post('/tambahadmin', [PenjualController::class, 'store']);
 
 // Admin
 Route::get('/admin', [AdminController::class, 'home']);
-Route::get('/pesan', [PesanController::class, 'index']);
+
 
 // Penjual
 

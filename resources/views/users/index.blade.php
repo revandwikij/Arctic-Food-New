@@ -79,7 +79,6 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Level</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -90,7 +89,7 @@
                     <td>{{ $hasil->id}}</td>
                     <td>{{ $hasil->username}}</td>
                     <td>{{ $hasil->email}}</td>
-                    <td>{{ $hasil->level}}</td>
+                
 
                     <td>
                      <form method="POST" action="/hapus" style="display: inline-block;">
