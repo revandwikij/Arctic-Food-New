@@ -1,21 +1,21 @@
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 
 <!-- Customizable CSS -->
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/blue.css" />
-<link rel="stylesheet" href="assets/css/owl.carousel.css" />
-<link rel="stylesheet" href="assets/css/owl.transitions.css" />
-<link rel="stylesheet" href="assets/css/animate.min.css" />
-<link rel="stylesheet" href="assets/css/rateit.css" />
-<link rel="stylesheet" href="assets/css/profile.css" />
-<link rel="stylesheet" href="assets/css/bootstrap-select.min.css" />
-{{-- <link rel="stylesheet" href="assets/css/style.css" /> --}}
-{{-- <link rel="stylesheet" href="assets/css/login.css" /> --}}
-{{-- <link rel="stylesheet" href="assets/css/coba.css" /> --}}
+<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/blue.css" />
+<link rel="stylesheet" href="../assets/css/owl.carousel.css" />
+<link rel="stylesheet" href="../assets/css/owl.transitions.css" />
+<link rel="stylesheet" href="../assets/css/animate.min.css" />
+<link rel="stylesheet" href="../assets/css/rateit.css" />
+<link rel="stylesheet" href="../assets/css/profile.css" />
+<link rel="stylesheet" href="../assets/css/bootstrap-select.min.css" />
+{{-- <link rel="stylesheet" href="../assets/css/style.css" /> --}}
+{{-- <link rel="stylesheet" href="../assets/css/login.css" /> --}}
+{{-- <link rel="stylesheet" href="../assets/css/coba.css" /> --}}
 
 <!-- Icons/Glyphs -->
-<link rel="stylesheet" href="assets/css/font-awesome.css" />
+<link rel="stylesheet" href="../assets/css/font-awesome.css" />
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Barlow:200,300,300i,400,400i,500,500i,600,700,800" rel="stylesheet" />

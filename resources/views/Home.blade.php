@@ -1173,7 +1173,7 @@
                   <br>
                   <strong>Harga :</strong>Rp.{{number_format($b->Harga)}}
                 </p>
-               <a href="/pesan/{{$b->Id_Barang}}">Masukan Keranjang</a>
+               <a href="/pesan/{{$b->Id_Barang}}" class="btn btn-primary">Pesan</a>
               </div>
             </div>
           </div>
