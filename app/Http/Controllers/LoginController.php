@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelUser;
 use App\Models\pelanggan;
+use App\Models\Penjual;
 use App\Models\User;
 use App\Models\users;
 use Illuminate\Auth\Events\Logout;
@@ -24,9 +25,22 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            if (Auth::user()->level == 'pelanggan')
+            {
+                return redirect()->intended('/');
+            }
+            else if (Auth::user()->level == 'penjual')
+            {
+                return redirect()->intended('/admin');
+            } 
+            else
+            {
+                return "Email atau password anda salah";
+            }
+
+           
         }
-        return "Email atau password anda salah";
+        
     }
 
     //logout
@@ -41,11 +55,9 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    //register
+    //register pembeli
     public function register(Request $request)
     {
-
-
         pelanggan::create([
             'id' => $request->id,
             'username' => $request->username,
@@ -59,6 +71,6 @@ class LoginController extends Controller
             'password' =>'required|confirmed|min:8'
         ]);
 
-        return to_route('/login');
+        return redirect('/login');
     }
 }

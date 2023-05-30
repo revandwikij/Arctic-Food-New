@@ -15,7 +15,7 @@
     <!-- Css -->
     @include('layouting.home.head')
 </head>
-<body>
+<body class="cnt-home">
 
     @include('layouting.home.header')
 

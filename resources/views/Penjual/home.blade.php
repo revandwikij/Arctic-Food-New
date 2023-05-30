@@ -8,6 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -77,6 +78,20 @@
             </li>
             
             <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <box-icon name='user-rectangle' type='solid' ></box-icon>
+                        <span class="link-name">Akun</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link-name" href="#">Tambah Akun</a></li>
+                    <li><a href="/add">Tambah Akun </a></li>
+                </ul>
+            </li>
+
+            <li>
                 <a href="#">
                     <i class='bx bx-hard-hat' ></i>
                     <span class="link-name">Tentang</span>
@@ -94,7 +109,7 @@
                 <div class="profile-name">Revan Dwiki</div>
                 <div class="name-job">Penjual</div>
             </div>
-            <a href="/Log-Out"><i class='bx bx-log-out' href="/Log-Out"></i></a>
+            <a href="/logout"><i class='bx bx-log-out' href="/logout"></i></a>
             </div>
         </li>
     </ul>

@@ -43,7 +43,7 @@
         </div>
     </div>
 </nav>
- 
+
 
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -52,13 +52,13 @@
             <div class="card">
                 <h5 class="text-center mb-4"></h5>
                 @foreach ($barang as $data)
-                    
-                
-                
+
+
+
                 <form action="/Edit" class="form-card" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Id Barang<span class="text-danger"> *</span></label> <input type="text" id="Id_Barang" name="Id_Barang" value="{{ $data->Id_Barang }}" placeholder="Masukan Produk Terbaru" onblur="validate(1)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Id Barang<span class="text-danger"> *</span></label> <input type="text" id="Id_Barang" name="Id_Barang" value="{{ $data->Id_Barang }}" placeholder="Masukan Produk Terbaru" onblur="validate(1)" readonly> </div>
 
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Produk<span class="text-danger"> *</span></label> <input type="text" id="Nama_Barang" name="Nama_Barang" value="{{ $data->Nama_Barang }}" placeholder="Masukan Produk Terbaru" onblur="validate(1)"> </div>
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Keterangan Barang<span class="text-danger"> *</span></label><textarea id="Keterangan_Barang" name="Keterangan_Barang" value="{{ $data->Keterangan_Barang }}" cols="30" rows="10"></textarea> </div>
@@ -85,7 +85,7 @@
     </div>
 </div>
 
- 
+
             <div class="col-12 copyright mt-3">
                 <p class="float-left">
                     <a href="#">Back to top</a>
