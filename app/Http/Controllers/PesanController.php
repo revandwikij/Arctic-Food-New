@@ -13,4 +13,9 @@ class PesanController extends Controller
         $Barang = Barang::where('Id_Barang', $Id_Barang)->get();
         return view ('detail', compact('Barang'), compact('kategoris'));
     }
+
+    public function pesan (Request $request, $Id_Barang)
+    {
+        $Barang = Barang::where('Id_Barang', $Id_Barang)->get();
+    }
 }
