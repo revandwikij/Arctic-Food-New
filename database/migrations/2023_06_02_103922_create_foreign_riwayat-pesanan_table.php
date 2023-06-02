@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayat_pembelian', function (Blueprint $table) {
-            $table->integer('Id_Rating');
-            $table->string('Id_Pembelian');
-            $table->date('Tgl_Selesai_Transaksi');
-            $table->timestamps();
+        Schema::table('riwayat_pesanan', function (Blueprint $table){
+            $table->foreign('Id_Pesanan')->references('Id_Pesanan')->on('pesanan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayat_pembelian');
+        //
     }
 };

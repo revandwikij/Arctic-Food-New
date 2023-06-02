@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pesanan_detail', function (Blueprint $table) {
-            $table->id();
+        Schema::create('riwayat_pesanan', function (Blueprint $table) {
+            $table->integer('Id_Rating');
+            $table->unsignedBigInteger('Id_Pesanan');
+            $table->date('Tgl_Selesai_Transaksi');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesanan_detail');
+        Schema::dropIfExists('riwayat_pembelian');
     }
 };

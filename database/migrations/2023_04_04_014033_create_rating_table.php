@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('rating', function (Blueprint $table) {
             $table->id('Id_Rating');
-            $table->integer('Id_Pelanggan');
-            $table->integer('Id_Barang');
+            $table->unsignedBigInteger('Id_Pelanggan');
+            $table->unsignedBigInteger('Id_Barang');
             $table->enum('Value', ['Puas', 'Netral', 'Tidak Puas']);
             $table->string('Ulasan');
             $table->timestamps();

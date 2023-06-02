@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chat', function (Blueprint $table) {
             $table->id('Id_Chat');
-            $table->integer('NIB');
-            $table->integer('Id_Pelanggan');
+            $table->unsignedBigInteger('NIB');
+            $table->unsignedBigInteger('Id_Pelanggan');
             $table->string('Isi_Chat');
             $table->timestamps();
         });

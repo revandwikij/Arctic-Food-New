@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id('Id_Pelanggan');
-            // $table->integer('Id_Alamat');  
+            $table->unsignedBigInteger('Id_Alamat')->nullable();
             $table->string('username');
             $table->string('email');
             $table->enum('jenkel', ['L','P']);
             $table->string('no_Telp');
             $table->string('password');
             $table->timestamps();
-
-            // $table->foreign('Id_Alamat')->references('alamat')->on('Id_Alamat')->onDelete('cascade');
         });
     }
 

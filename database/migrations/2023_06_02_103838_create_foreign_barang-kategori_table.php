@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alamat', function (Blueprint $table) {
-            $table->id('Id_Alamat');
-            $table->string('Alamat');
-            $table->string('No_Telp');
-            $table->timestamps();
+        Schema::table('barang', function (Blueprint $table){
+            $table->foreign('Id_Kategori')->references('Id_Kategori')->on('kategori')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alamat');
+        //
     }
 };
