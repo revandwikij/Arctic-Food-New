@@ -23,12 +23,12 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="/Dashboard">
+                <a href="/admin">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="link-name">Dashboard</span>
+                    <span class="link-name">Beranda</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a class="link-name" href="/Dashboard">Dashboard</a></li>
+                    <li><a class="link-name" href="/admin">Beranda</a></li>
                 </ul>
                 <ul class="sub-menu blank">
                     <li><a class="link-name" href="#">Transaksi</a></li>

@@ -82,7 +82,7 @@
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo">
                         <a href="/">
-                            <img src="assets/images/Go-logo.png" alt="logo" width="300px" />
+                            <img src="../assets/images/Go-logo.png" alt="logo" width="300px" />
                         </a>
                     </div>
                     <!-- /.logo -->

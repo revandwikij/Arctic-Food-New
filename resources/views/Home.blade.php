@@ -1081,7 +1081,7 @@
           <!-- ============================================== SIDEBAR : END ============================================== -->
 
           <!-- ============================================== CONTENT ============================================== -->
-          <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
+          {{-- <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
             <!-- ========================================== SECTION – HERO ========================================= -->
             <div class="center">
 
@@ -1149,25 +1149,7 @@
 
             <!-- ============================================== SCROLL TABS ============================================== -->
            
-            @foreach($barang as $b)
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  @if ($b->Foto_Barang)
-                  <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
-                  @endif
-                 
-                  <div class="card-body">
-                    <h5 class="card-title">{{$b->Nama_Barang}}</h5>
-                    <p class="card-text">
-                      <strong>Stok :</strong>{{$b->Stok}}
-                      <br>
-                      <strong>Harga :</strong>{{number_format($b->Harga)}}
-                    </p>
-                   <button> <a href="/pesan/{Id_Barang}" class="btn btn-primary">Masukan eranjang</a></button>
-                  </div>
-                </div>
-              </div>
-            @endforeach
+           
             
             
              <!-- /.scroll-tabs -->
@@ -1176,7 +1158,26 @@
 
           
             <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
+          </div> --}}
+          @foreach($barang as $b)
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+              @if ($b->Foto_Barang)
+              <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
+              @endif
+             
+              <div class="card-body">
+                <h5 class="card-title">{{$b->Nama_Barang}}</h5>
+                <p class="card-text">
+                  <strong>Stok :</strong>{{$b->Stok}}
+                  <br>
+                  <strong>Harga :</strong>Rp.{{number_format($b->Harga)}}
+                </p>
+               <a href="/pesan/{{$b->Id_Barang}}" class="btn btn-primary">Pesan</a>
+              </div>
+            </div>
           </div>
+        @endforeach
           <!-- /.homebanner-holder -->
           <!-- ============================================== CONTENT : END ============================================== -->
         </div>

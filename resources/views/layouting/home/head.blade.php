@@ -1,5 +1,5 @@
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 
 <!-- Customizable CSS -->
 <link rel="stylesheet" href="assets/css/main.css" />
@@ -17,7 +17,7 @@
 
 
 <!-- Icons/Glyphs -->
-<link rel="stylesheet" href="assets/css/font-awesome.css" />
+<link rel="stylesheet" href="../assets/css/font-awesome.css" />
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Barlow:200,300,300i,400,400i,500,500i,600,700,800" rel="stylesheet" />

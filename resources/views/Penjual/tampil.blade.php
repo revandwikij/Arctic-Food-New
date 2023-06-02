@@ -58,7 +58,7 @@
                         <tr>
                             <th scope="col">Id Barang</th>
                             <th scope="col">Foto</th>
-                            <th scope="col">Id Kategori</th>
+                            <th scope="col">Kategori</th>
                             <th scope="col">Nama Produk</th>
                             <th scope="col">Stok</th>
                             <th scope="col" >Keterangan Barang</th>
