@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('keranjang', function (Blueprint $table) {
             $table->id('Id_Keranjang');
-            $table->integer('Id_Pelanggan');
+            $table->unsignedBigInteger('Id_Pelanggan');
             $table->unsignedBigInteger('Id_Barang');
             $table->integer('Kuantitas');  //value nya jadi 5
             $table->integer('Sub_Total');

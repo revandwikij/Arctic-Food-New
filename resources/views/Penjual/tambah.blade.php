@@ -43,7 +43,8 @@
         </div>
     </div>
 </nav>
- 
+
+{{-- @foreach ($test as $data) --}}
 
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -52,13 +53,21 @@
             <div class="card">
                 <h5 class="text-center mb-4"></h5>
                 <form action="/Form" class="form-card" method="POST" enctype="multipart/form-data">
-                @csrf
+                    @csrf
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Produk<span class="text-danger"> *</span></label> <input type="text" id="Nama_Barang" name="Nama_Barang" placeholder="Masukan Produk Terbaru" onblur="validate(1)"> </div>
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Keterangan Barang<span class="text-danger"> *</span></label><textarea id="Keterangan_Barang" name="Keterangan_Barang" cols="30" rows="10"></textarea> </div>
                     </div>
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ID Kategori<span class="text-danger"> *</span></label> <input type="text" id="Id_Kategori" name="Id_Kategori" placeholder="" onblur="validate(3)"> </div>
+
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ID Kategori<span class="text-danger"> *</span></label>
+                            <input type="text" id="Id_Kategori" name="Id_Kategori" placeholder="" onblur="validate(3)">
+                            {{-- <select name="Id_Kategori" id="Id_Kategori">
+                                <option value="1">{{$data['Kategori']}}</option>
+                            </select> --}}
+                        </div>
+
+
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Foto Barang<span class="text-danger"> *</span></label> <input type="file" id="Foto_Barang" name="Foto_Barang" placeholder="" onblur="validate(3)"> </div>
 
                     </div>
@@ -77,7 +86,7 @@
     </div>
 </div>
 
- 
+
             <div class="col-12 copyright mt-3">
                 <p class="float-left">
                     <a href="#">Back to top</a>
@@ -87,3 +96,5 @@
         </div>
     </div>
 </footer>
+
+{{-- @endforeach --}}

@@ -32,15 +32,15 @@ class LoginController extends Controller
             else if (Auth::user()->level == 'penjual')
             {
                 return redirect()->intended('/admin');
-            } 
+            }
             else
             {
                 return "Email atau password anda salah";
             }
 
-           
+
         }
-        
+
     }
 
     //logout
@@ -71,6 +71,6 @@ class LoginController extends Controller
             'password' =>'required|confirmed|min:8'
         ]);
 
-        return redirect('/login');
+        return redirect()->action([ViewController::class, 'login ']);
     }
 }

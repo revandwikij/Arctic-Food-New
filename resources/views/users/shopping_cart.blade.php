@@ -34,13 +34,13 @@
                 </thead><!-- /thead -->
 
                 <tbody>
-                    @foreach ($barang as $b)
+                    @foreach ($test as $data)
                     <tr>
                         <td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
-                            @if ($b->Foto_Barang)
+                            @if ($data->Foto_Barang)
                                 <a class="entry-thumbnail" href="detail.html">
-                                    <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
+                                    <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
                                 </a>
                             @endif
                             {{-- <a class="entry-thumbnail" href="detail.html">
@@ -48,7 +48,7 @@
                             </a> --}}
                         </td>
                         <td class="cart-product-name-info">
-                            <h4 class='cart-product-description'><a href="detail.html">{{ $b->Nama_Barang }}</a></h4>
+                            <h4 class='cart-product-description'><a href="detail.html">{{ $data->Nama_Barang }}</a></h4>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="rating rateit-small"></div>
@@ -69,8 +69,8 @@
                                     <input type="text" value="1">
                               </div>
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $b->Harga }}</span></td>
-                        <td class="cart-product-grand-total"><span class="cart-grand-total-price">{{ $b->Harga }}</span></td>
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga }}</span></td>
+                        <td class="cart-product-grand-total"><span class="cart-grand-total-price">{{ $data->Harga }}</span></td>
                     </tr>
                     @endforeach
                 </tbody><!-- /tbody -->

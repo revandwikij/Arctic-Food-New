@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Alamat extends Model
+class Keranjang extends Model
 {
     use HasFactory;
-    protected $table = "alamat";
-    protected $primaryKey = "Id_Alamat";
+    protected $table = 'keranjang';
+    protected $primaryKey = "Id_Keranjang";
 }

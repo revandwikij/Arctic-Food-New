@@ -11,7 +11,6 @@
                 </div>
                 <div class="card-body">
                     <form method="POST" action="/regis/verif">
-                        @csrf
                         {{ csrf_field() }}
                         <div class="form-row">
                             <div class="name">Username</div>

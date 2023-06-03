@@ -140,7 +140,7 @@
                                     <div class="row">
                                         <div class="col-xs-4">
                                             <div class="image">
-                                                <a href="detail.html"><img src="assets/images/products/p4.jpg"
+                                                <a href="detail.html"><img src="../assets/images/products/p4.jpg"
                                                         alt="" /></a>
                                             </div>
                                         </div>

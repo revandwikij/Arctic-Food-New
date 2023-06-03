@@ -41,8 +41,8 @@ Route::get('/coba', function () {
     return view('keranjang');
 });
 
-Route::get('/Barang', [BarangController::class, 'index']);
-Route::get('/Tambah', [BarangController::class, 'create']);
+Route::get('/Barang', [ViewController::class, 'barang']);
+Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
 Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
 Route::post('/Form', [BarangController::class, 'store']);
 Route::post('/Edit', [BarangController::class, 'update']);
@@ -72,7 +72,7 @@ Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 // Route::get('/users/create', [userscontrollers::class, 'create']);
 
 // Admin
-Route::get('/admin', [AdminController::class, 'home']);
+Route::get('/admin', [ViewController::class, 'admin']);
 
 
 // Penjual

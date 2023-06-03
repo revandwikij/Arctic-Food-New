@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PesanController extends Controller
 {
     public function index ($Id_Barang)
-    {   
+    {
         $kategoris = kategori::all();
         $Barang = Barang::where('Id_Barang', $Id_Barang)->get();
         return view ('detail', compact('Barang'), compact('kategoris'));
@@ -17,5 +17,6 @@ class PesanController extends Controller
     public function pesan (Request $request, $Id_Barang)
     {
         $Barang = Barang::where('Id_Barang', $Id_Barang)->get();
+        return redirect('/');
     }
 }

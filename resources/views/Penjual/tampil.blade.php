@@ -69,7 +69,9 @@
 
                     <tbody>
 
-                    @foreach ($barang as $data)
+                    {{-- @foreach ($barang as $data) --}}
+                    @foreach ($test as $data)
+                    {{-- @foreach ($data->Kategori() as $kategori) --}}
 
                     <tr>
 
@@ -80,7 +82,7 @@
 
                                 @endif
                             </td>
-                            <td>{{$data->Id_Kategori}} </td>
+                            <td>{{$data->Kategori}} </td>
                             <td>{{$data->Nama_Barang}} </td>
                             <td>{{$data->Stok}} </td>
                             <td>{{$data->Keterangan_Barang}} </td>
@@ -93,7 +95,9 @@
                             </td>
 
                     </tr>
-                     @endforeach
+                    {{-- @endforeach --}}
+                    @endforeach
+                    {{-- @endforeach --}}
                     </tbody>
                   <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a>
                   </table>
