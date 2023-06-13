@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('Id_Pembayaran');
             $table->unsignedBigInteger('Id_Pesanan');
             $table->unsignedBigInteger('Id_Pelanggan');
+            $table->enum('Metode_Pembayaran', ['COD', 'GoPay']);
             $table->integer('Total_Harga');
             $table->date('Tgl_Pembayaran');
             $table->timestamps();
