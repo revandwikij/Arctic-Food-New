@@ -41,12 +41,9 @@ class PesanController extends Controller
             $keranjang->Kuantitas = $request->jumlah_pesan;
             $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
             $keranjang->save();
-            
+
             return redirect('/cart');
 
-
-
-            
         }
     }
 
