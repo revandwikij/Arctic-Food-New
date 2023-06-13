@@ -32,6 +32,9 @@
                 </thead><!-- /thead -->
 
                 <tbody>
+                    @php
+                    $total = 0 ;    
+                    @endphp
                     @foreach ($test as $data)
                     <tr>
                         <td class="romove-item"><a href="clean/{{$data->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
@@ -67,7 +70,11 @@
                                     <input type="text" value="{{ $data->Kuantitas }}">
                               </div>
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}</span></td>
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}  
+                        @php
+                            $total += $data['Kuantitas'] * $data['Harga'];
+                        @endphp
+                        </span></td>
                     </tr>
                     @endforeach
                 </tbody><!-- /tbody -->
@@ -97,7 +104,7 @@
                 <tr>
                     <th>
                         <div class="cart-grand-total ">
-                            Total<span class="inner-left-md"></span>
+                            Total :<span class="inner-left-md"> Rp. {{$total}}</span>
                         </div>
                     </th>
                 </tr>
@@ -106,7 +113,7 @@
                     <tr>
                         <td>
                             <div class="cart-checkout-btn pull-right">
-                                <button type="submit" class="btn btn-primary checkout-btn" ><a href="/bayar">PEMBAYARAN</a></button>
+                                <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
                             </div>
                         </td>
