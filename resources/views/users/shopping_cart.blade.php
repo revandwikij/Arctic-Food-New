@@ -35,7 +35,7 @@
                 <tbody>
                     @foreach ($test as $data)
                     <tr>
-                        <td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+                        <td class="romove-item"><a href="clean/{{$data->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
                             @if ($data->Foto_Barang)
                                 <a class="entry-thumbnail" href="detail.html">
