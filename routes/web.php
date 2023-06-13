@@ -64,10 +64,10 @@ Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 Route::get('/detil', [ViewController::class, 'detail']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
-Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
-Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
-Route::post('/keranjang/{Id_Barang}', [PesanController::class, 'keranjang']);
-Route::get('clean/{Id_Barang}', [PesanController::class, 'hpus']);
+Route::get('/detail/{Id_Barang}', [KeranjangController::class, 'index']);
+Route::post('/pesan/{Id_Barang}', [KeranjangController::class, 'pesan']);
+Route::post('/keranjang/{Id_Barang}', [KeranjangController::class, 'keranjang']);
+Route::get('clean/{Id_Barang}', [KeranjangController::class, 'hapus']);
 
 
 

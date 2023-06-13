@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Barang;
 use App\Models\kategori;
 use App\Models\Keranjang;
+use App\Models\User;
+
+use App\Models\pelanggan;
+use App\Models\users;
+use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KeranjangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index ($Id_Barang)
     {
         $kategoris = kategori::all();
@@ -46,50 +48,10 @@ class KeranjangController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function hapus($Id_Keranjang)
     {
-        //
+	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
+	return redirect('/cart');;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function delete($Id_Barang)
-    {
-        // $products = session('cart');
-        // foreach ($products as $key => $value)
-        // {
-        //     if ($value['id'] == $id)
-        //     {
-        //         unset($products [$key]);
-        //     }
-        // }
-        // //put back in session array without deleted item
-        // $request->session()->push('cart',$products);
-        // //then you can redirect or whatever you need
-        // return redirect()->back();
-
-        DB::table('keranjang')->where('Id_Barang', $Id_Barang)->delete();
-
-	    return redirect('/cart');
-    }
 }
