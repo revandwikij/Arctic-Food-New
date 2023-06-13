@@ -43,8 +43,11 @@ class ViewController extends Controller
     }
     public function cart()
     {
+
+        // $test = Keranjang::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')->get(['keranjang.*', 'pelanggan.*']);
         $test = Keranjang::join('barang', 'barang.Id_Barang', '=', 'keranjang.Id_Barang')
-                ->get(['barang.*', 'keranjang.*']);
+                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
+                ->get(['barang.*', 'keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
         $kategoris = kategori::all();
         return view('users.shopping_cart', compact('kategoris'), compact('test'), compact('pelanggan'));

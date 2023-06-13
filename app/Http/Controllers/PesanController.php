@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\kategori;
+use App\Models\Keranjang;
+use App\Models\User;
+
+use App\Models\pelanggan;
+use App\Models\users;
+use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PesanController extends Controller
@@ -19,4 +25,29 @@ class PesanController extends Controller
         $Barang = Barang::where('Id_Barang', $Id_Barang)->get();
         return redirect('/');
     }
+
+    public function keranjang (Request $request, $Id_Barang)
+    {
+        if(Auth::id())
+        {
+            $user=auth()->user();
+            // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
+            // ->get(['users.*', 'pelanggan.*']);
+            $Barang = Barang::find($Id_Barang);
+
+            $keranjang  = new Keranjang;
+            $keranjang->Id_Pelanggan = $user->id;
+            $keranjang->Id_Barang = $Barang->Id_Barang;
+            $keranjang->Kuantitas = $request->jumlah_pesan;
+            $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
+            $keranjang->save();
+            
+            return redirect('/cart');
+
+
+
+            
+        }
+    }
+
 }

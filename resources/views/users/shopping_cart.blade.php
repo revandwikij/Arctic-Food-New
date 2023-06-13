@@ -29,7 +29,6 @@
                         {{-- <th class="cart-edit item">Edit</th> --}}
                         <th class="cart-qty item">Quantity</th>
                         <th class="cart-sub-total item">Subtotal</th>
-                        <th class="cart-total last-item">Total</th>
                     </tr>
                 </thead><!-- /thead -->
 
@@ -66,11 +65,10 @@
                                       <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                       <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                     </div>
-                                    <input type="text" value="1">
+                                    <input type="text" value="{{ $data->Kuantitas }}">
                               </div>
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga }}</span></td>
-                        <td class="cart-product-grand-total"><span class="cart-grand-total-price">{{ $data->Harga }}</span></td>
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}</span></td>
                     </tr>
                     @endforeach
                 </tbody><!-- /tbody -->
@@ -99,11 +97,8 @@
             <thead>
                 <tr>
                     <th>
-                        <div class="cart-sub-total  ">
-                            Subtotal<span class="inner-left-md">Rp. 90.000</span>
-                        </div>
                         <div class="cart-grand-total ">
-                            Total<span class="inner-left-md">Rp. 90.000</span>
+                            Total<span class="inner-left-md"></span>
                         </div>
                     </th>
                 </tr>

@@ -62,10 +62,11 @@ Route::get('/bayar', [PaymentController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart']);
 Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
-Route::get('/detail', [ViewController::class, 'detail']);
+Route::get('/detil', [ViewController::class, 'detail']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
+Route::post('/keranjang/{Id_Barang}', [PesanController::class, 'keranjang']);
 
 
 
@@ -83,7 +84,7 @@ Route::get('/admin', [ViewController::class, 'admin']);
 
 // Login - Register - Logout
 Route::post('/login/verif', [LoginController::class, 'validasi'] );
-Route::get('/admin', [AdminController::class, 'home'] );
+
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/regis/verif', [LoginController::class, 'register'] );
 
