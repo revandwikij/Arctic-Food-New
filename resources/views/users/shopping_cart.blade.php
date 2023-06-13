@@ -34,11 +34,7 @@
                 <tbody>
                     @foreach ($test as $data)
                     <tr>
-                        <form action="{{ route('delete.cart', ['Id_Barang' => $Id_Barang]) }}" method="post">
-                            <td class="romove-item"><a href="/delete/{Id_Barang}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
-                            @csrf
-                        </form>
-
+                        <td class="romove-item"><a href="clean/{{$data->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
                             @if ($data->Foto_Barang)
                                 <a class="entry-thumbnail" href="detail.html">

@@ -10,6 +10,7 @@ use App\Models\pelanggan;
 use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PesanController extends Controller
 {
@@ -45,6 +46,12 @@ class PesanController extends Controller
             return redirect('/cart');
 
         }
+    }
+
+    public function hpus($Id_Keranjang)
+    {
+	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
+	return redirect('/cart');;
     }
 
 }
