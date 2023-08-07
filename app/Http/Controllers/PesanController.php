@@ -66,7 +66,7 @@ class PesanController extends Controller
         ->get(['keranjang.*','pelanggan.*']);
         $Pesan = new Pesan;
         $Pesan->Id_Pelanggan = $user->id;
-        $Pesan->Id_Keranjang =  $user->id;
+        $Pesan->Id_Keranjang =  
         $Pesan->Tgl_Pesanan =  date('Y-m-d H:i:s', time());
         $Pesan->save();
 
