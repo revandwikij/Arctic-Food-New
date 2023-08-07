@@ -67,10 +67,7 @@ class LoginController extends Controller
             'no_telp' => $request->no_telp,
         ]);
 
-        $request->validate([
-            'password' =>'required|confirmed|min:8'
-        ]);
 
-        return redirect()->action([ViewController::class, 'login ']);
+        return redirect('/');
     }
 }

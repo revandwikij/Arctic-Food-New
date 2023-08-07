@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('Id_Barang');
             $table->unsignedBigInteger('Id_Pesanan');
             $table->integer('Kuantitas');  //value nya jadi 5
-            $table->integer('Sub_Total');
+            $table->integer('Total');
             $table->timestamps();
         });
     }

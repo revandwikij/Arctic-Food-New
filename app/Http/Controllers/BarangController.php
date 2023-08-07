@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,13 +18,14 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Id_Kategori' => 'required',
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
             'Foto_Barang' => 'required',
             'Keterangan_Barang' => 'required',
         ]);
+
+        // $kategori = kategori::find('');
 
         $Foto_Barang = $request->file('Foto_Barang');
         $Foto_Ekstensi = $Foto_Barang->extension();
@@ -64,8 +66,9 @@ class BarangController extends Controller
      */
     public function edit($Id_Barang)
     {
+        $kategoris = kategori::all();
 	    $barang = DB::table('barang')->where('Id_Barang',$Id_Barang)->get();
-	    return view('Penjual.edit',['barang' => $barang]);
+	    return view('Penjual.edit',['barang' => $barang],['kategoris' => $kategoris]);
     }
 
     /**
@@ -121,5 +124,19 @@ class BarangController extends Controller
 
 	// alihkan halaman ke halaman pegawai
 	return redirect('/Barang');;
+    }
+
+    public function search(Request $request)
+    {
+        // menangkap data pencarian
+		$cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $barang = DB::table('barang')
+        ->where('nama_barang','like',"%".$cari."%")
+        ->paginate();
+
+        // mengirim data barang ke view index
+        return view('Home',['barang' => $barang]);
     }
 }

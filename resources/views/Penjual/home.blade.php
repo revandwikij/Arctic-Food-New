@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+@extends('layouting.layout admin.master')
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/tes.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    <div class="sidebar">
+@section('title', 'dashboard')
+
+@section('content')
+<div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-flutter'></i>
             <span class="logo_name">GoUMKM</span>
@@ -46,7 +33,7 @@
                     <li><a class="link-name" href="#">File Master</a></li>
                     <li><a href="/Barang">Barang</a></li>
                     <li><a href="/users">Pelanggan</a></li>
-                    
+
                 </ul>
             </li>
             <li>
@@ -76,7 +63,7 @@
                     <li><a href="#">Laporan Stok</a></li>
                 </ul>
             </li>
-            
+
             <li>
                 <div class="icon-link">
                     <a href="#">
@@ -132,26 +119,26 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id Barang</th>
-                                        <th scope="col">Foto</th>
-                                        <th scope="col">Id Kategori</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">Stok</th>
-                                        <th scope="col" >Keterangan Barang</th>
-                                        <th scope="col" >Harga</th>
-                                        
-                                    </tr> 
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Alamat</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Jenis Kelamin</th>
+                                        <th scope="col">No Telp</th>
+                                    </tr>
                                 </thead>
-                               
+
                                 <tbody>
-                                   
-                              
+
+                                {{-- @foreach ($d as $data)
                                 <tr>
-                                        
-                                       
-            
+                                    <th scope="col">{{ $data->username }}</th>
+                                    <th scope="col">{{ $data->Alamat }}</th>
+                                    <th scope="col">{{ $data->email }}</th>
+                                    <th scope="col">{{ $data->jenkel }}</th>
+                                    <th scope="col">{{ $data->no_Telp }}</th>
                                 </tr>
-                               
+                                @endforeach --}}
+
                                 </tbody>
                               {{-- <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a> --}}
                               </table>
@@ -159,66 +146,6 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
-
-        <div class="kotak3">
-            <div class="container mb-4">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Id Barang</th>
-                                        <th scope="col">Foto</th>
-                                        <th scope="col">Id Kategori</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">Stok</th>
-                                        <th scope="col" >Keterangan Barang</th>
-                                        <th scope="col" >Harga</th>
-                                        
-                                    </tr> 
-                                </thead>
-                               
-                                <tbody>
-                                   
-                              
-                                <tr>
-                                        
-                                       
-            
-                                </tr>
-                               
-                                </tbody>
-                              {{-- <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a> --}}
-                              </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
     </section>
-
-<script>
-    let arrow = document.querySelectorAll(".arrow")
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-            console.log(e);
-        let arrowParent = e.target.parentElement.parentElement;
-        arrowParent.classList.toggle("showMenu");
-        });
-    }
-        
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
-    });
-</script>
-</body>
-</html>
+@endsection

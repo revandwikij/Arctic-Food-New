@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('Id_Pesanan');
             $table->unsignedBigInteger('Id_Pelanggan');
             $table->unsignedBigInteger('Id_Keranjang');
+            $table->integer('Total');
             $table->date('Tgl_Pesanan');
             $table->timestamps();
         });

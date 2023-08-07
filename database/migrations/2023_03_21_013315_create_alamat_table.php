@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('alamat', function (Blueprint $table) {
             $table->id('Id_Alamat');
+            $table->unsignedBigInteger('Id_Pelanggan');
             $table->string('Alamat');
-            $table->string('No_Telp');
             $table->timestamps();
         });
     }

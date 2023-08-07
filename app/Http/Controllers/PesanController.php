@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\kategori;
 use App\Models\Keranjang;
+use App\Models\Pesan;
 use App\Models\User;
 
 use App\Models\pelanggan;
-use App\Models\Pesan;
 use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -43,12 +45,9 @@ class PesanController extends Controller
             $keranjang->Kuantitas = $request->jumlah_pesan;
             $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
             $keranjang->save();
-            
+
             return redirect('/cart');
 
-
-
-            
         }
     }
 
@@ -60,16 +59,25 @@ class PesanController extends Controller
 
     public function mesen()
     {
+
         $user=auth()->user();
         $test = Keranjang::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')
         ->where('keranjang.Id_Pelanggan', '=', $user->id)
         ->get(['keranjang.*','pelanggan.*']);
+
+        $total = Keranjang::sum('sub_total');
+
         $Pesan = new Pesan;
         $Pesan->Id_Pelanggan = $user->id;
         $Pesan->Id_Keranjang =  $user->id;
+        $Pesan->Total = $total ;
         $Pesan->Tgl_Pesanan =  date('Y-m-d H:i:s', time());
         $Pesan->save();
 
+        $alamat = Alamat::all();
+        $pesan = Pesan::all();
+
+        return view('users.payment', compact('alamat','pesan'));
 
     }
 

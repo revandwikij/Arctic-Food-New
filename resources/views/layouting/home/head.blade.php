@@ -1,26 +1,19 @@
-<!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-
-<!-- Customizable CSS -->
-<link rel="stylesheet" href="../assets/css/main.css" />
-<link rel="stylesheet" href="../assets/css/blue.css" />
-<link rel="stylesheet" href="../assets/css/owl.carousel.css" />
-<link rel="stylesheet" href="../assets/css/owl.transitions.css" />
-<link rel="stylesheet" href="../assets/css/animate.min.css" />
-<link rel="stylesheet" href="../assets/css/rateit.css" />
-<link rel="stylesheet" href="../assets/css/profile.css" />
-<link rel="stylesheet" href="../assets/css/bootstrap-select.min.css" />
-{{-- <link rel="stylesheet" href="../assets/css/style.css" /> --}}
-{{-- <link rel="stylesheet" href="../assets/css/login.css" /> --}}
-{{-- <link rel="stylesheet" href="../assets/css/coba.css" /> --}}
-<link rel="stylesheet" href="../assets/css/detailcss.css">
-
-
-<!-- Icons/Glyphs -->
-<link rel="stylesheet" href="../assets/css/font-awesome.css" />
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Barlow:200,300,300i,400,400i,500,500i,600,700,800" rel="stylesheet" />
-<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="../assets/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="../assets/icomoon/icomoon.css">
+<link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- script
+================================================== -->
+<script src="../assets/js/modernizr.js"></script>
