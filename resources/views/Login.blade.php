@@ -29,13 +29,5 @@
     <div
         style='opacity: 1; transform: rotate(3.975692877889816e-16deg); mix-blend-mode: normal; border-style: solid; border-style: solid; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-left-radius: 13px; border-bottom-right-radius: 13px; align-items: inherit; border-radius: 13px'>
     </div>
-    <p
-        style='line-height: undefined; letter-spacing: 50%; text-transform: none; text-align: left; vertical-align: top; font-family: Inter; font-size: 100px; color: rgba(255, 255, 255, 1); font-weight: 800; width: 100%'>
-        ...</p>
-    <p
-        style='line-height: undefined; letter-spacing: 0%; text-transform: none; text-align: left; vertical-align: top; font-family: Inter; font-size: 22px; color: rgba(0, 0, 0, 1); font-weight: 400; width: 100%; height: 100%'>
-        belum memiliki akun?</p>
-    <div
-        style='opacity: 1; transform: rotate(-7.502964620809179deg); mix-blend-mode: normal; border-style: solid; border-style: solid; align-items: inherit'>
     </div>
 </div>
