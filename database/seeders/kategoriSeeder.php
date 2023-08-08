@@ -14,17 +14,22 @@ class kategoriSeeder extends Seeder
     public function run(): void
     {
         kategori::create([
-            "Kategori" => "Fashion",
+            "Kategori" => "Busana",
             'created_at' => date('Y-m-d H:i:s', time()),
             'updated_at' => date('Y-m-d H:i:s', time())
         ]);
         kategori::create([
-            "Kategori" => "Electronic",
+            "Kategori" => "Makanan",
             'created_at' => date('Y-m-d H:i:s', time()),
             'updated_at' => date('Y-m-d H:i:s', time())
         ]);
         kategori::create([
-            "Kategori" => "DLL",
+            "Kategori" => "Perabotan",
+            'created_at' => date('Y-m-d H:i:s', time()),
+            'updated_at' => date('Y-m-d H:i:s', time())
+        ]);
+        kategori::create([
+            "Kategori" => "Kerajinan",
             'created_at' => date('Y-m-d H:i:s', time()),
             'updated_at' => date('Y-m-d H:i:s', time())
         ]);

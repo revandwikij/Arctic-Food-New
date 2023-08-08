@@ -18,4 +18,9 @@ class pelanggan extends Model
         'jenkel',
         'no_telp',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

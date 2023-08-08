@@ -8,6 +8,8 @@
     <title>Pembayaran</title>
 </head>
 <body>
+    @foreach ($pesan as $p)
+
     <div class="iphone">
         <header class="header">
           <h1>Pembayaran</h1>
@@ -16,12 +18,13 @@
         <form action="https://httpbin.org/post" class="form" method="POST">
           <div>
             <h2>Alamat</h2>
-
-            <div class="card">
+            <select class="card">
               <address>
-                <input class="card-title card" type="text" style="width: 500px" minlength="10px" autocomplete="off">
+                    @foreach ($alamat as $a)
+                    <option value="{{ $a->Alamat }}"></option>
+                    @endforeach
               </address>
-            </div>
+            </select>
           </div>
 
           <fieldset>
@@ -66,7 +69,7 @@
               <tfoot>
                 <tr>
                   <td>Total Pembayaran</td>
-                  <td align="right">Rp. 70.000</td>
+                  <td align="right">Rp. {{number_format ($p->Total) }}</td>
                 </tr>
               </tfoot>
             </table>
@@ -79,6 +82,8 @@
           </div>
         </form>
       </div>
+      @endforeach
+
 
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
 

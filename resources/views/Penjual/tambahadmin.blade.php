@@ -29,8 +29,8 @@
                                 </div>
                             </div>
                         </div>
-                         
-                        
+
+
                         <div class="form-row">
                             <div class="name">Password</div>
                             <div class="value">

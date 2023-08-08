@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('Id_Keranjang');
             $table->unsignedBigInteger('Id_Pelanggan');
             $table->unsignedBigInteger('Id_Barang');
-            $table->integer('Kuantitas');  //value nya jadi 5
+            $table->integer('Harga_Satuan');
             $table->integer('Sub_Total');
-            $table->integer('Total')->nullable();
+            $table->integer('Jumlah')->nullable();
             $table->timestamps();
         });
     }

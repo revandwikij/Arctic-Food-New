@@ -16,16 +16,16 @@ class users_seeder extends Seeder
     public function run(): void
     {
         FacadesDB::table('users')->insert([
-            'name' => 'admin',
+            'username' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => 'admin',
+            'password' => '$2a$12$aDrFBVu3l/0qNpFqoyTXp.cOLtU.ft/P7UJNx18aB8Qnf60BESfYi', //admin
             'level' => 'admin',
         ]);
 
         FacadesDB::table('users')->insert([
-            'name' => 'user',
-            'email' => 'user2',
-            'password' => 'user2p',
+            'username' => 'user',
+            'email' => 'user2@gmail.com',
+            'password' => '$2a$12$w.7gzX6EZ4R5zwVPZgFGv.sIRXPVYpd8tm.4f.bNuzJF7faeHL7JK', //user2p
             'level' => 'user',
         ]);
     }

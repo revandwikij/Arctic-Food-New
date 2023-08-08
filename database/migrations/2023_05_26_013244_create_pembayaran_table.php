@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id('Id_Pembayaran');
             $table->unsignedBigInteger('Id_Pesanan');
-            $table->unsignedBigInteger('Id_Pelanggan');
             $table->enum('Metode_Pembayaran', ['COD', 'GoPay']);
             $table->integer('Total_Harga');
+            $table->enum('Status_Pembayaran', ['Lunas', 'Belum Lunas'])->nullable();
             $table->date('Tgl_Pembayaran');
             $table->timestamps();
         });

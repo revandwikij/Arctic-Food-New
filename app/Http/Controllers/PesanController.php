@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\kategori;
 use App\Models\Keranjang;
-use App\Models\User;
-
-use App\Models\pelanggan;
 use App\Models\Pesan;
+use App\Models\User;
+use App\Models\DetailPesanan;
+use App\Models\pelanggan;
 use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -40,15 +42,13 @@ class PesanController extends Controller
             $keranjang  = new Keranjang;
             $keranjang->Id_Pelanggan = $user->id;
             $keranjang->Id_Barang = $Barang->Id_Barang;
-            $keranjang->Kuantitas = $request->jumlah_pesan;
+            $keranjang->Jumlah = $request->jumlah_pesan;
+            $keranjang->Harga_Satuan = $Barang->Harga;
             $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
             $keranjang->save();
-            
+
             return redirect('/cart');
 
-
-
-            
         }
     }
 
@@ -57,20 +57,45 @@ class PesanController extends Controller
 	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
 	return redirect('/cart');;
     }
-
-    public function mesen()
+   
+    public function checkout()
     {
         $user=auth()->user();
-        $test = Keranjang::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')
-        ->where('keranjang.Id_Pelanggan', '=', $user->id)
-        ->get(['keranjang.*','pelanggan.*']);
-        $Pesan = new Pesan;
-        $Pesan->Id_Pelanggan = $user->id;
-        $Pesan->Id_Keranjang =  
-        $Pesan->Tgl_Pesanan =  date('Y-m-d H:i:s', time());
-        $Pesan->save();
+        $Belanja = Keranjang::where('Id_Pelanggan', $user)->get();
 
+        $totalharga = 0;
+        $orderdetail = [];
 
+        foreach($Belanja as $item)
+        {
+            $subtotal = $item->Jumlah * $item->Harga_Satuan;
+            $totalharga += $subtotal;
+
+            $orderdetails[] = [
+                'Id_Barang' => $item->Id_Barang,
+                'Kuantitas' => $item->Jumlah,
+                'Sub_Total' => $subtotal,
+            ];
+        }
+         
+        $order = new Pesan();
+        $order->Id_Pelanggan = $user;
+        $order->Tgl_Pesanan = now();
+        $order->Total = $totalharga;
+        $order->save();
+
+        $orderID = $order->id;
+        foreach ($orderdetails as $data) {
+             
+            $detail = new DetailPesanan();
+            $detail->Id_Pesanan = $orderID;
+            $detail->Id_Barang =  $data['Id_Barang'];
+            $detail->Kuantitas = $data['Kuantitas'];
+            $detail->Sub_Total = $data['Sub_Total'];
+            $detail->save();
+
+            
+        }
     }
 
 }

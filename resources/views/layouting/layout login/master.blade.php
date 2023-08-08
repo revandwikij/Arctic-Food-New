@@ -15,7 +15,6 @@
     @include('layouting.layout login.head')
 </head>
 <body>
-
     @yield('content')
 
     <!-- Js -->

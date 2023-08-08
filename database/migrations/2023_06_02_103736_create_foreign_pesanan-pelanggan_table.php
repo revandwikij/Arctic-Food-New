@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::table('pesanan', function (Blueprint $table){
             $table->foreign('Id_Pelanggan')->references('Id_Pelanggan')->on('pelanggan')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('pesanan', function (Blueprint $table){
-            $table->foreign('Id_Keranjang')->references('Id_Keranjang')->on('keranjang')->onDelete('cascade')->onUpdate('cascade');
-        });
+        
     }
 
     /**
