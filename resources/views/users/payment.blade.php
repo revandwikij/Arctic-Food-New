@@ -20,9 +20,9 @@
             <h2>Alamat</h2>
             <select class="card">
               <address>
-                    @foreach ($alamat as $a)
-                    <option value="{{ $a->Alamat }}"></option>
-                    @endforeach
+                    {{-- @foreach ($alamat as $a) --}}
+                    <option value=""></option>
+                    {{-- @endforeach --}}
               </address>
             </select>
           </div>

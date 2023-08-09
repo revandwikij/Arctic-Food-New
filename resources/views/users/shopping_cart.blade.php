@@ -86,7 +86,6 @@
             <div class="shopping-cart-btn">
                 <span class="">
                     <a href="/  " class="btn btn-upper btn-primary outer-left-xs">Kembali Belanja</a>
-                    <a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs"> CHECKOUT</a>
                 </span>
             </div>
             <thead>
