@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,7 +16,7 @@ return new class extends Migration
         CREATE TRIGGER update_stok_barang AFTER INSERT ON `keranjang` FOR EACH ROW
             BEGIN
                 UPDATE barang
-                SET Stok = Stok - NEW.Kuantitas
+                SET Stok = Stok - NEW.Jumlah
                 WHERE Id_Barang = NEW.Id_Barang;
             END
         ');

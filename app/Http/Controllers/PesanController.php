@@ -61,7 +61,7 @@ class PesanController extends Controller
     public function checkout()
     {
         $user=auth()->user();
-        $Belanja = Keranjang::where('Id_Pelanggan', $user)->get();
+        $Belanja = Keranjang::where('Id_Pelanggan', $user->id)->get();
 
         $totalharga = 0;
         $orderdetail = [];
@@ -79,12 +79,12 @@ class PesanController extends Controller
         }
          
         $order = new Pesan();
-        $order->Id_Pelanggan = $user;
+        $order->Id_Pelanggan = $user->id;
         $order->Tgl_Pesanan = now();
         $order->Total = $totalharga;
         $order->save();
 
-        $orderID = $order->id;
+        $orderID = $order->Id_Pesanan;
         foreach ($orderdetails as $data) {
              
             $detail = new DetailPesanan();
