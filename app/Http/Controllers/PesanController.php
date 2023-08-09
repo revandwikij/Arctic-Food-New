@@ -10,6 +10,7 @@ use App\Models\Pesan;
 use App\Models\User;
 use App\Models\DetailPesanan;
 use App\Models\pelanggan;
+use App\Models\Pembayaran;
 use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -97,6 +98,18 @@ class PesanController extends Controller
 
             return view('users.payment', compact('pesan'));
         }
+    }
+
+    public function pembayaran(Request $request, $Id_Pesanan)
+    {
+        $order = Pesan::findorFail($Id_Pesanan);
+
+        $bayar = new Pembayaran();
+        $bayar->Id_Pesanan = $order->Id_Pesanan;
+        $bayar->Metode_Pembayaran = $request->Metode_Pembayaran;
+        $bayar->Total_Harga = $order->Total;
+        $bayar->Status_Pembayaran = $order->Id_Pesanan;
+        $bayar->Tgl_Pembayaran = now();
     }
 
 }
