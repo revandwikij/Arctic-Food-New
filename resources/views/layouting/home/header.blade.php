@@ -87,7 +87,7 @@
             <div class="col-lg-2 col-md-2">
               <div class="main-logo">
                 <a href="index.html">
-                  <img src="../assets/images/main-logo.png" alt="logo">
+                  <img style="width: 100px" src="../assets/css/images/Go-logo.png" alt="logo">
                 </a>
               </div>
             </div>

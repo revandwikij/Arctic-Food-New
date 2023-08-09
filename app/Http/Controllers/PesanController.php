@@ -57,14 +57,14 @@ class PesanController extends Controller
 	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
 	return redirect('/cart');;
     }
-   
+
     public function checkout()
     {
         $user=auth()->user();
-        $Belanja = Keranjang::where('Id_Pelanggan', $user)->get();
+        $Belanja = Keranjang::where('Id_Pelanggan', $user->id)->get();
 
         $totalharga = 0;
-        $orderdetail = [];
+        $orderdetails = [];
 
         foreach($Belanja as $item)
         {
@@ -77,16 +77,16 @@ class PesanController extends Controller
                 'Sub_Total' => $subtotal,
             ];
         }
-         
+
         $order = new Pesan();
-        $order->Id_Pelanggan = $user;
+        $order->Id_Pelanggan = $user->id;
         $order->Tgl_Pesanan = now();
         $order->Total = $totalharga;
         $order->save();
 
-        $orderID = $order->id;
+        $orderID = $order->Id_Pesanan;
         foreach ($orderdetails as $data) {
-             
+
             $detail = new DetailPesanan();
             $detail->Id_Pesanan = $orderID;
             $detail->Id_Barang =  $data['Id_Barang'];
@@ -94,7 +94,6 @@ class PesanController extends Controller
             $detail->Sub_Total = $data['Sub_Total'];
             $detail->save();
 
-            
         }
     }
 

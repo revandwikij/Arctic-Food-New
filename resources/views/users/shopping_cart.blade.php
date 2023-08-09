@@ -3,7 +3,7 @@
 @section('title', 'Cart')
 
 @section('content')
-    {{-- <div class="body-content outer-top-xs">
+    <div class="body-content outer-top-xs">
         <div class="container">
             <div class="row ">
                 <div class="shopping-cart">
@@ -48,7 +48,7 @@
                                 </div>
                             </div><!-- /.row -->
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}  
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}
 
                         <td class="cart-product-quantity">
                             <div class="quant-input">
@@ -113,12 +113,12 @@
 </div><!-- /.shopping-cart -->
             </div> <!-- /.row -->
     </div><!-- /.body-content -->
-    </div> --}}
+    </div>
 
 
     //
 
-<section class="h-100" style="background-color: #eee;">
+{{-- <section class="h-100" style="background-color: #eee;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10">
@@ -163,7 +163,7 @@
                 <h5 class="mb-0">$499.00</h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                {{-- <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a> --}}
+                {{-- <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
                 <td class="romove-item"><a href="clean/{{$item->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
               </div>
             </div>
@@ -189,6 +189,6 @@
       </div>
     </div>
   </div>
-</section>
+</section> --}}
 @endsection
 

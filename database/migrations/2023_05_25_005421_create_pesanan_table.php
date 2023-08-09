@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('Id_Pesanan');
             $table->unsignedBigInteger('Id_Pelanggan');
             $table->integer('Total');
-            $table->string('Alamat_Pengiriman');
+            $table->string('Alamat_Pengiriman')->nullable();
             $table->date('Tgl_Pesanan');
             $table->timestamps();
         });

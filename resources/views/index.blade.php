@@ -173,9 +173,7 @@
         </div>
         <ul class="tabs list-unstyled">
           <li data-tab-target="#all" class="active tab">All</li>
-            @foreach ($kategoris as $k)
-          <li data-tab-target="#{{ $k->Id_Kategori }}" class="tab">{{ $k->Kategori }}</li>
-            @endforeach
+          <li data-tab-target="#" class="tab"></li>
         </ul>
 
         <div class="tab-content">
@@ -201,7 +199,7 @@
                   <h3 class="product-title">
                     <a href="single-product.html">{{ $b->Nama_Barang }}</a>
                   </h3>
-                  <div class="item-price text-primary">{{ $b->Harga }}</div>
+                  <div class="item-price text-primary">Rp.{{number_format($b->Harga)}}</div>
                 </div>
               </div>
         @endforeach
@@ -232,7 +230,7 @@
                   <h3 class="product-title">
                     <a href="single-product.html">{{ $b->Nama_Barang }}</a>
                   </h3>
-                  <div class="item-price text-primary">{{ $b->Harga }}</div>
+                  <div class="item-price text-primary">Rp.{{number_format($b->Harga)}}</div>
                 </div>
               </div>
             @endforeach

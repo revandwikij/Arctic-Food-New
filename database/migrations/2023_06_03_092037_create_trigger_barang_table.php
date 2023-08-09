@@ -15,7 +15,7 @@ return new class extends Migration
         CREATE TRIGGER update_stok_barang AFTER INSERT ON `keranjang` FOR EACH ROW
             BEGIN
                 UPDATE barang
-                SET Stok = Stok - NEW.Kuantitas
+                SET Stok = Stok - NEW.Jumlah
                 WHERE Id_Barang = NEW.Id_Barang;
             END
         ');
