@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id('Id_Pelanggan');
             $table->string('username');
+            $table->unsignedBigInteger('Id_Alamat')->nullable();
             $table->string('email')->unique();
             $table->enum('jenkel', ['L','P']);
             $table->string('no_Telp');

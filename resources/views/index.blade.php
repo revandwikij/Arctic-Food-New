@@ -85,7 +85,7 @@
                   <h3 class="product-title">
                     <a href="/detail/{{ $b->Id_Barang }}">{{ $b->Nama_Barang }}</a>
                   </h3>
-                  <span class="item-price text-primary">{{ $b->Harga }}</span>
+                  <span class="item-price text-primary">Rp.{{number_format($b->Harga)}}</span>
                 </div>
             </div>
         </div>

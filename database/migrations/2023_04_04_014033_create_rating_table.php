@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rating', function (Blueprint $table) {
-            $table->id('Id_Rating');
+        Schema::create('ulasan', function (Blueprint $table) {
+            $table->id('Id_Ulasan');
             $table->unsignedBigInteger('Id_Pelanggan');
             $table->unsignedBigInteger('Id_Barang');
-            $table->enum('Value', ['Puas', 'Netral', 'Tidak Puas']);
             $table->string('Ulasan');
             $table->timestamps();
         });

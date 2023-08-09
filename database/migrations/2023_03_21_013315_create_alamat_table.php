@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('alamat', function (Blueprint $table) {
             $table->id('Id_Alamat');
             $table->unsignedBigInteger('Id_Pelanggan');
-            $table->string('Alamat');
+            $table->string('Alamat_Lengkap');
+            $table->string('Kota');
+            $table->string('Kode_Pos');
             $table->timestamps();
         });
     }

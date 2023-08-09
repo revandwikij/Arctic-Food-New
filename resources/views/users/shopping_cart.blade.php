@@ -15,6 +15,7 @@
                         <th class="cart-romove item">Hapus</th>
                         <th class="cart-description item">Foto Barang</th>
                         <th class="cart-product-name item">Nama</th>
+                        <th class="cart-product-name item">Harga Jual</th>
                         <th class="cart-qty item">Quantity</th>
                         <th class="cart-sub-total item">Subtotal</th>
                     </tr>
@@ -47,6 +48,8 @@
                                 </div>
                             </div><!-- /.row -->
                         </td>
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}  
+
                         <td class="cart-product-quantity">
                             <div class="quant-input">
                                     <div class="arrows">
@@ -58,7 +61,7 @@
                         </td>
                         <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}
                         @php
-                            $total += $data['Kuantitas'] * $data['Harga'];
+                            $total += $data['Jumlah'] * $data['Harga'];
                         @endphp
                         </span></td>
                     </tr>

@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('laporan', function (Blueprint $table) {
             $table->id('Id_Laporan');
-            $table->unsignedBigInteger('Id_Barang');
-            $table->integer('Harga_Beli');
-            $table->integer('Harga_Jual');
-            $table->integer('Kuantitas');
-            $table->integer('Laba_Kotor');
-            $table->integer('Laba_Bersih');
+            $table->unsignedBigInteger('NIB');
+            $table->string('Bulan');
+            $table->integer('Jumlah_Transaksi');
+            $table->integer('Total_Penjualan');
             $table->timestamps();
         });
     }

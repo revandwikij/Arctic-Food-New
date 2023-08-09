@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('rating', function (Blueprint $table){
+        Schema::table('ulasan', function (Blueprint $table){
             $table->foreign('Id_Barang')->references('Id_Barang')->on('barang')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('rating', function (Blueprint $table){
+        Schema::table('ulasan', function (Blueprint $table){
             $table->foreign('Id_Pelanggan')->references('Id_Pelanggan')->on('pelanggan')->onDelete('cascade')->onUpdate('cascade');
         });
     }

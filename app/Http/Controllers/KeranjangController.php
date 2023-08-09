@@ -39,7 +39,7 @@ class KeranjangController extends Controller
             $keranjang  = new Keranjang;
             $keranjang->Id_Pelanggan = $user->id;
             $keranjang->Id_Barang = $Barang->Id_Barang;
-            $keranjang->Kuantitas = $request->jumlah_pesan;
+            $keranjang->Jumlah = $request->jumlah_pesan;
             $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
             $keranjang->save();
 
