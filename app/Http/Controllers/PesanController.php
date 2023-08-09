@@ -94,6 +94,8 @@ class PesanController extends Controller
             $detail->Sub_Total = $data['Sub_Total'];
             $detail->save();
 
+        
+
         }
     }
 

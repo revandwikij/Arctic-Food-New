@@ -18,13 +18,13 @@
         <form action="https://httpbin.org/post" class="form" method="POST">
           <div>
             <h2>Alamat</h2>
-            <select class="card">
+            {{-- <select class="card">
               <address>
                     @foreach ($alamat as $a)
                     <option value="{{ $a->Alamat }}"></option>
                     @endforeach
               </address>
-            </select>
+            </select> --}}
           </div>
 
           <fieldset>

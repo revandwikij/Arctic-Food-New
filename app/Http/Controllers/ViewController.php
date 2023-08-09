@@ -76,8 +76,10 @@ class ViewController extends Controller
 
     public function bayar()
     {
+        $user=auth()->user();
         $pesan = Pesan::all();
-        return view('users.payment', compact('pesan'));
+        $alamat = Alamat::all()->find('Id_Pelanggan', '=', $user->id);
+        return view('users.payment', compact('pesan'), compact('alamat'));
 
     }
 
