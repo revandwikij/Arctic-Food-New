@@ -16,9 +16,11 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::paginate(20);
+        $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('index', compact('kategoris'), compact('barang'), compact('pelanggan'));
+        // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+        //         ->get(['barang.*', 'kategori.*']);
+        return view('index', compact('kategoris'),compact('barang'), compact('pelanggan'));
     }
 
     public function admin()
@@ -38,19 +40,18 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('loginnew', compact('kategoris'), compact('barang'), compact('pelanggan'));
+        return view('login', compact('kategoris'), compact('barang'), compact('pelanggan'));
     }
     public function regis()
     {
         $pelanggan = pelanggan::all();
         $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('registernew', compact('kategoris'), compact('barang'), compact('pelanggan'));
+        return view('register', compact('kategoris'), compact('barang'), compact('pelanggan'));
     }
     public function cart()
     {
         $user = auth()->user();
-        // $test = Keranjang::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')->get(['keranjang.*', 'pelanggan.*']);
         $test = Keranjang::join('barang', 'barang.Id_Barang', '=', 'keranjang.Id_Barang')
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
                 ->where('keranjang.Id_Pelanggan', '=', $user->id)
@@ -104,5 +105,9 @@ class ViewController extends Controller
         // $barang = Barang::all();
         $kategoris = kategori::all();
         return view('Penjual.tambah', compact('pelanggan','kategoris'));
+    }
+    public function shop()
+    {
+        return view('shop');
     }
 }

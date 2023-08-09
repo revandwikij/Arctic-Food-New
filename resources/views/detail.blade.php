@@ -3,10 +3,10 @@
 @section('title', 'detail')
 
 @section('content')
+@foreach ($Barang as $item)
     <div class="container mt-5">
-        @foreach ($Barang as $item)
         <div class="row">
-            
+
             <div class="col-md-5">
                <div class="card">
                     <div class="card-header">
@@ -15,9 +15,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mt-5">
-                                 @if ($item->Foto_Barang)
+                                @if ($item->Foto_Barang)
                                 <img style="width: 200px" src="{{ url('Foto_barang'). '/'. $item->Foto_Barang }}">
-                                    @endif
+                                @endif
                             </div>
                             <div class="col-md-6">
                                  <h3>{{ $item->Nama_Barang }}</h3>
@@ -38,20 +38,18 @@
                                             <td>:</td>
                                             <td> {{$item->Keterangan_Barang}}</td>
                                         </tr>
-                                       
+
                                             <tr>
                                                 <td>Jumlah Pesanan</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <form action="/keranjang/{{$item->Id_Barang}}" method="POST"> 
+                                                    <form action="/keranjang/{{$item->Id_Barang}}" method="POST">
                                                     @csrf
                                                     <input type="number" name="jumlah_pesan" class="form-control" required>
                                                     <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                             
-                                       
                                     </tbody>
                                  </table>
                             </div>
@@ -60,9 +58,9 @@
                     </div>
                </div>
             </div>
-           
+
         </div>
-        
+
     </div>
         @endforeach
 @endsection

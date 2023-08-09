@@ -15,25 +15,25 @@
 
       <ul class="cat-list">
         <li class="cat-list-item">
-          <a href="shop.html" title="Men Jackets">Men Jackets</a>
+          <a href="/shop" title="Men Jackets">Men Jackets</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Fashion">Fashion</a>
+          <a href="/shop" title="Fashion">Fashion</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Casual Wears">Casual Wears</a>
+          <a href="/shop" title="Casual Wears">Casual Wears</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Women">Women</a>
+          <a href="/shop" title="Women">Women</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Trending">Trending</a>
+          <a href="/shop" title="Trending">Trending</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Hoodie">Hoodie</a>
+          <a href="/shop" title="Hoodie">Hoodie</a>
         </li>
         <li class="cat-list-item">
-          <a href="shop.html" title="Kids">Kids</a>
+          <a href="/shop" title="Kids">Kids</a>
         </li>
       </ul>
     </div>
@@ -53,7 +53,7 @@
             <div class="col-md-4 col-sm-12 user-items">
               <ul class="d-flex justify-content-end list-unstyled">
                 <li>
-                  <a href="cart.html">
+                  <a href="/cart">
                     <i class="icon icon-shopping-cart"></i>
                   </a>
                 </li>
@@ -108,9 +108,9 @@
                     <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
 
                     <li class="menu-item has-sub">
-                      <a href="shop.html" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
+                      <a href="/shop" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
                       <ul class="submenu">
-                        <li><a href="shop.html" class="item-anchor">Shop</a></li>
+                        <li><a href="/shop" class="item-anchor">Shop</a></li>
                         <li><a href="shop-slider.html" class="item-anchor">Shop slider<span class="text-primary"> (PRO)</span></a></li>
                         <li><a href="shop-grid.html" class="item-anchor">Shop grid<span class="text-primary"> (PRO)</span></a></li>
                         <li><a href="shop-list.html" class="item-anchor">Shop list<span class="text-primary"> (PRO)</span></a></li>

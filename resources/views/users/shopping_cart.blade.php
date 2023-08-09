@@ -3,18 +3,7 @@
 @section('title', 'Cart')
 
 @section('content')
-    <div class="breadcrumb">
-        @section('form', 'Keranjang')
-        {{-- <div class="container">
-            <div class="breadcrumb-inner">
-                <ul class="list-inline list-unstyled">
-                    <li><a href="/ ">Dasboard</a></li>
-                    <li class='active'>Keranjang</li>
-                </ul>
-        </div><!-- /.container --> --}}
-    </div><!-- /.breadcrumb -->
-
-    <div class="body-content outer-top-xs">
+    {{-- <div class="body-content outer-top-xs">
         <div class="container">
             <div class="row ">
                 <div class="shopping-cart">
@@ -33,23 +22,20 @@
 
                 <tbody>
                     @php
-                    $total = 0 ;    
+                    $total = 0 ;
                     @endphp
                     @foreach ($test as $data)
                     <tr>
                         <td class="romove-item"><a href="clean/{{$data->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
                             @if ($data->Foto_Barang)
-                                <a class="entry-thumbnail" href="detail.html">
+                                <a class="entry-thumbnail" href="/detail/{{$data->Id_Barang}}">
                                     <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
                                 </a>
                             @endif
-                            {{-- <a class="entry-thumbnail" href="detail.html">
-                                <img src="{{ $b->Foto_Barang }}" alt="">
-                            </a> --}}
                         </td>
                         <td class="cart-product-name-info">
-                            <h4 class='cart-product-description'><a href="detail.html">{{ $data->Nama_Barang }}</a></h4>
+                            <h4 class='cart-product-description'><a href="/detail/{{$data->Id_Barang}}">{{ $data->Nama_Barang }}</a></h4>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="rating rateit-small"></div>
@@ -70,7 +56,7 @@
                                     <input type="text" value="{{ $data->Kuantitas }}">
                               </div>
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}  
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}
                         @php
                             $total += $data['Kuantitas'] * $data['Harga'];
                         @endphp
@@ -97,7 +83,7 @@
             <div class="shopping-cart-btn">
                 <span class="">
                     <a href="/  " class="btn btn-upper btn-primary outer-left-xs">Kembali Belanja</a>
-                    {{-- <a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs"> CHECKOUT</a> --}}
+                    <a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs"> CHECKOUT</a>
                 </span>
             </div>
             <thead>
@@ -120,11 +106,86 @@
                     </tr>
             </tbody><!-- /tbody -->
         </table><!-- /table -->
-    </div><!-- /.cart-shopping-total -->			</div><!-- /.shopping-cart -->
+    </div><!-- /.cart-shopping-total -->
+</div><!-- /.shopping-cart -->
             </div> <!-- /.row -->
-            <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-
-    <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
     </div><!-- /.body-content -->
+    </div> --}}
+
+
+    //
+
+<section class="h-100" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+          <div>
+            <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
+                  class="fas fa-angle-down mt-1"></i></a></p>
+          </div>
+        </div>
+
+        @foreach ($test as $item)
+        <div class="card rounded-3 mb-4">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                @if ($item->Foto_Barang)
+                    <a class="entry-thumbnail" href="/detail/{{$item->Id_Barang}}">
+                        <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $item->Foto_Barang }}">
+                    </a>
+                @endif
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="lead fw-normal mb-2">{{$item->Nama_Barang}}</p>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                <button class="btn btn-link px-2"
+                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                  <i class="fa fa-minus"></i>
+                </button>
+
+                <input id="form1" min="0" name="quantity" value="2" type="number"
+                  class="form-control form-control-sm" />
+
+                <button class="btn btn-link px-2"
+                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <h5 class="mb-0">$499.00</h5>
+              </div>
+              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                {{-- <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a> --}}
+                <td class="romove-item"><a href="clean/{{$item->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endforeach
+
+        <div class="card mb-4">
+          <div class="card-body p-4 d-flex flex-row">
+            <div class="form-outline flex-fill">
+              <input type="text" id="form1" class="form-control form-control-lg" placeholder="Discount Code"/>
+            </div>
+            <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 @endsection
 

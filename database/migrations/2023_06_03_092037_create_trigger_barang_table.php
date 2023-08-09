@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // DB::unprepared('
-        // CREATE TRIGGER Barang-Keranjang AFTER INSERT ON `pelanggan` FOR EACH ROW
-        //     BEGIN
-        //         INSERT INTO users
-        //         set username = new.username,
-        //         email = new.email,
-        //         password = new.password,
-        //         level = "pelanggan";
-        //     END
-        // ');
+        DB::unprepared('
+        CREATE TRIGGER update_stok_barang AFTER INSERT ON `keranjang` FOR EACH ROW
+            BEGIN
+                UPDATE barang
+                SET Stok = Stok - NEW.Kuantitas
+                WHERE Id_Barang = NEW.Id_Barang;
+            END
+        ');
     }
 
     /**

@@ -14,7 +14,7 @@
 
         <input type="text" placeholder="No. Telepon" name="no_telp" required>
 
-        <select class="input--style-5" id="exampleInputEmail1" name="jenkel" required>
+        <select placeholder="Jenkel" name="jenkel" required>
             <option value="L">L</option>
             <option value="P">P</option>
         </select>

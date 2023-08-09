@@ -51,7 +51,7 @@ class PesanController extends Controller
         }
     }
 
-    public function hpus($Id_Keranjang)
+    public function hapus($Id_Keranjang)
     {
 	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
 	return redirect('/cart');;

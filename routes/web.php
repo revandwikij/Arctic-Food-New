@@ -31,18 +31,19 @@ use Illuminate\Http\Request;
 
 Route::get('/', [ViewController::class, 'home']);
 Route::get('/login', [ViewController::class, 'login'])->name('login');
-Route::get('/regis', [ViewController::class, 'regis']);
+Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 
+//BARANG
 Route::get('/Barang', [ViewController::class, 'barang']);
 Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
 Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
 Route::post('/Form', [BarangController::class, 'store']);
 Route::post('/Edit', [BarangController::class, 'update']);
 Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
+Route::get('/barang/cari', [BarangController::class, 'search']);
 
-//
 
 //INI LOGIN-USERS
 Route::get('/users', [userscontrollers::class, 'index']);
@@ -52,18 +53,18 @@ Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/bayar', [ViewController::class, 'bayar']);
-Route::get('/cart', [ViewController::class, 'cart']);
+Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
 Route::get('/profil', [ViewController::class, 'profil']);
+Route::get('/shop', [ViewController::class, 'shop']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 Route::get('/detil', [ViewController::class, 'detail']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{Id_Barang}', [PesanController::class, 'keranjang']);
-Route::get('clean/{Id_Barang}', [PesanController::class, 'hpus']);
+Route::get('clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::get('/beli', [PesanController::class, 'mesen']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
-Route::get('/barang/cari', [BarangController::class, 'search']);
 
 
 // Admin
