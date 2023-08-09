@@ -60,6 +60,7 @@ class PesanController extends Controller
 
     public function checkout()
     {
+        $pesan = Pesan::all();
         $user=auth()->user();
         $Belanja = Keranjang::where('Id_Pelanggan', $user->id)->get();
 
@@ -94,8 +95,7 @@ class PesanController extends Controller
             $detail->Sub_Total = $data['Sub_Total'];
             $detail->save();
 
-        
-
+            return view('users.payment', compact('pesan'));
         }
     }
 
