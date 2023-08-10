@@ -15,6 +15,7 @@ use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class PesanController extends Controller
 {
@@ -39,7 +40,20 @@ class PesanController extends Controller
             // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
             // ->get(['users.*', 'pelanggan.*']);
             $Barang = Barang::find($Id_Barang);
+        
 
+             if(Keranjang::where('Id_Barang', $Id_Barang)->exists())
+             {
+                Keranjang::where('Id_Barang', $Id_Barang)->update([
+                    'Id_Keranjang' => 3, //masih dummy harusnya diisi pake id keranjang user
+                    'Id_Pelanggan' => $user->id,
+                    'Id_Barang' => $Barang->Id_Barang,
+                    'Jumlah' => $request->jumlah_pesan,
+                    'Harga_Satuan' => $Barang->Harga,
+                    'Sub_Total' =>  $request->jumlah_pesan * $Barang->Harga
+                ]);
+             }
+            else{
             $keranjang  = new Keranjang;
             $keranjang->Id_Pelanggan = $user->id;
             $keranjang->Id_Barang = $Barang->Id_Barang;
@@ -49,7 +63,7 @@ class PesanController extends Controller
             $keranjang->save();
 
             return redirect('/cart');
-
+            }
         }
     }
 
