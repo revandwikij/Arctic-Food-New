@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 
 class BarangController extends Controller
 {
@@ -21,7 +22,7 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
-            'Foto_Barang' => 'required',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg|dimensions:min_width=400,min_height=420',
             'Keterangan_Barang' => 'required',
         ]);
 
@@ -30,6 +31,9 @@ class BarangController extends Controller
         $Foto_Barang = $request->file('Foto_Barang');
         $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+
+        $Foto = Image::make($Foto_Barang);
+        $Foto->crop(400,420);
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
 
 
@@ -44,7 +48,7 @@ class BarangController extends Controller
 
 
 
-        return redirect('/Barang');
+        return redirect('/Barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
     }
 
     /**
@@ -85,6 +89,7 @@ class BarangController extends Controller
             'Id_Barang' => 'required',
             'Id_Kategori' => 'required',
             'Nama_Barang' => 'required',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg|dimensions:min_width=400,min_height=420',
             'Stok' => 'required',
             'Harga' => 'required',
             'Keterangan_Barang' => 'required',
@@ -93,6 +98,9 @@ class BarangController extends Controller
         $Foto_Barang = $request->file('Foto_Barang');
         $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+
+        $Foto = Image::make($Foto_Barang);
+        $Foto->crop(400,420);
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
         $Foto['Foto_Barang'] = $Foto_Nama;
 
@@ -108,8 +116,8 @@ class BarangController extends Controller
         'Keterangan_Barang' => $request->Keterangan_Barang
 	]);
 
-	    return redirect('/Barang');
-    }
+    return redirect('/Barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
+}
 
     /**
      * Remove the specified resource from storage.
