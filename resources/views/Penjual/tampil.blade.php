@@ -3,6 +3,11 @@
 @section('title', 'dashboard')
 
 @section('content')
+@if(session('errors'))
+    <div class="alert alert-danger">
+        {{ session('errors') }}
+    </div>
+@endif
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">Data Barang</h1>
