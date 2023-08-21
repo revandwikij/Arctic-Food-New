@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Nama_Barang');
             $table->string('Foto_Barang');
             $table->integer('Harga');
+            $table->float("Berat_Barang_kg");
             $table->integer('Stok');
             $table->string('Keterangan_Barang');
             $table->timestamps();
