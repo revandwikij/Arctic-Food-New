@@ -113,4 +113,9 @@ class ViewController extends Controller
     {
         return view('shop');
     }
+
+    public function coba()
+    {
+        return view('users.bayar');
+    }
 }

@@ -67,7 +67,7 @@
               <div class="product-item">
                 <div class="image-holder">
                     @if ($b->Foto_Barang)
-                        <img class="product-image" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
+                        <img class="product-image" style="max-width: 400px; max-height:420px" alt="Books" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
                     @endif
                 </div>
                 <div class="cart-concern">

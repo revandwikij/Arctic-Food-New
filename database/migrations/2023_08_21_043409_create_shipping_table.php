@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chat', function (Blueprint $table) {
-            $table->id('Id_Chat');
-            $table->unsignedBigInteger('NIB');
-            $table->unsignedBigInteger('Id_Pelanggan');
-            $table->string('Isi_Chat');
+        Schema::create('shipping', function (Blueprint $table) {
+            $table->id('Id_Shipping');
+            $table->unsignedBigInteger('Id_Pesanan');
+            $table->unsignedBigInteger('Id_Biaya')->nullable();
+            $table->integer('Total_Shipping');
             $table->timestamps();
+
+
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('shipping');
     }
 };

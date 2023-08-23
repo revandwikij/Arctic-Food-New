@@ -3,7 +3,11 @@
 @section('title', 'edit')
 
 @section('content')
-
+@if(session('errors'))
+    <div class="alert alert-danger">
+        {{ session('errors') }}
+    </div>
+@endif
 
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">

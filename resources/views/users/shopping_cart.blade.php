@@ -50,23 +50,19 @@
                                 </div>
                             </div><!-- /.row -->
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-price">{{ $data->Harga}}
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}
+                          <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Jumlah}}
 
-                        <td class="cart-product-quantity">
+                        {{-- <td class="cart-product-quantity">
                             <div class="quant-input">
                                 <div class="arrows">
                                     <div class="arrow plus gradient">
                                         <span class="ir plus-button"><i class="icon fa fa-sort-asc"></i></span>
                                     </div>
-                                    <input type="text" value="{{ $data->Jumlah }}" class="quantity-input" >
-                                    <div class="arrow minus gradient">
-                                        <span class="ir minus-button"><i class="icon fa fa-sort-desc"></i></span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.{{ number_format($data->Sub_Total),00}}
+                                    <input type="text" value="{{ $data->Kuantitas }}">
+                              </div>
+                        </td> --}}
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}
                         @php
                             $total += $data['Jumlah'] * $data['Harga'];
                         @endphp

@@ -40,18 +40,20 @@ class PesanController extends Controller
             // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
             // ->get(['users.*', 'pelanggan.*']);
             $Barang = Barang::find($Id_Barang);
-
+            $cek = Keranjang::where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Id_Keranjang');
+            $cek2 = Keranjang::where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Jumlah');
 
              if(Keranjang::where('Id_Barang', $Id_Barang)->exists())
              {
                 Keranjang::where('Id_Barang', $Id_Barang)->update([
-                    'Id_Keranjang' => 1, //masih dummy harusnya diisi pake id keranjang user
+                    'Id_Keranjang' => $cek, //masih dummy harusnya diisi pake id keranjang user
                     'Id_Pelanggan' => $user->id,
                     'Id_Barang' => $Barang->Id_Barang,
-                    'Jumlah' => $request->jumlah_pesan,
+                    'Jumlah' => $cek2 + $request->jumlah_pesan,
                     'Harga_Satuan' => $Barang->Harga,
-                    'Sub_Total' =>  $request->jumlah_pesan * $Barang->Harga
+                    'Sub_Total' => ($cek2 + $request->jumlah_pesan) * $Barang->Harga
                 ]);
+                return redirect('/cart');
              }
             else{
             $keranjang  = new Keranjang;
