@@ -32,7 +32,7 @@ class BarangController extends Controller
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
         $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
 
-
+        return $request;
         $Barang = new Barang;
         $Barang->Id_Kategori = $request->Id_Kategori;
         $Barang->Nama_Barang = $request->Nama_Barang;
@@ -41,7 +41,6 @@ class BarangController extends Controller
         $Barang->Harga = $request->Harga;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
         $Barang->save();
-
 
 
         return redirect('/Barang');

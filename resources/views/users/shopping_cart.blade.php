@@ -3,6 +3,8 @@
 @section('title', 'Cart')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="body-content outer-top-xs">
         <div class="container">
             <div class="row ">
@@ -48,18 +50,23 @@
                                 </div>
                             </div><!-- /.row -->
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}
+                        <td class="cart-product-sub-total"><span class="cart-price">{{ $data->Harga}}
 
                         <td class="cart-product-quantity">
                             <div class="quant-input">
-                                    <div class="arrows">
-                                      <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                      <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                <div class="arrows">
+                                    <div class="arrow plus gradient">
+                                        <span class="ir plus-button"><i class="icon fa fa-sort-asc"></i></span>
                                     </div>
-                                    <input type="text" value="{{ $data->Kuantitas }}">
-                              </div>
+                                    <input type="text" value="{{ $data->Jumlah }}" class="quantity-input" >
+                                    <div class="arrow minus gradient">
+                                        <span class="ir minus-button"><i class="icon fa fa-sort-desc"></i></span>
+                                    </div>
+                                </div>
+
+                            </div>
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.{{ number_format($data->Sub_Total),00}}
                         @php
                             $total += $data['Jumlah'] * $data['Harga'];
                         @endphp
@@ -100,9 +107,99 @@
             <tbody>
                     <tr>
                         <td>
-                            <div class="cart-checkout-btn pull-right">
+                            {{-- <div class="cart-checkout-btn pull-right">
                                 <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
+                            </div> --}}
+                            <button type="button" class="btn btn-primary launch" data-toggle="modal" data-target="#staticBackdrop">
+                                <i class="fa fa-rocket"></i> Pay Now
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="text-right">
+                                                <i class="fa fa-close close" data-dismiss="modal"></i>
+                                            </div>
+                                            <div class="tabs mt-3">
+                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link active" id="visa-tab" data-toggle="tab" href="#visa" role="tab" aria-controls="visa" aria-selected="true">
+                                                            <img src="../assets/images/cod.jpg" width="80">
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">
+                                                            <img src="../assets/images/gopay.png" width="80">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-contents" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
+                                                        <div class="mt-4 mx-4">
+                                                            <div class="price-info"> <!-- Informasi Ongkos Pengiriman dan Total Pembayaran -->
+                                                                <p>Ongkos Pengiriman: $10.00</p>
+                                                                <p>Total Pembayaran: $100.00</p>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <h5>Cash On Delivery</h5>
+                                                            </div>
+                                                            <div class="form mt-3">
+                                                                <div class="inputbox">
+                                                                    <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
+                                                                    <span>Nama Lengkap</span>
+                                                                    <!-- <i class="fa fa-eye"></i> -->
+                                                                </div>
+                                                                <div class="inputbox">
+                                                                    <select class="form-select" required>
+                                                                        <option value="" disabled selected>Select Address</option>
+                                                                        <option value="address1">Address 1</option>
+                                                                        <option value="address2">Address 2</option>
+                                                                        <option value="address3">Address 3</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="d-flex flex-row">
+                                                                    <!-- <div class="inputbox">
+                                                                        <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
+                                                                        <span>Expiration Date</span>
+                                                                    </div>
+                                                                    <div class="inputbox">
+                                                                        <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
+                                                                        <span>CVV</span>
+                                                                    </div> -->
+                                                                </div>
+                                                                <div class="px-5 pay">
+                                                                    <button class="btn btn-success btn-block">Bayar Sekarang</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
+                                                        <div class="px-5 mt-5">
+                                                            <div class="price-info"> <!-- Informasi Ongkos Pengiriman dan Total Pembayaran -->
+                                                                <p>Ongkos Pengiriman: $10.00</p>
+                                                                <p>Total Pembayaran: $100.00</p>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <h5>Gopay</h5>
+                                                            </div>
+                                                            <div class="inputbox">
+                                                                <input type="text" name="name" class="form-controls" required="required">
+                                                                <span>No Gojek</span>
+                                                            </div>
+                                                            <div class="pay px-5">
+                                                                <button class="btn btn-primary btn-block">Bayar Sekarang</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -117,77 +214,43 @@
 
     //
 
-{{-- <section class="h-100" style="background-color: #eee;">
-  <div class="container h-100 py-5">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-10">
+    <script>
+        const plusButton = document.querySelector('.plus-button');
+const minusButton = document.querySelector('.minus-button');
+const quantityInput = document.querySelector('.quantity-input');
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
-          <div>
-            <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
-                  class="fas fa-angle-down mt-1"></i></a></p>
-          </div>
-        </div>
+function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
 
-        @foreach ($test as $item)
-        <div class="card rounded-3 mb-4">
-          <div class="card-body p-4">
-            <div class="row d-flex justify-content-between align-items-center">
-              <div class="col-md-2 col-lg-2 col-xl-2">
-                @if ($item->Foto_Barang)
-                    <a class="entry-thumbnail" href="/detail/{{$item->Id_Barang}}">
-                        <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $item->Foto_Barang }}">
-                    </a>
-                @endif
-              </div>
-              <div class="col-md-3 col-lg-3 col-xl-3">
-                <p class="lead fw-normal mb-2">{{$item->Nama_Barang}}</p>
-              </div>
-              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  <i class="fa fa-minus"></i>
-                </button>
+// Inisialisasi jumlah awal
+let quantity = parseInt(quantityInput.value);
 
-                <input id="form1" min="0" name="quantity" value="2" type="number"
-                  class="form-control form-control-sm" />
+// Tambahkan event listener untuk tombol plus
+plusButton.addEventListener('click', () => {
+    quantity++;
+    quantityInput.value = quantity;
+    updateSubtotal();
+});
 
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  <i class="fa fa-plus"></i>
-                </button>
-              </div>
-              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h5 class="mb-0">$499.00</h5>
-              </div>
-              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                {{-- <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                <td class="romove-item"><a href="clean/{{$item->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
+// Tambahkan event listener untuk tombol minus
+minusButton.addEventListener('click', () => {
+    if (quantity > 1) {
+        quantity--;
+        quantityInput.value = quantity;
+        updateSubtotal();
+    }
+});
 
-        <div class="card mb-4">
-          <div class="card-body p-4 d-flex flex-row">
-            <div class="form-outline flex-fill">
-              <input type="text" id="form1" class="form-control form-control-lg" placeholder="Discount Code"/>
-            </div>
-            <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
-          </div>
-        </div>
+// Fungsi untuk menghitung ulang subtotal
+function updateSubtotal() {
+    const price = parseInt('{{ $data->Harga }}'); // Ambil harga dari PHP
+    const subtotal = quantity * price;
+    document.querySelector('.cart-sub-total-price').textContent = formatCurrency(subtotal) // Tampilkan subtotal
+}
 
-        <div class="card">
-          <div class="card-body">
-            <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section> --}}
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @endsection
 

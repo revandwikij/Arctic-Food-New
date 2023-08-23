@@ -14,6 +14,8 @@ class AlamatController extends Controller
         {
             $request->validate([
                 'Alamat' => 'required',
+                'Kota' => 'required',
+                'Pos' => 'required',
             ]);
 
             $user=auth()->user();
@@ -21,7 +23,9 @@ class AlamatController extends Controller
             // ->get(['users.*', 'pelanggan.*']);
             $alamat  = new Alamat;
             $alamat->Id_Pelanggan = $user->id;
-            $alamat->Alamat = $request->Alamat;
+            $alamat->Alamat_Lengkap = $request->Alamat;
+            $alamat->Kota = $request->Kota;
+            $alamat->Kode_Pos = $request->Pos;
             $alamat->save();
 
             return redirect('/profil');

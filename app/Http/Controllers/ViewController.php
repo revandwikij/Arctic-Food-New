@@ -28,7 +28,7 @@ class ViewController extends Controller
         // $pelanggan = pelanggan::all();
         // $alamat = Alamat::all();
         $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
-                ->get(['pelanggan.*', 'Alamat.Alamat']);
+                ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
         // $d = DB::select('CALL store_procedure_pelanggan()');
         $barang = Barang::paginate(20);
         $kategoris = kategori::all();
@@ -63,7 +63,8 @@ class ViewController extends Controller
     }
     public function profil()
     {
-        $pelanggan = pelanggan::all();
+        $user=auth()->user();
+        $pelanggan = pelanggan::where('Id_Pelanggan', $user->id)->get();
         $barang = Barang::all();
         $kategoris = kategori::all();
         return view('users.profile', compact('kategoris','barang','pelanggan'));

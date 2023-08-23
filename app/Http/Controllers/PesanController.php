@@ -40,12 +40,12 @@ class PesanController extends Controller
             // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
             // ->get(['users.*', 'pelanggan.*']);
             $Barang = Barang::find($Id_Barang);
-        
+
 
              if(Keranjang::where('Id_Barang', $Id_Barang)->exists())
              {
                 Keranjang::where('Id_Barang', $Id_Barang)->update([
-                    'Id_Keranjang' => 3, //masih dummy harusnya diisi pake id keranjang user
+                    'Id_Keranjang' => 1, //masih dummy harusnya diisi pake id keranjang user
                     'Id_Pelanggan' => $user->id,
                     'Id_Barang' => $Barang->Id_Barang,
                     'Jumlah' => $request->jumlah_pesan,
