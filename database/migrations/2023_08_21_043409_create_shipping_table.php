@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('laporan', function (Blueprint $table){
-            $table->foreign('NIB')->references('NIB')->on('penjual')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('shipping', function (Blueprint $table) {
+            $table->id();
+            $table->string('Id_Shipping')->unique();
+            $table->string('Id_Pesanan');
+            $table->string('Id_Biaya')->nullable();
+            $table->integer('Total_Shipping');
+            $table->timestamps();
+
+
         });
     }
 
@@ -21,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('foreign_laporan_barang');
+        Schema::dropIfExists('shipping');
     }
 };

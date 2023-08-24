@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-md-6 mt-5">
                                 @if ($item->Foto_Barang)
-                                <img style="width: 200px" src="{{ url('Foto_barang'). '/'. $item->Foto_Barang }}">
+                                <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
                                 @endif
                             </div>
                             <div class="col-md-6">

@@ -9,9 +9,10 @@ class pelanggan extends Model
 {
     use HasFactory;
     protected $table = 'pelanggan';
-    protected $primaryKey = "Id_Pelanggan";
+     
 
     protected $fillable = [
+        'Id_Pelanggan',
         'username',
         'email',
         'password',

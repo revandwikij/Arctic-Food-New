@@ -58,6 +58,7 @@ Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/shop', [ViewController::class, 'shop']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 Route::get('/detil', [ViewController::class, 'detail']);
+Route::get('/coba', [ViewController::class, 'coba']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alamat;
 use App\Models\Barang;
+use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\Pesan;
@@ -40,30 +41,26 @@ class PesanController extends Controller
             // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
             // ->get(['users.*', 'pelanggan.*']);
             $Barang = Barang::find($Id_Barang);
-            $cek = Keranjang::where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Id_Keranjang');
-            $cek2 = Keranjang::where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Jumlah');
+            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'keranjang.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->get();
+            $bahan = [];
 
-             if(Keranjang::where('Id_Barang', $Id_Barang)->exists())
+             if(Keranjang::where('Id_Pelanggan', $cek)->exists())
              {
-                Keranjang::where('Id_Barang', $Id_Barang)->update([
-                    'Id_Keranjang' => $cek, //masih dummy harusnya diisi pake id keranjang user
-                    'Id_Pelanggan' => $user->id,
-                    'Id_Barang' => $Barang->Id_Barang,
-                    'Jumlah' => $cek2 + $request->jumlah_pesan,
-                    'Harga_Satuan' => $Barang->Harga,
-                    'Sub_Total' => ($cek2 + $request->jumlah_pesan) * $Barang->Harga
-                ]);
-                return redirect('/cart');
+
+                 
+                // Keranjang::where('Id_Barang', $Id_Barang)->update([
+                //     'Id_Keranjang' => $cek, //masih dummy harusnya diisi pake id keranjang user
+                //     'Id_Pelanggan' => $user->id,
+                //     'Id_Barang' => $Barang->Id_Barang,
+                //     'Jumlah' => $cek2 + $request->jumlah_pesan,
+                //     'Harga_Satuan' => $Barang->Harga,
+                //     'Sub_Total' => ($cek2 + $request->jumlah_pesan) * $Barang->Harga
+                // ]);
+                // return redirect('/cart');
              }
             else{
             $keranjang  = new Keranjang;
             $keranjang->Id_Pelanggan = $user->id;
-            $keranjang->Id_Barang = $Barang->Id_Barang;
-            $keranjang->Jumlah = $request->jumlah_pesan;
-            $keranjang->Harga_Satuan = $Barang->Harga;
-            $keranjang->Sub_Total = $request->jumlah_pesan * $Barang->Harga;
-            $keranjang->save();
-
             return redirect('/cart');
             }
         }
@@ -105,7 +102,7 @@ class PesanController extends Controller
         $orderID = $order->Id_Pesanan;
         foreach ($orderdetails as $data) {
 
-            $detail = new DetailPesanan();
+            $detail = new DetailKeranjang();
             $detail->Id_Pesanan = $orderID;
             $detail->Id_Barang =  $data['Id_Barang'];
             $detail->Kuantitas = $data['Kuantitas'];

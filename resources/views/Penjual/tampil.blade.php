@@ -43,7 +43,7 @@
                             <td>{{$data->Id_Barang}} </td>
                             <td>
                                 @if ($data->Foto_Barang)
-                                <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
+                                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
 
                                 @endif
                             </td>

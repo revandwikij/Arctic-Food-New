@@ -17,6 +17,7 @@ class ViewController extends Controller
     {
         $pelanggan = pelanggan::all();
         $barang = Barang::all();
+        $coba = Barang::take(4)->get();
         $kategoris = kategori::all();
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
@@ -96,7 +97,7 @@ class ViewController extends Controller
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
                 ->get(['barang.*', 'kategori.Kategori']);
         $pelanggan = pelanggan::all();
-        return view('Penjual.tampil', compact('pelanggan'), ['test' => $test]);
+        return view('Penjual.tampil', compact('pelanggan', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()
@@ -111,5 +112,10 @@ class ViewController extends Controller
     public function shop()
     {
         return view('shop');
+    }
+
+    public function coba()
+    {
+        return view('users.bayar');
     }
 }
