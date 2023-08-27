@@ -43,7 +43,7 @@
                                                 <td>Jumlah Pesanan</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <form action="/keranjang/{{$item->Id_Barang}}" method="POST">
+                                                    <form action="/keranjang/{{$item->id}}" method="POST">
                                                     @csrf
                                                     <input type="number" name="jumlah_pesan" class="form-control" required>
                                                     <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>

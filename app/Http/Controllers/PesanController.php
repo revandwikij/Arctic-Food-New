@@ -33,42 +33,90 @@ class PesanController extends Controller
         return redirect('/');
     }
 
-    public function keranjang (Request $request, $Id_Barang)
+    public function keranjang (Request $request, $id)
     {
         if(Auth::id())
         {
             $user=auth()->user();
-            // $akun= users::join('pelanggan', 'users.username', '=', 'pelanggan.username')
-            // ->get(['users.*', 'pelanggan.*']);
-            $Barang = Barang::find($Id_Barang);
-            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'keranjang.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->get();
-            $bahan = [];
+            $Barang = Barang::find($id);
+            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
+            $pecah = json_decode($cek, true);
+            $kran = $pecah['Id_Pelanggan'];
+           
+ 
+            $lastUid1 = DetailKeranjang::orderBy('id', 'desc')->first()->Id_Detail_Keranjang ?? 'D000';
+            $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+            $newUid1 = 'D' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
-             if(Keranjang::where('Id_Pelanggan', $cek)->exists())
+            $lastUid = Keranjang::orderBy('id', 'desc')->first()->Id_Keranjang ?? 'K000';
+            $nextNumber = (int) substr($lastUid, 1) + 1;
+            $newUid = 'K' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+             if(Keranjang::where('Id_Pelanggan', $kran)->exists())
              {
 
+                
+                $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->first();
+                $pecah2 = json_decode($cekcart, true);
+                $kran2 = $pecah2['Id_Keranjang'];
+
+                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
                  
-                // Keranjang::where('Id_Barang', $Id_Barang)->update([
-                //     'Id_Keranjang' => $cek, //masih dummy harusnya diisi pake id keranjang user
-                //     'Id_Pelanggan' => $user->id,
-                //     'Id_Barang' => $Barang->Id_Barang,
-                //     'Jumlah' => $cek2 + $request->jumlah_pesan,
-                //     'Harga_Satuan' => $Barang->Harga,
-                //     'Sub_Total' => ($cek2 + $request->jumlah_pesan) * $Barang->Harga
-                // ]);
-                // return redirect('/cart');
+
+                if($cekbarang)
+                {
+                
+                     if(DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists())
+                     {
+                            DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
+                            'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
+                            // 'Id_Detail_Keranjang' => $detkran,
+                            'Id_Barang' => $Barang->Id_Barang,
+                            'Kuantitas' => $request->jumlah_pesan,
+                            'Sub_Total' => $request->jumlah_pesan * $Barang->Harga
+                        ]);
+                        return redirect('/cart');
+                     }
+                }
+            else
+            {
+                
+                $coba = new DetailKeranjang();
+                $coba->Id_Detail_Keranjang = $newUid1;
+                $coba->Id_Keranjang = $kran2 ;
+                $coba->Id_Barang =$Barang->Id_Barang ;
+                $coba->Kuantitas = $request->jumlah_pesan;
+                $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
+                $coba->save();
+
+                return redirect('/cart');            
+            }
              }
             else{
             $keranjang  = new Keranjang;
-            $keranjang->Id_Pelanggan = $user->id;
+            $keranjang->Id_Keranjang = $newUid;
+            $keranjang->Id_Pelanggan = $kran;
+            $keranjang->save();
+
+            $cek4 = $keranjang->Id_Keranjang;
+            $coba = new DetailKeranjang();
+            $coba->Id_Detail_Keranjang = $newUid1;
+            $coba->Id_Keranjang = $cek4;
+            $coba->Id_Barang = $Barang->Id_Barang;
+            $coba->Kuantitas = $request->jumlah_pesan;
+            $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
+            $coba->save();
+
+
             return redirect('/cart');
             }
         }
     }
 
-    public function hapus($Id_Keranjang)
+    public function hapus($Id_Detail_Keranjang)
     {
-	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
+	DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->delete();
 	return redirect('/cart');;
     }
 
