@@ -22,7 +22,7 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
-            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg|dimensions:min_width=400,min_height=420',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg,svg,webp|dimensions:min_width=400,min_height=420',
             'Keterangan_Barang' => 'required',
         ]);
 
@@ -43,6 +43,7 @@ class BarangController extends Controller
         $Barang->Foto_Barang = $Foto_Nama;
         $Barang->Stok = $request->Stok;
         $Barang->Harga = $request->Harga;
+        $Barang->Berat_Barang_kg = $request->Beban;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
         $Barang->save();
 

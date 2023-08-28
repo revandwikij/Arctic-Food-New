@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alamat;
 use App\Models\Barang;
+use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\pelanggan;
@@ -52,8 +53,8 @@ class ViewController extends Controller
     public function cart()
     {
         $user = auth()->user();
-        $test = Keranjang::join('barang', 'barang.Id_Barang', '=', 'keranjang.Id_Barang')
-                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
+        $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
                 ->where('keranjang.Id_Pelanggan', '=', $user->id)
                 ->get(['barang.*', 'keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
