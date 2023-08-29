@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alamat;
 use App\Models\Barang;
+use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\pelanggan;
@@ -17,6 +18,7 @@ class ViewController extends Controller
     {
         $pelanggan = pelanggan::all();
         $barang = Barang::all();
+        $coba = Barang::take(4)->get();
         $kategoris = kategori::all();
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
@@ -52,10 +54,11 @@ class ViewController extends Controller
     public function cart()
     {
         $user = auth()->user();
-        $test = Keranjang::join('barang', 'barang.Id_Barang', '=', 'keranjang.Id_Barang')
+        $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
-                ->where('keranjang.Id_Pelanggan', '=', $user->id)
-                ->get(['barang.*', 'keranjang.*','pelanggan.*']);
+                ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
+                ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
 
         $kategoris = kategori::all();
@@ -97,7 +100,7 @@ class ViewController extends Controller
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
                 ->get(['barang.*', 'kategori.Kategori']);
         $pelanggan = pelanggan::all();
-        return view('Penjual.tampil', compact('pelanggan'), ['test' => $test]);
+        return view('Penjual.tampil', compact('pelanggan', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()

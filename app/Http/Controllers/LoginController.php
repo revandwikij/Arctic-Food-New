@@ -58,8 +58,13 @@ class LoginController extends Controller
     //register pembeli
     public function register(Request $request)
     {
+
+        $lastUid = pelanggan::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'P000';
+        $nextNumber = (int) substr($lastUid, 1) + 1;
+        $newUid = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
         pelanggan::create([
-            'id' => $request->id,
+            'Id_Pelanggan' => $newUid,
             'username' => $request->username,
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,

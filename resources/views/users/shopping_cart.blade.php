@@ -29,11 +29,11 @@
                     @endphp
                     @foreach ($test as $data)
                     <tr>
-                        <td class="romove-item"><a href="clean/{{$data->Id_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+                        <td class="romove-item"><a href="clean/{{$data->Id_Detail_Keranjang}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
                             @if ($data->Foto_Barang)
                                 <a class="entry-thumbnail" href="/detail/{{$data->Id_Barang}}">
-                                    <img style="max-width: 100px; max-height:100px" src="{{ url('Foto_barang'). '/'. $data->Foto_Barang }}">
+                                    <img style="max-width: 100px; max-height:100px" src="{{ asset('uploads/' . $data->Foto_Barang) }}">
                                 </a>
                             @endif
                         </td>
@@ -50,8 +50,8 @@
                                 </div>
                             </div><!-- /.row -->
                         </td>
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Harga}}
-                          <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Jumlah}}
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp. {{number_format( $data->Harga)}}
+                          <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Kuantitas}}
 
                         {{-- <td class="cart-product-quantity">
                             <div class="quant-input">
@@ -62,9 +62,9 @@
                                     <input type="text" value="{{ $data->Kuantitas }}">
                               </div>
                         </td> --}}
-                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Sub_Total}}
+                        <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp. {{number_format ($data->Sub_Total)}}
                         @php
-                            $total += $data['Jumlah'] * $data['Harga'];
+                            $total += $data['Kuantitas'] * $data['Harga'];
                         @endphp
                         </span></td>
                     </tr>
@@ -95,7 +95,7 @@
                 <tr>
                     <th>
                         <div class="cart-grand-total ">
-                            Total :<span class="inner-left-md"> Rp. {{$total}}</span>
+                            Total :<span class="inner-left-md"> Rp. {{number_format($total)}}</span>
                         </div>
                     </th>
                 </tr>

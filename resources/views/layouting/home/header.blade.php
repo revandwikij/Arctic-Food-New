@@ -81,8 +81,8 @@
           <div class="row d-flex align-items-center">
             <div class="col-lg-2 col-md-2">
               <div class="main-logo">
-                <a href="/">
-                  <img style="width: 100px" src="../assets/css/images/Go-logo.png" alt="logo">
+                <a href="index.html">
+                  <img style="width: 100px" src="../assets/css/images/arcticlogo.png" alt="logo">
                 </a>
               </div>
             </div>
