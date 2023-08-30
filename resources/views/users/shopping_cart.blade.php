@@ -51,22 +51,28 @@
                             </div><!-- /.row -->
                         </td>
                         <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp. {{number_format( $data->Harga)}}
-                          <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $data->Kuantitas}}
-
-                        {{-- <td class="cart-product-quantity">
-                            <div class="quant-input">
-                                <div class="arrows">
-                                    <div class="arrow plus gradient">
-                                        <span class="ir plus-button"><i class="icon fa fa-sort-asc"></i></span>
-                                    </div>
-                                    <input type="text" value="{{ $data->Kuantitas }}">
-                              </div>
-                        </td> --}}
+                            <td class="cart-product-sub-total">
+                                <button class="quantity-button minus-button">-</button>
+                                <span class="cart-sub-total-price quantity">{{ $data->Kuantitas }}</span>
+                                <button class="quantity-button plus-button">+</button>
+                            </td>
                         <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp. {{number_format ($data->Sub_Total)}}
                         @php
                             $total += $data['Kuantitas'] * $data['Harga'];
                         @endphp
                         </span></td>
+                        {{-- <td class="cart-product-sub-total">
+                            <span class="cart-sub-total-price">Rp. {{ number_format($data->Harga) }}</span>
+                        </td>
+                        <td class="cart-product-sub-total">
+                            <button class="quantity-button minus-button">-</button>
+                            <span class="cart-sub-total-price quantity">{{ $data->Kuantitas }}</span>
+                            <button class="quantity-button plus-button">+</button>
+                            <div class="subtotal">Subtotal: Rp. {{ number_format($data->Kuantitas * $data->Harga) }}</div>
+                        </td>
+                        <td class="cart-product-sub-total">
+                            <span class="cart-sub-total-price">Rp. {{ number_format($data->Sub_Total) }}</span>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody><!-- /tbody -->
@@ -85,10 +91,10 @@
 
 
     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
-        <table class="table">
+        <table class="table float-end">
             <div class="shopping-cart-btn">
                 <span class="">
-                    <a href="/  " class="btn btn-upper btn-primary outer-left-xs">Kembali Belanja</a>
+                    <a href="/ " class="btn btn-upper btn-primary outer-left-xs">Kembali Belanja</a>
                 </span>
             </div>
             <thead>
@@ -107,96 +113,10 @@
                                 <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
                             </div> --}}
-                            <button type="button" class="btn btn-primary launch" data-toggle="modal" data-target="#staticBackdrop">
+                            <button type="button" class="btn btn-primary launch float-end" data-toggle="modal" data-target="#staticBackdrop">
                                 <i class="fa fa-rocket"></i> Pay Now
                             </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="text-right">
-                                                <i class="fa fa-close close" data-dismiss="modal"></i>
-                                            </div>
-                                            <div class="tabs mt-3">
-                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link active" id="visa-tab" data-toggle="tab" href="#visa" role="tab" aria-controls="visa" aria-selected="true">
-                                                            <img src="../assets/images/cod.jpg" width="80">
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">
-                                                            <img src="../assets/images/gopay.png" width="80">
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-contents" id="myTabContent">
-                                                    <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
-                                                        <div class="mt-4 mx-4">
-                                                            <div class="price-info"> <!-- Informasi Ongkos Pengiriman dan Total Pembayaran -->
-                                                                <p>Ongkos Pengiriman: $10.00</p>
-                                                                <p>Total Pembayaran: $100.00</p>
-                                                            </div>
-                                                            <div class="text-center">
-                                                                <h5>Cash On Delivery</h5>
-                                                            </div>
-                                                            <div class="form mt-3">
-                                                                <div class="inputbox">
-                                                                    <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
-                                                                    <span>Nama Lengkap</span>
-                                                                    <!-- <i class="fa fa-eye"></i> -->
-                                                                </div>
-                                                                <div class="inputbox">
-                                                                    <select class="form-select" required>
-                                                                        <option value="" disabled selected>Select Address</option>
-                                                                        <option value="address1">Address 1</option>
-                                                                        <option value="address2">Address 2</option>
-                                                                        <option value="address3">Address 3</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="d-flex flex-row">
-                                                                    <!-- <div class="inputbox">
-                                                                        <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
-                                                                        <span>Expiration Date</span>
-                                                                    </div>
-                                                                    <div class="inputbox">
-                                                                        <input type="text" name="name" min="1" max="999" class="form-controls" required="required">
-                                                                        <span>CVV</span>
-                                                                    </div> -->
-                                                                </div>
-                                                                <div class="px-5 pay">
-                                                                    <button class="btn btn-success btn-block">Bayar Sekarang</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
-                                                        <div class="px-5 mt-5">
-                                                            <div class="price-info"> <!-- Informasi Ongkos Pengiriman dan Total Pembayaran -->
-                                                                <p>Ongkos Pengiriman: $10.00</p>
-                                                                <p>Total Pembayaran: $100.00</p>
-                                                            </div>
-                                                            <div class="text-center">
-                                                                <h5>Gopay</h5>
-                                                            </div>
-                                                            <div class="inputbox">
-                                                                <input type="text" name="name" class="form-controls" required="required">
-                                                                <span>No Gojek</span>
-                                                            </div>
-                                                            <div class="pay px-5">
-                                                                <button class="btn btn-primary btn-block">Bayar Sekarang</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
             </tbody><!-- /tbody -->
@@ -208,44 +128,86 @@
     </div>
 
 
-    //
 
-    <script>
+
+{{-- <script>
         const plusButton = document.querySelector('.plus-button');
-const minusButton = document.querySelector('.minus-button');
-const quantityInput = document.querySelector('.quantity-input');
+        const minusButton = document.querySelector('.minus-button');
 
-function formatCurrency(amount) {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
-    }
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+        }
 
-// Inisialisasi jumlah awal
-let quantity = parseInt(quantityInput.value);
+        // Tambahkan event listener untuk tombol plus
+        plusButton.addEventListener('click', () => {
+            quantity++;
+            quantityInput.value = quantity;
+            updateSubtotal();
+        });
 
-// Tambahkan event listener untuk tombol plus
-plusButton.addEventListener('click', () => {
-    quantity++;
-    quantityInput.value = quantity;
-    updateSubtotal();
-});
+        // Tambahkan event listener untuk tombol minus
+        minusButton.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.value = quantity;
+                updateSubtotal();
+            }
+        });
 
-// Tambahkan event listener untuk tombol minus
-minusButton.addEventListener('click', () => {
-    if (quantity > 1) {
-        quantity--;
-        quantityInput.value = quantity;
-        updateSubtotal();
-    }
-});
+        function updateSubtotal() {
+            const subtotalElement = parseInt('{{ $data->Harga }}'); // Ambil harga dari PHP
+            const subtotal = quantity * subtotalElement;
+            document.querySelector('.cart-sub-total-price').textContent = formatCurrency(subtotal) // Tampilkan subtotal
+        };
 
-// Fungsi untuk menghitung ulang subtotal
-function updateSubtotal() {
-    const price = parseInt('{{ $data->Harga }}'); // Ambil harga dari PHP
-    const subtotal = quantity * price;
-    document.querySelector('.cart-sub-total-price').textContent = formatCurrency(subtotal) // Tampilkan subtotal
-}
+</script> --}}
 
-    </script>
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+        const plusButtons = document.querySelectorAll(".plus-button");
+        const minusButtons = document.querySelectorAll(".minus-button");
+
+        plusButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                const quantitySpan = this.parentNode.querySelector(".quantity");
+                const price = parseFloat(this.parentNode.querySelector(".cart-sub-total-price").textContent.replace("Rp. ", "").replace(".", "").replace(",", "."));
+
+                let currentQuantity = parseInt(quantitySpan.textContent);
+                currentQuantity++;
+                quantitySpan.textContent = currentQuantity;
+
+                updateSubtotal(this.parentNode, currentQuantity, price);
+            });
+        });
+
+        minusButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                const quantitySpan = this.parentNode.querySelector(".quantity");
+                const price = parseFloat(this.parentNode.querySelector(".cart-sub-total-price").textContent.replace("Rp. ", "").replace(".", "").replace(",", "."));
+
+                let currentQuantity = parseInt(quantitySpan.textContent);
+                if (currentQuantity > 1) {
+                    currentQuantity--;
+                    quantitySpan.textContent = currentQuantity;
+                    updateSubtotal(this.parentNode, currentQuantity, price);
+                }
+            });
+        });
+
+        function updateSubtotal(container, quantity, price) {
+            // const quantityElement = container.querySelector(".quantity");
+            // const subtotalElement = container.querySelector(".subtotal");
+            const subtotalElement = parseInt('{{ $data->Harga }}');
+            const subtotal = quantity * subtotalElement;
+
+            // quantityElement.textContent = quantity;
+            subtotalElement.textContent = `Subtotal: Rp. ${subtotal.toLocaleString("id-ID")}`;
+        }
+    });
+
+</script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @endsection

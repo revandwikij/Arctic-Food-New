@@ -15,11 +15,13 @@
     @include('layouting.layout admin.head')
 </head>
 <body>
+    @include('layouting.layout admin.header')
 
     @yield('content')
 
+    @include('layouting.layout admin.footer')
+
     <!-- Js -->
     @include('layouting.layout admin.foot')
-
 </body>
 </html>

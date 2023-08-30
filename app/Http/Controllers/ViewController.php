@@ -17,8 +17,7 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $coba = Barang::take(4)->get();
+        $barang = Barang::paginate(3);
         $kategoris = kategori::all();
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
@@ -114,11 +113,13 @@ class ViewController extends Controller
     }
     public function shop()
     {
-        return view('shop');
+        $barang = Barang::all();
+        $kategori = kategori::all();
+        return view('shop', compact('barang', 'kategori') ) ;
     }
 
-    public function coba()
+    public function payment()
     {
-        return view('users.bayar');
+        return view('payment');
     }
 }

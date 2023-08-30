@@ -14,11 +14,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/cart">Pesanan</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Barang">Barang</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/barang">Barang</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="contact.html">Laporan</a>
+                    <a class="nav-link" href="/lapor">Laporan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users">Data Pelanggan</a>

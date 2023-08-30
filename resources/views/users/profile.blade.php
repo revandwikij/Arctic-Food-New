@@ -35,14 +35,6 @@
 							<i class="fa fa-user text-center mr-1"></i>
 							Security
 						</a>
-						{{-- <a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
-							<i class="fa fa-tv text-center mr-1"></i>
-							Application
-						</a>
-						<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
-							<i class="fa fa-bell text-center mr-1"></i>
-							Notification
-						</a> --}}
 					</div>
 				</div>
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
@@ -90,6 +82,10 @@
                         @endforeach
 						<div>
 							<a href="/"><button class="btn btn-primary">KEMBALI</button></a>
+							{{-- <button class="btn btn-light">Cancel</button> --}}
+						</div>
+						<div>
+							<a href="/logout"><button class="btn btn-primary">LOGOUT</button></a>
 							{{-- <button class="btn btn-light">Cancel</button> --}}
 						</div>
 					</div>
