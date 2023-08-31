@@ -65,7 +65,7 @@ Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
-Route::get('/beli', [PesanController::class, 'checkout']);
+Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
 

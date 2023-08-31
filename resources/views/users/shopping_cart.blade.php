@@ -75,22 +75,7 @@
                         </td> --}}
                     </tr>
                     @endforeach
-                </tbody><!-- /tbody -->
-
-                <tfoot>
-                    <tr>
-                        <td colspan="7">
-
-                            <!-- /.shopping-cart-btn -->
-                        </td>
-                    </tr>
-                </tfoot>
-            </table><!-- /table -->
-        </div>
-    </div><!-- /.shopping-cart-table -->
-
-
-    <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
+                    <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
         <table class="table float-end">
             <div class="shopping-cart-btn">
                 <span class="">
@@ -113,15 +98,30 @@
                                 <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
                             </div> --}}
-                            <button type="button" class="btn btn-primary launch float-end" data-toggle="modal" data-target="#staticBackdrop">
-                                <i class="fa fa-rocket"></i> Pay Now
-                            </button>
+                            <a href="/beli/{Id_Keranjang} " class="btn btn-upper btn-primary outer-left-xs">Bayar</a>
+
 
                         </td>
                     </tr>
             </tbody><!-- /tbody -->
         </table><!-- /table -->
     </div><!-- /.cart-shopping-total -->
+                </tbody><!-- /tbody -->
+
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+
+                            <!-- /.shopping-cart-btn -->
+                        </td>
+                    </tr>
+                </tfoot>
+            </table><!-- /table -->
+        </div>
+    </div><!-- /.shopping-cart-table -->
+
+
+    
 </div><!-- /.shopping-cart -->
             </div> <!-- /.row -->
     </div><!-- /.body-content -->
