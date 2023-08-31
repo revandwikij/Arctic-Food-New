@@ -26,18 +26,18 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-        
+
         // function generateUniqueCode($prefix) {
         //     $lastBarang = Barang::latest()->first(); // Ambil data barang terakhir
-        //     if ($lastBarang) 
+        //     if ($lastBarang)
         //     {
         //         $lastCode = $lastBarang->Id_Barang; // Ambil kode terakhir dari barang
         //         $lastNumber = (int) substr($lastCode, strlen($prefix)); // Ambil nomor urut terakhir
         //         $nextNumber = $lastNumber + 1; // Hitung nomor urut berikutnya
         //         $newCode = $prefix . str_pad($nextNumber, 3, '0', STR_PAD_LEFT); // Gabungkan kode unik dengan nomor urut
         //         return $newCode;
-        //     } 
-        //     else 
+        //     }
+        //     else
         //     {
         //         // Jika belum ada data barang, mulai dari B001
         //         return $prefix . '001';
@@ -60,21 +60,21 @@ class BarangController extends Controller
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
-    
+
             // Buat objek gambar dari file yang diunggah
             $image = Image::make($gambar);
-    
+
             // Auto crop gambar sesuai dengan ukuran yang diinginkan (misalnya 400x400)
             $image->fit(389, 473);
-    
+
             // Simpan gambar yang sudah di-crop
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
 
-        
 
 
+        // return $request;
         $Barang = new Barang;
         $Barang->Id_Barang = $newUid;
         $Barang->Id_Kategori = $request->Id_Kategori;
@@ -87,7 +87,7 @@ class BarangController extends Controller
 
 
 
-        return redirect('/Barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
+        return redirect('/barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
         }
     }
 
@@ -129,7 +129,7 @@ class BarangController extends Controller
             'Id_Barang' => 'required',
             'Id_Kategori' => 'required',
             'Nama_Barang' => 'required',
-            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg|dimensions:min_width=400,min_height=420',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg',
             'Stok' => 'required',
             'Harga' => 'required',
             'Keterangan_Barang' => 'required',
@@ -156,7 +156,7 @@ class BarangController extends Controller
         'Keterangan_Barang' => $request->Keterangan_Barang
 	]);
 
-    return redirect('/Barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
+    return redirect('/barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
 }
 
     /**
@@ -171,7 +171,7 @@ class BarangController extends Controller
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
 	// alihkan halaman ke halaman pegawai
-	return redirect('/Barang');;
+	return redirect('/barang');;
     }
 
     public function search(Request $request)

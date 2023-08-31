@@ -101,7 +101,7 @@ CSS STRUCTURE:
   7.13 Error Page
   7.14 Styles Page
 
-    
+
 /*--------------------------------------------------------------
 /** 1. VARIABLES
 --------------------------------------------------------------*/
@@ -408,7 +408,7 @@ select {
     border: 1px solid var(--grey-color);
     border-radius: 4px;
     box-shadow: none;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
@@ -441,11 +441,11 @@ label,
 legend {
   display: block;
   margin-bottom: .5rem;
-  font-weight: 600; 
+  font-weight: 600;
 }
 fieldset {
   padding: 0;
-  border-width: 0; 
+  border-width: 0;
 }
 input[type="checkbox"],
 input[type="radio"] {
@@ -480,14 +480,14 @@ li {
 code {
   padding: .2rem .5rem;
   margin: 0 .2rem;
-  border-radius: 4px; 
+  border-radius: 4px;
   background-color: var(--accent-color);
   color: var(--light-color);
 }
 pre > code {
   display: block;
   padding: 1rem 1.5rem;
-  white-space: normal; 
+  white-space: normal;
   }
 
 /*------------------------------------------------
@@ -500,11 +500,11 @@ td {
    }
 th:first-child,
 td:first-child {
-  padding-left: 0; 
+  padding-left: 0;
   }
 th:last-child,
 td:last-child {
-  padding-right: 0; 
+  padding-right: 0;
   }
 
 /*------------------------------------------------
@@ -524,7 +524,7 @@ dl,
 figure,
 table,
 form {
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
 /*------------------------------------------------
@@ -532,17 +532,17 @@ form {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .u-full-width {
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 .u-max-full-width {
   max-width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 .u-pull-right {
-  float: right; 
+  float: right;
 }
 .u-pull-left {
-  float: left; 
+  float: left;
 }
 .list-icon i {
   margin-right: 10px;
@@ -621,7 +621,7 @@ hr {
   margin-top: 2rem;
   margin-bottom: 2rem;
   border-width: 0;
-  border-top: 1px solid var(--grey-color); 
+  border-top: 1px solid var(--grey-color);
 }
 
 /* -Zoom Effect
@@ -672,7 +672,7 @@ input[type="reset"],
 input[type="file"],
 button {
   background-image: none;
-  background: var(--dark-color);
+  background: var(--primary-color);
   text-decoration: none !important;
   display: inline-block;
   position: relative;
@@ -1209,10 +1209,10 @@ table.border-bottom tr {
 /*----------------------------------------------*/
 /* 3.1 Blockquote /Pullquote */
 /*----------------------------------------------*/
-.single-post .content p:first-child, 
-.quote blockquote, blockquote, 
-.single-post .content blockquote p, 
-.pullquote-right, 
+.single-post .content p:first-child,
+.quote blockquote, blockquote,
+.single-post .content blockquote p,
+.pullquote-right,
 .pullquote-left {
     font-family: var(--heading-font);
     font-size: 1.5em;
@@ -1225,7 +1225,7 @@ table.border-bottom tr {
 }
 .pullquote-right, .pullquote-left {
   width: 40%;
-} 
+}
 blockquote cite {
   display: block;
   font-size: 0.8em;
@@ -1235,12 +1235,12 @@ blockquote cite {
 .pullquote-left {
   float: left;
   margin: 20px 20px 20px 0;
-} 
+}
 .pullquote-right {
   float: right;
   margin: 20px 0 20px 20px;
 }
-  
+
 /*----------------------------------------------*/
 /* 3.2 Text Highlights */
 /*----------------------------------------------*/
@@ -1833,7 +1833,7 @@ blockquote cite {
     font-size: 17px;
     color: #191919;
 }
-.stellarnav li a{  
+.stellarnav li a{
     color: var(--dark-color);
     font-weight: 500;
 }
@@ -2080,7 +2080,7 @@ i.icon.icon-arrow-io {
 .product-collection .categories {
     text-transform: uppercase;
 }
-.product-collection .product-entry h3.item-title {    
+.product-collection .product-entry h3.item-title {
     font-size: 4.4em;
     line-height: 1;
     font-weight: 900;
@@ -2148,7 +2148,7 @@ i.icon.icon-arrow-io {
 }
 #subscribe .subscribe-content button {
     font-weight: 700;
-    margin: 0;    
+    margin: 0;
 }
 #subscribe .subscribe-content button:hover {
     background: var(--primary-color);
@@ -2169,7 +2169,7 @@ i.icon.icon-arrow-io {
   }
   #subscribe .subscribe-content {
       width: 100%;
-  }  
+  }
   #subscribe .subscribe-content button {
       width: 100%;
       margin-top: 20px;
@@ -2469,7 +2469,7 @@ a.blog-categories:hover{
 }
 
 /*--------------------------------------------------------------
-/* 7. OTHER PAGES 
+/* 7. OTHER PAGES
 --------------------------------------------------------------*/
 
 /* 7.1 About Page
@@ -2519,7 +2519,7 @@ a.blog-categories:hover{
 .post-grid .sidebar .widgets{
     margin-bottom: 40px;
 }
-.shopify-grid input[type="text"], 
+.shopify-grid input[type="text"],
 .post-grid input[type="text"] {
     width: 100%;
     height: 65px;
@@ -2541,7 +2541,7 @@ a.blog-categories:hover{
 .pagination .page-numbers,
 .pagination .pagination-arrow{
   margin: 0 10px;
-} 
+}
 .pagination .page-numbers {
     width: 30px;
     height: 30px;
@@ -2551,11 +2551,11 @@ a.blog-categories:hover{
     padding: 0 10px;
     line-height: 1.4;
     transition: 0.9s all;
-    border-radius: 8px;    
+    border-radius: 8px;
 }
 .pagination .page-numbers:hover,
 .pagination .page-numbers.current {
-    color: var(--light-color); 
+    color: var(--light-color);
     background-color: var(--primary-color);
 }
 .pagination i.icon {
@@ -2753,7 +2753,7 @@ a.blog-categories:hover{
 #billboard .two-column-swiper-slider{
   margin-top: 30px;
 }
-#billboard .two-column-swiper .button-prev, 
+#billboard .two-column-swiper .button-prev,
 #billboard .two-column-swiper .button-next {
     position: unset;
     font-size: 24px;
@@ -2764,7 +2764,7 @@ a.blog-categories:hover{
     margin: 0;
     border: 2px solid var(--dark-color);
 }
-#billboard .two-column-swiper .button-prev:hover, 
+#billboard .two-column-swiper .button-prev:hover,
 #billboard .two-column-swiper .button-next:hover {
     color: var(--light-color);
     background-color: var(--dark-color);

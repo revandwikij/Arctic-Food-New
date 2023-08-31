@@ -36,7 +36,7 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
 
 
 //BARANG
-Route::get('/Barang', [ViewController::class, 'barang']);
+Route::get('/barang', [ViewController::class, 'barang']);
 Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
 Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
 Route::post('/Form', [BarangController::class, 'store']);
@@ -59,11 +59,12 @@ Route::get('/shop', [ViewController::class, 'shop']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 Route::get('/detil', [ViewController::class, 'detail']);
 Route::get('/coba', [ViewController::class, 'coba']);
+Route::get('/payment', [ViewController::class, 'payment']);
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
-Route::get('clean/{Id_Barang}', [PesanController::class, 'hapus']);
+Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::get('/beli', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 

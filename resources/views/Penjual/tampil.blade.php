@@ -1,4 +1,4 @@
-@extends('layouting.layout barang.master')
+@extends('layouting.layout admin.master')
 
 @section('title', 'dashboard')
 
@@ -10,7 +10,7 @@
 @endif
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Data Barang</h1>
+        <h1 class="jumbotron-heading">Data admin</h1>
      </div>
 </section>
 

@@ -17,8 +17,7 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $coba = Barang::take(4)->get();
+        $barang = Barang::paginate(3);
         $kategoris = kategori::all();
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
@@ -30,7 +29,7 @@ class ViewController extends Controller
         // $pelanggan = pelanggan::all();
         // $alamat = Alamat::all();
         $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
-                ->get(['pelanggan.*', 'Alamat.Alamat']);
+                ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
         // $d = DB::select('CALL store_procedure_pelanggan()');
         $barang = Barang::paginate(20);
         $kategoris = kategori::all();
@@ -66,7 +65,8 @@ class ViewController extends Controller
     }
     public function profil()
     {
-        $pelanggan = pelanggan::all();
+        $user=auth()->user();
+        $pelanggan = pelanggan::where('Id_Pelanggan', $user->id)->get();
         $barang = Barang::all();
         $kategoris = kategori::all();
         return view('users.profile', compact('kategoris','barang','pelanggan'));
@@ -113,11 +113,13 @@ class ViewController extends Controller
     }
     public function shop()
     {
-        return view('shop');
+        $barang = Barang::all();
+        $kategori = kategori::all();
+        return view('shop', compact('barang', 'kategori') ) ;
     }
 
-    public function coba()
+    public function payment()
     {
-        return view('users.bayar');
+        return view('payment');
     }
 }

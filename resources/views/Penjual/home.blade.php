@@ -31,7 +31,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link-name" href="#">File Master</a></li>
-                    <li><a href="/Barang">Barang</a></li>
+                    <li><a href="/barang">Barang</a></li>
                     <li><a href="/users">Pelanggan</a></li>
 
                 </ul>
