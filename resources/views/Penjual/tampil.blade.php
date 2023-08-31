@@ -65,6 +65,8 @@
                     {{-- @endforeach --}}
                     </tbody>
                   <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a>
+                  <a href ="/Tambah" class="btn btn-secondary mb-5">Tambah Kategori</a>
+
                   </table>
             </div>
         </div>
