@@ -155,9 +155,21 @@
                             <div class="col-md-6">
                                 <form action="/alamat" method="GET">
                                 @csrf
+								<div class="form-group">
+                                    <label>Label Alamat</label>
+                                    <input type="text" class="form-control" name="Label" placeholder="Contoh : Rumah, Sekolah, Kantor Saya"></input>
+                                </div>
+								<div class="form-group">
+                                    <label>Nama Penerima</label>
+                                    <input type="text" class="form-control" name="Nama_Penerima"></input>
+                                </div>
                                 <div class="form-group">
                                     <label>Alamat Lengkap</label>
                                     <textarea type="text" class="form-control" name="Alamat"></textarea>
+                                </div>
+								<div class="form-group">
+                                    <label>Nomor Handphone</label>
+                                    <input type="text" class="form-control" name="No_Hp"></input>
                                 </div>
                                 <div class="form-group">
                                     <label>Kota</label>

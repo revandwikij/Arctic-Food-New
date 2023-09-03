@@ -17,6 +17,9 @@ class AlamatController extends Controller
                 'Alamat' => 'required',
                 'Kota' => 'required',
                 'Pos' => 'required',
+                'Label' => 'required',
+                'Nama_Penerima' => 'required',
+                'No_Hp' => 'required',
             ]);
 
             $lastUid = Alamat::orderBy('id', 'desc')->first()->Id_Alamat ?? 'A000';
@@ -30,7 +33,10 @@ class AlamatController extends Controller
             $alamat = new Alamat;
             $alamat->Id_Alamat = $newUid;
             $alamat->Id_Pelanggan = $user1->Id_Pelanggan;
+            $alamat->Label = $request->Label;
             $alamat->Alamat_Lengkap = $request->Alamat;
+            $alamat->Nama_Penerima = $request->Nama_Penerima;
+            $alamat->No_Hp = $request->No_Hp;
             $alamat->Kota = $request->Kota;
             $alamat->Kode_Pos = $request->Pos;
             $alamat->save();

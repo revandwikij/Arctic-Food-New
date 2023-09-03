@@ -33,12 +33,12 @@ class PesanController extends Controller
         return redirect('/');
     }
 
-    public function keranjang (Request $request, $id)
+    public function keranjang (Request $request, $Id_Barang)
     {
         if(Auth::id())
         {
             $user=auth()->user();
-            $Barang = Barang::find($id);
+            $Barang = Barang::where('Id_Barang', $Id_Barang)->first();
             $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
             $pecah = json_decode($cek, true);
             $kran = $pecah['Id_Pelanggan'];
@@ -117,7 +117,7 @@ class PesanController extends Controller
     public function hapus($Id_Detail_Keranjang)
     {
 	DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->delete();
-	return redirect('/cart');;
+	return redirect('/cart');
     }
 
     public function checkout($Id_Keranjang)
@@ -130,7 +130,7 @@ class PesanController extends Controller
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
         ->where('users.id', '=', $user->id)->get();
        
-        $lastUid = Keranjang::orderBy('id', 'desc')->first()->Id_Keranjang ?? 'O000';
+        $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
@@ -149,7 +149,7 @@ class PesanController extends Controller
         $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
         $pesan->save();
 
-            return redirect("/");
+            return redirect("/payment");
             
         }
 

@@ -27,16 +27,18 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
+                    <th>Jumlah Transaksi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $no => $hasil)
+                @foreach ($users as $no)
 
                 <tr>
-                    <td>{{ $hasil->id}}</td>
-                    <td>{{ $hasil->username}}</td>
-                    <td>{{ $hasil->email}}</td>
+                    <td>{{ $no->Id_Pelanggan}}</td>
+                    <td>{{ $no->username}}</td>
+                    <td>{{ $no->email}}</td>
+                    <td>0</td>
 
 
                     <td>

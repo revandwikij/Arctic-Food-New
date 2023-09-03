@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('Id_Alamat')->unique();
             $table->string('Id_Pelanggan');
+            $table->string('Label');
+            $table->string('Nama_Penerima');
+            $table->string('No_Hp');
             $table->string('Alamat_Lengkap');
             $table->string('Kota');
             $table->string('Kode_Pos');

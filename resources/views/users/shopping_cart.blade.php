@@ -10,6 +10,22 @@
             <div class="row ">
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
+                        <div class="container d-flex justify-content-left align-items-left">
+
+                            <div class="dropdown">
+                              <button class="btn btn-outline-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                <span>Countries</span>
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Australia</a></li>
+                                <li><a class="dropdown-item" href="#">India</a></li>
+                                <li><a class="dropdown-item" href="#">United States</a></li>
+                              </ul>
+                            </div>
+                             
+              
+                           </div>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -98,8 +114,9 @@
                                 <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
                             </div> --}}
-                            <a href="/beli/{Id_Keranjang} " class="btn btn-upper btn-primary outer-left-xs">Bayar</a>
-
+                            @foreach($cekcart as $cart)
+                            <a href="/beli/{{$cart->Id_Keranjang}} " class="btn btn-upper btn-primary outer-left-xs">Bayar</a>
+                            @endforeach
 
                         </td>
                     </tr>

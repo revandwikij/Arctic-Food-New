@@ -48,7 +48,7 @@
               </p>
             </div>
             <div class="col-md-4 shipping-purchase text-center">
-              <p>Gratis Ongkir</p>
+              <p>Keep It Cool</p>
             </div>
             <div class="col-md-4 col-sm-12 user-items">
               <ul class="d-flex justify-content-end list-unstyled">

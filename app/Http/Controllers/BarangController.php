@@ -187,4 +187,27 @@ class BarangController extends Controller
         // mengirim data barang ke view index
         return view('Home',['barang' => $barang]);
     }
+
+    public function kategori()
+    {
+        $kategori = kategori::all();
+        return view('Penjual.kategori', compact('kategori'));
+    }
+
+    public function addkategori(Request $request)
+    {
+        $lastUid = kategori::orderBy('id', 'desc')->first()->Id_Kategori ?? 'C000';
+        $nextNumber = (int) substr($lastUid, 1) + 1;
+        $newUid = 'C' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        $kategori = new kategori();
+        $kategori->Id_Kategori = $newUid;
+        $kategori->kategori = $request->kategori;
+        $kategori->save();
+
+        return redirect('/kategori');
+    }
+
+
+
 }
