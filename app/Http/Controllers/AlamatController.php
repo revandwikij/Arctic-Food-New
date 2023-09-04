@@ -35,8 +35,8 @@ class AlamatController extends Controller
             $alamat->Id_Pelanggan = $user1->Id_Pelanggan;
             $alamat->Label = $request->Label;
             $alamat->Alamat_Lengkap = $request->Alamat;
-            $alamat->Nama_Penerima = $request->Nama_Penerima;
-            $alamat->No_Hp = $request->No_Hp;
+            $alamat->Nama_Penerima = Auth::user()->username;
+            $alamat->No_Hp = $user1->no_Telp;
             $alamat->Kota = $request->Kota;
             $alamat->Kode_Pos = $request->Pos;
             $alamat->save();

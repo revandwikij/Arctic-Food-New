@@ -4,77 +4,87 @@
 
 @section('content')
 
-<div class="container mt-4 p-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white pt-3 px-md-4 px-2">
-       
-  </nav>
-  <div class="row px-md-4 px-2 pt-4">
-      <div class="col-lg-8">
-          <p class="pb-2 fw-bold">Alamat Pengiriman</p>
-          <div class="card">
-              <div>
-                  <div class="table-responsive px-md-4 px-2 pt-3">
-                      <table class="table table-borderless">
-                          <tbody>
-                              <tr class="border-bottom">
-                                  <td>
-                                      <div class="d-flex align-items-center">
-                                           <div class="ps-3 d-flex flex-column justify-content">
-                                              <p class="fw-bold">Air<span class="ps-1">Red</span><span class="ps-1">Pants</span></p> <small class=" d-flex"> <span class=" text-muted">Color:</span> <span class=" fw-bold">Red/White</span> </small> <small class=""> <span class=" text-muted">Size:</span> <span class=" fw-bold">L</span> </small>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div class="d-flex">
-                                          <p class="pe-3"><span class="red">$45.00</span></p>
-                                       </div>
-                                  </td>
-                                  <td>
-                                      <div class="d-flex align-items-center"> <span class="pe-3 text-muted">Quantity</span> <span class="pe-3"> <input class="ps-2" type="number" value="2"></span>
-                                          <div class="round"> <span class=""> L </span> </div>
-                                      </div>
-                                  </td>
-                              </tr>
-                               
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="col-lg-4 payment-summary">
-          <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
-          <div class="card px-md-3 px-2 pt-4">
-              <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
-              <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
-                  <p class="">VC115665</p>
-              </div>
-              <div class="d-flex justify-content-between b-bottom"> <input type="text" class="ps-2" placeholder="COUPON CODE">
-                  <div class="btn btn-primary">Apply</div>
-              </div>
-              <div class="d-flex flex-column b-bottom">
-                  <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
-                      <p>$122</p>
-                  </div>
-                  <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
-                      <p>$22</p>
-                  </div>
-                  <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
-                      <p>$132</p>
-                  </div>
-              </div>
-              <a href="/" class="btn btn-upper btn-primary outer-left-xs mt-3" style="margin-top: 20px">Bayar</a>
-              <br>
-              <br>
-           </div>
-      </div>
-       
-     
-  </div>
-</div>
+    <div class="container mt-4 p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white pt-3 px-md-4 px-2">
+
+        </nav>
+
+        <div class="row px-md-4 px-2 pt-4">
+            <div class="col-lg-8">
+                <p class="pb-2 fw-bold">Alamat Pengiriman</p>
+                <div class="card">
+                    <div>
+                        @foreach ($test as $data)
+                            <div class="table-responsive px-md-4 px-2 pt-3">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr class="border-bottom">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ps-3 d-flex flex-column justify-content">
+                                                        <p class="fw-bold">{{$data->Nama_Barang}}</p> <small class=" d-flex">
+                                                            <span class=" text-muted">Color:</span> <span
+                                                                class=" fw-bold">Red/White</span> </small> <small
+                                                            class=""> <span class=" text-muted">Size:</span> <span
+                                                                class=" fw-bold">L</span> </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <p class="pe-3"><span class="red">{{$data->Sub_Total}}</span></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center"> <span
+                                                        class="pe-3 text-muted">Quantity</span>
+                                                        <span class="pe-3"> <input class="ps-2" type="number" value="{{$data->Kuantitas}}"></span>
+                                                    <div class="round"> <span class=""> L </span> </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 payment-summary">
+                <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
+                <div class="card px-md-3 px-2 pt-4">
+                    <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
+                    <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
+                        <p class="">VC115665</p>
+                    </div>
+                    <div class="d-flex justify-content-between b-bottom"> <input type="text" class="ps-2"
+                            placeholder="COUPON CODE">
+                        <div class="btn btn-primary">Apply</div>
+                    </div>
+                    <div class="d-flex flex-column b-bottom">
+                        <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
+                            <p>$122</p>
+                        </div>
+                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
+                            <p>$22</p>
+                        </div>
+                        <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
+                            <p>$132</p>
+                        </div>
+                    </div>
+                    <a href="/" class="btn btn-upper btn-primary outer-left-xs mt-3"
+                        style="margin-top: 20px">Bayar</a>
+                    <br>
+                    <br>
+                </div>
+            </div>
 
 
-{{-- <section style="background-color: #eee;">
+        </div>
+    </div>
+
+
+    {{-- <section style="background-color: #eee;">
     <div class="container py-5">
       <div class="card">
         <div class="card-body">
