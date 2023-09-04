@@ -37,7 +37,7 @@ Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak
-// Route::group(['middleware' => ['auth', 'penjual']], function () {
+Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
     Route::get('/admin', [ViewController::class, 'admin']);
@@ -50,7 +50,7 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
     Route::get('/barang/cari', [BarangController::class, 'search']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-// });
+});
 
 
 
