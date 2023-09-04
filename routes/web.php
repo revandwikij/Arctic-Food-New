@@ -34,6 +34,8 @@ Route::get('/shop', [ViewController::class, 'shop']);
 Route::get('/', [ViewController::class, 'home']);
 Route::get('/login', [ViewController::class, 'login'])->name('login');
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
+Route::get('/about', [ViewController::class, 'about']);
+Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak

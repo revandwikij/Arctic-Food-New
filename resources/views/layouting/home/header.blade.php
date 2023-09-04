@@ -100,7 +100,7 @@
                       </ul> --}}
                     </li>
 
-                    <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
+                    
 
                     <li class="menu-item has-sub">
                       <a href="/shop" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop</a>
@@ -136,9 +136,14 @@
                         <li><a href="blog-masonry.html" class="item-anchor">Blog masonry<span class="text-primary"> (PRO)</span></a></li>
                         <li><a href="single-post.html" class="item-anchor">Single post</a></li>
                       </ul> --}}
+
+                      <li>
+                        <a href="about" class="item-anchor" data-effect="About">About</a>
+                      </li>
+
                     </li>
 
-                    <li><a href="contact.html" class="item-anchor" data-effect="Contact">Contact</a></li>
+                    <li><a href="contact" class="item-anchor" data-effect="Contact">Contact</a></li>
 
                   </ul>
                 </div>

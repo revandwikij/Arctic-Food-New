@@ -10,17 +10,18 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../assets/icomoon/icomoon.css">
     <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/profile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- script
     ================================================== -->
-    <script src="js/modernizr.js"></script>
+    <script src="../assets/js/modernizr.js"></script>
   </head>
   <body>
 
@@ -109,7 +110,7 @@
               <div class="col-lg-2 col-md-2">
                 <div class="main-logo">
                   <a href="index.html">
-                    <img src="images/main-logo.png" alt="logo">
+                    <img src="../assets/images/main-logo.png" alt="logo">
                   </a>
                 </div>
               </div>
@@ -238,7 +239,7 @@
         <div class="row d-flex align-items-center">
           <div class="col-lg-6 col-md-12">
             <div class="image-holder">
-              <img src="images/single-image1.jpg" alt="single" class="about-image">
+              <img src="../assets/images/single-image1.jpg" alt="single" class="about-image">
             </div>
           </div>
           <div class="col-lg-6 col-md-12">
@@ -317,7 +318,7 @@
           <article class="col-md-4 post-item">
             <div class="image-holder zoom-effect">
               <a href="single-post.html">
-                <img src="images/post-img1.jpg" alt="post" class="post-image">
+                <img src="../assets/images/post-img1.jpg" alt="post" class="post-image">
               </a>
             </div>
             <div class="post-content d-flex">
@@ -336,7 +337,7 @@
           <article class="col-md-4 post-item">
             <div class="image-holder zoom-effect">
               <a href="single-post.html">
-                <img src="images/post-img2.jpg" alt="post" class="post-image">
+                <img src="../assets/images/post-img2.jpg" alt="post" class="post-image">
               </a>
             </div>
             <div class="post-content d-flex">
@@ -355,7 +356,7 @@
           <article class="col-md-4 post-item">
             <div class="image-holder zoom-effect">
               <a href="single-post.html">
-                <img src="images/post-img3.jpg" alt="post" class="post-image">
+                <img src="../assets/images/post-img3.jpg" alt="post" class="post-image">
               </a>
             </div>
             <div class="post-content d-flex">
@@ -378,11 +379,11 @@
     <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between">
-          <img src="images/brand1.png" alt="phone" class="brand-image">
-          <img src="images/brand2.png" alt="phone" class="brand-image">
-          <img src="images/brand3.png" alt="phone" class="brand-image">
-          <img src="images/brand4.png" alt="phone" class="brand-image">
-          <img src="images/brand5.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand2.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand3.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand4.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
         </div>
       </div>
     </section>
@@ -397,37 +398,37 @@
         <div class="row d-flex flex-wrap justify-content-between">
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image1.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image2.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image2.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image3.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image3.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image4.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image4.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image5.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image6.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
@@ -545,17 +546,17 @@
           <div class="payment-method">
             <p>Payment options :</p>
             <div class="card-wrap">
-              <img src="images/visa-icon.jpg" alt="visa">
-              <img src="images/mastercard.png" alt="mastercard">
-              <img src="images/american-express.jpg" alt="american-express">
+              <img src="../assets/images/visa-icon.jpg" alt="visa">
+              <img src="../assets/images/mastercard.png" alt="mastercard">
+              <img src="../assets/images/american-express.jpg" alt="american-express">
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../assets/js/plugins.js"></script>
+    <script src="../assets/js/script.js"></script>
   </body>
 </html>
