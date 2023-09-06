@@ -3,6 +3,8 @@
 @section('title', 'edit')
 
 @section('content')
+
+
 @if(session('errors'))
     <div class="alert alert-danger">
         {{ session('errors') }}

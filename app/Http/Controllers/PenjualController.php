@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penjual;
+use App\Models\Shipping;
 use App\Models\users;
 use Illuminate\Http\Request;
+use Shmop;
 
 class PenjualController extends Controller
 {
@@ -48,35 +50,11 @@ class PenjualController extends Controller
         return redirect('/admin');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function ship(Request $request)
     {
-        //
-    }
+        $biaya = new Shipping();
+        
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }

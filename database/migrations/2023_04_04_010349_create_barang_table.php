@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('Id_Kategori');
             $table->string('Nama_Barang');
             $table->string('Foto_Barang');
+            $table->double('Berat');
+            $table->string('Brand');
             $table->integer('Harga');
             $table->integer('Stok');
             $table->string('Keterangan_Barang');
