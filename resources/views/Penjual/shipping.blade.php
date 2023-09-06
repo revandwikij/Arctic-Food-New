@@ -11,8 +11,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Id Kategori</th>
-                            <th scope="col">Kategori</th>
+                            <th scope="col">Kota/kg</th>
+                            <th scope="col">Biaya</th>
+                            <th scope="col">Banyak Transasksi</th>
 
                         </tr>
                     </thead>

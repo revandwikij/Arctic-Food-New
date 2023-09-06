@@ -18,11 +18,14 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+    
         $request->validate([
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
-            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.',
+            'Brand' => 'required',
+            'Berat' => 'required',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg',
             'Keterangan_Barang' => 'required',
         ]);
 
@@ -74,12 +77,14 @@ class BarangController extends Controller
 
 
 
-        // return $request;
+         
         $Barang = new Barang;
         $Barang->Id_Barang = $newUid;
         $Barang->Id_Kategori = $request->Id_Kategori;
         $Barang->Nama_Barang = $request->Nama_Barang;
         $Barang->Foto_Barang = $filename;
+        $Barang->Berat = $request->Berat;
+        $Barang->Brand = $request->Brand;
         $Barang->Stok = $request->Stok;
         $Barang->Harga = $request->Harga;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
@@ -131,6 +136,8 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.svg',
             'Stok' => 'required',
+            'Berat' => 'required',
+            'Brand' => 'required',
             'Harga' => 'required',
             'Keterangan_Barang' => 'required',
         ]);
@@ -152,6 +159,8 @@ class BarangController extends Controller
         'Nama_Barang' => $request->Nama_Barang,
         'Foto_Barang' => $Foto_Nama,
         'Stok' => $request->Stok,
+        'Berat' => $request->Berat,
+        'Brand' => $request->Brand,
         'Harga' => $request->Harga,
         'Keterangan_Barang' => $request->Keterangan_Barang
 	]);

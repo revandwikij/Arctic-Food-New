@@ -14,6 +14,8 @@ class Barang extends Model
         'Id_Barang', // tambahkan kolom lainnya sesuai kebutuhan
         'Nama_Barang',
         'Foto_Barang',
+        'Berat',
+        'Brand',
         'Stok',
         'Harga',
         'Keterangan_Barang',

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('biaya_shipping', function (Blueprint $table) {
             $table->id();
             $table->string('Id_Biaya')->unique();
-            $table->string('Kota/kg');
+            $table->string('KotaperKg');
             $table->integer('Biaya_Shipping');
             $table->timestamps();
         });

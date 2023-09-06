@@ -154,6 +154,11 @@ class ViewController extends Controller
     {
         return view ('contact');
     }
+
+    public function thanks()
+    {
+        return view ('thank');
+    }
     
 
 }

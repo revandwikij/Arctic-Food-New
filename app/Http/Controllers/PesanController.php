@@ -9,7 +9,6 @@ use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\Pesan;
 use App\Models\User;
-use App\Models\DetailPesanan;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\users;
@@ -111,7 +110,8 @@ class PesanController extends Controller
 
             return redirect('/cart');
             }
-        }
+            }
+        
     }
 
     public function hapus($Id_Detail_Keranjang)
