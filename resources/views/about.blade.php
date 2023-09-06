@@ -195,62 +195,25 @@
       </div>
     </section>
 
-    <section id="shipping-information" class="padding-large">
-      <div class="container">
-        <div class="row d-flex flex-wrap align-items-center justify-content-between">
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-truck"></i>
-              <h4 class="block-title">
-                <strong>Free shipping</strong> Over $200
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-return"></i>
-              <h4 class="block-title">
-                <strong>Money back</strong> Return within 7 days
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-tags1"></i>
-              <h4 class="block-title">
-                <strong>Buy 4 get 5th</strong> 50% off
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-help_outline"></i>
-              <h4 class="block-title">
-                <strong>Any questions?</strong> experts are ready
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    
     <section id="about-us">
       <div class="container ">
         <div class="row d-flex align-items-center">
           <div class="col-lg-6 col-md-12">
             <div class="image-holder">
-              <img src="../assets/images/single-image1.jpg" alt="single" class="about-image">
+              <img src="../assets/css/images/ab.jpg" alt="single" class="about-image">
             </div>
           </div>
           <div class="col-lg-6 col-md-12">
             <div class="detail">
               <div class="display-header">
-                <h2 class="section-title">How was Ultras Store started?</h2>
-                <p>Risus augue curabitur diam senectus congue velit et. Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at. Et libero vulputate amet duis erat volutpat vitae eget. Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at.
-                <br>
-                Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at. Et libero vulputate amet duis erat volutpat vitae eget. Quam libero etiam et in ac at quis. Risus augue curabitur diam senectus congue velit et. </p>
+                <h2 class="section-title">Bagaimana Artic Food Berdiri?</h2>
+                <p>Toko e-commerce "Artic Food" dimulai dengan visi untuk menjadi sumber terkemuka makanan beku berkualitas tinggi. Proses dimulai dengan menyusun rencana bisnis yang matang, yang mencakup identifikasi pasar target, penelitian pesaing, dan perencanaan strategi bisnis.
+                  <br> Tim di balik "Artic Food" merancang situs web e-commerce yang menarik dan user-friendly menggunakan platform e-commerce yang sesuai. Situs web ini mencakup tampilan produk yang menarik serta sistem pembayaran yang aman.
+                  <br>Kami percaya pada kekuatan transformatif dari teknologi dan ingin mengubah dunia menjadi lebih baik dengan menyediakan platform untuk menghubungkan pembeli dan penjual.
+                </p>
                 <div class="btn-wrap">
-                  <a href="shop.html" class="btn btn-dark btn-medium d-flex align-items-center" tabindex="0">Shop our store<i class="icon icon-arrow-io"></i>
+                  <a href="/" class="btn btn-dark btn-medium d-flex align-items-center" tabindex="0">Berbelanja<i class="icon icon-arrow-io"></i>
                   </a>
                 </div>
               </div>

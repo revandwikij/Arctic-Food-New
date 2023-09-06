@@ -254,7 +254,7 @@
     <section class="google-map">
       <div class="mapouter">
         <div class="gmap_canvas">
-          <iframe width="100%" height="500" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.651907523001!2d107.54919057498472!3d-6.93214279306772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef5fcf52b6b7%3A0xa9b77611cffbb1d0!2sJl.%20Marga%20Asri%20II%20C%20No.103%2C%20Gempolsari%2C%20Kec.%20Bandung%20Kulon%2C%20Kota%20Bandung%2C%20Jawa%20Barat%2040215!5e0!3m2!1sen!2sid!4v1693814649354!5m2!1sen!2sid"></iframe>
+          <iframe width="100%" height="500" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3060763169688!2d107.50595987890298!3d-6.853868075468069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e49c6c4266d7%3A0xfa8c9316de308eef!2sJl.%20Berlian%20No.9%2C%20Cilame%2C%20Kec.%20Ngamprah%2C%20Kabupaten%20Bandung%20Barat%2C%20Jawa%20Barat%2040552!5e0!3m2!1sen!2sid!4v1693961786418!5m2!1sen!2sid"></iframe>
           <a href="https://getasearch.com/fmovies"></a>
           <br>
           <style>

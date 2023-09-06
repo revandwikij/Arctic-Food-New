@@ -1028,8 +1028,8 @@ h2.product-title{
   padding-bottom: 0.5em;
 }
 .padding-small {
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 .padding-medium {
   padding-top: 4em;
@@ -2476,6 +2476,9 @@ a.blog-categories:hover{
 --------------------------------------------------------------*/
 #about-us .about-image{
     border-radius: 8px;
+    width:500px;
+    height:700px;
+    margin-left:80px
 }
 #about-us .detail{
     padding: 0 60px;
