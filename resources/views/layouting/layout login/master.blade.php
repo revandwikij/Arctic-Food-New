@@ -15,8 +15,9 @@
     @include('layouting.layout login.head')
 </head>
 <body>
+   
     @yield('content')
-
+    
     <!-- Js -->
     @include('layouting.layout login.foot')
 

@@ -1,19 +1,27 @@
-<script>
-    let arrow = document.querySelectorAll(".arrow")
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-            console.log(e);
-        let arrowParent = e.target.parentElement.parentElement;
-        arrowParent.classList.toggle("showMenu");
-        });
-    }
+ <!-- Javascript -->          
+ <script src="assets/plugins/popper.min.js"></script>
+ <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
 
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
+ <!-- Charts JS -->
+ <script src="assets/plugins/chart.js/chart.min.js"></script> 
+ <script src="assets/js/index-charts.js"></script> 
+ 
+ <!-- Page Specific JS -->
+ <script src="assets/js/app.js"></script>
+
+{{-- <script>
+    // Get the current path of the page
+    var currentPath = window.location.pathname;
+
+    // Remove the trailing slash if present
+    currentPath = currentPath.replace(/\/$/, "");
+
+    // Find the corresponding navigation link and add 'active' class
+    var navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+    navLinks.forEach(function(link) {
+        var linkPath = link.getAttribute("href");
+        if (linkPath === currentPath) {
+            link.classList.add("active");
+        }
     });
-</script>
-</body>
-</html>
+</script> --}}

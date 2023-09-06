@@ -9,5 +9,15 @@ class Alamat extends Model
 {
     use HasFactory;
     protected $table = "alamat";
-    protected $primaryKey = "Id_Alamat";
+
+    protected $fillable = [
+        'Id_Alamat', // tambahkan kolom lainnya sesuai kebutuhan
+        'Id_Pelanggan',
+        'Label',
+        'Nama_Penerima',
+        'No_Hp',
+        'Alamat_Lengkap',
+        'Kota',
+        'Kode_Pos',
+    ];
 }

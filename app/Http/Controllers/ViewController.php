@@ -17,8 +17,7 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $coba = Barang::take(4)->get();
+        $barang = Barang::paginate(3);
         $kategoris = kategori::all();
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
@@ -27,14 +26,14 @@ class ViewController extends Controller
 
     public function admin()
     {
-        // $pelanggan = pelanggan::all();
+        $pelanggan = pelanggan::count();
         // $alamat = Alamat::all();
         $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
-                ->get(['pelanggan.*', 'Alamat.Alamat']);
+                ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
         // $d = DB::select('CALL store_procedure_pelanggan()');
-        $barang = Barang::paginate(20);
+        $barang = Barang::count();
         $kategoris = kategori::all();
-        return view('Penjual.home', compact('kategoris','test'));
+        return view('Penjual.home', compact('kategoris','test','pelanggan','barang'));
     }
 
     public function login()
@@ -60,13 +59,16 @@ class ViewController extends Controller
                 ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
-
+        $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->get();
         $kategoris = kategori::all();
-        return view('users.shopping_cart', compact('kategoris'), compact('test'), compact('pelanggan'));
+        $alamat = Alamat::all();
+        return view('users.shopping_cart',compact('test', 'cekcart','alamat'));
     }
     public function profil()
     {
-        $pelanggan = pelanggan::all();
+        $user=auth()->user();
+        $pelanggan = pelanggan::where('Id_Pelanggan', $user->id)->get();
         $barang = Barang::all();
         $kategoris = kategori::all();
         return view('users.profile', compact('kategoris','barang','pelanggan'));
@@ -111,13 +113,47 @@ class ViewController extends Controller
         $kategoris = kategori::all();
         return view('Penjual.tambah', compact('pelanggan','kategoris'));
     }
-    public function shop()
+
+    public function datapelanggan()
     {
-        return view('shop');
+        $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
+
+        return view('users.index', compact('users'));
     }
 
-    public function coba()
+    public function shop()
     {
-        return view('users.bayar');
+        $barang = Barang::all();
+        $kategori = kategori::all();
+        return view('shop', compact('barang', 'kategori') ) ;
     }
+
+    public function payment()
+    {
+        $user = auth()->user();
+        $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
+                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
+                ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
+                ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
+        $pelanggan = pelanggan::all();
+        return view('payment',compact('test',));
+    }
+
+    public function pesanan()
+    {
+        return view ('Penjual.pesanan');
+    }
+    
+    public function about()
+    {
+        return view ('about');
+    }
+
+    public function contact()
+    {
+        return view ('contact');
+    }
+    
+
 }

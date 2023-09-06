@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userscontrollers;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\PesanController;
+use App\Models\Barang;
 use App\Models\pelanggan;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
@@ -28,25 +29,35 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
+Route::get('/shop', [ViewController::class, 'shop']);
 Route::get('/', [ViewController::class, 'home']);
 Route::get('/login', [ViewController::class, 'login'])->name('login');
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
+Route::get('/about', [ViewController::class, 'about']);
+Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
+//penjual kak
+Route::group(['middleware' => ['auth', 'seller']], function () {
+    Route::get('/kategori', [BarangController::class, 'kategori']);
+    Route::post('/katadd', [BarangController::class, 'addkategori']);
+    Route::get('/admin', [ViewController::class, 'admin']);
+    Route::get('/barang', [ViewController::class, 'barang']);
+    Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
+    Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
+    Route::post('/Form', [BarangController::class, 'store']);
+    Route::post('/Edit', [BarangController::class, 'update']);
+    Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
+    Route::get('/barang/cari', [BarangController::class, 'search']);
+    Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
+    Route::get('/order', [ViewController::class, 'pesanan']);
+});
 
-//BARANG
-Route::get('/Barang', [ViewController::class, 'barang']);
-Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
-Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
-Route::post('/Form', [BarangController::class, 'store']);
-Route::post('/Edit', [BarangController::class, 'update']);
-Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
-Route::get('/barang/cari', [BarangController::class, 'search']);
 
 
 //INI LOGIN-USERS
-Route::get('/users', [userscontrollers::class, 'index']);
+
 Route::get('/tambah', [userscontrollers::class, 'create']);
 Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
@@ -55,24 +66,26 @@ Route::get('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/bayar', [ViewController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
 Route::get('/profil', [ViewController::class, 'profil']);
-Route::get('/shop', [ViewController::class, 'shop']);
-Route::get('/add', [ViewController::class, 'tambahadmin']);
-Route::get('/detil', [ViewController::class, 'detail']);
-Route::get('/coba', [ViewController::class, 'coba']);
-Route::post('/tambahadmin', [PenjualController::class, 'store']);
-Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
+Route::get('/payment', [ViewController::class, 'payment']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
-Route::get('clean/{Id_Barang}', [PesanController::class, 'hapus']);
-Route::get('/beli', [PesanController::class, 'checkout']);
+Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
+Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
 
-// Admin
-Route::get('/admin', [ViewController::class, 'admin']);
+Route::post('/tambahadmin', [PenjualController::class, 'store']);
+Route::get('/add', [ViewController::class, 'tambahadmin']);
+// Route::get('/detil', [ViewController::class, 'detail']);
+// Route::get('/coba', [ViewController::class, 'coba']);
 
 
-// Penjual
+
+
+
+
+
+
 
 
 

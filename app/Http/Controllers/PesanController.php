@@ -32,12 +32,12 @@ class PesanController extends Controller
         return redirect('/');
     }
 
-    public function keranjang (Request $request, $id)
+    public function keranjang (Request $request, $Id_Barang)
     {
         if(Auth::id())
         {
             $user=auth()->user();
-            $Barang = Barang::find($id);
+            $Barang = Barang::where('Id_Barang', $Id_Barang)->first();
             $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
             $pecah = json_decode($cek, true);
             $kran = $pecah['Id_Pelanggan'];
@@ -117,44 +117,78 @@ class PesanController extends Controller
     public function hapus($Id_Detail_Keranjang)
     {
 	DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->delete();
-	return redirect('/cart');;
+	return redirect('/cart');
     }
 
-    public function checkout()
+    public function checkout($Id_Keranjang)
     {
-        $pesan = Pesan::all();
-        $user=auth()->user();
-        $Belanja = DetailKeranjang::where('Id_Pelanggan', $user->id)->get();
+        if(Auth::id())
+        {
+        $user = auth()->user();
+        $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
+        $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
+        $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+        ->where('users.id', '=', $user->id)->get();
+       
+        $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
+        $nextNumber = (int) substr($lastUid, 1) + 1;
+        $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
         $totalharga = 0;
-        $orderdetails = [];
-
-        foreach($Belanja as $item)
+        foreach($buattotal as $coba)
         {
-            $subtotal = $item->Jumlah * $item->Harga_Satuan;
-            $totalharga += $subtotal;
+        $totalharga += $coba->Sub_Total;
+        };    
 
-           
+        $pesan = new Pesan();
+        $pesan->Id_Pesanan = $newUid;
+        $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
+        $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        $pesan->Total = $totalharga;
+        $pesan->Tgl_Pesanan = now();
+        $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
+        $pesan->save();
+
+            return redirect("/payment");
+            
         }
 
-        $order = new Pesan();
-        $order->Id_Pelanggan = $user->id;
-        $order->Tgl_Pesanan = now();
-        $order->Total = $totalharga;
-        $order->save();
+        // $pesan = Pesan::all();
+        // $user=auth()->user();
+        // $Belanja = Keranjang::where('Id_Pelanggan', $user->id)->get();
 
-        $orderID = $order->Id_Pesanan;
-        foreach ($orderdetails as $data) {
+        // $orderdetails = [];
 
-            $detail = new DetailKeranjang();
-            $detail->Id_Pesanan = $orderID;
-            $detail->Id_Barang =  $data['Id_Barang'];
-            $detail->Kuantitas = $data['Kuantitas'];
-            $detail->Sub_Total = $data['Sub_Total'];
-            $detail->save();
+        // foreach($Belanja as $item)
+        // {
+        //     $subtotal = $item->Jumlah * $item->Harga_Satuan;
+        //     $totalharga += $subtotal;
 
-            return view('users.payment', compact('pesan'));
-        }
+        //     $orderdetails[] = [
+        //         'Id_Barang' => $item->Id_Barang,
+        //         'Kuantitas' => $item->Jumlah,
+        //         'Sub_Total' => $subtotal,
+        //     ];
+        // }
+
+        // $order = new Pesan();
+        // $order->Id_Pelanggan = $user->id;
+        // $order->Tgl_Pesanan = now();
+        // $order->Total = $totalharga;
+        // $order->save();
+
+        // $orderID = $order->Id_Pesanan;
+        // foreach ($orderdetails as $data) {
+
+        //     $detail = new DetailKeranjang();
+        //     $detail->Id_Pesanan = $orderID;
+        //     $detail->Id_Barang =  $data['Id_Barang'];
+        //     $detail->Kuantitas = $data['Kuantitas'];
+        //     $detail->Sub_Total = $data['Sub_Total'];
+        //     $detail->save();
+
+        //     return view('users.payment', compact('pesan'));
+        // }
     }
 
     public function pembayaran(Request $request, $Id_Pesanan)

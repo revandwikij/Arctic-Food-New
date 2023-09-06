@@ -35,7 +35,7 @@ class LoginController extends Controller
             }
             else
             {
-                return "Email atau password anda salah";
+                return  "Email atau password anda salah";
             }
 
 

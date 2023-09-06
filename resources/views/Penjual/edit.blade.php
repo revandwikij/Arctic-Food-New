@@ -1,4 +1,4 @@
-@extends('layouting.layout barang.master')
+@extends('layouting.layout admin.master')
 
 @section('title', 'edit')
 

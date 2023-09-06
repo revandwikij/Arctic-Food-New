@@ -1,4 +1,4 @@
-@extends('layouting.layout barang.master')
+@extends('layouting.layout admin.master')
 
 @section('title', 'dashboard')
 
@@ -8,9 +8,10 @@
         {{ session('errors') }}
     </div>
 @endif
+
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Data Barang</h1>
+        <h1 class="jumbotron-heading">Data admin</h1>
      </div>
 </section>
 
@@ -64,10 +65,13 @@
                     @endforeach
                     {{-- @endforeach --}}
                     </tbody>
-                  <a href ="/Tambah" class="btn btn-primary mb-5">Tambah Produk</a>
+                  <a href ="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>
+                  <a href ="/kategori" class="btn btn-secondary mb-5">Tambah Kategori</a>
+
                   </table>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
