@@ -18,6 +18,6 @@
 <!-- script ================================================== -->
 
 <!-- Icon -->
-<link rel="icon" href="../assets/css/images/arcticlogo.png" type="image">
+<link rel="icon" href="../assets/css/images/aam.png" type="image">
 
 <script src="../assets/js/modernizr.js"></script>

@@ -14,7 +14,7 @@
       </button>
       <div class="swiper main-swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background-image: url('../assets/images/banner1.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
+          <div class="swiper-slide" style="background-image: url('../assets/css/images/1.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
             <div class="banner-content">
               <div class="container">
                 <div class="row">
