@@ -61,7 +61,39 @@
         </div>
         <div class="swiper product-swiper overflow-hidden">
           <div class="swiper-wrapper">
-    @foreach ($barang as $b)
+            @foreach ($barang as $item)
+                
+          
+            
+            <div class="product-item col-lg-4 col-md-6 col-sm-6">
+              <div class="image-holder">
+                @if($item->Foto_Barang)
+                <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
+              </div>
+              @endif
+              <div class="cart-concern">
+                <div class="cart-button d-flex justify-content-between align-items-center">
+                  <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                  </button>
+                  <button type="button" class="view-btn tooltip
+                      d-flex">
+                    <i class="icon icon-screen-full"></i>
+                    <span class="tooltip-text">Quick view</span>
+                  </button>
+                  <button type="button" class="wishlist-btn">
+                    <i class="icon icon-heart"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="product-detail">
+                <h3 class="product-title">
+                  <a href="/detail/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
+                </h3>
+                <div class="item-price text-primary">{{$item->Harga}}</div>
+              </div>
+            </div>
+            @endforeach
+    {{-- @foreach ($barang as $b)
 
             <div class="swiper-slide">
               <div class="product-item">
@@ -89,7 +121,7 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @endforeach --}}
           </div>
         </div>
         <div class="swiper-pagination"></div>

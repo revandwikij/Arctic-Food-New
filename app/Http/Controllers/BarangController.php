@@ -22,25 +22,64 @@ class BarangController extends Controller
             'Nama_Barang' => 'required',
             'Stok' => 'required',
             'Harga' => 'required',
-            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg,svg,webp|dimensions:min_width=400,min_height=420',
+            'Foto_Barang' => 'required|image|mimes:jpeg,png,jpg.',
             'Keterangan_Barang' => 'required',
         ]);
 
-        // $kategori = kategori::find('');
+        
+        // function generateUniqueCode($prefix) {
+        //     $lastBarang = Barang::latest()->first(); // Ambil data barang terakhir
+        //     if ($lastBarang) 
+        //     {
+        //         $lastCode = $lastBarang->Id_Barang; // Ambil kode terakhir dari barang
+        //         $lastNumber = (int) substr($lastCode, strlen($prefix)); // Ambil nomor urut terakhir
+        //         $nextNumber = $lastNumber + 1; // Hitung nomor urut berikutnya
+        //         $newCode = $prefix . str_pad($nextNumber, 3, '0', STR_PAD_LEFT); // Gabungkan kode unik dengan nomor urut
+        //         return $newCode;
+        //     } 
+        //     else 
+        //     {
+        //         // Jika belum ada data barang, mulai dari B001
+        //         return $prefix . '001';
+        //     }
+        // }
 
-        $Foto_Barang = $request->file('Foto_Barang');
-        $Foto_Ekstensi = $Foto_Barang->extension();
-        $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+        $lastUid = Barang::orderBy('id', 'desc')->first()->Id_Barang ?? 'B000';
+        $nextNumber = (int) substr($lastUid, 1) + 1;
+        $newUid = 'B' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-        $Foto = Image::make($Foto_Barang);
-        $Foto->crop(400,420);
-        $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
+
+
+        // $Foto_Barang = $request->file('Foto_Barang');
+        // $Foto_Ekstensi = $Foto_Barang->extension();
+        // $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+
+        // $Foto = Image::make($Foto_Barang);
+        // $Foto->crop(400,420);
+        // $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
+
+        if ($request->hasFile('Foto_Barang')) {
+            $gambar = $request->file('Foto_Barang');
+    
+            // Buat objek gambar dari file yang diunggah
+            $image = Image::make($gambar);
+    
+            // Auto crop gambar sesuai dengan ukuran yang diinginkan (misalnya 400x400)
+            $image->fit(389, 473);
+    
+            // Simpan gambar yang sudah di-crop
+            $path = public_path('uploads');
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
+            $image->save($path . '/' . $filename);
+
+        
 
 
         $Barang = new Barang;
+        $Barang->Id_Barang = $newUid;
         $Barang->Id_Kategori = $request->Id_Kategori;
         $Barang->Nama_Barang = $request->Nama_Barang;
-        $Barang->Foto_Barang = $Foto_Nama;
+        $Barang->Foto_Barang = $filename;
         $Barang->Stok = $request->Stok;
         $Barang->Harga = $request->Harga;
         $Barang->Berat_Barang_kg = $request->Beban;
@@ -50,6 +89,7 @@ class BarangController extends Controller
 
 
         return redirect('/Barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
+        }
     }
 
     /**

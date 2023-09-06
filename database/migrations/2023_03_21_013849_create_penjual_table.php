@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penjual', function (Blueprint $table) {
-            $table->id('NIB');//length nya jadi 13
+            $table->id();//length nya jadi 13
+            $table->string('NIB')->unique();//length nya jadi 13
             $table->string('Nama_Toko');
             $table->string('Email');
             $table->string('No_Telp');

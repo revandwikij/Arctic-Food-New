@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Alamat;
 use App\Models\Barang;
+use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\Pesan;
 use App\Models\User;
-use App\Models\DetailKeranjang;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\users;
@@ -32,56 +32,81 @@ class PesanController extends Controller
         return redirect('/');
     }
 
-    public function keranjang (Request $request, $Id_Barang)
+    public function keranjang (Request $request, $id)
     {
         if(Auth::id())
         {
             $user=auth()->user();
-            $Barang = Barang::find($Id_Barang);
-            // $cek = Keranjang::join('detail_keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')->where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Id_Keranjang');
-            // $cek2 = Keranjang::where('Id_Pelanggan', $user->id)->where('Id_Barang', $Id_Barang)->value('Jumlah');
-            $Belanja = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')->where('Id_Pelanggan', $user->id)->get();
-            $detail =[];
+            $Barang = Barang::find($id);
+            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
+            $pecah = json_decode($cek, true);
+            $kran = $pecah['Id_Pelanggan'];
+           
+ 
+            $lastUid1 = DetailKeranjang::orderBy('id', 'desc')->first()->Id_Detail_Keranjang ?? 'D000';
+            $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+            $newUid1 = 'D' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
+            $lastUid = Keranjang::orderBy('id', 'desc')->first()->Id_Keranjang ?? 'K000';
+            $nextNumber = (int) substr($lastUid, 1) + 1;
+            $newUid = 'K' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-            //  if(DetailKeranjang::where('Id_Barang', $Id_Barang)->exists())
-            //  {
-            //     DetailKeranjang::where('Id_Barang', $Id_Barang)->update([
-            //         'Id_Keranjang' => $cek, //masih dummy harusnya diisi pake id keranjang user
-            //         'Id_Pelanggan' => $user->id,
-            //         'Id_Barang' => $Barang->Id_Barang,
-            //         'Kuantitas' =>$request->jumlah_pesan,
-            //         'Harga_Satuan' => $Barang->Harga,
-            //         'Sub_Total' => $request->jumlah_pesan * $Barang->Harga
-            //     ]);
-            //     return redirect('/cart');
-            //  }
-            // else{
+             if(Keranjang::where('Id_Pelanggan', $kran)->exists())
+             {
 
-            foreach($Belanja as $item)
-        {
-            $subtotal = $item->Kuantitas * $item->Harga;
-            $detail[] = [
-                'Id_Barang' => $item->Id_Barang,
-                'Kuantitas' => $item->Kuantitas,
-                'Sub_Total' => $subtotal,
-            ];
-        }
+                
+                $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->first();
+                $pecah2 = json_decode($cekcart, true);
+                $kran2 = $pecah2['Id_Keranjang'];
 
+                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
+                 
+
+                if($cekbarang)
+                {
+                
+                     if(DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists())
+                     {
+                            DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
+                            'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
+                            // 'Id_Detail_Keranjang' => $detkran,
+                            'Id_Barang' => $Barang->Id_Barang,
+                            'Kuantitas' => $request->jumlah_pesan,
+                            'Sub_Total' => $request->jumlah_pesan * $Barang->Harga
+                        ]);
+                        return redirect('/cart');
+                     }
+                }
+            else
+            {
+                
+                $coba = new DetailKeranjang();
+                $coba->Id_Detail_Keranjang = $newUid1;
+                $coba->Id_Keranjang = $kran2 ;
+                $coba->Id_Barang =$Barang->Id_Barang ;
+                $coba->Kuantitas = $request->jumlah_pesan;
+                $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
+                $coba->save();
+
+                return redirect('/cart');            
+            }
+             }
+            else{
             $keranjang  = new Keranjang;
-            $keranjang->Id_Pelanggan = $user->id;
+            $keranjang->Id_Keranjang = $newUid;
+            $keranjang->Id_Pelanggan = $kran;
             $keranjang->save();
 
-            $kerid = $keranjang->Id_Keranjang;
-           
-            foreach($detail as $isi)
-            {
-            $detkeranjang= new DetailKeranjang();
-            $detkeranjang->Id_Keranjang = $kerid;
-            $detkeranjang->Id_Barang = $isi['Id_Barang'];
-            $detkeranjang->Kuantitas = $isi['Kuantitas'];
-            $detkeranjang->Sub_Total = $isi['Sub_Total'];
-            $detkeranjang->save();
+            $cek4 = $keranjang->Id_Keranjang;
+            $coba = new DetailKeranjang();
+            $coba->Id_Detail_Keranjang = $newUid1;
+            $coba->Id_Keranjang = $cek4;
+            $coba->Id_Barang = $Barang->Id_Barang;
+            $coba->Kuantitas = $request->jumlah_pesan;
+            $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
+            $coba->save();
+
 
             return redirect('/cart');
             }
@@ -89,9 +114,9 @@ class PesanController extends Controller
         
     }
 
-    public function hapus($Id_Keranjang)
+    public function hapus($Id_Detail_Keranjang)
     {
-	DB::table('keranjang')->where('Id_Keranjang',$Id_Keranjang)->delete();
+	DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->delete();
 	return redirect('/cart');;
     }
 
@@ -121,12 +146,12 @@ class PesanController extends Controller
         $orderID = $order->Id_Pesanan;
         foreach ($orderdetails as $data) {
 
-            // $detail = new DetailPesanan();
-            // $detail->Id_Pesanan = $orderID;
-            // $detail->Id_Barang =  $data['Id_Barang'];
-            // $detail->Kuantitas = $data['Kuantitas'];
-            // $detail->Sub_Total = $data['Sub_Total'];
-            // $detail->save();
+            $detail = new DetailKeranjang();
+            $detail->Id_Pesanan = $orderID;
+            $detail->Id_Barang =  $data['Id_Barang'];
+            $detail->Kuantitas = $data['Kuantitas'];
+            $detail->Sub_Total = $data['Sub_Total'];
+            $detail->save();
 
             return view('users.payment', compact('pesan'));
         }

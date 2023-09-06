@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-md-6 mt-5">
                                 @if ($item->Foto_Barang)
-                                <img style="width: 200px" src="{{ url('Foto_barang'). '/'. $item->Foto_Barang }}">
+                                <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
                                 @endif
                             </div>
                             <div class="col-md-6">
@@ -43,7 +43,7 @@
                                                 <td>Jumlah Pesanan</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <form action="/keranjang/{{$item->Id_Barang}}" method="POST">
+                                                    <form action="/keranjang/{{$item->id}}" method="POST">
                                                     @csrf
                                                     <input type="number" name="jumlah_pesan" class="form-control" required>
                                                     <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>
