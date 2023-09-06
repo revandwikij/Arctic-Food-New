@@ -67,6 +67,7 @@ Route::get('/bayar', [ViewController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
 Route::get('/profil', [ViewController::class, 'profil']);
 Route::get('/payment', [ViewController::class, 'payment']);
+Route::get('/thanks', [ViewController::class, 'thanks']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);

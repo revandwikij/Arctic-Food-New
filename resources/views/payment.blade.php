@@ -72,7 +72,7 @@
                             <p>$132</p>
                         </div>
                     </div>
-                    <a href="/" class="btn btn-upper btn-primary outer-left-xs mt-3"
+                    <a href="/thanks" class="btn btn-upper btn-primary outer-left-xs mt-3"
                         style="margin-top: 20px">Bayar</a>
                     <br>
                     <br>
