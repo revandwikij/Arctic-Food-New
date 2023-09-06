@@ -138,8 +138,8 @@
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
                 <div class="categories">casual collection</div>
-                <h3 class="item-title">street wear.</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim massa diam elementum.</p>
+                <h3 class="item-title">AYAM</h3>
+                <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak terlupakan.</p>
                 <div class="btn-wrap">
                   <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
@@ -154,7 +154,7 @@
               </div>
               <div class="col-md-6 product-entry">
                 <div class="categories">Basic Collection</div>
-                <h3 class="item-title">Basic shoes.</h3>
+                <h3 class="item-title">SAPI</h3>
                 <div class="btn-wrap">
                   <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
@@ -167,7 +167,7 @@
               </div>
               <div class="col-md-6 product-entry">
                 <div class="categories">Best Selling Product</div>
-                <h3 class="item-title">woolen hat.</h3>
+                <h3 class="item-title">IKAN</h3>
                 <div class="btn-wrap">
                   <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
