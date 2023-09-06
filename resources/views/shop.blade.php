@@ -4,75 +4,80 @@
 
 @section('content')
 
-    <section class="site-banner jarallax min-height300 padding-large" style="background: url(../assets/images/hero-image.jpg) no-repeat; background-position: top;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="page-title">Shop page</h1>
-            <div class="breadcrumbs">
-              <span class="item">
-                <a href="index.html">Home /</a>
-              </span>
-              <span class="item">Shop</span>
+    <section class="site-banner jarallax min-height300 padding-large"
+        style="background: url(../assets/images/hero-image.jpg) no-repeat; background-position: top;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-title">Shop page</h1>
+                    <div class="breadcrumbs">
+                        <span class="item">
+                            <a href="index.html">Home /</a>
+                        </span>
+                        <span class="item">Shop</span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <div class="shopify-grid padding-large">
-      <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
-          <section id="selling-products" class="col-md-9 product-store">
-            <div class="container">
-              <ul class="tabs list-unstyled">
-                @foreach ($kategori as $item)
-                    <li data-tab-target="#{{$item->kategori}}" class=" tab">{{$item->kategori}}</li>
-                    {{-- <li data-tab-target="#shoes" class="tab">Shoes</li>
+                <section id="selling-products" class="col-md-9 product-store">
+                    <div class="container">
+                        <ul class="tabs list-unstyled">
+                            @foreach ($kategori as $item)
+                                <li data-tab-target="#{{ $item->kategori }}" class=" tab">{{ $item->kategori }}</li>
+                                {{-- <li data-tab-target="#shoes" class="tab">Shoes</li>
                     <li data-tab-target="#tshirts" class="tab">Tshirts</li>
                     <li data-tab-target="#pants" class="tab">Pants</li>
                     <li data-tab-target="#hoodie" class="tab">Hoodie</li>
                     <li data-tab-target="#outer" class="tab">Outer</li>
                     <li data-tab-target="#jackets" class="tab">Jackets</li>
                     <li data-tab-target="#accessories" class="tab">Accessories</li> --}}
-                @endforeach
-              </ul>
-              <div class="tab-content">
-                <div id="all" data-tab-content class="active">
-                    @foreach ($barang as $data)
-                        <div class="row d-flex flex-wrap">
-                        <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                            <div class="image-holder">
-                            @if($data->Foto_Barang)
-                            <img src="{{ asset('uploads/' . $data->Foto_Barang) }}"  alt="{{$data->Nama_Barang}}" class="product-image">
-                            @endif
-                            </div>
-                            <div class="cart-concern">
-                            <div class="cart-button d-flex justify-content-between align-items-center">
-                                <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                                </button>
-                                <button type="button" class="view-btn tooltip
+                            @endforeach
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all" data-tab-content class="active">
+                                <div class="row d-flex flex-wrap">
+                                    @foreach ($barang as $data)
+                                        <div class="product-item col-lg-4 col-md-6 col-sm-6">
+                                            <div class="image-holder">
+                                                @if ($data->Foto_Barang)
+                                                    <img src="{{ asset('uploads/' . $data->Foto_Barang) }}"
+                                                        alt="{{ $data->Nama_Barang }}" class="product-image">
+                                                @endif
+                                            </div>
+                                            <div class="cart-concern">
+                                                <div class="cart-button d-flex justify-content-between align-items-center">
+                                                    <button type="button"
+                                                        class="btn-wrap cart-link d-flex align-items-center">add to cart <i
+                                                            class="icon icon-arrow-io"></i>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="view-btn tooltip
                                     d-flex">
-                                <i class="icon icon-screen-full"></i>
-                                <span class="tooltip-text">Quick view</span>
-                                </button>
-                                <button type="button" class="wishlist-btn">
-                                <i class="icon icon-heart"></i>
-                                </button>
+                                                        <i class="icon icon-screen-full"></i>
+                                                        <span class="tooltip-text">Quick view</span>
+                                                    </button>
+                                                    <button type="button" class="wishlist-btn">
+                                                        <i class="icon icon-heart"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail">
+                                                <h3 class="product-title">
+                                                    <a href="single-product.html">{{ $data->Nama_Barang }}</a>
+                                                </h3>
+                                                <div class="item-price text-primary">{{ $data->Harga }}</div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            </div>
-                            <div class="product-detail">
-                            <h3 class="product-title">
-                                <a href="single-product.html">{{$data->Nama_Barang}}</a>
-                            </h3>
-                            <div class="item-price text-primary">{{ $data->Harga }}</div>
-                            </div>
-                        </div>
-                        </div>
-                    @endforeach
-                </div>
-                {{-- <div id="shoes" data-tab-content>
+                            {{-- <div id="shoes" data-tab-content>
                   <div class="row d-flex flex-wrap">
                     <div class="product-item col-lg-4 col-md-6 col-sm-6">
                       <div class="image-holder">
@@ -700,267 +705,268 @@
                     </div>
                   </div>
                 </div> --}}
-              </div>
-              <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
-                <div class="pagination loop-pagination d-flex justify-content-center">
-                  <a href="#" class="pagination-arrow d-flex align-items-center">
-                    <i class="icon icon-arrow-left"></i>
-                  </a>
-                  <span aria-current="page" class="page-numbers current">1</span>
-                  <a class="page-numbers" href="#">2</a>
-                  <a class="page-numbers" href="#">3</a>
-                  <a href="#" class="pagination-arrow d-flex align-items-center">
-                    <i class="icon icon-arrow-right"></i>
-                  </a>
-                </div>
-              </nav>
-            </div>
-          </section>
+                        </div>
+                        <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
+                            <div class="pagination loop-pagination d-flex justify-content-center">
+                                <a href="#" class="pagination-arrow d-flex align-items-center">
+                                    <i class="icon icon-arrow-left"></i>
+                                </a>
+                                <span aria-current="page" class="page-numbers current">1</span>
+                                <a class="page-numbers" href="#">2</a>
+                                <a class="page-numbers" href="#">3</a>
+                                <a href="#" class="pagination-arrow d-flex align-items-center">
+                                    <i class="icon icon-arrow-right"></i>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
 
-          <aside class="col-md-3">
-            <div class="sidebar">
-              <div class="widgets widget-menu">
-                <div class="widget-search-bar">
-                  <form role="search" method="get" class="d-flex">
-                    <input class="search-field" placeholder="Search" type="text">
-                    <button class="btn btn-dark"><i class="icon icon-search"></i></button>
-                  </form>
-                </div>
-              </div>
-              <div class="widgets widget-product-tags">
-                <h5 class="widget-title">Tags</h5>
-                <ul class="product-tags sidebar-list list-unstyled">
-                  <li class="tags-item">
-                    <a href="">White</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Cheap</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Branded</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Modern</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Simple</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="widgets widget-product-brands">
-                <h5 class="widget-title">Brands</h5>
-                <ul class="product-tags sidebar-list list-unstyled">
-                  <li class="tags-item">
-                    <a href="">Nike</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Adidas</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Puma</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">Spike</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="widgets widget-price-filter">
-                <h5 class="widget-title">Filter By Price</h5>
-                <ul class="product-tags sidebar-list list-unstyled">
-                  <li class="tags-item">
-                    <a href="">Less than $10</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">$10- $20</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">$20- $30</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">$30- $40</a>
-                  </li>
-                  <li class="tags-item">
-                    <a href="">$40- $50</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </aside>
+                <aside class="col-md-3">
+                    <div class="sidebar">
+                        <div class="widgets widget-menu">
+                            <div class="widget-search-bar">
+                                <form role="search" method="get" class="d-flex">
+                                    <input class="search-field" placeholder="Search" type="text">
+                                    <button class="btn btn-dark"><i class="icon icon-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widgets widget-product-tags">
+                            <h5 class="widget-title">Tags</h5>
+                            <ul class="product-tags sidebar-list list-unstyled">
+                                <li class="tags-item">
+                                    <a href="">White</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Cheap</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Branded</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Modern</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Simple</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widgets widget-product-brands">
+                            <h5 class="widget-title">Brands</h5>
+                            <ul class="product-tags sidebar-list list-unstyled">
+                                <li class="tags-item">
+                                    <a href="">Nike</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Adidas</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Puma</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">Spike</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widgets widget-price-filter">
+                            <h5 class="widget-title">Filter By Price</h5>
+                            <ul class="product-tags sidebar-list list-unstyled">
+                                <li class="tags-item">
+                                    <a href="">Less than $10</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">$10- $20</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">$20- $30</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">$30- $40</a>
+                                </li>
+                                <li class="tags-item">
+                                    <a href="">$40- $50</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
 
+            </div>
         </div>
-      </div>
     </div>
 
     <hr>
     <section id="latest-blog" class="padding-large">
-      <div class="container">
-        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">our Journal</h2>
-          <div class="btn-wrap align-right">
-            <a href="blog.html" class="d-flex align-items-center">Read All Articles <i class="icon icon icon-arrow-io"></i>
-            </a>
-          </div>
+        <div class="container">
+            <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+                <h2 class="section-title">our Journal</h2>
+                <div class="btn-wrap align-right">
+                    <a href="blog.html" class="d-flex align-items-center">Read All Articles <i
+                            class="icon icon icon-arrow-io"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row d-flex flex-wrap">
+                <article class="col-md-4 post-item">
+                    <div class="image-holder zoom-effect">
+                        <a href="single-post.html">
+                            <img src="../assets/images/post-img1.jpg" alt="post" class="post-image">
+                        </a>
+                    </div>
+                    <div class="post-content d-flex">
+                        <div class="meta-date">
+                            <div class="meta-day text-primary">22</div>
+                            <div class="meta-month">Aug-2021</div>
+                        </div>
+                        <div class="post-header">
+                            <h3 class="post-title">
+                                <a href="single-post.html">top 10 casual look ideas to dress up your kids</a>
+                            </h3>
+                            <a href="blog.html" class="blog-categories">Fashion</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-md-4 post-item">
+                    <div class="image-holder zoom-effect">
+                        <a href="single-post.html">
+                            <img src="../assets/images/post-img2.jpg" alt="post" class="post-image">
+                        </a>
+                    </div>
+                    <div class="post-content d-flex">
+                        <div class="meta-date">
+                            <div class="meta-day text-primary">25</div>
+                            <div class="meta-month">Aug-2021</div>
+                        </div>
+                        <div class="post-header">
+                            <h3 class="post-title">
+                                <a href="single-post.html">Latest trends of wearing street wears supremely</a>
+                            </h3>
+                            <a href="blog.html" class="blog-categories">Trending</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-md-4 post-item">
+                    <div class="image-holder zoom-effect">
+                        <a href="single-post.html">
+                            <img src="../assets/images/post-img3.jpg" alt="post" class="post-image">
+                        </a>
+                    </div>
+                    <div class="post-content d-flex">
+                        <div class="meta-date">
+                            <div class="meta-day text-primary">28</div>
+                            <div class="meta-month">Aug-2021</div>
+                        </div>
+                        <div class="post-header">
+                            <h3 class="post-title">
+                                <a href="single-post.html">types of comfortable clothes ideas for women</a>
+                            </h3>
+                            <a href="blog.html" class="blog-categories">Inspiration</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
-        <div class="row d-flex flex-wrap">
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img1.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">22</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">top 10 casual look ideas to dress up your kids</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Fashion</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img2.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">25</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">Latest trends of wearing street wears supremely</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Trending</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img3.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">28</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">types of comfortable clothes ideas for women</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Inspiration</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
     </section>
 
     <section id="brand-collection" class="padding-medium bg-light-grey">
-      <div class="container">
-        <div class="d-flex flex-wrap justify-content-between">
-          <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand2.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand3.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand4.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between">
+                <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
+                <img src="../assets/images/brand2.png" alt="phone" class="brand-image">
+                <img src="../assets/images/brand3.png" alt="phone" class="brand-image">
+                <img src="../assets/images/brand4.png" alt="phone" class="brand-image">
+                <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
+            </div>
         </div>
-      </div>
     </section>
 
     <section id="instagram" class="padding-large">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Follow our instagram</h2>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Follow our instagram</h2>
+            </div>
+            <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
+            </p>
+            <div class="row d-flex flex-wrap justify-content-between">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+            </div>
         </div>
-        <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
-        </p>
-        <div class="row d-flex flex-wrap justify-content-between">
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section id="shipping-information">
-      <hr>
-      <div class="container">
-        <div class="row d-flex flex-wrap align-items-center justify-content-between">
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-truck"></i>
-              <h4 class="block-title">
-                <strong>Free shipping</strong> Over $200
-              </h4>
+        <hr>
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center justify-content-between">
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-truck"></i>
+                        <h4 class="block-title">
+                            <strong>Free shipping</strong> Over $200
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-return"></i>
+                        <h4 class="block-title">
+                            <strong>Money back</strong> Return within 7 days
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-tags1"></i>
+                        <h4 class="block-title">
+                            <strong>Buy 4 get 5th</strong> 50% off
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-help_outline"></i>
+                        <h4 class="block-title">
+                            <strong>Any questions?</strong> experts are ready
+                        </h4>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-return"></i>
-              <h4 class="block-title">
-                <strong>Money back</strong> Return within 7 days
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-tags1"></i>
-              <h4 class="block-title">
-                <strong>Buy 4 get 5th</strong> 50% off
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-help_outline"></i>
-              <h4 class="block-title">
-                <strong>Any questions?</strong> experts are ready
-              </h4>
-            </div>
-          </div>
         </div>
-      </div>
-      <hr>
+        <hr>
     </section>
 @endsection
