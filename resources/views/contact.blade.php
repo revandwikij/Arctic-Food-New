@@ -10,17 +10,17 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../assets/icomoon/icomoon.css">
     <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- script
     ================================================== -->
-    <script src="js/modernizr.js"></script>
+    <script src="../assets/js/modernizr.js"></script>
   </head>
   <body>
 
@@ -109,7 +109,7 @@
               <div class="col-lg-2 col-md-2">
                 <div class="main-logo">
                   <a href="index.html">
-                    <img src="images/main-logo.png" alt="logo">
+                    <img src="../assets/images/main-logo.png" alt="logo">
                   </a>
                 </div>
               </div>
@@ -178,7 +178,7 @@
       </div>
     </header>
 
-    <section class="site-banner jarallax padding-large" style="background: url(images/hero-image.jpg) no-repeat; background-position: top;">
+    <section class="site-banner jarallax padding-large" style="background: url(../assets/images/hero-image.jpg) no-repeat; background-position: top;">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -254,7 +254,7 @@
     <section class="google-map">
       <div class="mapouter">
         <div class="gmap_canvas">
-          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+          <iframe width="100%" height="500" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3060763169688!2d107.50595987890298!3d-6.853868075468069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e49c6c4266d7%3A0xfa8c9316de308eef!2sJl.%20Berlian%20No.9%2C%20Cilame%2C%20Kec.%20Ngamprah%2C%20Kabupaten%20Bandung%20Barat%2C%20Jawa%20Barat%2040552!5e0!3m2!1sen!2sid!4v1693961786418!5m2!1sen!2sid"></iframe>
           <a href="https://getasearch.com/fmovies"></a>
           <br>
           <style>
@@ -281,11 +281,11 @@
     <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between">
-          <img src="images/brand1.png" alt="phone" class="brand-image">
-          <img src="images/brand2.png" alt="phone" class="brand-image">
-          <img src="images/brand3.png" alt="phone" class="brand-image">
-          <img src="images/brand4.png" alt="phone" class="brand-image">
-          <img src="images/brand5.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand2.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand3.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand4.png" alt="phone" class="brand-image">
+          <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
         </div>
       </div>
     </section>
@@ -300,37 +300,37 @@
         <div class="row d-flex flex-wrap justify-content-between">
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image1.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image1.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image2.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image2.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image3.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image3.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image4.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image4.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image5.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
             <figure class="zoom-effect">
-              <img src="images/insta-image6.jpg" alt="instagram" class="insta-image">
+              <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
               <i class="icon icon-instagram"></i>
             </figure>
           </div>
@@ -489,17 +489,17 @@
           <div class="payment-method">
             <p>Payment options :</p>
             <div class="card-wrap">
-              <img src="images/visa-icon.jpg" alt="visa">
-              <img src="images/mastercard.png" alt="mastercard">
-              <img src="images/american-express.jpg" alt="american-express">
+              <img src="../assets/images/visa-icon.jpg" alt="visa">
+              <img src="../assets/images/mastercard.png" alt="mastercard">
+              <img src="../assets/images/american-express.jpg" alt="american-express">
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../assets/js/plugins.js"></script>
+    <script src="../assets/js/script.js"></script>
   </body>
 </html>

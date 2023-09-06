@@ -144,6 +144,16 @@ class ViewController extends Controller
     {
         return view ('Penjual.pesanan');
     }
+    
+    public function about()
+    {
+        return view ('about');
+    }
 
+    public function contact()
+    {
+        return view ('contact');
+    }
+    
 
 }
