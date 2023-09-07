@@ -163,21 +163,26 @@
                                     <label>Nama Penerima</label>
                                     <input type="text" class="form-control" name="Nama_Penerima"></input>
                                 </div>
+								<div class="form-group">
+                                    <label>No HP</label>
+                                    <input type="text" class="form-control" name="No_Hp"></input>
+                                </div>
                                 <div class="form-group">
                                     <label>Alamat Lengkap</label>
                                     <textarea type="text" class="form-control" name="Alamat"></textarea>
                                 </div>
-								<div class="form-group">
-                                    <label>Nomor Handphone</label>
-                                    <input type="text" class="form-control" name="No_Hp"></input>
-                                </div>
                                 <div class="form-group">
-                                    <label>Kota</label>
-                                    <input type="text" class="form-control" name="Kota"></input>
+                                    {{-- <label>Kota</label>
+                                    <input type="text" class="form-control" name="Kota"> --}}
+                                    <select name="Kota" id="Kota">
+                                        @foreach ($biaya_ship as $data)
+                                        <option value="{{$data['Kota']}}">{{$data['Kota']}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Kode_Pos</label>
-                                    <input type="text" class="form-control" name="Pos"></input>
+                                    <input type="text" class="form-control" name="Pos">
                                 </div>
 							    </div>
 						        </div>

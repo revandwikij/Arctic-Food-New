@@ -11,6 +11,7 @@ use App\Models\Pesan;
 use App\Models\User;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
+use App\Models\Shipping;
 use App\Models\users;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -41,8 +42,8 @@ class PesanController extends Controller
             $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
             $pecah = json_decode($cek, true);
             $kran = $pecah['Id_Pelanggan'];
-           
- 
+
+
             $lastUid1 = DetailKeranjang::orderBy('id', 'desc')->first()->Id_Detail_Keranjang ?? 'D000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
             $newUid1 = 'D' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
@@ -54,18 +55,18 @@ class PesanController extends Controller
              if(Keranjang::where('Id_Pelanggan', $kran)->exists())
              {
 
-                
+
                 $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->first();
                 $pecah2 = json_decode($cekcart, true);
                 $kran2 = $pecah2['Id_Keranjang'];
 
                 $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
-                 
+
 
                 if($cekbarang)
                 {
-                
+
                      if(DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists())
                      {
                             DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
@@ -80,7 +81,7 @@ class PesanController extends Controller
                 }
             else
             {
-                
+
                 $coba = new DetailKeranjang();
                 $coba->Id_Detail_Keranjang = $newUid1;
                 $coba->Id_Keranjang = $kran2 ;
@@ -89,7 +90,7 @@ class PesanController extends Controller
                 $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
                 $coba->save();
 
-                return redirect('/cart');            
+                return redirect('/cart');
             }
              }
             else{
@@ -111,7 +112,7 @@ class PesanController extends Controller
             return redirect('/cart');
             }
             }
-        
+
     }
 
     public function hapus($Id_Detail_Keranjang)
@@ -120,7 +121,7 @@ class PesanController extends Controller
 	return redirect('/cart');
     }
 
-    public function checkout($Id_Keranjang)
+    public function checkout($Id_Keranjang,Request $request)
     {
         if(Auth::id())
         {
@@ -129,7 +130,8 @@ class PesanController extends Controller
         $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
         ->where('users.id', '=', $user->id)->get();
-       
+        $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('alamat.Id_Alamat', '=', '') ;
+
         $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
@@ -138,19 +140,44 @@ class PesanController extends Controller
         foreach($buattotal as $coba)
         {
         $totalharga += $coba->Sub_Total;
-        };    
+        };
 
         $pesan = new Pesan();
         $pesan->Id_Pesanan = $newUid;
         $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
         $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        $pesan->Id_Alamat = $request->Id_Alamat;
         $pesan->Total = $totalharga;
         $pesan->Tgl_Pesanan = now();
         $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
         $pesan->save();
 
+
+
+        $totalberat = 0;
+
+        $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
+        $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+        $newUid1 = 'S' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+
+
+
+        $cek30 = $pesan->Id_Pesanan;
+        $ship = new Shipping();
+        $ship->Id_Shipping = $newUid1;
+        $ship->Id_Pesanan = $cek30;
+        $ship->Id_Biaya = $request->Id_Biaya;
+        $ship->Total_Shipping = $totalharga;
+        $ship->Tgl_Pesanan = now();
+        $ship->save();
+
+
+
+
+
+
             return redirect("/payment");
-            
+
         }
 
         // $pesan = Pesan::all();

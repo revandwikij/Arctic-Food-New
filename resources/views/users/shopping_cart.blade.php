@@ -12,7 +12,7 @@
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
 
-                            <div class="dropdown">
+                            {{-- <div class="dropdown">
                                 <span style="font">Alamat</span>
                                 <button class="btn btn-outline-primary  dropdown-toggle" type="button"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -20,10 +20,24 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     @foreach ($alamat as $a)
-                                        <li><a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
-                            </div>
+                            </div> --}}
+                            @foreach ($cekcart as $cart)
+                                <form action="/beli/{{ $cart->Id_Keranjang }}" method="POST">
+                                    @csrf
+                                    @foreach ($alamat as $a)
+                                        <span style="font">Alamat</span>
+                                        <select name="Id_Alamat" id="">
+                                            <option value="{{ $a->Id_Alamat }}">{{ $a->Label }}</option>
+                                        </select>
+                                    @endforeach
+                            @endforeach
+
+
 
 
                         </div>
@@ -34,6 +48,7 @@
                                         <th class="cart-romove item">Hapus</th>
                                         <th class="cart-description item">Foto Barang</th>
                                         <th class="cart-product-name item">Nama</th>
+                                        <th class="cart-product-name item">Berat Barang</th>
                                         <th class="cart-product-name item">Harga Jual</th>
                                         <th class="cart-qty item">Quantity</th>
                                         <th class="cart-sub-total item">Subtotal</th>
@@ -60,7 +75,7 @@
                                                 <h4 class='cart-product-description'><a
                                                         href="/detail/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
                                                 </h4>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="rating rateit-small"></div>
                                                     </div>
@@ -69,8 +84,10 @@
                                                             (06 Reviews)
                                                         </div>
                                                     </div>
-                                                </div><!-- /.row -->
+                                                </div><!-- /.row --> --}}
                                             </td>
+                                            <td class="cart-product-sub-total"><span class="cart-sub-total-price">
+                                                    {{ $data->Berat }} Kg
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.
                                                     {{ number_format($data->Harga) }}
                                             <td class="cart-product-sub-total">
@@ -123,10 +140,8 @@
                                 <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
                                 <span class="">Have Fun!!</span>
                             </div> --}}
-                                                        @foreach ($cekcart as $cart)
-                                                            <a href="/beli/{{ $cart->Id_Keranjang }} "
-                                                                class="btn btn-upper btn-primary outer-left-xs">Bayar</a>
-                                                        @endforeach
+                                                        <button class="btn btn-upper btn-primary outer-left-xs" type="submit">Bayar</button>
+                                                        </form>
 
                                                     </td>
                                                 </tr>
@@ -189,7 +204,7 @@
 
 </script> --}}
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const plusButtons = document.querySelectorAll(".plus-button");
             const minusButtons = document.querySelectorAll(".minus-button");
@@ -235,10 +250,10 @@
         });
 
         function selectLabel(label) {
-        // Set the selected label in the <span> element
-        document.getElementById('selectedLabel').textContent = label;
-    }
-    </script>
+            // Set the selected label in the <span> element
+            document.getElementById('selectedLabel').textContent = label;
+        }
+    </script> --}}
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

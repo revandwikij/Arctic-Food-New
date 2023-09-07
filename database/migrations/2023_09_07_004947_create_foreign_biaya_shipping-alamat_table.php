@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('biaya_shipping', function (Blueprint $table) {
-            $table->id();
-            $table->string('Id_Biaya')->unique();
-            $table->string('Kota')->unique();
-            $table->integer('Biaya_Shipping_per_Kg');
-            $table->timestamps();
+        Schema::table('Alamat', function (Blueprint $table){
+            $table->foreign('Kota')->references('Kota')->on('biaya_shipping')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -25,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('biaya_shipping');
+        //
     }
 };

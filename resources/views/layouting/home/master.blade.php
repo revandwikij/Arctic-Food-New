@@ -14,6 +14,7 @@
 
     <!-- Css -->
     @include('layouting.home.head')
+    
 </head>
 <body class="cnt-home">
 

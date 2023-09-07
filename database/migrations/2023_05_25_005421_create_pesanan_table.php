@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('Id_Pesanan')->unique();
             $table->string('Id_Pelanggan');
             $table->string('Id_Keranjang');
-            $table->string('Id_Alamat')->nullable();
+            $table->string('Id_Alamat');
             $table->integer('Total');
+            $table->double('Total_Beban');
             $table->date('Tgl_Pesanan');
             $table->enum('Status_Pesanan', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim', 'Selesai', 'Dibatalkan']);
             $table->timestamps();
