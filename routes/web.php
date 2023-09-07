@@ -51,10 +51,14 @@ Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak
+<<<<<<< HEAD
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/dataship', [ViewController::class, 'dataship']);
     Route::post('/tambahship/action', [ShippingController::class, 'store']);
     Route::get('/tambahship', [ViewController::class, 'tambahship']);
+=======
+Route::group(['middleware' => ['auth', 'seller']], function () {
+>>>>>>> 91379f9b42d919394f54b91c467d69638429da91
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
     Route::get('/admin', [ViewController::class, 'admin']);
@@ -67,13 +71,13 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
     Route::get('/barang/cari', [BarangController::class, 'search']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-// });
+});
 
 
 
 Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/bayar', [ViewController::class, 'bayar']);
-    Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
+    Route::get('/cart', [ViewController::class, 'cart']);
     Route::get('/profil', [ViewController::class, 'profil']);
     Route::get('/payment', [ViewController::class, 'payment']);
     Route::get('/thanks', [ViewController::class, 'thanks']);

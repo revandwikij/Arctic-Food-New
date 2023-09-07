@@ -87,7 +87,7 @@
                                                 </div><!-- /.row --> --}}
                                             </td>
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">
-                                                    {{ $data->Berat }} Kg
+                                                    {{ $data->Sub_Beban }} Kg
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.
                                                     {{ number_format($data->Harga) }}
                                             <td class="cart-product-sub-total">
