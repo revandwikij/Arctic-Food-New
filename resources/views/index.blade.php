@@ -640,11 +640,11 @@
     <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between">
-          <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand2.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand3.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand4.png" alt="phone" class="brand-image">
-          <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
+          <img src="../assets/css/images/Lfiesta.png" alt="phone" class="brand-image">
+          <img src="../assets/css/images/Lsogood.png" alt="phone" class="brand-image">
+          <img src="../assets/css/images/Lkanzler.png" alt="phone" class="brand-image">
+          <img src="../assets/css/images/Lbellfood.png" alt="phone" class="brand-image">
+          <img src="../assets/css/images/Lsunny.png" alt="phone" class="brand-image">
         </div>
       </div>
     </section>

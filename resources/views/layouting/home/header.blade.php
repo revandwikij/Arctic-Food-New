@@ -94,7 +94,7 @@
                                 <ul class="menu-list">
 
                                     <li class="menu-item has-sub">
-                                        <a href="index.html" class="item-anchor active d-flex align-item-center"
+                                        <a href="/" class="item-anchor active d-flex align-item-center"
                                             data-effect="Home">Home</a>
                                         {{-- <ul class="submenu">
                         <li><a href="index.html" class="item-anchor active">Home</a></li>
