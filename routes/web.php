@@ -66,6 +66,25 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
 
 
 
+Route::group(['middleware' => ['auth', 'pembeli']], function () {
+    Route::get('/bayar', [ViewController::class, 'bayar']);
+    Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
+    Route::get('/profil', [ViewController::class, 'profil']);
+    Route::get('/payment', [ViewController::class, 'payment']);
+    Route::get('/thanks', [ViewController::class, 'thanks']);
+    Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
+    Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
+    Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
+    Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
+    Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
+    Route::get('/shop', [ViewController::class, 'shop']);
+    Route::get('/contact', [ViewController::class, 'contact']);
+    Route::get('/about', [ViewController::class, 'about']);
+    Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
+});
+
+
 //INI LOGIN-USERS
 Route::get('/bayar', [ViewController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
@@ -77,6 +96,13 @@ Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middlewar
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
+
+// Route::get('/tambah', [userscontrollers::class, 'create']);
+// Route::post('/bikin', [userscontrollers::class, 'store']);
+// Route::post('/hapus', [userscontrollers::class, 'destroy']);
+// Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
+// Route::get('/hapus', [userscontrollers::class, 'destroy']);
+
 
 
 Route::post('/tambahadmin', [PenjualController::class, 'store']);

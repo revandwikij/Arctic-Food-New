@@ -32,20 +32,24 @@
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex">
                         <label class="form-control-label px-3">ID Kategori<span class="text-danger"> *</span></label>
-                        <p> 1 = Busana
-                            2 = Makanan
-                            3 = Perabotan
-                            4 = Kerajinan
-                        </p>
                         <select name="Id_Kategori" id="Id_Kategori">
                             @foreach ($kategoris as $k)
-                            <option value="{{$k['Id_Kategori']}}">{{$k['Id_Kategori']}}</option>
+                            <option value="{{$k['Id_Kategori']}}">{{$k['Kategori']}}</option>
                             @endforeach
                         </select>
                         </div>
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Foto Barang<span class="text-danger"> *</span></label> <input type="file" id="Foto_Barang" name="Foto_Barang" value="{{ $data->Foto_Barang }}" placeholder="" onblur="validate(3)"> </div>
 
                     </div>
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Brand<span class="text-danger"> *</span></label> <input type="text" id="Brand" name="Brand" value="{{ $data->Brand }}" onblur="validate(5)"> </div>
+                    </div>
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Berat<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Berat" value="{{ $data->Berat }}" placeholder="Dalam Kg contoh : 0,5 = 500" onblur="validate(5)"> </div>
+                    </div>
+
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Stok<span class="text-danger"> *</span></label> <input type="text" id="Stok" name="Stok" value="{{ $data->Stok }}" placeholder="" onblur="validate(5)"> </div>
                     </div>

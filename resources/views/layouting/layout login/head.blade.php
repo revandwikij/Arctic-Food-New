@@ -9,7 +9,7 @@
     <link href="/assets/css/select2.min.css" rel="stylesheet" media="all">
     <link href="/assets/css/daterangepicker.css" rel="stylesheet" media="all">
 
-    <link rel="icon" href="../assets/css/images/Go-logo.png" type="image">
+    <link rel="icon" href="../assets/css/images/arcticlogo.png" type="image">
 
 
     <!-- Main CSS-->

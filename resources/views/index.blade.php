@@ -137,7 +137,7 @@
                 <img src="../assets/images/collection-item1.jpg" alt="collection item" class="large-image image-rounded">
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
-                <div class="categories">casual collection</div>
+                <div class="categories">olahan</div>
                 <h3 class="item-title">AYAM</h3>
                 <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak terlupakan.</p>
                 <div class="btn-wrap">
@@ -153,7 +153,7 @@
                 <img src="../assets/images/collection-item2.jpg" alt="collection item" class="small-image image-rounded">
               </div>
               <div class="col-md-6 product-entry">
-                <div class="categories">Basic Collection</div>
+                <div class="categories">Olahan</div>
                 <h3 class="item-title">SAPI</h3>
                 <div class="btn-wrap">
                   <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
@@ -166,7 +166,7 @@
                 <img src="../assets/images/collection-item3.jpg" alt="collection item" class="small-image image-rounded">
               </div>
               <div class="col-md-6 product-entry">
-                <div class="categories">Best Selling Product</div>
+                <div class="categories">Olahan</div>
                 <h3 class="item-title">IKAN</h3>
                 <div class="btn-wrap">
                   <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
@@ -388,10 +388,10 @@
                 <div class="discount">10% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Full sleeve cover shirt</a>
+                    <a href="single-product.html">Fiesta spisy wings</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$50.00</del>$40.00
+                    <del class="prev-price">Rp45.000</del>Rp39.999
                   </div>
                 </div>
               </div>
@@ -416,10 +416,10 @@
                 <div class="discount">10% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
+                    <a href="single-product.html">Kanzler spisy chiken nugget</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$50.00</del>$40.00
+                    <del class="prev-price">Rp57.000</del>Rp47.000
                   </div>
                 </div>
               </div>
@@ -444,10 +444,10 @@
                 <div class="discount">10% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Grey Check Coat</a>
+                    <a href="single-product.html">Fiesta dori stik</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$55.00</del>$45.00
+                    <del class="prev-price">Rp48.000</del>Rp40.0000
                   </div>
                 </div>
               </div>
@@ -472,10 +472,10 @@
                 <div class="discount">10% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Silk White Shirt</a>
+                    <a href="single-product.html">Fiesta schnitzel</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$45.00</del>$35.00
+                    <del class="prev-price">Rp58.000</del>49.999
                   </div>
                 </div>
               </div>
@@ -500,10 +500,10 @@
                 <div class="discount">10% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Blue Jeans pant</a>
+                    <a href="single-product.html">Bellfods chiken nugget</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$45.00</del>$35.00
+                    <del class="prev-price">Rp68.000</del>Rp59.999
                   </div>
                 </div>
               </div>
@@ -523,9 +523,9 @@
               <img src="../assets/images/model.jpg" alt="collection item" class="large-image image-rounded">
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
-              <div class="categories">Denim collection</div>
-              <h3 class="item-title">The casual selection.</h3>
-              <p>Vel non viverra ligula odio ornare turpis mauris. Odio aliquam, tincidunt ut vitae elit risus. Tempor egestas condimentum et ac rutrum dui, odio.</p>
+              <div class="categories">Special nuggets</div>
+              <h3 class="item-title">Kanzler nugget crispy</h3>
+              <p>Kelezatan premium dalam setiap gigitan. Nugget renyah dengan rasa luar biasa yang tak terlupakan.</p>
               <div class="btn-wrap">
                 <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                 </a>
@@ -540,8 +540,8 @@
       <div class="inner-content">
         <h2 class="section-title divider">Quote of the day</h2>
         <blockquote>
-          <q>It's true, I don't like the whole cutoff-shorts-and-T-shirt look, but I think you can look fantastic in casual clothes.</q>
-          <div class="author-name">- Dr. Seuss</div>
+          <q>Beli frozen food, dinginkan hatiku, dan biarkan cinta kita menghangatkan microwave bersama-sama!</q>
+          <div class="author-name">- Mang Ido said</div>
         </blockquote>
       </div>
     </section>
