@@ -33,7 +33,7 @@ use Illuminate\Http\Request;
 Route::get('/', [ViewController::class, 'home']);
 Route::get('/login', [ViewController::class, 'login'])->name('login');
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
-Route::get('/about', [ViewController::class, 'about']);
+
 
 
 //penjual kak
@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
 });
 
+
+
 Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/bayar', [ViewController::class, 'bayar']);
     Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
@@ -66,6 +68,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop', [ViewController::class, 'shop']);
     Route::get('/contact', [ViewController::class, 'contact']);
+    Route::get('/about', [ViewController::class, 'about']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 });
 
