@@ -41,7 +41,7 @@
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="/barang">Data Barang</a></li>
                             <li class="submenu-item"><a class="submenu-link" href="/users">Data user</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="/shipping">Data Shipping</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="/dataship">Data Shipping</a></li>
                          </ul>
                     </div>
                     </a><!--//nav-link-->
