@@ -164,7 +164,9 @@ class ViewController extends Controller
 
     public function dataship()
     {
-        return view ('penjual.dataship');
+        $ship= Biaya_Ship::all();
+        // dd($ship);
+        return view ('penjual.dataship', compact('ship')) ;
     }
 
     public function tambahship()

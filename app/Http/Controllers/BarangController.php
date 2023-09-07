@@ -180,7 +180,7 @@ class BarangController extends Controller
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
 	// alihkan halaman ke halaman pegawai
-	return redirect('/barang');;
+	return redirect('/barang');
     }
 
     public function search(Request $request)

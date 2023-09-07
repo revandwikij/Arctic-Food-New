@@ -1,6 +1,6 @@
 @extends('layouting.layout admin.master')
 
-@section('title', 'dashboard')
+@section('title', 'dataship')
 
 @section('content')
 @if(session('errors'))
@@ -25,44 +25,36 @@
                             <th scope="col">Id Shipping</th>
                             <th scope="col">Kota</th>
                             <th scope="col">Biaya / Gram</th>
+                            <th scope="col">action</th>
                         </tr>
                     </thead>
 
                     <tbody>
 
-                    {{-- @foreach ($test as $data)
+                    @foreach ($ship as $data)
 
                     <tr>
 
-                            <td>{{$data->Id_Barang}} </td>
-                            <td>
-                                @if ($data->Foto_Barang)
-                                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
-
-                                @endif
-                            </td>
-                            <td>{{$data->Kategori}} </td>
-                            <td>{{$data->Nama_Barang}} </td>
-                            <td>{{$data->Stok}} </td>
-                            <td>{{$data->Keterangan_Barang}} </td>
-                            <td>Rp. {{ number_format($data->Harga) }} </td>
+                            <td>{{$data->Id_Biaya}} </td>
+                            <td>{{$data->Kota}} </td>
+                            <td>{{$data->Biaya_Shipping_per_Kg}} </td>
                             <td>
 
-                                <a href ="Ubah/{{$data->Id_Barang}}" class="btn btn-secondary">Edit</a>
-                               <button onclick="return confirm('Hapus Data?')"  class="btn btn-sm btn-danger"><a href="Hapus/{{ $data->Id_Barang }}" method="post"><i class="fa fa-trash"></i></button></a>
+                                <a href ="/editship/{{$data->Id_Biaya}}" class="btn btn-secondary">Edit</a>
+                               <button onclick="return confirm('Hapus Data?')"  class="btn btn-sm btn-danger"><a href="/hapusship/{{ $data->Id_Biaya }}" method="post"><i class="fa fa-trash"></i></button></a>
 
                             </td>
 
                     </tr>
                     @endforeach
                     </tbody>
-                  <a href ="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>
-                  <a href ="/kategori" class="btn btn-secondary mb-5">Tambah Kategori</a>
+                  <a href ="/tambahship" class="btn btn-primary mb-5 me-2">Tambah Shipping</a>
+                  {{-- <a href ="/kategori" class="btn btn-secondary mb-5">Tambah Kategori</a> --}}
 
                   </table>
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 @endsection

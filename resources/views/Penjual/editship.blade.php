@@ -1,6 +1,6 @@
 @extends('layouting.layout admin.master')
 
-@section('title', 'tambahship')
+@section('title', 'editship')
 
 @section('content')
 @if(session('errors'))
@@ -12,7 +12,7 @@
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            <h3>Tambah Shipping</h3>
+            <h3>Edit Shipping</h3>
             <div class="card">
                 <h5 class="text-center mb-4"></h5>
                 <form action="/tambahship/action" class="form-card" method="POST" enctype="multipart/form-data">
@@ -33,7 +33,7 @@
 
 
                     <div class="row justify-content-end">
-                        <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Tambah</button> </div>
+                        <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Edit</button> </div>
                     </div>
                 </form>
             </div>

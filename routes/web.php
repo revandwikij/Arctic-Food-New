@@ -51,14 +51,13 @@ Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak
-<<<<<<< HEAD
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/dataship', [ViewController::class, 'dataship']);
     Route::post('/tambahship/action', [ShippingController::class, 'store']);
     Route::get('/tambahship', [ViewController::class, 'tambahship']);
-=======
-Route::group(['middleware' => ['auth', 'seller']], function () {
->>>>>>> 91379f9b42d919394f54b91c467d69638429da91
+    Route::get('/editship/{Id_Biaya}', [ShippingController::class, 'edit']);
+    Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
+// Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
     Route::get('/admin', [ViewController::class, 'admin']);
@@ -71,7 +70,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/barang/cari', [BarangController::class, 'search']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-});
+// });
 
 
 
