@@ -54,6 +54,18 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
 });
 
+Route::group(['middleware' => ['auth', 'pembeli']], function () {
+    Route::get('/bayar', [ViewController::class, 'bayar']);
+    Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
+    Route::get('/profil', [ViewController::class, 'profil']);
+    Route::get('/payment', [ViewController::class, 'payment']);
+    Route::get('/thanks', [ViewController::class, 'thanks']);
+    Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
+    Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
+    Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
+    Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
+    Route::get('/alamat', [AlamatController::class, 'addaddress']);
+});
 
 
 //INI LOGIN-USERS
@@ -63,16 +75,7 @@ Route::post('/bikin', [userscontrollers::class, 'store']);
 Route::post('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
 Route::get('/hapus', [userscontrollers::class, 'destroy']);
-Route::get('/bayar', [ViewController::class, 'bayar']);
-Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
-Route::get('/profil', [ViewController::class, 'profil']);
-Route::get('/payment', [ViewController::class, 'payment']);
-Route::get('/thanks', [ViewController::class, 'thanks']);
-Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
-Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
-Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
-Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
-Route::get('/alamat', [AlamatController::class, 'addaddress']);
+
 
 
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
