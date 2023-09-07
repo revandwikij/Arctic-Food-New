@@ -19,7 +19,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-6">
-                    <h2 class="banner-title">Summer Collection</h2>
+                    <h2 class="banner-title">Arctic Food</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
                     <div class="btn-wrap">
                       <a href="/shop" class="btn btn-light btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
@@ -35,7 +35,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-6">
-                    <h2 class="banner-title">Casual Collection</h2>
+                    <h2 class="banner-title">Our Product</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
                     <div class="btn-wrap">
                       <a href="/shop" class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
@@ -62,9 +62,9 @@
         <div class="swiper product-swiper overflow-hidden">
           <div class="swiper-wrapper">
             @foreach ($barang as $item)
-                
-          
-            
+
+
+
             <div class="product-item col-lg-4 col-md-6 col-sm-6">
               <div class="image-holder">
                 @if($item->Foto_Barang)
@@ -179,26 +179,7 @@
       </div>
     </section>
 
-    <section id="subscribe" class="padding-large">
-      <div class="container">
-        <div class="row">
-          <div class="block-text col-md-6">
-            <div class="section-header">
-              <h2 class="section-title">Get 25% off Discount Coupons</h2>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictumst amet, metus, sit massa posuere maecenas. At tellus ut nunc amet vel egestas.</p>
-          </div>
-          <div class="subscribe-content col-md-6">
-            <form id="form" class="d-flex justify-content-between">
-              <input type="text" name="email" placeholder="Enter your email addresss here">
-              <button class="btn btn-dark">Subscribe Now</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="selling-products" class="product-store bg-light-grey padding-large">
+    {{-- <section id="selling-products" class="product-store bg-light-grey padding-large">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Best selling products</h2>
@@ -376,7 +357,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
 
     <section id="flash-sales" class="product-store padding-large">
 
@@ -566,78 +547,8 @@
     </section>
 
     <hr>
-    <section id="latest-blog" class="padding-large">
-      <div class="container">
-        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">our Journal</h2>
-          <div class="btn-wrap align-right">
-            <a href="blog.html" class="d-flex align-items-center">Read All Articles <i class="icon icon icon-arrow-io"></i>
-            </a>
-          </div>
-        </div>
-        <div class="row d-flex flex-wrap">
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img1.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">22</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">top 10 casual look ideas to dress up your kids</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Fashion</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img2.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">25</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">Latest trends of wearing street wears supremely</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Trending</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img3.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">28</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">types of comfortable clothes ideas for women</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Inspiration</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section id="brand-collection" class="padding-medium bg-light-grey">
+    {{-- <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between">
           <img src="../assets/images/brand1.png" alt="phone" class="brand-image">
@@ -647,9 +558,9 @@
           <img src="../assets/images/brand5.png" alt="phone" class="brand-image">
         </div>
       </div>
-    </section>
+    </section> --}}
 
-    <section id="instagram" class="padding-large">
+    {{-- <section id="instagram" class="padding-large">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Follow our instagram</h2>
@@ -695,7 +606,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
 
     <section id="shipping-information">
       <hr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alamat;
 use App\Models\Barang;
+use App\Models\Biaya_Ship;
 use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
@@ -61,7 +62,6 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->get();
-        $kategoris = kategori::all();
         $alamat = Alamat::all();
         return view('users.shopping_cart',compact('test', 'cekcart','alamat'));
     }
@@ -71,7 +71,9 @@ class ViewController extends Controller
         $pelanggan = pelanggan::where('Id_Pelanggan', $user->id)->get();
         $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('users.profile', compact('kategoris','barang','pelanggan'));
+        // $alamat = Alamat::join('biaya_shipping', 'alamat.Kota', '=', 'biaya_shipping.Kota')->get([]);
+        $biaya_ship = Biaya_Ship::all();
+        return view('users.profile', compact('kategoris','barang','pelanggan','biaya_ship'));
     }
 
     public function tambahadmin()
@@ -144,7 +146,7 @@ class ViewController extends Controller
     {
         return view ('Penjual.pesanan');
     }
-    
+
     public function about()
     {
         return view ('about');
@@ -159,6 +161,6 @@ class ViewController extends Controller
     {
         return view ('thank');
     }
-    
+
 
 }

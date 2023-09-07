@@ -29,17 +29,27 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// HOME
+Route::get('/', [ViewController::class, 'home']);
+
+// Login - Register - Logout
+Route::get('/login', [ViewController::class, 'login'])->name('login');
+Route::post('/login/verif', [LoginController::class, 'validasi'] );
+Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
+Route::post('/regis/verif', [LoginController::class, 'register'] )->name('register.verif');
+Route::get('/logout', [LoginController::class, 'logout']);
+
+
+// VIEW
 Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
 Route::get('/shop', [ViewController::class, 'shop']);
-Route::get('/', [ViewController::class, 'home']);
-Route::get('/login', [ViewController::class, 'login'])->name('login');
-Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::get('/about', [ViewController::class, 'about']);
 Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak
-Route::group(['middleware' => ['auth', 'seller']], function () {
+// Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
     Route::get('/admin', [ViewController::class, 'admin']);
@@ -52,17 +62,11 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/barang/cari', [BarangController::class, 'search']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-});
+// });
 
 
 
 //INI LOGIN-USERS
-
-Route::get('/tambah', [userscontrollers::class, 'create']);
-Route::post('/bikin', [userscontrollers::class, 'store']);
-Route::post('/hapus', [userscontrollers::class, 'destroy']);
-Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
-Route::get('/hapus', [userscontrollers::class, 'destroy']);
 Route::get('/bayar', [ViewController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
 Route::get('/profil', [ViewController::class, 'profil']);
@@ -71,7 +75,7 @@ Route::get('/thanks', [ViewController::class, 'thanks']);
 Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
-Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
+Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
 
@@ -92,7 +96,4 @@ Route::get('/add', [ViewController::class, 'tambahadmin']);
 
 
 
-// Login - Register - Logout
-Route::post('/login/verif', [LoginController::class, 'validasi'] );
-Route::get('/logout', [LoginController::class, 'logout']);
-Route::post('/regis/verif', [LoginController::class, 'register'] )->name('register.verif');
+

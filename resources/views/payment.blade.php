@@ -61,9 +61,11 @@
                             placeholder="COUPON CODE">
                         <div class="btn btn-primary">Apply</div>
                     </div>
+                    @foreach ($test as $data)
+
                     <div class="d-flex flex-column b-bottom">
                         <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
-                            <p>$122</p>
+                            <p>{{ $data->Sub_Total }}</p>
                         </div>
                         <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
                             <p>$22</p>
@@ -72,6 +74,7 @@
                             <p>$132</p>
                         </div>
                     </div>
+                    @endforeach
                     <a href="/thanks" class="btn btn-upper btn-primary outer-left-xs mt-3"
                         style="margin-top: 20px">Bayar</a>
                     <br>
