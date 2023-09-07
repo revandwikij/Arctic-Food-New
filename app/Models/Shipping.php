@@ -9,13 +9,13 @@ class Shipping extends Model
 {
     use HasFactory;
 
-    protected $table = 'biaya_shipping';
-     
+    protected $table = 'shipping';
+
 
     protected $fillable = [
+        'Id_Shipping',
+        'Id_Pesanan',
         'Id_Biaya',
-        'Kota_kg',
-        'Biaya_Shipping',
-         
+        'Total_Shipping',
     ];
 }

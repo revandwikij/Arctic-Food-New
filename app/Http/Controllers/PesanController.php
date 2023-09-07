@@ -135,11 +135,13 @@ class PesanController extends Controller
         // $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('alamat.Id_Alamat', '=', '') ;
         // $beban = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')->join('keranjang', 'keranjang.Id_Pelanggan', '=', 'alamat.Id_Pelanggan')->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->select('detail_keranjang.Sub_Beban')->get();
         // $beban = Biaya_Ship::all();
-        $beban = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
+        $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
         ->join('keranjang', 'keranjang.Id_Pelanggan', '=', 'alamat.Id_Pelanggan')
         ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
         ->select('detail_keranjang.Sub_Beban')
         ->get();
+
+        $beban = Shipping::join('biaya_shipping', 'shipping.Id_Biaya', '=', 'biaya_shipping.Id_Biaya')->join('alamat', 'biaya_shipping.Kota' ,'=', 'alamat.Kota')->join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')->get();
 
 
 
@@ -156,12 +158,14 @@ class PesanController extends Controller
         $totalharga += $coba->Sub_Total;
 
         };
-
         $totalbeban = 0;
-        foreach($beban as $test)
+        foreach($test as $a)
         {
-            $totalbeban += $test->Sub_Beban;
+
+        $totalbeban = $a->Sub_Beban * $a->Kuantitas  ;
+
         };
+
 
         $pesan = new Pesan();
         $pesan->Id_Pesanan = $newUid;
