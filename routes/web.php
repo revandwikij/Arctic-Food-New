@@ -29,14 +29,12 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
-Route::get('/shop', [ViewController::class, 'shop']);
+ 
 Route::get('/', [ViewController::class, 'home']);
 Route::get('/login', [ViewController::class, 'login'])->name('login');
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::get('/about', [ViewController::class, 'about']);
-Route::get('/contact', [ViewController::class, 'contact']);
-Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
+
 
 //penjual kak
 Route::group(['middleware' => ['auth', 'seller']], function () {
@@ -65,6 +63,10 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
     Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
+    Route::get('/shop', [ViewController::class, 'shop']);
+    Route::get('/contact', [ViewController::class, 'contact']);
+    Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 });
 
 

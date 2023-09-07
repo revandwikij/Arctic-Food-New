@@ -19,6 +19,6 @@ class CheckPembeli
             return $next($request);
         }
     
-        return redirect('/')->with('error', 'Gabole gabole wleee');
+        return redirect('/admin')->with('error', 'Gabole gabole wleee');
     }
 }
