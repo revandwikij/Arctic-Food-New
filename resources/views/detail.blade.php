@@ -34,6 +34,11 @@
                                             <td>{{$data->Stok}}</td>
                                         </tr>
                                         <tr>
+                                            <td>Berat</td>
+                                            <td>:</td>
+                                            <td>{{$data->Berat}} Kg</td>
+                                        </tr>
+                                        <tr>
                                             <td>Keterangan</td>
                                             <td>:</td>
                                             <td> {{$data->Keterangan_Barang}}</td>

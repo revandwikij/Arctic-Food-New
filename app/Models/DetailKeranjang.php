@@ -9,12 +9,13 @@ class DetailKeranjang extends Model
 {
     use HasFactory;
     protected $table = 'detail_Keranjang';
-    
+
     protected $fillable = [
         'Id_Detail_Keranjang',
         'Id_Keranjang',
         'Id_Barang',
         'Kuantitas',
+        'Sub_Barang',
         'Sub_Total',
     ];
 }

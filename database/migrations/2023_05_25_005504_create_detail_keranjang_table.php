@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('Id_Detail_Keranjang')->unique();
             $table->string('Id_Keranjang');
             $table->string('Id_Barang');
-            $table->integer('Kuantitas');  //value nya jadi 5
+            $table->integer('Kuantitas');
+            $table->integer('Sub_Beban');
             $table->integer('Sub_Total');
             $table->timestamps();
         });

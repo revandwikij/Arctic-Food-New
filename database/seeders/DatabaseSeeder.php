@@ -62,10 +62,10 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             [
-                'username' => 'yuda',
-                'email' => 'yudaganteng@gmail.com',
+                'username' => 'admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345678'),
-                'level' => 'pelanggan',
+                'level' => 'penjual',
             ]
         ]);
     }

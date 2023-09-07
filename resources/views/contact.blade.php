@@ -38,7 +38,7 @@
         </form>
 
         <h5 class="cat-list-title">Browse Categories</h5>
-        
+
         <ul class="cat-list">
           <li class="cat-list-item">
             <a href="shop.html" title="Men Jackets">Men Jackets</a>
@@ -291,51 +291,51 @@
     </section>
 
     <section id="instagram" class="padding-large">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Follow our instagram</h2>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Follow our instagram</h2>
+            </div>
+            <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
+            </p>
+            <div class="row d-flex flex-wrap justify-content-between">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+            </div>
         </div>
-        <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
-        </p>
-        <div class="row d-flex flex-wrap justify-content-between">
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image1.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image2.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image3.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image4.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-        </div>          
-      </div>
     </section>
 
     <section id="shipping-information">

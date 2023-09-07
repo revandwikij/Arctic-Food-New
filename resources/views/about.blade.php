@@ -20,7 +20,7 @@
       </div>
     </section>
 
-    
+
     <section id="about-us">
       <div class="container ">
         <div class="row d-flex align-items-center">
@@ -93,76 +93,6 @@
     </section>
 
     <hr>
-    <section id="latest-blog" class="padding-large">
-      <div class="container">
-        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">our Journal</h2>
-          <div class="btn-wrap align-right">
-            <a href="blog.html" class="d-flex align-items-center">Read All Articles <i class="icon icon icon-arrow-io"></i>
-            </a>
-          </div>
-        </div>
-        <div class="row d-flex flex-wrap">
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img1.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">22</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">top 10 casual look ideas to dress up your kids</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Fashion</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img2.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">25</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">Latest trends of wearing street wears supremely</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Trending</a>
-              </div>
-            </div>
-          </article>
-          <article class="col-md-4 post-item">
-            <div class="image-holder zoom-effect">
-              <a href="single-post.html">
-                <img src="../assets/images/post-img3.jpg" alt="post" class="post-image">
-              </a>
-            </div>
-            <div class="post-content d-flex">
-              <div class="meta-date">
-                <div class="meta-day text-primary">28</div>
-                <div class="meta-month">Aug-2021</div>
-              </div>
-              <div class="post-header">
-                <h3 class="post-title">
-                  <a href="single-post.html">types of comfortable clothes ideas for women</a>
-                </h3>
-                <a href="blog.html" class="blog-categories">Inspiration</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
@@ -177,51 +107,50 @@
     </section>
 
     <section id="instagram" class="padding-large">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Follow our instagram</h2>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Follow our instagram</h2>
+            </div>
+            <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
+            </p>
+            <div class="row d-flex flex-wrap justify-content-between">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <figure class="zoom-effect">
+                        <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
+                        <i class="icon icon-instagram"></i>
+                    </figure>
+                </div>
+            </div>
         </div>
-        <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
-        </p>
-        <div class="row d-flex flex-wrap justify-content-between">
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image2.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image3.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image4.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <figure class="zoom-effect">
-              <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
-              <i class="icon icon-instagram"></i>
-            </figure>
-          </div>
-        </div>          
-      </div>
     </section>
   @endsection
-    
