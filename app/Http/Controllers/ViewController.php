@@ -162,5 +162,15 @@ class ViewController extends Controller
         return view ('thank');
     }
 
+    public function dataship()
+    {
+        return view ('penjual.dataship');
+    }
+
+    public function tambahship()
+    {
+        return view ('penjual.tambahship');
+    }
+
 
 }
