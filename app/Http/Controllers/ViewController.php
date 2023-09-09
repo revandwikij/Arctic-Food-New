@@ -138,8 +138,9 @@ class ViewController extends Controller
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
                 ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
+        $pesanan = Pesan::all();
         $pelanggan = pelanggan::all();
-        return view('payment',compact('test',));
+        return view('payment',compact('test','pesanan'));
     }
 
     public function pesanan()

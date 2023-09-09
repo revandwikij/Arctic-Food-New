@@ -22,7 +22,8 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="ps-3 d-flex flex-column justify-content">
-                                                        <p class="fw-bold">{{$data->Nama_Barang}}</p> <small class=" d-flex">
+                                                        <p class="fw-bold">{{ $data->Nama_Barang }}</p> <small
+                                                            class=" d-flex">
                                                             <span class=" text-muted">Color:</span> <span
                                                                 class=" fw-bold">Red/White</span> </small> <small
                                                             class=""> <span class=" text-muted">Size:</span> <span
@@ -32,13 +33,14 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <p class="pe-3"><span class="red">{{$data->Sub_Total}}</span></p>
+                                                    <p class="pe-3"><span class="red">{{ $data->Sub_Total }}</span></p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center"> <span
                                                         class="pe-3 text-muted">Quantity</span>
-                                                        <span class="pe-3"> <input class="ps-2" type="number" value="{{$data->Kuantitas}}"></span>
+                                                    <span class="pe-3"> <input class="ps-2" type="number"
+                                                            value="{{ $data->Kuantitas }}"></span>
                                                     <div class="round"> <span class=""> L </span> </div>
                                                 </div>
                                             </td>
@@ -50,37 +52,40 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 payment-summary">
-                <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
-                <div class="card px-md-3 px-2 pt-4">
-                    <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
-                    <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
-                        <p class="">VC115665</p>
-                    </div>
-                    <div class="d-flex justify-content-between b-bottom"> <input type="text" class="ps-2"
-                            placeholder="COUPON CODE">
-                        <div class="btn btn-primary">Apply</div>
-                    </div>
-                    @foreach ($test as $data)
-
-                    <div class="d-flex flex-column b-bottom">
-                        <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
-                            <p>{{ $data->Sub_Total }}</p>
+            <form action="">
+                @csrf
+                <div class="col-lg-4 payment-summary">
+                    <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
+                    <div class="card px-md-3 px-2 pt-4">
+                        <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
+                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
+                            <p class="">VC115665</p>
                         </div>
-                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
-                            <p>$22</p>
+                        <div class="d-flex justify-content-between b-bottom">
+                            <input type="radio" name="Metod_Pembayaran" id="">COD
+                            <input type="radio" name="Metod_Pembayaran" id="">Gopay
                         </div>
-                        <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
-                            <p>$132</p>
-                        </div>
+                        @foreach ($pesanan as $item)
+                            <div class="d-flex flex-column b-bottom">
+                                <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
+                                    <p>{{ $item->Total }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
+                                    <p>{{ $item->Total_Beban }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
+                                    <p>{{ $item->Total + $item->Total_Beban }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                        <a href="/thanks" class="btn btn-upper btn-primary outer-left-xs mt-3"
+                            style="margin-top: 20px">Bayar</a>
+                        <br>
+                        <br>
                     </div>
-                    @endforeach
-                    <a href="/thanks" class="btn btn-upper btn-primary outer-left-xs mt-3"
-                        style="margin-top: 20px">Bayar</a>
-                    <br>
-                    <br>
                 </div>
-            </div>
+            </form>
+
 
 
         </div>

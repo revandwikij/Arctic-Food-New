@@ -18,7 +18,7 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $request->validate([
             'Nama_Barang' => 'required',
             'Stok' => 'required',
@@ -77,7 +77,7 @@ class BarangController extends Controller
 
 
 
-         
+
         $Barang = new Barang;
         $Barang->Id_Barang = $newUid;
         $Barang->Id_Kategori = $request->Id_Kategori;
@@ -142,14 +142,14 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-        $Foto_Barang = $request->file('Foto_Barang');
+        $Foto_Barang = $request->file('Foto_Barang ');
         $Foto_Ekstensi = $Foto_Barang->extension();
         $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
 
         $Foto = Image::make($Foto_Barang);
         $Foto->crop(400,420);
-        $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
-        $Foto['Foto_Barang'] = $Foto_Nama;
+        $Foto_Barang->move(public_path('Foto_Barang '), $Foto_Nama);
+        $Foto->Foto_Barang = $Foto_Nama;
 
 
 
@@ -176,10 +176,10 @@ class BarangController extends Controller
      */
     public function destroy($Id_Barang)
     {
-        // menghapus data pegawai berdasarkan id yang dipilih
+        // menghapus data Barang berdasarkan id yang dipilih
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
-	// alihkan halaman ke halaman pegawai
+	// alihkan halaman ke halaman Barang
 	return redirect('/barang');
     }
 
@@ -188,7 +188,7 @@ class BarangController extends Controller
         // menangkap data pencarian
 		$cari = $request->cari;
 
-        // mengambil data dari table pegawai sesuai pencarian data
+        // mengambil data dari table Barang sesuai pencarian data
         $barang = DB::table('barang')
         ->where('nama_barang','like',"%".$cari."%")
         ->paginate();

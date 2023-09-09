@@ -158,13 +158,14 @@ class PesanController extends Controller
         $totalharga += $coba->Sub_Total;
 
         };
-        $totalbeban = 0;
-        foreach($test as $a)
-        {
+        $totalbeban = 30000;
+        // foreach($test as $a)
+        // {
 
-        $totalbeban = $a->Sub_Beban * $a->Kuantitas  ;
+        // $totalbeban = $a->Sub_Beban * $a->Kuantitas  ;
 
-        };
+        // };
+
 
 
         $pesan = new Pesan();
@@ -184,14 +185,15 @@ class PesanController extends Controller
         $newUid1 = 'S' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
 
-
+        // $ship = Shipping::join('biaya_shipping', 'shipping.Id_Biaya', '=', 'biaya_shipping.Id_Biaya')->join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')->join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('alamat.Kota')->get();
+        $biaya = 'B01';
 
 
         $cek30 = $pesan->Id_Pesanan;
         $ship = new Shipping();
         $ship->Id_Shipping = $newUid1;
         $ship->Id_Pesanan = $cek30;
-        $ship->Id_Biaya = $request->Id_Biaya;
+        $ship->Id_Biaya = $biaya;
         $ship->Total_Shipping = $totalharga;
         $ship->save();
 
@@ -245,12 +247,14 @@ class PesanController extends Controller
     public function pembayaran(Request $request, $Id_Pesanan)
     {
         $order = Pesan::findorFail($Id_Pesanan);
+        $ship = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')->join('pesanan', 'shipping.Id_Pesanan', '=', 'pesanan.Id_Pesanan')->where('pesanan.Id_Pesanan')->get();
 
         $bayar = new Pembayaran();
         $bayar->Id_Pesanan = $order->Id_Pesanan;
+        $bayar->Id_Shipping = $order->Id_Pesanan;
         $bayar->Metode_Pembayaran = $request->Metode_Pembayaran;
-        $bayar->Total_Harga = $order->Total;
-        $bayar->Status_Pembayaran = $order->Id_Pesanan;
+        $bayar->Total_Harga = $order->Total + $order->Total_Beban;
+        $bayar->Status_Pembayaran = $order->Status_Pesanan;
         $bayar->Tgl_Pembayaran = now();
     }
 

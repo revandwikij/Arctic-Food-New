@@ -3,6 +3,7 @@
 @section('title', 'dashboard')
 
 @section('content')
+
 @if(session('errors'))
     <div class="alert alert-danger">
         {{ session('errors') }}
@@ -43,9 +44,13 @@
 
                             <td>{{$data->Id_Barang}} </td>
                             <td>
+                                {{-- @if ($data->Foto_Barang)
+                                    <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
+                                @endif --}}
                                 @if ($data->Foto_Barang)
-                                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
-
+                                    <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
+                                @else
+                                    <img src="{{ asset('Foto_Barang/' . $data->Foto_Barang) }}" alt="{{ $data->Nama_Barang }}" width="100" height="100">
                                 @endif
                             </td>
                             <td>{{$data->Kategori}} </td>
