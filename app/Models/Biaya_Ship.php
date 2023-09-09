@@ -12,7 +12,7 @@ class Biaya_Ship extends Model
 
     protected $fillable = [
         'Id_Biaya', // tambahkan kolom lainnya sesuai kebutuhan
-        'KotaperKg',
-        'Biaya_Shipping',
+        'Kota',
+        'Biaya_Shipping_per_Kg',
     ];
 }

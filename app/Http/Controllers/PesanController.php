@@ -63,7 +63,11 @@ class PesanController extends Controller
                 $kran2 = $pecah2['Id_Keranjang'];
 
                 $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
-
+            
+            if ($Barang->Stok < $request->jumlah_pesan )
+            {
+                return redirect()->back()->with('error', 'Stok barang tidak mencukupi.');
+            }
                 if($cekbarang)
                 {
 
@@ -75,7 +79,7 @@ class PesanController extends Controller
                             'Id_Barang' => $Barang->Id_Barang,
                             'Kuantitas' => $request->jumlah_pesan,
                             'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
-                            'Sub_Barang' => $request->jumlah_pesan * $Barang->Berat
+                            'Sub_Beban' => $request->jumlah_pesan * $Barang->Berat
                         ]);
                         return redirect('/cart');
                      }
@@ -108,6 +112,8 @@ class PesanController extends Controller
             $coba->Id_Barang = $Barang->Id_Barang;
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
+            $coba->Sub_Total= $Barang->Berat * $request->jumlah_pesan;
+
             $coba->save();
 
 
@@ -132,17 +138,15 @@ class PesanController extends Controller
         $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
         ->where('users.id', '=', $user->id)->get();
-        // $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('alamat.Id_Alamat', '=', '') ;
-        // $beban = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')->join('keranjang', 'keranjang.Id_Pelanggan', '=', 'alamat.Id_Pelanggan')->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->select('detail_keranjang.Sub_Beban')->get();
-        // $beban = Biaya_Ship::all();
-        $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
-        ->join('keranjang', 'keranjang.Id_Pelanggan', '=', 'alamat.Id_Pelanggan')
-        ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-        ->select('detail_keranjang.Sub_Beban')
-        ->get();
+        // $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
+        // ->join('pesanan', 'pesanan.Id_Alamat', '=', 'alamat.Id_Pelanggan')
+        // ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+        // ->select('biaya_shipping.Biaya_Shipping_per_Kg')
+        // ->get();
 
-        $beban = Shipping::join('biaya_shipping', 'shipping.Id_Biaya', '=', 'biaya_shipping.Id_Biaya')->join('alamat', 'biaya_shipping.Kota' ,'=', 'alamat.Kota')->join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')->get();
+      
 
+ 
 
 
         $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
@@ -150,21 +154,16 @@ class PesanController extends Controller
         $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
 
-
+        $totalbeban = 0;
         $totalharga = 0;
         foreach($buattotal as $coba)
         {
-
+        $totalbeban += $coba->Sub_Beban;
         $totalharga += $coba->Sub_Total;
 
         };
-        $totalbeban = 30000;
-        // foreach($test as $a)
-        // {
-
-        // $totalbeban = $a->Sub_Beban * $a->Kuantitas  ;
-
-        // };
+        
+        
 
 
 
@@ -185,24 +184,33 @@ class PesanController extends Controller
         $newUid1 = 'S' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
 
-        // $ship = Shipping::join('biaya_shipping', 'shipping.Id_Biaya', '=', 'biaya_shipping.Id_Biaya')->join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')->join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('alamat.Kota')->get();
-        $biaya = 'B01';
+        $kota = Pesan::join('alamat', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        ->select('alamat.Kota')->first();
 
 
+        $biyship = Biaya_Ship::where('Kota', $kota->Kota)->first();
+        
+
+        
+        
         $cek30 = $pesan->Id_Pesanan;
         $ship = new Shipping();
         $ship->Id_Shipping = $newUid1;
         $ship->Id_Pesanan = $cek30;
-        $ship->Id_Biaya = $biaya;
-        $ship->Total_Shipping = $totalharga;
+        $ship->Id_Biaya = $biyship->Id_Biaya;
+        $ship->Total_Shipping = $biyship->Biaya_Shipping_per_Kg * $totalbeban;
         $ship->save();
 
 
 
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-
-
-            return redirect("/payment");
+        // $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+        
+        return redirect('/payment');
 
         }
 
@@ -246,16 +254,32 @@ class PesanController extends Controller
 
     public function pembayaran(Request $request, $Id_Pesanan)
     {
-        $order = Pesan::findorFail($Id_Pesanan);
-        $ship = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')->join('pesanan', 'shipping.Id_Pesanan', '=', 'pesanan.Id_Pesanan')->where('pesanan.Id_Pesanan')->get();
+        
+        if (Auth::id())
+        {
+        
+        $request->validate([
+            'Metod_Pembayaran' => 'requeired',
+        ]);
+
+        $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
+
+        $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+        $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+        $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
         $bayar = new Pembayaran();
-        $bayar->Id_Pesanan = $order->Id_Pesanan;
-        $bayar->Id_Shipping = $order->Id_Pesanan;
-        $bayar->Metode_Pembayaran = $request->Metode_Pembayaran;
-        $bayar->Total_Harga = $order->Total + $order->Total_Beban;
-        $bayar->Status_Pembayaran = $order->Status_Pesanan;
+        $bayar->Id_Pembayaran = $newUid1;
+        $bayar->Id_Shipping = $order->Id_Shipping;
+        $bayar->Metode_Pembayaran = $request->Metod_Pembayaran;
+        $bayar->Total_Harga = $order->Total + $order->Total_Shipping;
+        $bayar->Status_Pembayaran = 'Belum Lunas';
         $bayar->Tgl_Pembayaran = now();
+        $bayar->save();
+
+        return redirect("/thanks");
+
+        }
     }
 
 }

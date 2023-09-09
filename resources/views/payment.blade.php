@@ -14,7 +14,7 @@
                 <p class="pb-2 fw-bold">Alamat Pengiriman</p>
                 <div class="card">
                     <div>
-                        @foreach ($test as $data)
+                        @foreach ($alamat as $data)
                             <div class="table-responsive px-md-4 px-2 pt-3">
                                 <table class="table table-borderless">
                                     <tbody>
@@ -22,7 +22,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="ps-3 d-flex flex-column justify-content">
-                                                        <p class="fw-bold">{{ $data->Nama_Barang }}</p> <small
+                                                        <p class="fw-bold">{{ $data->Label }}</p> <small
                                                             class=" d-flex">
                                                             <span class=" text-muted">Color:</span> <span
                                                                 class=" fw-bold">Red/White</span> </small> <small
@@ -33,7 +33,7 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <p class="pe-3"><span class="red">{{ $data->Sub_Total }}</span></p>
+                                                    <p class="pe-3"><span class="red">LOL</span></p>
                                                 </div>
                                             </td>
                                             <td>
@@ -52,7 +52,9 @@
                     </div>
                 </div>
             </div>
-            <form action="">
+        </div>
+        @foreach ($datapesan as $item)
+            <form action="/bayar/{{$item->Id_Pesanan}}" method="POST">
                 @csrf
                 <div class="col-lg-4 payment-summary">
                     <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
@@ -62,29 +64,31 @@
                             <p class="">VC115665</p>
                         </div>
                         <div class="d-flex justify-content-between b-bottom">
-                            <input type="radio" name="Metod_Pembayaran" id="">COD
-                            <input type="radio" name="Metod_Pembayaran" id="">Gopay
+                          <input type="radio" id="cod" name="Metod_Pembayaran" value="COD">
+                          <label for="html">COD</label>
+                          <input type="radio" id="gopay" name="Metod_Pembayaran" value="GoPay">
+                          <label for="css">GoPay</label>
                         </div>
-                        @foreach ($pesanan as $item)
+                       
                             <div class="d-flex flex-column b-bottom">
                                 <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
-                                    <p>{{ $item->Total }}</p>
+                                    <p>Rp. {{number_format($item->Total) }}</p>
                                 </div>
                                 <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
-                                    <p>{{ $item->Total_Beban }}</p>
+                                    <p>Rp. {{number_format($item->Total_Shipping) }}</p>
                                 </div>
                                 <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
-                                    <p>{{ $item->Total + $item->Total_Beban }}</p>
+                                    <p>Rp. {{number_format($item->Total + $item->Total_Shipping) }}</p>
                                 </div>
                             </div>
-                            @endforeach
-                        <a href="/thanks" class="btn btn-upper btn-primary outer-left-xs mt-3"
-                            style="margin-top: 20px">Bayar</a>
+                            
+                        <button type="submit" class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
                         <br>
                         <br>
                     </div>
                 </div>
             </form>
+            @endforeach
 
 
 

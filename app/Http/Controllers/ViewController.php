@@ -132,15 +132,16 @@ class ViewController extends Controller
 
     public function payment()
     {
-        $user = auth()->user();
-        $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
-                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
-                ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
-                ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
-        $pesanan = Pesan::all();
-        $pelanggan = pelanggan::all();
-        return view('payment',compact('test','pesanan'));
+      $user=auth()->user();
+      $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
+
+      $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+      $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get(); 
+
+      return view('payment', compact('datapesan', 'alamat'));
     }
 
     public function pesanan()
@@ -174,6 +175,8 @@ class ViewController extends Controller
     {
         return view ('penjual.tambahship');
     }
+
+    
 
 
 }

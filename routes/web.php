@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
     Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
     Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
+    Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop', [ViewController::class, 'shop']);
