@@ -112,7 +112,7 @@ class PesanController extends Controller
             $coba->Id_Barang = $Barang->Id_Barang;
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
-            $coba->Sub_Total= $Barang->Berat * $request->jumlah_pesan;
+            $coba->Sub_Beban= $Barang->Berat * $request->jumlah_pesan;
 
             $coba->save();
 
@@ -257,9 +257,14 @@ class PesanController extends Controller
         
         if (Auth::id())
         {
+
+            if(Pesan::where('Id_Pesanan', $Id_Pesanan)->exists())
+            {
+                return redirect('/payment');
+            }
         
         $request->validate([
-            'Metod_Pembayaran' => 'requeired',
+            'Metod_Pembayaran' => 'required',
         ]);
 
         $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();

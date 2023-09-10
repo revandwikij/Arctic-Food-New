@@ -33,6 +33,8 @@
 </thead>
 <tbody>
 
+@foreach ($pesanan as $item)
+    
 
 <tr class="rounded bg-white">
   <th scope="row">
@@ -40,11 +42,11 @@
  
        </div>
   </th>
-  <td class="order-color">121 091</td>
-  <td>Mar 21</td>
+  <td class="order-color">{{$item->Id_Pesanan}}</td>
+  <td>{{$item->Tgl_Pesanan}}</td>
   <td class="d-flex align-items-center">
-      <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25">
-      <span class="ml-2">Harrient Santigo</span>
+       
+      <span class="ml-2">{{$item->username}}</span>
   </td>
   <td>
       <div class="dropdown">
@@ -58,8 +60,8 @@ Unfullfilled
 </ul>
 </div>
   </td>
-  <td>$604.50</td>
-  <td>$182.40</td>
+  <td>{{$item->Total_Harga}}</td>
+  <td>{{$item->Kota}}</td>
   <td>
        <div class="dropdown">
 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -75,6 +77,8 @@ Authorized
   <td>Today</td>
 
 </tr>
+
+@endforeach
 
 
 </tbody>

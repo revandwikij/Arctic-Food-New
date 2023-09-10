@@ -62,7 +62,7 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->get();
-        $alamat = Alamat::all();
+        $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         return view('users.shopping_cart',compact('test', 'cekcart','alamat'));
     }
     public function profil()
@@ -146,7 +146,8 @@ class ViewController extends Controller
 
     public function pesanan()
     {
-        return view ('Penjual.pesanan');
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->get();
+        return view ('Penjual.pesanan', compact('pesanan'));
     }
 
     public function about()

@@ -24,24 +24,24 @@
                                                     <div class="ps-3 d-flex flex-column justify-content">
                                                         <p class="fw-bold">{{ $data->Label }}</p> <small
                                                             class=" d-flex">
-                                                            <span class=" text-muted">Color:</span> <span
-                                                                class=" fw-bold">Red/White</span> </small> <small
-                                                            class=""> <span class=" text-muted">Size:</span> <span
-                                                                class=" fw-bold">L</span> </small>
+                                                            <span class=" text-muted">Nama Penerima :</span> <span
+                                                                class=" fw-bold"> {{ $data->Nama_Penerima }}</span> </small> <small
+                                                            class=""> <span class=" text-muted">No HP:</span> <span
+                                                                class=" fw-bold">{{ $data->No_Hp }}</span> </small>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <p class="pe-3"><span class="red">LOL</span></p>
+                                                    <p class="pe-3"><span class="red">{{ $data->Kota }}</span></p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center"> <span
-                                                        class="pe-3 text-muted">Quantity</span>
-                                                    <span class="pe-3"> <input class="ps-2" type="number"
-                                                            value="{{ $data->Kuantitas }}"></span>
-                                                    <div class="round"> <span class=""> L </span> </div>
+                                                        class="pe-3 text-muted">Alamat Lengkap</span>
+                                                        <span
+                                                        class=" fw-bold">{{ $data->Alamat_Lengkap }}</span>
+                                                    
                                                 </div>
                                             </td>
                                         </tr>
