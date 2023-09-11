@@ -258,10 +258,7 @@ class PesanController extends Controller
         if (Auth::id())
         {
 
-            if(Pesan::where('Id_Pesanan', $Id_Pesanan)->exists())
-            {
-                return redirect('/payment');
-            }
+            
         
         $request->validate([
             'Metod_Pembayaran' => 'required',

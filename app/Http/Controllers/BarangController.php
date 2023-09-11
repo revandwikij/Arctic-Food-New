@@ -142,14 +142,19 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-        $Foto_Barang = $request->file('Foto_Barang ');
-        $Foto_Ekstensi = $Foto_Barang->extension();
-        $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
+        if ($request->hasFile('Foto_Barang')) {
+            $gambar = $request->file('Foto_Barang');
 
-        $Foto = Image::make($Foto_Barang);
-        $Foto->crop(400,420);
-        $Foto_Barang->move(public_path('Foto_Barang '), $Foto_Nama);
-        $Foto->Foto_Barang = $Foto_Nama;
+            // Buat objek gambar dari file yang diunggah
+            $image = Image::make($gambar);
+
+            // Auto crop gambar sesuai dengan ukuran yang diinginkan (misalnya 400x400)
+            $image->fit(389, 473);
+
+            // Simpan gambar yang sudah di-crop
+            $path = public_path('uploads');
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
+            $image->save($path . '/' . $filename);
 
 
 
@@ -157,7 +162,7 @@ class BarangController extends Controller
 		'Id_Barang' => $request->Id_Barang,
         'Id_Kategori' => $request->Id_Kategori,
         'Nama_Barang' => $request->Nama_Barang,
-        'Foto_Barang' => $Foto_Nama,
+        'Foto_Barang' => $filename,
         'Stok' => $request->Stok,
         'Berat' => $request->Berat,
         'Brand' => $request->Brand,
@@ -166,7 +171,7 @@ class BarangController extends Controller
 	]);
 
     return redirect('/barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
-}
+}}
 
     /**
      * Remove the specified resource from storage.
