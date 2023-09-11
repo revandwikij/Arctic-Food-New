@@ -71,7 +71,10 @@ Authorized
   </td>
   <td>
     @if ($item->Status_Pesanan == 'Menunggu Konfirmasi')
-    <form action="/konfirm/{{ $item->Id_Pesanan }}" method="post">
+    <form action="konfirm/{{ $item->Id_Pesanan }}" method="post">
+      {{-- @csrf --}}
+      {{ csrf_field() }}
+      {{-- {{ csrf_token() }} --}}
     <button type="submit" class="btn btn-primary mb-2">Konfirmasi</button>
     </form> 
     @endif

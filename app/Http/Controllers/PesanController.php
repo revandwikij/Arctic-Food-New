@@ -292,10 +292,11 @@ class PesanController extends Controller
         Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
             'Id_Pelanggan' => $Pesan->Id_Pelanggan, //masih dummy harusnya diisi pake id keranjang user
             // 'Id_Detail_Keranjang' => $detkran,
-            'Id_Keranjang' => $Pesan->Id_Barang,
-            'Id_Alamat' => $Pesan->jumlah_pesan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
             'Total' => $Pesan->Total,
-            'Total_Beban' => $Pesan->Total_Beban
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Diproses'
         ]);
         
         return redirect ('/order');

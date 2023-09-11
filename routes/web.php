@@ -71,7 +71,8 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
     Route::get('/barang/cari', [BarangController::class, 'search']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-    Route::post('konfirmasi/{$Id_Pesanan}', [PesanController::class, 'konfirm']);
+    Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
+
 // });
 
 
