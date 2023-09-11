@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">Pesanan</h1>
@@ -28,7 +29,7 @@
   <th scope="col">Total Bayar</th>
   <th scope="col">Kota Pengiriman</th>
   <th scope="col">Status Pembayaran</th>
-  <th scope="col">Kirim Email</th>
+  <th scope="col">Aksi</th>
 </tr>
 </thead>
 <tbody>
@@ -49,15 +50,9 @@
       <span class="ml-2">{{$item->username}}</span>
   </td>
   <td>
-      <div class="dropdown">
-<button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-Unfullfilled
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<li><a class="dropdown-item" href="#">Fullfilled</a></li>
-<li><a class="dropdown-item" href="#">Unfullfilled</a></li>
-<li><a class="dropdown-item" href="#">Hold</a></li>
-</ul>
+    
+      {{ $item->Status_Pesanan }}
+  
 </div>
   </td>
   <td>{{$item->Total_Harga}}</td>
@@ -74,8 +69,16 @@ Authorized
 </ul>
 </div>
   </td>
-  <td>Today</td>
-
+  <td>
+    @if ($item->Status_Pesanan == 'Menunggu Konfirmasi')
+    <form action="konfirm/{{ $item->Id_Pesanan }}" method="post">
+      {{-- @csrf --}}
+      {{ csrf_field() }}
+      {{-- {{ csrf_token() }} --}}
+    <button type="submit" class="btn btn-primary mb-2">Konfirmasi</button>
+    </form> 
+    @endif
+  </td>
 </tr>
 
 @endforeach
@@ -86,6 +89,8 @@ Authorized
     
 
 </div>
+
+
 
 
 @endsection
