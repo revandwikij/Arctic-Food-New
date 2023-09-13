@@ -45,7 +45,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Username</label>
-								  	<input type="text" class="form-control" value="{{ Auth::user()->username }}" readonly>
+								  	<input type="text" class="form-control" value="{{ $p->username }}" readonly>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -57,7 +57,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Email</label>
-								  	<input type="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+								  	<input type="email" class="form-control" value="{{ $p->email }}" readonly>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -83,10 +83,7 @@
 						<div>
 							<a href="/"><button class="btn btn-primary">KEMBALI</button></a>
 							{{-- <button class="btn btn-light">Cancel</button> --}}
-						</div>
-						<div>
-							<a href="/logout"><button class="btn btn-primary">LOGOUT</button></a>
-							{{-- <button class="btn btn-light">Cancel</button> --}}
+                            <a href="/logout"><button class="btn btn-primary">LOGOUT</button></a>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
@@ -152,6 +149,15 @@
                     <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                         <h3 class="mb-4">address Settings</h3>
                         <div class="row">
+
+                            <div class="col-md-9 mb-5">
+                                <h4 >Alamat yg sudah ada</h4>
+                                <select name="" id="">
+                                    @foreach ($alamat as $item)
+                                    <option value="{{ $item->Id_Alamat }}">{{ $item->Label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-md-6">
                                 <form action="/alamat" method="GET">
                                 @csrf
@@ -161,11 +167,11 @@
                                 </div>
 								<div class="form-group">
                                     <label>Nama Penerima</label>
-                                    <input type="text" class="form-control" name="Nama_Penerima"></input>
+                                    <input type="text" class="form-control" name="Nama_Penerima">
                                 </div>
 								<div class="form-group">
                                     <label>No HP</label>
-                                    <input type="text" class="form-control" name="No_Hp"></input>
+                                    <input type="text" class="form-control" name="No_Hp">
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat Lengkap</label>

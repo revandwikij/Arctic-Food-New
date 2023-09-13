@@ -35,9 +35,10 @@ class Notif extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                ->greeting('Hello,')
+                ->line('Your deposit of '. $this->amount. ' was successful.')
+                ->action('View dashboard', url('/order'))
+                ->line('Thank you for using our application!');
     }
 
     /**

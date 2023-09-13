@@ -41,7 +41,7 @@
                                                         class="pe-3 text-muted">Alamat Lengkap</span>
                                                         <span
                                                         class=" fw-bold">{{ $data->Alamat_Lengkap }}</span>
-                                                    
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -69,7 +69,7 @@
                           <input type="radio" id="gopay" name="Metod_Pembayaran" value="GoPay">
                           <label for="css">GoPay</label>
                         </div>
-                       
+
                             <div class="d-flex flex-column b-bottom">
                                 <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
                                     <p>Rp. {{number_format($item->Total) }}</p>
@@ -81,7 +81,7 @@
                                     <p>Rp. {{number_format($item->Total + $item->Total_Shipping) }}</p>
                                 </div>
                             </div>
-                            
+
                         <button type="submit" class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
                         <br>
                         <br>
@@ -238,4 +238,5 @@
       </div>
     </div>
   </section> --}}
+  <br><br><br>
 @endsection

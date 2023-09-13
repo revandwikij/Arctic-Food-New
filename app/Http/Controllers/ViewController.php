@@ -68,12 +68,12 @@ class ViewController extends Controller
     public function profil()
     {
         $user=auth()->user();
-        $pelanggan = pelanggan::where('Id_Pelanggan', $user->id)->get();
+        $pelanggan = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         $barang = Barang::all();
         $kategoris = kategori::all();
-        // $alamat = Alamat::join('biaya_shipping', 'alamat.Kota', '=', 'biaya_shipping.Kota')->get([]);
+        $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         $biaya_ship = Biaya_Ship::all();
-        return view('users.profile', compact('kategoris','barang','pelanggan','biaya_ship'));
+        return view('users.profile', compact('kategoris','barang','pelanggan','biaya_ship','alamat'));
     }
 
     public function tambahadmin()
@@ -139,7 +139,7 @@ class ViewController extends Controller
        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
       $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get(); 
+     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
       return view('payment', compact('datapesan', 'alamat'));
     }
@@ -177,7 +177,7 @@ class ViewController extends Controller
         return view ('penjual.tambahship');
     }
 
-    
+
 
 
 }

@@ -74,18 +74,18 @@ class userscontrollers extends Controller
     public function update(Request $request, users $users)
     {
         $request->validate([
-            'name' => 'required',
+            'username' => 'required',
             'email' => 'required',
-            'level' => 'required',
+            'jenkel' => 'required',
+            'no_Telp' => 'required',
         ]);
 
         DB::table('users')->where('id', $request->id)->update([
 
-        $users->name = $request->name,
+        $users->username = $request->username,
         $users->email = $request->email,
-        // if ($request->password)
-        $users->password = Hash::make($request->password),
-        $users->level = $request->level,
+        $users->jenkel = $request->jenkel,
+        $users->no_Telp = $request->no_Telp,
         $users->save(),
 
         ]);

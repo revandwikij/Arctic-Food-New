@@ -51,7 +51,7 @@ Route::get('/contact', [ViewController::class, 'contact']);
 Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 //penjual kak
-// Route::group(['middleware' => ['auth', 'seller']], function () {
+Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/dataship', [ViewController::class, 'dataship']);
     Route::post('/tambahship/action', [ShippingController::class, 'store']);
     Route::get('/tambahship', [ViewController::class, 'tambahship']);
@@ -73,7 +73,7 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
 
-// });
+});
 
 
 

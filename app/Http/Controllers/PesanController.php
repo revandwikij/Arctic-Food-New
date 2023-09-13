@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\EventPembayaran;
 use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\Biaya_Ship;
@@ -14,6 +15,7 @@ use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\Shipping;
 use App\Models\users;
+use App\Notifications\Notif;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +65,7 @@ class PesanController extends Controller
                 $kran2 = $pecah2['Id_Keranjang'];
 
                 $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
-            
+
             if ($Barang->Stok < $request->jumlah_pesan )
             {
                 return redirect()->back()->with('error', 'Stok barang tidak mencukupi.');
@@ -144,9 +146,9 @@ class PesanController extends Controller
         // ->select('biaya_shipping.Biaya_Shipping_per_Kg')
         // ->get();
 
-      
 
- 
+
+
 
 
         $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
@@ -162,8 +164,8 @@ class PesanController extends Controller
         $totalharga += $coba->Sub_Total;
 
         };
-        
-        
+
+
 
 
 
@@ -190,10 +192,10 @@ class PesanController extends Controller
 
 
         $biyship = Biaya_Ship::where('Kota', $kota->Kota)->first();
-        
 
-        
-        
+
+
+
         $cek30 = $pesan->Id_Pesanan;
         $ship = new Shipping();
         $ship->Id_Shipping = $newUid1;
@@ -209,7 +211,7 @@ class PesanController extends Controller
 
         // $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
-        
+
         return redirect('/payment');
 
         }
@@ -254,12 +256,12 @@ class PesanController extends Controller
 
     public function pembayaran(Request $request, $Id_Pesanan)
     {
-        
+
         if (Auth::id())
         {
 
-            
-        
+
+
         $request->validate([
             'Metod_Pembayaran' => 'required',
         ]);
@@ -279,6 +281,8 @@ class PesanController extends Controller
         $bayar->Tgl_Pembayaran = now();
         $bayar->save();
 
+        Notification::send('', new Notif(''));
+
         return redirect("/thanks");
 
         }
@@ -286,7 +290,7 @@ class PesanController extends Controller
 
     public function konfirm($Id_Pesanan)
     {
-        
+
         $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
 
         Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
@@ -298,7 +302,7 @@ class PesanController extends Controller
             'Total_Beban' => $Pesan->Total_Beban,
             'Status_Pesanan' => 'Diproses'
         ]);
-        
+
         return redirect ('/order');
     }
 
