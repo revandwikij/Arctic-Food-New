@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\pelanggan;
+use App\Models\User;
 use App\Models\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -71,26 +73,37 @@ class userscontrollers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, users $users)
+    public function updatepel(Request $request)
     {
-        $request->validate([
-            'username' => 'required',
-            'email' => 'required',
-            'jenkel' => 'required',
-            'no_Telp' => 'required',
+        // dd($request);   
+        // $request->validate([
+        //     'username' => 'required',
+        //     'email' => 'required',
+        //     'jenkel' => 'required',
+        //     'no_Telp' => 'required',
+        //     'Id_Pelanggan' => 'required',
+        // ]);
+        // dd();
+        $a = pelanggan::where('Id_Pelanggan', $request -> Id_Pelanggan) -> first();
+        $a->update([
+
+        'username' => $request->username,
+        'email' => $request->email,
+        'jenkel' => $request->jenkel,
+        'no_Telp' => $request->no_Telp,
+
+        ]);
+        $a = User::findorfail($request -> user);
+        $a->update([
+
+        'username' => $request->username,
+        'email' => $request->email,
+        // 'jenkel' => $request->jenkel,
+        // 'no_Telp' => $request->no_Telp,
+
         ]);
 
-        DB::table('users')->where('id', $request->id)->update([
-
-        $users->username = $request->username,
-        $users->email = $request->email,
-        $users->jenkel = $request->jenkel,
-        $users->no_Telp = $request->no_Telp,
-        $users->save(),
-
-        ]);
-
-        return redirect('users')->with('success', 'Ubah Data Berhasil');
+        return redirect('/profile')->with('success', 'Ubah Data Berhasil');
     }
 
     /**
@@ -101,4 +114,26 @@ class userscontrollers extends Controller
         $users->delete();
         return redirect('users')->with('success', 'Hapus Data Berhasil');
     }
+
+//     public function updateaccount(Request $request)
+//     {
+//         $request->validate([
+//         'username' => 'required|string|max:255',
+//         'jenkel' => 'required|string',
+//         'email' => 'required|string|email|max:255',
+//         'no_Telp' => 'required|string|max:15',
+
+//         ]);
+
+//         $Id_Pelanggan = Auth::Id_Pelanggan$Id_Pelanggan();
+
+//         $Id_Pelanggan->username = $request->input('username');
+//         $Id_Pelanggan->jenkel = $request->input('jenkel');
+//         $Id_Pelanggan->email = $request->input('email');
+//         $Id_Pelanggan->no_Telp = $request->input('no_Telp');
+//         $Id_Pelanggan->save(),
+
+//         return redirect('/profile')->with('success', 'Informasi akun berhasil diperbarui.');
+//     }
 }
+

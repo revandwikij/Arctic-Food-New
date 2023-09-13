@@ -69,10 +69,34 @@ class LoginController extends Controller
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,
             'jenkel' => $request->jenkel,
-            'no_telp' => $request->no_telp,
+            'no_Telp' => $request->no_Telp,
         ]);
 
 
         return redirect('/login');
     }
+
+    public function updatepassword(Request $request)
+    {
+
+    $request->validate([
+        'old_password' => 'required',
+        'new_password' => 'required',
+        'confirm_password' => 'required|same:new_password',
+    ]);
+
+    $user = User::find(Auth::user()->id);
+
+    // Memeriksa apakah password lama sesuai
+    if (Hash::check($request->old_password, $user->password)) {
+        // Password lama cocok, lanjutkan dengan pembaruan
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect('/profile')->with('success', 'Password berhasil diperbarui.');
+    } else {
+        // Password lama tidak cocok
+        return redirect('/profile')->with('error', 'Password lama tidak cocok. Silakan coba lagi.');
+    }
+}
 }

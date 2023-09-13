@@ -17,7 +17,7 @@ class pelanggan extends Model
         'email',
         'password',
         'jenkel',
-        'no_telp',
+        'no_Telp',
     ];
 
     public function user()

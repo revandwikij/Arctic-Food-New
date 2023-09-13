@@ -12,7 +12,7 @@
 
         <input type="text" placeholder="Email" name="email" required>
 
-        <input type="text" placeholder="No. Telepon" name="no_telp" required>
+        <input type="text" placeholder="No. Telepon" name="no_Telp" required>
 
         <select placeholder="Jenkel" name="jenkel" required>
             <option value="L">L</option>

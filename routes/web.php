@@ -41,6 +41,8 @@ Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::post('/regis/verif', [LoginController::class, 'register'] )->name('register.verif');
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
+
 
 
 // VIEW
@@ -99,6 +101,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
 
 
 //INI LOGIN-USERS
+Route::post('/updatepel', [userscontrollers::class, 'updatepel']);
 Route::get('/bayar', [ViewController::class, 'bayar']);
 Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
 Route::get('/profil', [ViewController::class, 'profil']);

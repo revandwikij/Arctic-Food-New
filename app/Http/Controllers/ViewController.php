@@ -177,9 +177,6 @@ class ViewController extends Controller
         return view ('penjual.tambahship');
     }
 
-<<<<<<< HEAD
-
-=======
     public function perludikirim()
     {
         $user=auth()->user();
@@ -197,7 +194,6 @@ class ViewController extends Controller
     }
 
     
->>>>>>> 52856ee3294c1e74e5a6882dee9b7d22d34f003e
 
 
 }
