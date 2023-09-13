@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/editship/{Id_Biaya}', [ShippingController::class, 'edit']);
     Route::post('/edit', [ShippingController::class, 'update']);
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
+    Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
