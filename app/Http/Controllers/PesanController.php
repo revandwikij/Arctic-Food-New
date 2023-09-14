@@ -276,10 +276,11 @@ class PesanController extends Controller
     public function callback(Request $request)
     {
 
-        if (Auth::id())
-        {
-
+        // if (Auth::id())
+        // {
             
+            
+            // dd($request);
 
             $serverKey = config('midtrans.server_key');
             $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
@@ -302,7 +303,7 @@ class PesanController extends Controller
                     $bayar->save();
                 }
             }
-        }
+        // }
     }
 
 
