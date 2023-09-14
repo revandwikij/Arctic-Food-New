@@ -133,16 +133,45 @@ class ViewController extends Controller
     public function payment()
     {
       $user=auth()->user();
-      $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
+      $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->first();
+
+
 
       $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
+       $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
+       
       $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
      ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-      return view('payment', compact('datapesan', 'alamat'));
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $pesan->Id_Pesanan,
+                'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
+            ),
+            'customer_details' => array(
+                'first_name' => $pesan->username,
+                'email' => $pesan->email,
+                'phone' => $pesan->no_Telp,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+      return view('payment', compact('datapesan', 'alamat', 'snapToken'));
     }
+
+   
 
     public function pesanan()
     {

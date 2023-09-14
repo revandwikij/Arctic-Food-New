@@ -15,7 +15,7 @@ use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\Shipping;
 use App\Models\users;
-use App\Notifications\Notif;
+// use App\Notifications\Notif;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -140,15 +140,7 @@ class PesanController extends Controller
         $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
         ->where('users.id', '=', $user->id)->get();
-        // $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
-        // ->join('pesanan', 'pesanan.Id_Alamat', '=', 'alamat.Id_Pelanggan')
-        // ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-        // ->select('biaya_shipping.Biaya_Shipping_per_Kg')
-        // ->get();
-
-
-
-
+         
 
 
         $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
@@ -205,12 +197,7 @@ class PesanController extends Controller
         $ship->save();
 
 
-
-        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
-
-        // $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+ 
 
         return redirect('/payment');
 
@@ -262,9 +249,7 @@ class PesanController extends Controller
 
 
 
-        $request->validate([
-            'Metod_Pembayaran' => 'required',
-        ]);
+       
 
         $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
 
@@ -281,12 +266,45 @@ class PesanController extends Controller
         $bayar->Tgl_Pembayaran = now();
         $bayar->save();
 
-        Notification::send('', new Notif(''));
+    
 
         return redirect("/thanks");
 
         }
     }
+
+    public function callback(Request $request)
+    {
+
+        if (Auth::id())
+        {
+
+            
+
+            $serverKey = config('midtrans.server_key');
+            $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+            if($hashed == $request->signature_key)
+            {
+                if($request->transaction_status == 'capture')
+                {
+                    $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
+
+                    $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                    $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                    $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+
+                    $bayar = new Pembayaran();
+                    $bayar->Id_Pembayaran = $newUid1;
+                    $bayar->Id_Shipping = $order->Id_Shipping;
+                    $bayar->Total_Harga = $request->gross_amount;
+                    $bayar->Status_Pembayaran = 'Lunas';
+                    $bayar->Tgl_Pembayaran = $request->transaction_time;
+                    $bayar->save();
+                }
+            }
+        }
+    }
+
 
     public function konfirm($Id_Pesanan)
     {
@@ -305,5 +323,7 @@ class PesanController extends Controller
 
         return redirect ('/order');
     }
+
+    
 
 }

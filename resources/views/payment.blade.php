@@ -54,7 +54,7 @@
             </div>
         </div>
         @foreach ($datapesan as $item)
-            <form action="/bayar/{{$item->Id_Pesanan}}" method="POST">
+            {{-- <form action="/bayar/{{$item->Id_Pesanan}}" method="POST"> --}}
                 @csrf
                 <div class="col-lg-4 payment-summary">
                     <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
@@ -63,12 +63,12 @@
                         <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
                             <p class="">VC115665</p>
                         </div>
-                        <div class="d-flex justify-content-between b-bottom">
+                        {{-- <div class="d-flex justify-content-between b-bottom">
                           <input type="radio" id="cod" name="Metod_Pembayaran" value="COD">
                           <label for="html">COD</label>
                           <input type="radio" id="gopay" name="Metod_Pembayaran" value="GoPay">
                           <label for="css">GoPay</label>
-                        </div>
+                        </div> --}}
 
                             <div class="d-flex flex-column b-bottom">
                                 <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
@@ -82,18 +82,20 @@
                                 </div>
                             </div>
 
-                        <button type="submit" class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
+                        <button id="pay-button" class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
                         <br>
                         <br>
                     </div>
                 </div>
-            </form>
+            
             @endforeach
 
 
 
         </div>
     </div>
+
+    
 
 
     {{-- <section style="background-color: #eee;">
@@ -239,4 +241,38 @@
     </div>
   </section> --}}
   <br><br><br>
+
+    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="{{config('midtrans.client_key')}}"></script>
+  <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+
+  <script type="text/javascript">
+    // For example trigger on button clicked, or any time you need
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function () {
+      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+      window.snap.pay('{{$snapToken}}', {
+        onSuccess: function(result){
+          /* You may add your own implementation here */
+          // alert("payment success!"); 
+          window.location.href = '/thanks'
+          console.log(result);
+        },
+        onPending: function(result){
+          /* You may add your own implementation here */
+          alert("wating your payment!"); console.log(result);
+        },
+        onError: function(result){
+          /* You may add your own implementation here */
+          alert("payment failed!"); console.log(result);
+        },
+        onClose: function(){
+          /* You may add your own implementation here */
+          alert('you closed the popup without finishing the payment');
+        }
+      })
+    });
+  </script>
 @endsection
