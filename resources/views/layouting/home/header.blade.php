@@ -45,7 +45,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-md-4 header-contact">
-                        <p>Let's talk! <strong><a href="https://wa.me/6 081546904824?text=Hai%20saya%20ingin%20bertanya%20dengan%20Arctic%20Food">+62 815 4690 4824</a></strong>
+                        <p>Let's talk! <strong><a href="https://wa.link/yr4naa">+62 815 4690 4824</a></strong>
                         </p>
                     </div>
                     <div class="col-md-4 shipping-purchase text-center">
