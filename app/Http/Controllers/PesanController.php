@@ -260,8 +260,6 @@ class PesanController extends Controller
         if (Auth::id())
         {
 
-
-
         $request->validate([
             'Metod_Pembayaran' => 'required',
         ]);
@@ -281,7 +279,7 @@ class PesanController extends Controller
         $bayar->Tgl_Pembayaran = now();
         $bayar->save();
 
-        Notification::send('', new Notif(''));
+        // Notification::send('', new Notif(''));
 
         return redirect("/thanks");
 

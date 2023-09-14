@@ -29,12 +29,12 @@
                             @foreach ($cekcart as $cart)
                                 <form action="/beli/{{ $cart->Id_Keranjang }}" method="POST">
                                     @csrf
-                                    @foreach ($alamat as $a)
-                                        <span style="font">Alamat</span>
-                                        <select name="Id_Alamat" id="">
+                                    <span style="font">Alamat</span>
+                                    <select name="Id_Alamat" id="">
+                                            @foreach ($alamat as $a)
                                             <option value="{{ $a->Id_Alamat }}">{{ $a->Label }}</option>
+                                            @endforeach
                                         </select>
-                                    @endforeach
                             @endforeach
 
 

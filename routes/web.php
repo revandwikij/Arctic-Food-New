@@ -41,6 +41,8 @@ Route::post('/login/verif', [LoginController::class, 'validasi'] );
 Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::post('/regis/verif', [LoginController::class, 'register'] )->name('register.verif');
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/edit', [LoginController::class, 'updatePassword'] );
+Route::post('/change-password', [LoginController::class, 'updatePassword'] );
 
 
 // VIEW

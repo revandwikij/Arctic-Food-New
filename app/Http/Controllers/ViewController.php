@@ -177,27 +177,23 @@ class ViewController extends Controller
         return view ('penjual.tambahship');
     }
 
-<<<<<<< HEAD
-
-=======
     public function perludikirim()
     {
         $user=auth()->user();
         $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
-  
+
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
         ->where('pesanan')
         ->get();
-  
+
         $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get(); 
-  
+       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
         return view ('penjual.perludikirim', compact('datapesan', 'alamat'));
     }
 
-    
->>>>>>> 52856ee3294c1e74e5a6882dee9b7d22d34f003e
+
 
 
 }

@@ -81,40 +81,45 @@
 						</div>
                         @endforeach
 						<div>
-							<a href="/"><button class="btn btn-primary">KEMBALI</button></a>
+							<a href="/"><button class="btn btn-primary">Back</button></a>
 							{{-- <button class="btn btn-light">Cancel</button> --}}
-                            <a href="/logout"><button class="btn btn-primary">LOGOUT</button></a>
+                            <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+                            {{-- <a href="/edit"><button class="btn btn-primary flex-end">Edit</button></a> --}}
 						</div>
 					</div>
-					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-						<h3 class="mb-4">Password Settings</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Old password</label>
-								  	<input type="password" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>New password</label>
-								  	<input type="password" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Confirm new password</label>
-								  	<input type="password" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-light">Cancel</button>
-						</div>
-					</div>
+                    {{-- <form action="/change-password" method="post">
+                        @csrf --}}
+                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                            <h3 class="mb-4">Password Settings</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label>Old password</label>
+                                          <input type="password" name="old_password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label>New password</label>
+                                          <input type="password" name="new_password" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label>Confirm new password</label>
+                                          <input type="password" name="new_password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary">Update</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </div>
+                        </div>
+                    {{-- </form> --}}
+
 					<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
 						<h3 class="mb-4">Security Settings</h3>
 						<div class="row">
