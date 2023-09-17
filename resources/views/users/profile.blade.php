@@ -8,8 +8,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     {{-- @foreach ($pelanggan as $p) --}}
-    <section class="py-5 my-5">
+    <section class="py-5">
 		<div class="container">
+			<div>
+				<a href="/"><button class="btn btn-primary" style="margin-bottom: 20px">KEMBALI</button></a>
+			</div>
 			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
@@ -31,39 +34,49 @@
 							<i class="fa fa-key text-center mr-1"></i>
 							Password
 						</a>
-						<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
-							<i class="fa fa-user text-center mr-1"></i>
-							Security
+						<a class="nav-link" href="/logout">
+							{{-- <i>
+								<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+									<path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160
+									96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/></svg>
+							</i> --}}
+							<i class="fa fa-sign-out text-center mr-1"></i>
+							Logout
 						</a>
 					</div>
 				</div>
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<h3 class="mb-4">AKUN SAYA</h3>
-                        @foreach ($pelanggan as $p)
+						<form action="/updatepel" method="POST">
+							@csrf
+							<h3 class="mb-4">AKUN SAYA</h3>
+							@foreach ($pelanggan as $p)
+							<input type="text" value="{{$p ->Id_Pelanggan}}" name="Id_Pelanggan" hidden>
+							<input type="text" value="{{Auth::user() -> id}}" name="user" hidden>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Username</label>
-								  	<input type="text" class="form-control" value="{{ $p->username }}" readonly>
+								  	<input type="text" name="username" class="form-control" value="{{ $p->username }}" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Jenis Kelamin</label>
-								  	<input type="text" class="form-control" value="{{ $p->jenkel }}" readonly>
+								  	<input type="text" name="jenkel" class="form-control" value="{{ $p->jenkel }}" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Email</label>
-								  	<input type="email" class="form-control" value="{{ $p->email }}" readonly>
+								  	<input type="email" name="email" class="form-control" value="{{ $p->email }}" >
 								</div>
 							</div>
+
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>No. Telepon</label>
-								  	<input type="text" class="form-control" value="{{ $p->no_Telp }}" readonly>
+								  	<input type="text" name="no_Telp" class="form-control" value="{{ $p->no_Telp }}" >
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -72,84 +85,53 @@
 							<div class="col-md-6">
 
 							</div>
-							<div class="col-md-12">
+							{{-- <div class="col-md-12">
 								<div class="form-group">
 								  	<label>Bio</label>
 									<textarea class="form-control" rows="4">Gaboleh vnbcjueqiev </textarea>
 								</div>
-							</div>
+							</div> --}}
 						</div>
                         @endforeach
-						<div>
-							<a href="/"><button class="btn btn-primary">Back</button></a>
-							{{-- <button class="btn btn-light">Cancel</button> --}}
-                            <a href="/logout"><button class="btn btn-primary">Logout</button></a>
-                            {{-- <a href="/edit"><button class="btn btn-primary flex-end">Edit</button></a> --}}
-						</div>
+							<!-- Isi form pengeditan informasi akun di sini -->
+							<button type="submit" class="btn btn-primary">Simpan</button>
+						</form>
 					</div>
-                    {{-- <form action="/change-password" method="post">
-                        @csrf --}}
-                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                            <h3 class="mb-4">Password Settings</h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                          <label>Old password</label>
-                                          <input type="password" name="old_password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                          <label>New password</label>
-                                          <input type="password" name="new_password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                          <label>Confirm new password</label>
-                                          <input type="password" name="new_password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary">Update</button>
-                                <button class="btn btn-light">Cancel</button>
-                            </div>
-                        </div>
-                    {{-- </form> --}}
-
-					<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
-						<h3 class="mb-4">Security Settings</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Login</label>
-								  	<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Two-factor auth</label>
-								  	<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value="" id="recovery">
-										<label class="form-check-label" for="recovery">
-										Recovery
-										</label>
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<h3 class="mb-4">Password Settings</h3>
+						<form action="/updatepassword" method="POST">
+							@csrf
+							<div class="form-group">
+								<label for="old_password">Password Lama</label>
+								<div class="input-group">
+									<input type="password" name="old_password" id="old_password" class="form-control" required>
+									<div class="input-group-append">
+										<span class="input-group-text">
+											<i id="toggle_password" class="fas fa-eye-slash"></i>
+										</span>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-light">Cancel</button>
-						</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="new_password">Password Baru</label>
+										<input type="password" name="new_password" id="new_password" class="form-control" required>
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="confirm_password">Konfirmasi Password Baru</label>
+										<input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
+									</div>
+								</div>
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary">Perbarui Password</button>
+								<button type="button" class="btn btn-light">Kembali</button>
+							</div>
+						</form>
 					</div>
                     <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                         <h3 class="mb-4">address Settings</h3>
@@ -208,6 +190,22 @@
 	</section>
     {{-- @endforeach --}}
 
+	<script>
+		 var togglePassword = document.getElementById("toggle_password");
+    var oldPasswordInput = document.getElementById("old_password");
+
+    togglePassword.addEventListener("click", function () {
+        if (oldPasswordInput.type === "password") {
+            oldPasswordInput.type = "text";
+            togglePassword.classList.remove("fa-eye-slash");
+            togglePassword.classList.add("fa-eye");
+        } else {
+            oldPasswordInput.type = "password";
+            togglePassword.classList.remove("fa-eye");
+            togglePassword.classList.add("fa-eye-slash");
+        }
+    });
+	</script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

@@ -188,20 +188,6 @@ class BarangController extends Controller
 	return redirect('/barang');
     }
 
-    public function search(Request $request)
-    {
-        // menangkap data pencarian
-		$cari = $request->cari;
-
-        // mengambil data dari table Barang sesuai pencarian data
-        $barang = DB::table('barang')
-        ->where('nama_barang','like',"%".$cari."%")
-        ->paginate();
-
-        // mengirim data barang ke view index
-        return view('Home',['barang' => $barang]);
-    }
-
     public function kategori()
     {
         $kategori = kategori::all();

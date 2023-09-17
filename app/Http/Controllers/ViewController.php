@@ -101,9 +101,10 @@ class ViewController extends Controller
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                ->orderBy('Id_Barang', 'desc')
                 ->get(['barang.*', 'kategori.Kategori']);
         $pelanggan = pelanggan::all();
-        return view('Penjual.tampil', compact('pelanggan', 'test'), ['test' => $test]);
+        return view('Penjual.barang', compact('pelanggan', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()
@@ -146,7 +147,10 @@ class ViewController extends Controller
 
     public function pesanan()
     {
-        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->get();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->get();
         return view ('Penjual.pesanan', compact('pesanan'));
     }
 
@@ -167,7 +171,7 @@ class ViewController extends Controller
 
     public function dataship()
     {
-        $ship= Biaya_Ship::all();
+        $ship = Biaya_Ship::all();
         // dd($ship);
         return view ('penjual.dataship', compact('ship')) ;
     }
