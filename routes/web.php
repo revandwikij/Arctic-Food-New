@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
+  
 });
 
 

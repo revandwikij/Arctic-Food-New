@@ -6,6 +6,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
+
 <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../assets/icomoon/icomoon.css">
 <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
