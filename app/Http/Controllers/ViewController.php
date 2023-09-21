@@ -264,4 +264,9 @@ class ViewController extends Controller
         return view ('penjual.laporan');
     }
 
+    public function rincianlaporan()
+    {
+        return view ('penjual.rincianlaporan');
+    }
+
 }

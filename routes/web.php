@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
     Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
     Route::get('/laporan', [ViewController::class, 'laporan']);
+    Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
