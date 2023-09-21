@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userscontrollers;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Models\Barang;
 use App\Models\pelanggan;
@@ -55,10 +56,12 @@ Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->n
 //penjual kak
 Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/dataship', [ViewController::class, 'dataship']);
+    Route::post('/dataship/search', [SearchController::class, 'searchship']);
     Route::post('/tambahship/action', [ShippingController::class, 'store']);
     Route::get('/tambahship', [ViewController::class, 'tambahship']);
     Route::get('/editship/{Id_Biaya}', [ShippingController::class, 'edit']);
     Route::post('/edit', [ShippingController::class, 'update']);
+    Route::post('/dataship/search', 'SearchController@search')->name('search'); //new
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
     Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
@@ -71,8 +74,9 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/Form', [BarangController::class, 'store']);
     Route::post('/Edit', [BarangController::class, 'update']);
     Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
-    Route::get('/barang/cari', [BarangController::class, 'search']);
+    Route::post('/barang/cari', [SearchController::class, 'searchbarang']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
+    Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
 
@@ -97,6 +101,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
+  
 });
 
 

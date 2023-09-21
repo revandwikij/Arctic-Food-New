@@ -15,6 +15,26 @@
      </div>
 </section>
 
+<br>
+
+<div class="container">
+        <div class="d-flex justify-content-between">
+
+            <div class="app-search-box" style="width: 50%">
+                <form action="/dataship/search" method="POST">
+                    @csrf
+                    <input type="text" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
+                    <button type="submit" class="btn search-btn btn-primary" value="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div><!--//app-search-box-->
+            <div>
+                <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Shipping</a>
+            </div>
+        </div>
+    </div>
+
 <div class="container mb-4">
     <div class="row">
         <div class="col-12">
@@ -48,8 +68,6 @@
                     </tr>
                     @endforeach
                     </tbody>
-                  <a href ="/tambahship" class="btn btn-primary mb-5 me-2">Tambah Shipping</a>
-                  {{-- <a href ="/kategori" class="btn btn-secondary mb-5">Tambah Kategori</a> --}}
 
                   </table>
             </div>

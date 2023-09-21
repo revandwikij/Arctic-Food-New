@@ -33,6 +33,10 @@
                 </tr>
             </thead>
             <tbody>
+                <h1>Search Results</h1>
+
+                @if (count($users) > 0)
+
                 @foreach ($users as $no)
 
                 <tr>
@@ -51,6 +55,10 @@
                 </td>
             </tr>
             @endforeach
+
+            @else
+                <p>No results found for '{{ $cari }}'.</p>
+            @endif
         </table>
     </div>
 </div>
