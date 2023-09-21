@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
 use GuzzleHttp\Middleware;
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/edit', [ShippingController::class, 'update']);
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
     Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
+    Route::get('/laporan', [ViewController::class, 'laporan']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);

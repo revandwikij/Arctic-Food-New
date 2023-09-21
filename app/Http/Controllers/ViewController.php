@@ -259,5 +259,9 @@ class ViewController extends Controller
 
 
 
+    public function laporan()
+    {
+        return view ('penjual.laporan');
+    }
 
 }
