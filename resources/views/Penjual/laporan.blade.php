@@ -21,41 +21,34 @@
 </div><!--//app-search-box-->
 
 <div class="container mt-5">
-    <h2 class="mb-4">Tabel Laporan</h2>
+    <h2 class="mb-4">Laporan Saya</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>No Laporan</th>
-                <th>Produk</th>
-                <th>Kuantitas</th>
-                <th>Total Harga</th>
-                <th>Status</th>
+                <th>Judul Laporan</th>
+                <th>No. Laporan</th>
+                <th>Status Laporan</th>
+                <th>Tanggal Perbulan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td>Nama laporan</td>
                 <td>00213728881y32f3f</td>
-                <td>Produk A</td>
-                <td>10</td>
-                <td>$100.00</td>
                 <td>Selesai</td>
+                <td>1-31 Jan 2023</td>
                 <td>
-                    <button class="btn btn-primary btn-sm">Lihat</button>
-                    <button class="btn btn-danger btn-sm">Hapus</button>
-                    <button class="btn btn-success btn-sm">Download</button>
+                    <a href="/rincianlaporan" class="btn btn-primary btn-sm">Lihat Rincian</a>
                 </td>
             </tr>
             <tr>
+                <td>Nama laporan</td>
                 <td>00221736416246294829</td>
-                <td>Produk B</td>
-                <td>5</td>
-                <td>$50.00</td>
                 <td>Proses</td>
+                <td>1-29 Feb 2023</td>
                 <td>
-                    <button class="btn btn-primary btn-sm">Lihat</button>
-                    <button class="btn btn-danger btn-sm">Hapus</button>
-                    <button class="btn btn-success btn-sm">Download</button>
+                    <a href="/rincianlaporan" class="btn btn-primary btn-sm">Lihat Rincian</a>
                 </td>
             </tr>
         </tbody>
