@@ -226,7 +226,9 @@ class ViewController extends Controller
         return view ('penjual.perludikirim', compact('datapesan', 'alamat'));
     }
 
-
-
+    public function laporan()
+    {
+        return view ('penjual.laporan');
+    }
 
 }
