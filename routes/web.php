@@ -73,11 +73,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/Form', [BarangController::class, 'store']);
     Route::post('/Edit', [BarangController::class, 'update']);
     Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
-    Route::post('/barang/cari', [SearchController::class, 'searchbarang']);
+    Route::post('/barang/search', [SearchController::class, 'searchbarang']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
+    Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });
 
@@ -94,11 +95,15 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
     Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
+    Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop', [ViewController::class, 'shop']);
     Route::get('/contact', [ViewController::class, 'contact']);
+    Route::get('/rincian/{Id_Barang}', [ViewController::class, 'detailorder']);
+    Route::get('/barang/filter',[ViewController::class, 'filter']);
     Route::get('/about', [ViewController::class, 'about']);
+    Route::get('/transaksi', [ViewController::class, 'riwayat']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
   
 });

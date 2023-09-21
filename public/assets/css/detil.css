@@ -1,0 +1,182 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.detail-pesanan {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.back-button {
+    background-color: #3498db; /* Warna latar belakang biru */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer; /* Menambahkan efek kursor tangan saat dihover */
+}
+
+.back-button i {
+    margin-right: 10px; /* Jarak antara ikon dan teks */
+}
+
+.back-button:hover {
+    background-color: #2980b9; /* Warna latar belakang biru yang lebih gelap saat dihover */
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+  
+    padding-bottom: 5px;
+}
+
+.dtl{
+    text-align:center;
+}
+
+.alamat, .barang, .rincian-pembayaran ,.dtl{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc; /* Garis bawah untuk setiap div */
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item, name{
+    
+}
+
+p {
+    margin: 0;
+}
+
+/* Tampilan tabel yang lebih rapih */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Warna latar belakang baris tabel */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Tampilan rincian pembayaran yang lebih rapih */
+.rincian-pembayaran p {
+    margin-bottom: 5px;
+}
+
+/* Gaya tombol atau tautan jika diperlukan */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Tambahkan gaya tambahan sesuai kebutuhan Anda */
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.card .item-details {
+    flex-grow: 1;
+}
+
+.card p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.card .item-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card .item-quantity, .card .item-subtotal {
+    font-size: 14px;
+}
+
+.view-product-button {
+    background-color: #5b6770; /* Warna latar belakang abu */
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px; /* Jarak antara teks item-subtotal dan tombol */
+    display: inline-block;
+}
+
+.view-product-button:hover {
+    background-color: #aaa; /* Warna latar belakang abu yang lebih gelap saat dihover */
+}
+
+.order-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.status-dikirim-button {
+    background-color: #00b140; /* Warna latar belakang biru */
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none; /* Menghapus outline */
+    cursor: pointer; /* Menambahkan efek kursor tangan saat dihover */
+    border: none; /* Menghapus border */
+    transition: background-color 0.3s ease; /* Efek perubahan warna latar belakang saat dihover */
+}
+
+.status-dikirim-button:hover {
+    background-color: #43b02a; /* Warna latar belakang biru yang lebih gelap saat dihover */
+}

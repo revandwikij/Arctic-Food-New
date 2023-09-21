@@ -93,12 +93,12 @@
                                                         $total += $data['Kuantitas'] * $data['Harga'];
                                                     @endphp
                                                 </span></td>
-                                            <td>
+                                            {{-- <td>
                                                 <input type="checkbox" class="item-checkbox" name="selected_items[]" value=""
                                                     data-price="{{ $data->Sub_Total }} ">
                                             </td>
                                                 <input type="hidden" name="selected_items[]"
-                                                    value="{{ $data->Id_Detail_Keranjang }}">
+                                                    value="{{ $data->Id_Detail_Keranjang }}"> --}}
                                         </tr>
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
@@ -113,10 +113,10 @@
                                                 <tr>
                                                     <th>
                                                         <div class="cart-grand-total ">
-                                                            {{-- Total :<span class="inner-left-md"> Rp.
-                                                                {{ number_format($total) }}</span> --}}
-                                                            Total: <span class="inner-left-md"><span
-                                                                    id="total-price">0</span></span>
+                                                            Total :<span class="inner-left-md"> Rp.
+                                                                {{ number_format($total) }}</span>
+                                                            {{-- Total: <span class="inner-left-md"><span
+                                                                    id="total-price">0</span></span> --}}
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -155,7 +155,7 @@
     </div>
 
 
-    <script>
+    {{-- <script>
         const checkboxes = document.querySelectorAll('.item-checkbox');
 
         // Get the total price element
@@ -189,7 +189,7 @@
                 totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
             });
         });
-    </script>
+    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

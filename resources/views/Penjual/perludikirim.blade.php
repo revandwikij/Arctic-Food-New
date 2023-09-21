@@ -28,12 +28,12 @@
   <th scope="col">Total Bayar</th>
   <th scope="col">Kota Pengiriman</th>
   <th scope="col">Status Pembayaran</th>
-  <th scope="col">Kirim Email</th>
+  <th scope="col">Aksi</th>
 </tr>
 </thead>
 <tbody>
 
-@foreach ($pesan as $item)
+@foreach ($pesanan as $item)
     
 
 <tr class="rounded bg-white">
@@ -48,33 +48,31 @@
        
       <span class="ml-2">{{$item->username}}</span>
   </td>
-  <td>
-      <div class="dropdown">
-<button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-Unfullfilled
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<li><a class="dropdown-item" href="#">Fullfilled</a></li>
-<li><a class="dropdown-item" href="#">Unfullfilled</a></li>
-<li><a class="dropdown-item" href="#">Hold</a></li>
-</ul>
+   <td>
+    <span class="ml-2">{{$item->Status_Pesanan}}</span>
+
 </div>
   </td>
   <td>{{$item->Total_Harga}}</td>
   <td>{{$item->Kota}}</td>
   <td>
-       <div class="dropdown">
-<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-Authorized
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<li><a class="dropdown-item" href="#">Yes</a></li>
-<li><a class="dropdown-item" href="#">No</a></li>
-
-</ul>
+     {{ $item->Status_Pembayaran}}
 </div>
   </td>
-  <td>Today</td>
+  <td>
+    @if ($item->Status_Pesanan == 'Diproses')
+    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
+      {{ csrf_field() }}
+    <button type="submit" class="btn btn-primary mb-2">Kirim</button>
+    </form> 
+    @endif
+    @if ($item->Status_Pesanan == 'Dikirim')
+    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
+      {{ csrf_field() }}
+    <button type="submit" class="btn btn-primary mb-2">Kirim Email</button>
+    </form> 
+    @endif
+  </td>
 
 </tr>
 

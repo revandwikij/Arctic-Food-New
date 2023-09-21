@@ -112,7 +112,7 @@
 
                                         <ul class="submenu">
                                             <li><a href="/shop" class="item-anchor">Shop</a></li>
-                                            <li><a href="/shop" class="item-anchor">Transaction</a></li>
+                                            <li><a href="/transaksi" class="item-anchor">Transaction</a></li>
                                         </ul>
                                     </li>
 

@@ -28,16 +28,18 @@
                 <section id="selling-products" class="col-md-9 product-store">
                     <div class="container">
                         <ul class="tabs list-unstyled">
-                            @foreach ($kategori as $item)
-                                <li data-tab-target="#{{ $item->kategori }}" class=" tab">{{ $item->kategori }}</li>
-                                {{-- <li data-tab-target="#shoes" class="tab">Shoes</li>
+                            @foreach ($kategori as $item) 
+                            <li data-tab-target="#{{ $item->Kategori }}" class="tab">{{ $item->Kategori }}</li> 
+                            @endforeach
+                    {{-- 
+                    <li data-tab-target="#shoes" class="tab">Shoes</li>
                     <li data-tab-target="#tshirts" class="tab">Tshirts</li>
                     <li data-tab-target="#pants" class="tab">Pants</li>
                     <li data-tab-target="#hoodie" class="tab">Hoodie</li>
                     <li data-tab-target="#outer" class="tab">Outer</li>
                     <li data-tab-target="#jackets" class="tab">Jackets</li>
-                    <li data-tab-target="#accessories" class="tab">Accessories</li> --}}
-                            @endforeach
+                    <li data-tab-target="#accessories" class="tab">Accessories</li> 
+                    --}}
                         </ul>
                         <div class="tab-content">
                             <div id="all" data-tab-content class="active">
@@ -57,8 +59,7 @@
                                                             class="icon icon-arrow-io"></i>
                                                     </button>
                                                     <button type="button"
-                                                        class="view-btn tooltip
-                                    d-flex">
+                                                        class="view-btn tooltip d-flex">
                                                         <i class="icon icon-screen-full"></i>
                                                         <span class="tooltip-text">Quick view</span>
                                                     </button>
@@ -77,7 +78,43 @@
                                     @endforeach
                                 </div>
                             </div>
-                            {{-- <div id="shoes" data-tab-content>
+                            @foreach ($kategori as $item)
+                            <div id="{{ $item -> Kategori }}" data-tab-content>
+                              <div class="row d-flex flex-wrap">
+                                @foreach ($barang as $data)
+                                <div class="product-item col-lg-4 col-md-6 col-sm-6">
+                                  <div class="image-holder">
+                                    @if($item->Foto_Barang)
+                                      <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
+                                    @endif
+                                    {{-- <img src="../assets/images/selling-products3.jpg" alt="Books" class="product-image"> --}}
+                                  </div>
+                                  <div class="cart-concern">
+                                    <div class="cart-button d-flex justify-content-between align-items-center">
+                                      <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                                      </button>
+                                      <button type="button" class="view-btn tooltip
+                                          d-flex">
+                                        <i class="icon icon-screen-full"></i>
+                                        <span class="tooltip-text">Quick view</span>
+                                      </button>
+                                      <button type="button" class="wishlist-btn">
+                                        <i class="icon icon-heart"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div class="product-detail">
+                                    <h3 class="product-title">
+                                      <a href="single-product.html">{{ $data -> Nama_Barang }}</a>
+                                    </h3>
+                                    <div class="item-price text-primary">{{ $data -> Harga }}</div>
+                                  </div>
+                                </div>
+                                @endforeach
+                              </div>
+                            </div>
+                            @endforeach
+                {{-- <div id="shoes" data-tab-content>
                   <div class="row d-flex flex-wrap">
                     <div class="product-item col-lg-4 col-md-6 col-sm-6">
                       <div class="image-holder">
@@ -177,110 +214,6 @@
                           <a href="single-product.html">Nike Brand Shoe</a>
                         </h3>
                         <div class="item-price text-primary">$65.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div id="tshirts" data-tab-content>
-                  <div class="row d-flex flex-wrap">
-                    <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                      <div class="image-holder">
-                        <img src="../assets/images/selling-products3.jpg" alt="Books" class="product-image">
-                      </div>
-                      <div class="cart-concern">
-                        <div class="cart-button d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                          </button>
-                          <button type="button" class="view-btn tooltip
-                              d-flex">
-                            <i class="icon icon-screen-full"></i>
-                            <span class="tooltip-text">Quick view</span>
-                          </button>
-                          <button type="button" class="wishlist-btn">
-                            <i class="icon icon-heart"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="product-detail">
-                        <h3 class="product-title">
-                          <a href="single-product.html">Silk White Shirt</a>
-                        </h3>
-                        <div class="item-price text-primary">$35.00</div>
-                      </div>
-                    </div>
-                    <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                      <div class="image-holder">
-                        <img src="../assets/images/selling-products8.jpg" alt="Books" class="product-image">
-                      </div>
-                      <div class="cart-concern">
-                        <div class="cart-button d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                          </button>
-                          <button type="button" class="view-btn tooltip
-                              d-flex">
-                            <i class="icon icon-screen-full"></i>
-                            <span class="tooltip-text">Quick view</span>
-                          </button>
-                          <button type="button" class="wishlist-btn">
-                            <i class="icon icon-heart"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="product-detail">
-                        <h3 class="product-title">
-                          <a href="single-product.html">White Half T-shirt</a>
-                        </h3>
-                        <div class="item-price text-primary">$30.00</div>
-                      </div>
-                    </div>
-                    <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                      <div class="image-holder">
-                        <img src="../assets/images/selling-products5.jpg" alt="Books" class="product-image">
-                      </div>
-                      <div class="cart-concern">
-                        <div class="cart-button d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                          </button>
-                          <button type="button" class="view-btn tooltip
-                              d-flex">
-                            <i class="icon icon-screen-full"></i>
-                            <span class="tooltip-text">Quick view</span>
-                          </button>
-                          <button type="button" class="wishlist-btn">
-                            <i class="icon icon-heart"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="product-detail">
-                        <h3 class="product-title">
-                          <a href="single-product.html">Ghee Half T-shirt</a>
-                        </h3>
-                        <div class="item-price text-primary">$40.00</div>
-                      </div>
-                    </div>
-                    <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                      <div class="image-holder">
-                        <img src="../assets/images/selling-products7.jpg" alt="Books" class="product-image">
-                      </div>
-                      <div class="cart-concern">
-                        <div class="cart-button d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                          </button>
-                          <button type="button" class="view-btn tooltip
-                              d-flex">
-                            <i class="icon icon-screen-full"></i>
-                            <span class="tooltip-text">Quick view</span>
-                          </button>
-                          <button type="button" class="wishlist-btn">
-                            <i class="icon icon-heart"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="product-detail">
-                        <h3 class="product-title">
-                          <a href="single-product.html">Long Sleeve T-shirt</a>
-                        </h3>
-                        <div class="item-price text-primary">$40.00</div>
                       </div>
                     </div>
                   </div>
@@ -752,23 +685,31 @@
                                 </li>
                             </ul>
                         </div>
+
+
+                        
                         <div class="widgets widget-product-brands">
-                            <h5 class="widget-title">Brands</h5>
-                            <ul class="product-tags sidebar-list list-unstyled">
-                                <li class="tags-item">
-                                    <a href="">Nike</a>
+                          <h5 class="widget-title">Kategori</h5>
+                          <ul class="product-tags sidebar-list list-unstyled">
+                            @foreach ($kategori as $data)
+                              <li class="tags-item">
+                                  <a href="">{{ $data -> Kategori }}</a>
                                 </li>
-                                <li class="tags-item">
-                                    <a href="">Adidas</a>
-                                </li>
-                                <li class="tags-item">
-                                    <a href="">Puma</a>
-                                </li>
-                                <li class="tags-item">
-                                    <a href="">Spike</a>
-                                </li>
-                            </ul>
-                        </div>
+                                @endforeach
+                              {{-- <li class="tags-item">
+                                  <a href="">Adidas</a>
+                              </li>
+                              <li class="tags-item">
+                                  <a href="">Puma</a>
+                              </li>
+                              <li class="tags-item">
+                                  <a href="">Spike</a>
+                              </li> --}}
+                          </ul>
+                      </div>
+
+                        
+
                         <div class="widgets widget-price-filter">
                             <h5 class="widget-title">Filter By Price</h5>
                             <ul class="product-tags sidebar-list list-unstyled">
@@ -898,4 +839,5 @@
         </div>
         <hr>
     </section>
+    
 @endsection

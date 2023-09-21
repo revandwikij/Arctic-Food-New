@@ -167,42 +167,42 @@ class PesanController extends Controller
 
 
 
-        $selectedItemIds = $request->input('selected_items');
+        // $selectedItemIds = $request->input('selected_items');
 
-        // Create a new order (Pesan) for each selected item
-        foreach ($selectedItemIds as $selectedItemId) {
-            // Retrieve the item details based on the selected item ID
-            // $selectedItem = DetailKeranjang::find($selectedItemId);
-            $selectedItemId = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-            ->where('users.id', '=', $user->id)->get();
+        // // Create a new order (Pesan) for each selected item
+        // foreach ($selectedItemIds as $selectedItemId) {
+        //     // Retrieve the item details based on the selected item ID
+        //     // $selectedItem = DetailKeranjang::find($selectedItemId);
+        //     $selectedItemId = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+        //     ->where('users.id', '=', $user->id)->get();
 
-            // Create a new order (Pesan) record
-            $pesan = new Pesan();
-            $pesan->Id_Pesanan = $newUid; // Use your logic to generate the order ID
-            $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
-            $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
-            $pesan->Id_Alamat = $request->Id_Alamat;
-            // $pesan->Id_Detail_Keranjang = $selectedItemId; // Store the reference to the selected item
-            // dd($pesan);
-            $pesan->Total = $selectedItemId->Sub_Total; // Use the item's Sub_Total as the order total
-            $pesan->Total_Beban = $selectedItemId->Sub_Beban; // Use the item's Sub_Beban as the total beban
-            $pesan->Tgl_Pesanan = now();
-            $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
-            $pesan->save();
-        }
+        //     // Create a new order (Pesan) record
+        //     $pesan = new Pesan();
+        //     $pesan->Id_Pesanan = $newUid; // Use your logic to generate the order ID
+        //     $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
+        //     $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        //     $pesan->Id_Alamat = $request->Id_Alamat;
+        //     // $pesan->Id_Detail_Keranjang = $selectedItemId; // Store the reference to the selected item
+        //     // dd($pesan);
+        //     $pesan->Total = $selectedItemId->Sub_Total; // Use the item's Sub_Total as the order total
+        //     $pesan->Total_Beban = $selectedItemId->Sub_Beban; // Use the item's Sub_Beban as the total beban
+        //     $pesan->Tgl_Pesanan = now();
+        //     $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
+        //     $pesan->save();
+        // }
 
 
 
-        // $pesan = new Pesan();
-        // $pesan->Id_Pesanan = $newUid;
-        // $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
-        // $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
-        // $pesan->Id_Alamat = $request->Id_Alamat;
-        // $pesan->Total = $totalharga;
-        // $pesan->Total_Beban = $totalbeban;
-        // $pesan->Tgl_Pesanan = now();
-        // $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
-        // $pesan->save();
+        $pesan = new Pesan();
+        $pesan->Id_Pesanan = $newUid;
+        $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
+        $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        $pesan->Id_Alamat = $request->Id_Alamat;
+        $pesan->Total = $totalharga;
+        $pesan->Total_Beban = $totalbeban;
+        $pesan->Tgl_Pesanan = now();
+        $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
+        $pesan->save();
 
 
         $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
@@ -237,44 +237,38 @@ class PesanController extends Controller
         }
     }
 
-    public function pembayaran(Request $request, $Id_Pesanan)
-    {
+    // public function pembayaran(Request $request, $Id_Pesanan)
+    // {
 
-        if (Auth::id())
-        {
+    //     if (Auth::id())
+    //     {
 
 
 
-        $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
+    //     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
 
-        $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-        $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-        $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+    //     $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+    //     $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+    //     $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
-        $bayar = new Pembayaran();
-        $bayar->Id_Pembayaran = $newUid1;
-        $bayar->Id_Shipping = $order->Id_Shipping;
-        $bayar->Metode_Pembayaran = $request->Metod_Pembayaran;
-        $bayar->Total_Harga = $order->Total + $order->Total_Shipping;
-        $bayar->Status_Pembayaran = 'Belum Lunas';
-        $bayar->Tgl_Pembayaran = now();
-        $bayar->save();
+    //     $bayar = new Pembayaran();
+    //     $bayar->Id_Pembayaran = $newUid1;
+    //     $bayar->Id_Shipping = $order->Id_Shipping;
+    //     $bayar->Metode_Pembayaran = $request->Metod_Pembayaran;
+    //     $bayar->Total_Harga = $order->Total + $order->Total_Shipping;
+    //     $bayar->Status_Pembayaran = 'Belum Lunas';
+    //     $bayar->Tgl_Pembayaran = now();
+    //     $bayar->save();
 
-        Notification::send('', new Notif(''));
+    //     // Notification::send('', new Notif(''));
 
-        return redirect("/thanks");
+    //     return redirect("/thanks");
 
-        }
-    }
+    //     }
+    // }
 
     public function callback(Request $request)
     {
-
-        // if (Auth::id())
-        // {
-
-
-            // dd($request);
 
             $serverKey = config('midtrans.server_key');
             $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
@@ -297,7 +291,7 @@ class PesanController extends Controller
                     $bayar->save();
                 }
             }
-        // }
+        
     }
 
 
@@ -307,8 +301,7 @@ class PesanController extends Controller
         $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
 
         Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
-            'Id_Pelanggan' => $Pesan->Id_Pelanggan, //masih dummy harusnya diisi pake id keranjang user
-            // 'Id_Detail_Keranjang' => $detkran,
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
             'Id_Keranjang' => $Pesan->Id_Keranjang,
             'Id_Alamat' => $Pesan->Id_Alamat,
             'Total' => $Pesan->Total,
@@ -317,6 +310,40 @@ class PesanController extends Controller
         ]);
 
         return redirect ('/order');
+    }
+
+    public function konfirmkirim($Id_Pesanan)
+    {
+
+        $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
+
+        Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
+            'Total' => $Pesan->Total,
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Dikirim'
+        ]);
+
+        return redirect ('/perludikirim');
+    }
+
+    public function terima($Id_Pesanan)
+    {
+
+        $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
+
+        Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
+            'Total' => $Pesan->Total,
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Selesai'
+        ]);
+
+        return redirect ('/transaksi');
     }
 
 
