@@ -181,7 +181,7 @@ class ViewController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
         ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->get();
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->get();
         return view ('Penjual.pesanan', compact('pesanan'));
     }
 
@@ -212,20 +212,38 @@ class ViewController extends Controller
         return view ('penjual.tambahship');
     }
 
+    public function riwayat()
+    {
+        $user=auth()->user();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('users.id', '=', $user->id)->get();
+
+
+        return view ('riwayat', compact('pesanan'));
+    }
+
     public function perludikirim()
     {
         $user=auth()->user();
         $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
 
-        $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
-        ->where('pesanan')
-        ->get();
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        // ->where('pesanan')
+        // ->get();
 
-        $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Diproses')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
 
-        return view ('penjual.perludikirim', compact('datapesan', 'alamat'));
+    //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+    //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        return view ('penjual.perludikirim', compact('pesanan'));
     }
 
     public function profileadmin()
@@ -233,7 +251,29 @@ class ViewController extends Controller
         return view('Penjual.profileadmin');
     }
 
+    public function detailorder($Id_Pesanan)
+    {
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
 
+        return view('detilorder', compact('pesanan'));
+    }
+
+
+
+
+
+    public function laporan()
+    {
+        return view ('penjual.laporan');
+    }
+
+    public function rincianlaporan()
+    {
+        return view ('penjual.rincianlaporan');
+    }
 
 }

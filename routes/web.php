@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
 use GuzzleHttp\Middleware;
@@ -63,6 +64,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/edit', [ShippingController::class, 'update']);
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
     Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
+    Route::get('/laporan', [ViewController::class, 'laporan']);
+    Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
@@ -79,6 +82,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
+    Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });
 
@@ -95,11 +99,15 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
     Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
+    Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop', [ViewController::class, 'shop']);
     Route::get('/contact', [ViewController::class, 'contact']);
+    Route::get('/rincian/{Id_Barang}', [ViewController::class, 'detailorder']);
+    Route::get('/barang/filter',[ViewController::class, 'filter']);
     Route::get('/about', [ViewController::class, 'about']);
+    Route::get('/transaksi', [ViewController::class, 'riwayat']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 });

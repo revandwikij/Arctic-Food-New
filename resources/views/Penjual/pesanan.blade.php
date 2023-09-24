@@ -7,7 +7,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Pesanan</h1>
+        <h1 class="jumbotron-heading">Pesanan Masuk</h1>
      </div>
 </section>
 
@@ -57,16 +57,7 @@
   </td>
   <td>{{$item->Total_Harga}}</td>
   <td>{{$item->Kota}}</td>
-  <td>
-       <div class="dropdown">
-<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-Authorized
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<li><a class="dropdown-item" href="#">Yes</a></li>
-<li><a class="dropdown-item" href="#">No</a></li>
-
-</ul>
+  <td>{{$item->Status_Pembayaran}}</td> 
 </div>
   </td>
   <td>

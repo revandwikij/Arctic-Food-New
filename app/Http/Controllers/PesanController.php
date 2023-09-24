@@ -237,44 +237,38 @@ class PesanController extends Controller
         }
     }
 
-    public function pembayaran(Request $request, $Id_Pesanan)
-    {
+    // public function pembayaran(Request $request, $Id_Pesanan)
+    // {
 
-        if (Auth::id())
-        {
+    //     if (Auth::id())
+    //     {
 
 
 
-        $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
+    //     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $Id_Pesanan)->first();
 
-        $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-        $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-        $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+    //     $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+    //     $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+    //     $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
-        $bayar = new Pembayaran();
-        $bayar->Id_Pembayaran = $newUid1;
-        $bayar->Id_Shipping = $order->Id_Shipping;
-        $bayar->Metode_Pembayaran = $request->Metod_Pembayaran;
-        $bayar->Total_Harga = $order->Total + $order->Total_Shipping;
-        $bayar->Status_Pembayaran = 'Belum Lunas';
-        $bayar->Tgl_Pembayaran = now();
-        $bayar->save();
+    //     $bayar = new Pembayaran();
+    //     $bayar->Id_Pembayaran = $newUid1;
+    //     $bayar->Id_Shipping = $order->Id_Shipping;
+    //     $bayar->Metode_Pembayaran = $request->Metod_Pembayaran;
+    //     $bayar->Total_Harga = $order->Total + $order->Total_Shipping;
+    //     $bayar->Status_Pembayaran = 'Belum Lunas';
+    //     $bayar->Tgl_Pembayaran = now();
+    //     $bayar->save();
 
-        Notification::send('', new Notif(''));
+    //     // Notification::send('', new Notif(''));
 
-        return redirect("/thanks");
+    //     return redirect("/thanks");
 
-        }
-    }
+    //     }
+    // }
 
     public function callback(Request $request)
     {
-
-        // if (Auth::id())
-        // {
-
-
-            // dd($request);
 
             $serverKey = config('midtrans.server_key');
             $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
@@ -297,7 +291,7 @@ class PesanController extends Controller
                     $bayar->save();
                 }
             }
-        // }
+        
     }
 
 
@@ -307,8 +301,7 @@ class PesanController extends Controller
         $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
 
         Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
-            'Id_Pelanggan' => $Pesan->Id_Pelanggan, //masih dummy harusnya diisi pake id keranjang user
-            // 'Id_Detail_Keranjang' => $detkran,
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
             'Id_Keranjang' => $Pesan->Id_Keranjang,
             'Id_Alamat' => $Pesan->Id_Alamat,
             'Total' => $Pesan->Total,
@@ -317,6 +310,40 @@ class PesanController extends Controller
         ]);
 
         return redirect ('/order');
+    }
+
+    public function konfirmkirim($Id_Pesanan)
+    {
+
+        $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
+
+        Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
+            'Total' => $Pesan->Total,
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Dikirim'
+        ]);
+
+        return redirect ('/perludikirim');
+    }
+
+    public function terima($Id_Pesanan)
+    {
+
+        $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
+
+        Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
+            'Total' => $Pesan->Total,
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Selesai'
+        ]);
+
+        return redirect ('/transaksi');
     }
 
 
