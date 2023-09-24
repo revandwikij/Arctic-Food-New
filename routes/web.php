@@ -73,11 +73,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/Form', [BarangController::class, 'store']);
     Route::post('/Edit', [BarangController::class, 'update']);
     Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
-    Route::post('/barang/cari', [SearchController::class, 'searchbarang']);
+    Route::post('/barang/search', [SearchController::class, 'searchbarang']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
+    Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
 
 });
 
@@ -100,7 +101,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
-  
+
 });
 
 

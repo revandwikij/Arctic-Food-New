@@ -78,6 +78,8 @@ class ViewController extends Controller
 
     public function tambahadmin()
     {
+        auth()->user();
+
         return view('Penjual.tambahadmin');
     }
 
@@ -143,7 +145,7 @@ class ViewController extends Controller
 
        $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
-       
+
       $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
      ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
@@ -172,7 +174,7 @@ class ViewController extends Controller
       return view('payment', compact('datapesan', 'alamat', 'snapToken'));
     }
 
-   
+
 
     public function pesanan()
     {
@@ -224,6 +226,11 @@ class ViewController extends Controller
        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
         return view ('penjual.perludikirim', compact('datapesan', 'alamat'));
+    }
+
+    public function profileadmin()
+    {
+        return view('Penjual.profileadmin');
     }
 
 

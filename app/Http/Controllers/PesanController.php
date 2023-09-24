@@ -167,42 +167,42 @@ class PesanController extends Controller
 
 
 
-        $selectedItemIds = $request->input('selected_items');
+        // $selectedItemIds = $request->input('selected_items');
 
-        // Create a new order (Pesan) for each selected item
-        foreach ($selectedItemIds as $selectedItemId) {
-            // Retrieve the item details based on the selected item ID
-            // $selectedItem = DetailKeranjang::find($selectedItemId);
-            $selectedItemId = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-            ->where('users.id', '=', $user->id)->get();
+        // // Create a new order (Pesan) for each selected item
+        // foreach ($selectedItemIds as $selectedItemId) {
+        //     // Retrieve the item details based on the selected item ID
+        //     // $selectedItem = DetailKeranjang::find($selectedItemId);
+        //     $selectedItemId = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+        //     ->where('users.id', '=', $user->id)->get();
 
-            // Create a new order (Pesan) record
-            $pesan = new Pesan();
-            $pesan->Id_Pesanan = $newUid; // Use your logic to generate the order ID
-            $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
-            $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
-            $pesan->Id_Alamat = $request->Id_Alamat;
-            // $pesan->Id_Detail_Keranjang = $selectedItemId; // Store the reference to the selected item
-            // dd($pesan);
-            $pesan->Total = $selectedItemId->Sub_Total; // Use the item's Sub_Total as the order total
-            $pesan->Total_Beban = $selectedItemId->Sub_Beban; // Use the item's Sub_Beban as the total beban
-            $pesan->Tgl_Pesanan = now();
-            $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
-            $pesan->save();
-        }
+        //     // Create a new order (Pesan) record
+        //     $pesan = new Pesan();
+        //     $pesan->Id_Pesanan = $newUid; // Use your logic to generate the order ID
+        //     $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
+        //     $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        //     $pesan->Id_Alamat = $request->Id_Alamat;
+        //     // $pesan->Id_Detail_Keranjang = $selectedItemId; // Store the reference to the selected item
+        //     // dd($pesan);
+        //     $pesan->Total = $selectedItemId->Sub_Total; // Use the item's Sub_Total as the order total
+        //     $pesan->Total_Beban = $selectedItemId->Sub_Beban; // Use the item's Sub_Beban as the total beban
+        //     $pesan->Tgl_Pesanan = now();
+        //     $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
+        //     $pesan->save();
+        // }
 
 
 
-        // $pesan = new Pesan();
-        // $pesan->Id_Pesanan = $newUid;
-        // $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
-        // $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
-        // $pesan->Id_Alamat = $request->Id_Alamat;
-        // $pesan->Total = $totalharga;
-        // $pesan->Total_Beban = $totalbeban;
-        // $pesan->Tgl_Pesanan = now();
-        // $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
-        // $pesan->save();
+        $pesan = new Pesan();
+        $pesan->Id_Pesanan = $newUid;
+        $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
+        $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
+        $pesan->Id_Alamat = $request->Id_Alamat;
+        $pesan->Total = $totalharga;
+        $pesan->Total_Beban = $totalbeban;
+        $pesan->Tgl_Pesanan = now();
+        $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
+        $pesan->save();
 
 
         $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';

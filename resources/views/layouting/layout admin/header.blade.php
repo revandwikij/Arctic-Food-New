@@ -80,12 +80,12 @@
                                 href="#" role="button" aria-expanded="false"><img
                                     src="assets/images/user.png" alt="user profile"></a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                <li><a class="dropdown-item" href="account.html">Account</a></li>
-                                <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                                <li><a class="dropdown-item" href="/profileadmin">Account</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                             </ul>
                         </div><!--//app-user-dropdown-->
                     </div><!--//app-utilities-->
