@@ -21,7 +21,7 @@
 </div><!--//app-search-box-->
 
 <div class="container mt-5">
-    <h2 class="mb-4">Laporan Saya</h2>
+    <h2 class="mb-4">Laporan Penjualan</h2>
     <table class="table table-striped">
         <thead>
             <tr>

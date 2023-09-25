@@ -24,7 +24,7 @@
     <div class="text-right mt-4" style="margin-left: 92%">
         <button class="btn btn-danger">Hapus</button>
     </div>
-    <h2 class="mb-4">Tabel Laporan</h2>
+    <h2 class="mb-4">Informasi Laporan</h2>
     
     <table class="table table-striped">
         <thead>
