@@ -12,18 +12,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::unprepared('
-            CREATE VIEW v_laporan_penjualan AS
-            SELECT
-                b.Id_Barang,
-                
-                p.Tanggal_Pesanan,
-                b.Nama_Produk,
-                d.Jumlah,
-                d.Harga
-            FROM pesanan p
-            JOIN detail_pesanan d ON p.Id_Pesanan = d.Id_Pesanan;
-    ');
+        DB::statement("
+    CREATE VIEW v_laporan_barang AS
+    SELECT
+        DATE_FORMAT(pesanan.created_at, '%Y-%m-%d') AS tanggal,
+        barang.Nama_Barang AS produk,
+        barang.Id_Barang,
+        barang.Stok,
+        barang.Harga,
+        SUM(detail_keranjang.Kuantitas) AS total_terjual
+    FROM barang 
+    JOIN detail_keranjang  ON barang.Id_Barang = detail_keranjang.Id_Barang
+    JOIN keranjang  ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
+    JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
+    WHERE pesanan.Status_Pesanan = 'Selesai'
+    GROUP BY tanggal, produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;
+");
     }
 
     /**

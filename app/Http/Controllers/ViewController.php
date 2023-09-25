@@ -9,6 +9,7 @@ use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\pelanggan;
+use App\Models\PenjualanView;
 use App\Models\Pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -274,6 +275,22 @@ class ViewController extends Controller
     public function rincianlaporan()
     {
         return view ('penjual.rincianlaporan');
+    }
+
+    public function laporanPenjualan(Request $request)
+{
+    $tanggalAwal = $request->input('tanggal_awal');
+    $tanggalAkhir = $request->input('tanggal_akhir');
+
+    $penjualan = PenjualanView::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
+
+    return view('penjual.lapbar', ['penjualan' => $penjualan]);
+}
+
+    public function lapbar()
+    {
+        $penjualan = PenjualanView::all();
+        return view ('penjual.lapbar', compact('penjualan'));
     }
 
 }

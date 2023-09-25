@@ -80,8 +80,10 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
+    Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
+    Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });
