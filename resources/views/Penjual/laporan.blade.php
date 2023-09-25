@@ -22,6 +22,15 @@
 
 <div class="container mt-5">
     <h2 class="mb-4">Laporan Saya</h2>
+
+    <form method="post" action="">
+        @csrf
+        <label for="periode_awal">Periode Awal:</label>
+        <input type="date" name="periode_awal" id="periode_awal">
+        <label for="periode_akhir">Periode Akhir:</label>
+        <input type="date" name="periode_akhir" id="periode_akhir">
+        <button type="submit">Filter</button>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
