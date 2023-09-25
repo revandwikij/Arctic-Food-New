@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
+    Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });
@@ -108,7 +109,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/transaksi', [ViewController::class, 'riwayat']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
-  
+
 });
 
 

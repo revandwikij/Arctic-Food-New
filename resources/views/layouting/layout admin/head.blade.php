@@ -7,6 +7,19 @@
 
 <!-- Icon -->
 <link rel="icon" href="../assets/css/images/arcticlogo.png" type="image">
+<link rel="stylesheet" type="text/css" href="../assets/css/profile.css">
 
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<style>
+    .con {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)*.5);
+    padding-left: calc(var(--bs-gutter-x)*.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+</style>

@@ -36,7 +36,7 @@
                                         <tr>
                                             <td>Berat</td>
                                             <td>:</td>
-                                            <td>{{$data->Berat}} Kg</td>
+                                            <td>{{$data->Berat}} G</td>
                                         </tr>
                                         <tr>
                                             <td>Keterangan</td>
