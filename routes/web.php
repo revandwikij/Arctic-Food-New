@@ -7,6 +7,7 @@ use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PdfController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pelangganController;
@@ -84,6 +85,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
     Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
+    Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
+    Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });

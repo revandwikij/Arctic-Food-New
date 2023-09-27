@@ -25,15 +25,5 @@ class Barang extends Model
         'Keterangan_Barang',
     ];
 
-    // public $sortable = [
-    //     'Id_Barang', // tambahkan kolom lainnya sesuai kebutuhan
-    //     'Nama_Barang',
-    //     'Foto_Barang',
-    //     'Berat',
-    //     'Brand',
-    //     'Stok',
-    //     'Harga',
-    //     'Keterangan_Barang',
-    // ];
 
 }
