@@ -160,7 +160,8 @@ class ViewController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $pesan->Id_Pesanan,
+                // 'order_id' => $pesan->Id_Pesanan,
+                'order_id' => 'PREFIX_' . time(),
                 'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
             ),
             'customer_details' => array(
