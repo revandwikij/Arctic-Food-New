@@ -34,31 +34,19 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Judul Laporan</th>
-                <th>No. Laporan</th>
-                <th>Status Laporan</th>
+                <th>Id Laporan</th>
                 <th>Tanggal Perbulan</th>
-                <th>Aksi</th>
+                <th>Rincian</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Nama laporan</td>
                 <td>00213728881y32f3f</td>
-                <td>Selesai</td>
                 <td>1-31 Jan 2023</td>
                 <td>
                     <a href="/rincianlaporan" class="btn btn-primary btn-sm">Lihat Rincian</a>
                 </td>
             </tr>
-            <tr>
-                <td>Nama laporan</td>
-                <td>00221736416246294829</td>
-                <td>Proses</td>
-                <td>1-29 Feb 2023</td>
-                <td>
-                    <a href="/rincianlaporan" class="btn btn-primary btn-sm">Lihat Rincian</a>
-                </td>
             </tr>
         </tbody>
     </table>
