@@ -82,8 +82,8 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary">Lihat</button>
-                    <button class="btn btn-success">Download</button>
+                    <a href="{{ url('/stream-pdf') }}" class="btn btn-primary">Lihat</a>
+                    <a href="{{ url('/generate-pdf') }}" class="btn btn-success">Download</a>
                 </div>
             </div>
         </div>

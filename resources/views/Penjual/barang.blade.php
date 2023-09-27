@@ -33,6 +33,15 @@
                 </form>
             </div><!--//app-search-box-->
             <div>
+                <select id="kategori">
+                    <option value="" selected disabled>Pilih Kategori</option> <!-- Opsi default -->
+                    @foreach ($kategori as $k)
+                        <option value="{{ $k->Id_Kategori }}">{{ $k->Kategori }}</option>
+                    @endforeach
+                </select>
+                
+            </div>
+            <div>
                 <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>
                 <a href="/kategori" class="btn btn-secondary mb-5">Tambah Kategori</a>
             </div>
