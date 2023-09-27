@@ -36,10 +36,11 @@
                     <thead>
                         <tr>
                                                        
+                            <th scope="col">Tanggal</th>
                             <th scope="col">Produk</th>
-                            <th scope="col">Harga</th>
+                            <th scope="col">Harga Barang</th>
                             <th scope="col">Terjual</th>
-                             
+                            <th scope="col">Total Harga</th>
 
                         </tr>
                     </thead>
@@ -52,17 +53,38 @@
                             <tr>
 
                                 
+                                <td>{{ $data->tanggal }} </td>
                                 <td>{{ $data->produk }} </td>
                                 <td>Rp. {{ number_format($data->Harga) }} </td>
                                 <td>{{ $data->total_terjual }} </td>
-                                <td>{{ $data->Keterangan_Barang }} </td>
-                                
-
+                                <td>Rp. {{ number_format($data->total_terjual * $data->Harga) }} </td>                                
                             </tr>
                         @endforeach
  
+                        <tr>
+
+                                                     
+                            <td colspan="3">Jumlah</td>
+                            <td>{{ $penjualan->sum('total_terjual') }}</td>
+                            {{-- <td>{{ $penjualan->sum('total_terjual * Harga') }}</td> --}}
+                            <td>
+                                @php
+                                    $totalPenjualan = 0;
+                                    foreach ($penjualan as $data) {
+                                        $totalPenjualan += $data->total_terjual * $data->Harga;
+                                    }
+                                    echo "Rp. " . number_format($totalPenjualan);
+                                @endphp
+                            </td>
+
+                        </tr>
+
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary">Lihat</button>
+                    <button class="btn btn-success">Download</button>
+                </div>
             </div>
         </div>
     </div>
