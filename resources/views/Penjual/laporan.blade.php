@@ -7,7 +7,7 @@
 <body>
     <h1>Laporan </h1>
     <!-- Isi konten PDF Anda di sini -->
-    <table border="0" style="width: 100%">
+    {{-- <table border="0" style="width: 100%">
         <thead>
             <tr>
                 <th>Tanggal</th>
@@ -29,10 +29,10 @@
             @endforeach
             <tr>
 
-                                                     
+
                 <td colspan="3">Jumlah</td>
                 <td>{{ $penjualan->sum('total_terjual') }}</td>
-                {{-- <td>{{ $penjualan->sum('total_terjual * Harga') }}</td> --}}
+                <td>{{ $penjualan->sum('total_terjual * Harga') }}</td>
                 <td>
                     @php
                         $totalPenjualan = 0;
@@ -45,6 +45,22 @@
 
             </tr>
         </tbody>
-    </table>
+    </table> --}}
+
+    <div class="container">
+        <table border="0" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($penjualan as $data)
+                    <td>{{ $data->produk }}</td>
+                @endforeach
+            </tbody>
+
+    </div>
 </body>
 </html>
