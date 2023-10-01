@@ -29,12 +29,12 @@
                             @foreach ($cekcart as $cart)
                                 <form action="/beli/{{ $cart->Id_Keranjang }}" method="POST">
                                     @csrf
-                                    @foreach ($alamat as $a)
-                                        <span style="font">Alamat</span>
-                                        <select name="Id_Alamat" id="">
+                                    <span style="font">Alamat</span>
+                                    <select name="Id_Alamat" id="">
+                                        @foreach ($alamat as $a)
                                             <option value="{{ $a->Id_Alamat }}">{{ $a->Label }}</option>
-                                        </select>
-                                    @endforeach
+                                        @endforeach
+                                    </select>
                             @endforeach
 
 
@@ -52,6 +52,7 @@
                                         <th class="cart-product-name item">Harga Jual</th>
                                         <th class="cart-qty item">Quantity</th>
                                         <th class="cart-sub-total item">Subtotal</th>
+                                        <th class="cart-sub-total item"></th>
                                     </tr>
                                 </thead><!-- /thead -->
 
@@ -75,44 +76,29 @@
                                                 <h4 class='cart-product-description'><a
                                                         href="/detail/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
                                                 </h4>
-                                                {{-- <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="rating rateit-small"></div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="reviews">
-                                                            (06 Reviews)
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.row --> --}}
                                             </td>
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">
-                                                    {{ $data->Sub_Beban }} Kg
+                                                    {{ $data->Sub_Beban }} G
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.
                                                     {{ number_format($data->Harga) }}
                                             <td class="cart-product-sub-total">
-                                                <button class="quantity-button minus-button">-</button>
+                                                {{-- <button class="quantity-button minus-button">-</button> --}}
                                                 <span class="cart-sub-total-price quantity">{{ $data->Kuantitas }}</span>
-                                                <button class="quantity-button plus-button">+</button>
+                                                {{-- <button class="quantity-button plus-button">+</button> --}}
                                             </td>
-                                            <td class="cart-product-sub-total"><span class="cart-sub-total-price">Rp.
+                                            <td class="cart-product-sub-total">
+                                                <span class="cart-sub-total-price">Rp.
                                                     {{ number_format($data->Sub_Total) }}
                                                     @php
                                                         $total += $data['Kuantitas'] * $data['Harga'];
                                                     @endphp
                                                 </span></td>
-                                            {{-- <td class="cart-product-sub-total">
-                            <span class="cart-sub-total-price">Rp. {{ number_format($data->Harga) }}</span>
-                        </td>
-                        <td class="cart-product-sub-total">
-                            <button class="quantity-button minus-button">-</button>
-                            <span class="cart-sub-total-price quantity">{{ $data->Kuantitas }}</span>
-                            <button class="quantity-button plus-button">+</button>
-                            <div class="subtotal">Subtotal: Rp. {{ number_format($data->Kuantitas * $data->Harga) }}</div>
-                        </td>
-                        <td class="cart-product-sub-total">
-                            <span class="cart-sub-total-price">Rp. {{ number_format($data->Sub_Total) }}</span>
-                        </td> --}}
+                                            {{-- <td>
+                                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value=""
+                                                    data-price="{{ $data->Sub_Total }} ">
+                                            </td>
+                                                <input type="hidden" name="selected_items[]"
+                                                    value="{{ $data->Id_Detail_Keranjang }}"> --}}
                                         </tr>
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
@@ -129,6 +115,8 @@
                                                         <div class="cart-grand-total ">
                                                             Total :<span class="inner-left-md"> Rp.
                                                                 {{ number_format($total) }}</span>
+                                                            {{-- Total: <span class="inner-left-md"><span
+                                                                    id="total-price">0</span></span> --}}
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -136,11 +124,9 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        {{-- <div class="cart-checkout-btn pull-right">
-                                <button type="submit" class="btn btn-primary checkout-btn" ><a href="/beli">PEMBAYARAN</a></button>
-                                <span class="">Have Fun!!</span>
-                            </div> --}}
-                                                        <button class="btn btn-upper btn-primary outer-left-xs" type="submit">Bayar</button>
+
+                                                        <button class="btn btn-upper btn-primary outer-left-xs"
+                                                            type="submit">Bayar</button>
                                                         </form>
 
                                                     </td>
@@ -153,7 +139,6 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="7">
-
                                             <!-- /.shopping-cart-btn -->
                                         </td>
                                     </tr>
@@ -170,91 +155,41 @@
     </div>
 
 
-
-
     {{-- <script>
-        const plusButton = document.querySelector('.plus-button');
-        const minusButton = document.querySelector('.minus-button');
+        const checkboxes = document.querySelectorAll('.item-checkbox');
 
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+        // Get the total price element
+        const totalPriceElement = document.getElementById('total-price');
+
+        // Initialize the total price
+        let totalPrice = 0;
+
+        // Function to format a number as IDR
+        function formatIDR(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+            }).format(number);
         }
 
-        // Tambahkan event listener untuk tombol plus
-        plusButton.addEventListener('click', () => {
-            quantity++;
-            quantityInput.value = quantity;
-            updateSubtotal();
-        });
+        // Update the initial total display
+        totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
 
-        // Tambahkan event listener untuk tombol minus
-        minusButton.addEventListener('click', () => {
-            if (quantity > 1) {
-                quantity--;
-                quantityInput.value = quantity;
-                updateSubtotal();
-            }
-        });
-
-        function updateSubtotal() {
-            const subtotalElement = parseInt('{{ $data->Harga }}'); // Ambil harga dari PHP
-            const subtotal = quantity * subtotalElement;
-            document.querySelector('.cart-sub-total-price').textContent = formatCurrency(subtotal) // Tampilkan subtotal
-        };
-
-</script> --}}
-
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const plusButtons = document.querySelectorAll(".plus-button");
-            const minusButtons = document.querySelectorAll(".minus-button");
-
-            plusButtons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    const quantitySpan = this.parentNode.querySelector(".quantity");
-                    const price = parseFloat(this.parentNode.querySelector(".cart-sub-total-price")
-                        .textContent.replace("Rp. ", "").replace(".", "").replace(",", "."));
-
-                    let currentQuantity = parseInt(quantitySpan.textContent);
-                    currentQuantity++;
-                    quantitySpan.textContent = currentQuantity;
-
-                    updateSubtotal(this.parentNode, currentQuantity, price);
-                });
+        // Add event listeners to the checkboxes
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const price = parseFloat(checkbox.getAttribute('data-price'));
+                if (checkbox.checked) {
+                    totalPrice += price;
+                } else {
+                    totalPrice -= price;
+                }
+                // Update the total price display
+                totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
             });
-
-            minusButtons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    const quantitySpan = this.parentNode.querySelector(".quantity");
-                    const price = parseFloat(this.parentNode.querySelector(".cart-sub-total-price")
-                        .textContent.replace("Rp. ", "").replace(".", "").replace(",", "."));
-
-                    let currentQuantity = parseInt(quantitySpan.textContent);
-                    if (currentQuantity > 1) {
-                        currentQuantity--;
-                        quantitySpan.textContent = currentQuantity;
-                        updateSubtotal(this.parentNode, currentQuantity, price);
-                    }
-                });
-            });
-
-            function updateSubtotal(container, quantity, price) {
-                // const quantityElement = container.querySelector(".quantity");
-                // const subtotalElement = container.querySelector(".subtotal");
-                const subtotalElement = parseInt('{{ $data->Harga }}');
-                const subtotal = quantity * subtotalElement;
-
-                // quantityElement.textContent = quantity;
-                subtotalElement.textContent = `Subtotal: Rp. ${subtotal.toLocaleString("id-ID")}`;
-            }
         });
-
-        function selectLabel(label) {
-            // Set the selected label in the <span> element
-            document.getElementById('selectedLabel').textContent = label;
-        }
     </script> --}}
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

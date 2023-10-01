@@ -4,7 +4,7 @@
 
 @section('content')
 
- 
+
 
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -18,7 +18,7 @@
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Produk<span class="text-danger"> *</span></label> <input type="text" id="Nama_Barang" name="Nama_Barang" placeholder="Masukan Produk Terbaru" onblur="validate(1)"> </div>
                         <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Keterangan Barang<span class="text-danger"> *</span></label><textarea id="Keterangan_Barang" name="Keterangan_Barang" cols="30" rows="10"></textarea> </div>
                     </div>
-                    
+
                     <div class="row justify-content-between text-left">
 
                         <div class="form-group col-sm-6 flex-column d-flex">
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Berat<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Berat" placeholder="Dalam Kg contoh : 0,5 = 500" onblur="validate(5)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Berat<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Berat" onblur="validate(5)"> </div>
                     </div>
 
                     <div class="row justify-content-between text-left">

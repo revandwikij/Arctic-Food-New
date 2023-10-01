@@ -6,10 +6,10 @@
 <div class="search-popup">
     <div class="search-popup-container">
 
-        <form role="search" method="get" class="search-form" action="">
-            <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value=""
-                name="s" />
-            <button type="submit" class="search-submit"><a href="#"><i class="icon icon-search"></i></a></button>
+        <form role="search" method="get" class="search-form" action="/barang/cari">
+            @csrf
+            <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="cari" />
+            <button type="submit" class="search-submit"><a href="/barang/cari"><i class="icon icon-search"></i></a></button>
         </form>
 
         <h5 class="cat-list-title">Browse Categories</h5>
@@ -45,7 +45,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-md-4 header-contact">
-                        <p>Let's talk! <strong><a href="https://wa.me/6281546904824?text=Hai%20saya%20ingin%20bertanya%20dengan%20Arctic%20Food">+62 815 4690 4824</a></strong>
+                        <p>Let's talk! <strong><a href="https://wa.me/6281546904824?text=Hai%20saya%20ingin%20bertanya%20dengan%20Arctic%20Food" target="_blank">+62 815 4690 4824</a></strong>
                         </p>
                     </div>
                     <div class="col-md-4 shipping-purchase text-center">
@@ -112,7 +112,7 @@
 
                                         <ul class="submenu">
                                             <li><a href="/shop" class="item-anchor">Shop</a></li>
-                                            <li><a href="/shop" class="item-anchor">Transaction</a></li>
+                                            <li><a href="/transaksi" class="item-anchor">Transaction</a></li>
                                         </ul>
                                     </li>
 

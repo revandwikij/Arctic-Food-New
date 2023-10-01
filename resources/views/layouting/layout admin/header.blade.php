@@ -17,14 +17,6 @@
                     <div class="search-mobile-trigger d-sm-none col">
                         <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
                     </div><!--//col-->
-                    <div class="app-search-box col">
-                        <form class="app-search-form">
-                            <input type="text" placeholder="Search..." name="search"
-                                class="form-control search-input">
-                            <button type="submit" class="btn search-btn btn-primary" value="Search"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
-                        </form>
-                    </div><!--//app-search-box-->
 
                     <div class="app-utilities col-auto">
                         <div class="app-utility-item app-notifications-dropdown dropdown">
@@ -88,12 +80,12 @@
                                 href="#" role="button" aria-expanded="false"><img
                                     src="assets/images/user.png" alt="user profile"></a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                <li><a class="dropdown-item" href="account.html">Account</a></li>
-                                <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                                <li><a class="dropdown-item" href="/profileadmin">Account</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                             </ul>
                         </div><!--//app-user-dropdown-->
                     </div><!--//app-utilities-->

@@ -9,6 +9,7 @@ use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\pelanggan;
+use App\Models\PenjualanView;
 use App\Models\Pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +79,8 @@ class ViewController extends Controller
 
     public function tambahadmin()
     {
+        auth()->user();
+
         return view('Penjual.tambahadmin');
     }
 
@@ -101,9 +104,10 @@ class ViewController extends Controller
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                // ->orderBy('Id_Barang', 'desc')
                 ->get(['barang.*', 'kategori.Kategori']);
-        $pelanggan = pelanggan::all();
-        return view('Penjual.tampil', compact('pelanggan', 'test'), ['test' => $test]);
+        $kategori = kategori::all();
+        return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()
@@ -123,11 +127,20 @@ class ViewController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function shop()
+    public function shop($kategori = 'all')
     {
-        $barang = Barang::all();
-        $kategori = kategori::all();
-        return view('shop', compact('barang', 'kategori') ) ;
+        // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
+        if ($kategori == 'all') {
+            $barang = Barang::all();
+        } else {
+            // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
+            $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                ->where('kategori.Kategori', $kategori)
+                ->get();
+        }
+        $kategoris = kategori::all();
+
+        return view('shop', compact('barang', 'kategoris') );
     }
 
     public function payment()
@@ -142,7 +155,7 @@ class ViewController extends Controller
 
        $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
-       
+
       $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
      ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
@@ -156,7 +169,8 @@ class ViewController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $pesan->Id_Pesanan,
+                // 'order_id' => $pesan->Id_Pesanan,
+                'order_id' => 'PREFIX_' . time(),
                 'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
             ),
             'customer_details' => array(
@@ -171,11 +185,14 @@ class ViewController extends Controller
       return view('payment', compact('datapesan', 'alamat', 'snapToken'));
     }
 
-   
+
 
     public function pesanan()
     {
-        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->get();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->get();
         return view ('Penjual.pesanan', compact('pesanan'));
     }
 
@@ -196,7 +213,7 @@ class ViewController extends Controller
 
     public function dataship()
     {
-        $ship= Biaya_Ship::all();
+        $ship = Biaya_Ship::all();
         // dd($ship);
         return view ('penjual.dataship', compact('ship')) ;
     }
@@ -206,23 +223,103 @@ class ViewController extends Controller
         return view ('penjual.tambahship');
     }
 
+    public function riwayat()
+    {
+        $user=auth()->user();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('users.id', '=', $user->id)->get();
+
+
+        return view ('riwayat', compact('pesanan'));
+    }
+
     public function perludikirim()
     {
         $user=auth()->user();
         $pesan =Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
-  
-        $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
-        ->where('pesanan')
-        ->get();
-  
-        $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-       ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get(); 
-  
-        return view ('penjual.perludikirim', compact('datapesan', 'alamat'));
+
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        // ->where('pesanan')
+        // ->get();
+
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Diproses')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
+
+    //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+    //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        return view ('penjual.perludikirim', compact('pesanan'));
     }
 
-    
+    public function profileadmin()
+    {
+        return view('Penjual.profileadmin');
+    }
 
+    public function detailorder($Id_Pesanan)
+    {
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+
+
+        return view('detilorder', compact('pesanan'));
+    }
+
+
+
+
+
+    public function laporan()
+    {
+        return view ('penjual.laporan');
+    }
+
+    public function rincianlaporan()
+    {
+        return view ('penjual.rincianlaporan');
+    }
+
+    public function laporanPenjualan(Request $request)
+{
+    $tanggalAwal = $request->input('tanggal_awal');
+    $tanggalAkhir = $request->input('tanggal_akhir');
+
+    $penjualan = PenjualanView::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
+
+    return view('penjual.lapbar', ['penjualan' => $penjualan]);
+}
+
+    public function barangkategori(Request $request)
+{
+    $kategoriValue = $request->input('kategori');
+
+    // Lakukan query untuk mengambil data PenjualanView sesuai kategori
+    $test = [];
+
+    if ($kategoriValue) {
+        $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                       ->where('kategori.Kategori', $kategoriValue)
+                       ->get();
+    }
+
+    // Ambil semua kategori (jika diperlukan)
+    $kategori = kategori::all();
+
+    return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
+}
+
+    public function lapbar()
+    {
+        $penjualan = PenjualanView::all();
+        return view ('penjual.lapbar', compact('penjualan'));
+    }
 
 }

@@ -60,13 +60,13 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        DB::table('users')->insert([
-            [
-                'username' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('12345678'),
-                'level' => 'penjual',
-            ]
-        ]);
+        // DB::table('users')->insert([
+        //     [
+        //         'username' => 'admin',
+        //         'email' => 'admin@gmail.com',
+        //         'password' => Hash::make('12345678'),
+        //         'level' => 'penjual',
+        //     ]
+        // ]);
     }
 }

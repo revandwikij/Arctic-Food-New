@@ -9,9 +9,10 @@
 @endif
 <div class="card card-default">
     <div class="card-header">
-        <form class="form-inline">
+        <form class="form-inline" action="/users/search" method="POST">
+            @csrf
             <div class="form-group mr-1">
-                <input class="form-control" type="text" name="id" placeholder="Pencarian..." />
+                <input class="form-control" type="text" name="cari" placeholder="Pencarian..." />
             </div>
             <div class="form-group mr-1">
                 <button class="btn btn-success">Refresh</button>
