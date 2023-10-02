@@ -149,7 +149,7 @@ Route::get('/add', [ViewController::class, 'tambahadmin']);
 
 
 
-
+Route::get('/error',[ViewController::class, 'error']);
 
 
 

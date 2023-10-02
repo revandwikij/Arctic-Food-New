@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="product-detail">
                                         <h3 class="product-title">
-                                            <a href="/detail/{{$data->Id_Barang}}">{{ $data->Nama_Barang }}</a>
+                                            <a href="single-product.html">{{ $data->Nama_Barang }}</a>
                                         </h3>
                                         <div class="item-price text-primary">{{ $data->Harga }}</div>
                                     </div>
