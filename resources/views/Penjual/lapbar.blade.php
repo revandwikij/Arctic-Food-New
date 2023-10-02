@@ -35,7 +35,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                                                       
+
                             <th scope="col">Tanggal</th>
                             <th scope="col">Produk</th>
                             <th scope="col">Harga Barang</th>
@@ -47,23 +47,23 @@
 
                     <tbody>
 
-                         
+
 
                         @foreach ($penjualan as $data)
                             <tr>
 
-                                
+
                                 <td>{{ $data->tanggal }} </td>
                                 <td>{{ $data->produk }} </td>
                                 <td>Rp. {{ number_format($data->Harga) }} </td>
                                 <td>{{ $data->total_terjual }} </td>
-                                <td>Rp. {{ number_format($data->total_terjual * $data->Harga) }} </td>                                
+                                <td>Rp. {{ number_format($data->total_terjual * $data->Harga) }} </td>
                             </tr>
                         @endforeach
- 
+
                         <tr>
 
-                                                     
+
                             <td colspan="3">Jumlah</td>
                             <td>{{ $penjualan->sum('total_terjual') }}</td>
                             {{-- <td>{{ $penjualan->sum('total_terjual * Harga') }}</td> --}}
@@ -82,7 +82,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    <a href="{{ url('/stream-pdf') }}" class="btn btn-primary">Lihat</a>
+                    <a href="{{ url('/stream-pdf') }}" target="_blank" class="btn btn-primary">Lihat</a>
                     <a href="{{ url('/generate-pdf') }}" class="btn btn-success">Download</a>
                 </div>
             </div>
@@ -93,7 +93,7 @@
 
 
 
- 
+
 
 
 @endsection
