@@ -322,4 +322,9 @@ class ViewController extends Controller
         return view ('penjual.lapbar', compact('penjualan'));
     }
 
+    public function invoice()
+    {
+        return view ('penjual.invoice');
+    }
+
 }
