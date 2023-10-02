@@ -28,8 +28,8 @@ class PDFController extends Controller
     {
         $penjualan = DB::table('v_laporan_barang')->get();
         $barang = DB::table('v_laporan_barang')
-            ->select('id_barang', DB::raw('SUM(Total_Terjual) as total_kuantitas'))
-            ->groupBy('id_barang')
+            ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
+            ->groupBy('produk', 'total_terjual')
             ->get();
 
         $data = [
@@ -38,7 +38,7 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan', $data);
+        $pdf->loadView('penjual.laporan', $data, );
 
         return $pdf->stream('penjual.laporan');
     }
