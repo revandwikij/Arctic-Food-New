@@ -31,6 +31,10 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>Produk</td>
+                    <td colspan="4">:</td>
+                </tr>
                 @foreach ($penjualan as $data)
                     <tr>
                         <td>{{ $data->tanggal }}</td>
