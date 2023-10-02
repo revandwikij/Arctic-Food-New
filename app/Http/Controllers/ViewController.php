@@ -104,7 +104,7 @@ class ViewController extends Controller
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-                ->orderBy('Id_Barang', 'desc')
+                // ->orderBy('Id_Barang', 'desc')
                 ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
         return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
@@ -127,11 +127,20 @@ class ViewController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function shop()
+    public function shop($kategori = 'all')
     {
-        $barang = Barang::all();
-        $kategori = kategori::all();
-        return view('shop', compact('barang', 'kategori') ) ;
+        // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
+        if ($kategori == 'all') {
+            $barang = Barang::all();
+        } else {
+            // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
+            $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                ->where('kategori.Kategori', $kategori)
+                ->get();
+        }
+        $kategoris = kategori::all();
+
+        return view('shop', compact('barang', 'kategoris') );
     }
 
     public function payment()
@@ -160,7 +169,8 @@ class ViewController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $pesan->Id_Pesanan,
+                // 'order_id' => $pesan->Id_Pesanan,
+                'order_id' => 'PREFIX_' . time(),
                 'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
             ),
             'customer_details' => array(
@@ -285,6 +295,25 @@ class ViewController extends Controller
     $penjualan = PenjualanView::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
 
     return view('penjual.lapbar', ['penjualan' => $penjualan]);
+}
+
+    public function barangkategori(Request $request)
+{
+    $kategoriValue = $request->input('kategori');
+
+    // Lakukan query untuk mengambil data PenjualanView sesuai kategori
+    $test = [];
+
+    if ($kategoriValue) {
+        $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+                       ->where('kategori.Kategori', $kategoriValue)
+                       ->get();
+    }
+
+    // Ambil semua kategori (jika diperlukan)
+    $kategori = kategori::all();
+
+    return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
 }
 
     public function lapbar()

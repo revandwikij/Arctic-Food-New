@@ -33,13 +33,27 @@
                 </form>
             </div><!--//app-search-box-->
             <div>
-                <select id="kategori">
+                {{-- <select id="kategori">
                     <option value="" selected disabled>Pilih Kategori</option> <!-- Opsi default -->
                     @foreach ($kategori as $k)
-                        <option value="{{ $k->Id_Kategori }}">{{ $k->Kategori }}</option>
+                        <option value="{{ $k->Id_Kategori }}" id="{{ $k->Id_Kategori }}">{{ $k->Kategori }}</option>
                     @endforeach
-                </select>
-                
+                </select> --}}
+
+                <form action="/barkat" method="GET">
+                    @csrf
+                    <label for="kategori">Kategori</label>
+                    {{-- <input type="date" name="Kategori" id="Kategori"> --}}
+                    <select name="kategori" id="kategori">
+                        <option value="" selected disabled>Pilih Kategori</option> <!-- Opsi default -->
+                        @foreach ($kategori as $k)
+                            <option>{{ $k->Kategori }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit">Klik</button>
+                </form>
+
             </div>
             <div>
                 <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>

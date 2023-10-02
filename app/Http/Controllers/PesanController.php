@@ -216,12 +216,15 @@ class PesanController extends Controller
 
         $biyship = Biaya_Ship::where('Kota', $kota->Kota)->first();
 
+
+        $totalbb= $totalbeban/1000;
+
         $cek30 = $pesan->Id_Pesanan;
         $ship = new Shipping();
         $ship->Id_Shipping = $newUid1;
         $ship->Id_Pesanan = $cek30;
         $ship->Id_Biaya = $biyship->Id_Biaya;
-        $ship->Total_Shipping = $biyship->Biaya_Shipping_per_Kg * $totalbeban;
+        $ship->Total_Shipping = $biyship->Biaya_Shipping_per_Kg * $totalbb;
         $ship->save();
 
 
