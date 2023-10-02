@@ -106,8 +106,8 @@ class ViewController extends Controller
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
                 ->orderBy('Id_Barang', 'desc')
                 ->get(['barang.*', 'kategori.Kategori']);
-        $pelanggan = pelanggan::all();
-        return view('Penjual.barang', compact('pelanggan', 'test'), ['test' => $test]);
+        $kategori = kategori::all();
+        return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()

@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         DB::statement("
     CREATE VIEW v_laporan_barang AS
     SELECT
@@ -27,6 +28,7 @@ return new class extends Migration
     JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
     WHERE pesanan.Status_Pesanan = 'Selesai'
     GROUP BY tanggal, produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;
+
 ");
     }
 
