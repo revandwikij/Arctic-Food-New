@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>Stok</td>
                                             <td>:</td>
-                                            <td>{{$data->Stok}}</td>
+                                            <td id="stok">{{$data->Stok}}</td>
                                         </tr>
                                         <tr>
                                             <td>Berat</td>
@@ -68,5 +68,24 @@
 
     </div>
         @endforeach
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const stok = parseInt(document.getElementById("stok").textContent);
+                const jumlahPesanInput = document.querySelector('input[name="jumlah_pesan"]');
+                const submitButton = document.querySelector('button[type="submit"]');
+
+                jumlahPesanInput.addEventListener("input", function () {
+                    const jumlahPesan = parseInt(jumlahPesanInput.value);
+                    if (jumlahPesan > stok) {
+                        submitButton.disabled = true;
+                        alert("Jumlah pesanan melebihi stok yang tersedia!");
+                    } else {
+                        submitButton.disabled = false;
+                    }
+                });
+            });
+        </script>
+
 @endsection
 
