@@ -28,11 +28,48 @@
                 <section id="selling-products" class="col-md-9 product-store">
                     <div class="container">
                         <ul class="tabs list-unstyled">
-                            <li data-tab-target="#all" class="tab" >all</li>
+                            <li data-tab-target="#all" class="tab" active>all</li>
                             @foreach ($kategoris as $item)
                                 <li data-tab-target="#{{ $item->Kategori }}" class="tab">{{ $item->Kategori }}</li>
                             @endforeach
                         </ul>
+
+                        {{-- @foreach ($kategoris as $kategori)
+                        <div id="{{ $kategori->Kategori }}" class="barang-container" style="display: none;">
+                            @foreach ($barang as $data)
+                                @if ($data->Kategori === $kategori->Kategori)
+                                <div class="product-item col-lg-4 col-md-6 col-sm-6 barang-item">
+                                    <div class="image-holder">
+                                        @if ($data->Foto_Barang)
+                                            <img src="{{ asset('uploads/' . $data->Foto_Barang) }}"
+                                                alt="{{ $data->Nama_Barang }}" class="product-image">
+                                        @endif
+                                    </div>
+                                    <div class="cart-concern">
+                                        <div class="cart-button d-flex justify-content-between align-items-center">
+                                            <button type="button" class="btn-wrap cart-link d-flex align-items-center">add
+                                                to cart <i class="icon icon-arrow-io"></i>
+                                            </button>
+                                            <button type="button" class="view-btn tooltip d-flex">
+                                                <i class="icon icon-screen-full"></i>
+                                                <span class="tooltip-text">Quick view</span>
+                                            </button>
+                                            <button type="button" class="wishlist-btn">
+                                                <i class="icon icon-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="product-detail">
+                                        <h3 class="product-title">
+                                            <a href="single-product.html">{{ $data->Nama_Barang }}</a>
+                                        </h3>
+                                        <div class="item-price text-primary">{{ $data->Harga }}</div>
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endforeach --}}
                         <div class="barang-container">
                             @foreach ($barang as $data)
                                 <div class="product-item col-lg-4 col-md-6 col-sm-6 barang-item">
@@ -63,9 +100,9 @@
                                         <div class="item-price text-primary">{{ $data->Harga }}</div>
                                     </div>
                                 </div>
-                                @endforeach
-                            </div>
-                            {{-- @foreach ($barang as $item)
+                            @endforeach
+                        </div>
+                        {{-- @foreach ($barang as $item)
                             <div class="barang-item">
                                 <!-- Tampilkan informasi barang di sini -->
                                 <h3>{{ $item->nama }}</h3>
@@ -349,24 +386,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        const tabs = document.querySelectorAll('.tab');
-        const barangContainers = document.querySelectorAll('.barang-container');
+    const tabs = document.querySelectorAll('.tab');
+    const barangContainers = document.querySelectorAll('.barang-container');
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Hilangkan kelas aktif dari semua tab dan sembunyikan semua barang
-                tabs.forEach(t => t.classList.remove('active'));
-                barangContainers.forEach(container => container.style.display = 'none');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove 'active' class from all tabs and hide all product containers
+            tabs.forEach(t => t.classList.remove('active'));
+            barangContainers.forEach(container => container.style.display = 'none');
 
-                // Tampilkan tab yang dipilih dan barang yang sesuai
-                tab.classList.add('active');
-                const target = document.querySelector(tab.dataset.tabTarget);
-                if (target) {
-                    target.style.display = 'block';
-                }
-            });
+            // Add 'active' class to the clicked tab and display the corresponding products
+            tab.classList.add('active');
+            const target = document.querySelector(tab.dataset.tabTarget);
+            if (target) {
+                target.style.display = 'block';
+            }
         });
     });
+});
     </script>
-
 @endsection

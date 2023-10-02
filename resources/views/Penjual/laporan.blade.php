@@ -51,11 +51,18 @@
         <table border="0" style="width: 100%">
             <thead>
                 <tr>
-                    <th>Produk</th>
-                    <th>:</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>Produk</td>
+                    <td colspan="4">:</td>
+                </tr>
                 @foreach ($penjualan as $data)
                     <td>{{ $data->produk }}</td>
                 @endforeach
