@@ -10,188 +10,97 @@
         </div>
     @endif
 
-    <section class="py-5">
-        <div class="container">
-            <div>
-                {{-- <a href="/"><button class="btn btn-primary" style="margin-bottom: 20px">KEMBALI</button></a> --}}
-            </div>
-            <div class="bg-white shadow rounded-lg d-block d-sm-flex">
-                <div class="container" style="width: unset">
+	<style>
+        .profile-card {
+            max-width: 600px; /* Ukuran kartu profil */
+            margin: 0 auto;
+        }
+        .profile-img-container {
+    width: 150px; /* Ukuran lingkaran */
+    height: 150px; /* Ukuran lingkaran */
+    border-radius: 50%; /* Membuat foto menjadi lingkaran */
+    overflow: hidden; /* Memastikan foto tidak meluber */
+    margin: 0 auto; /* Pusatkan foto */
+    position: relative; /* Untuk mengatur posisi foto dalam container */
+    top: -225px; /* Sesuaikan dengan setengah tinggi container */
+    z-index: 1; /* Tempatkan di atas latar belakang */
+}
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .background-img {
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 15px;
+        }
+        /* Lebar input 100% */
+        .w-100 {
+            width: 100%;
+        }
+	</style>
 
-                    <div class="p-4">
-                        <div class="img-circle text-center mb-3">
-                            <div style="background-image: url('{{ asset('../assets/css/images/bg-1.jpeg') }}'); width: 100%; height: 30%; opacity: 0.5;"
-                                alt="bg"></div>
-                            <img src="assets/css/images/arcticlogo.png" alt="Image"
-                                style="width: 10%; border-radius: 100%; img{ }" class="shadow">
-                        </div>
-                        <h4 class="text-center">{{ Auth::user()->username }}</h4>
-                    </div>
-
-                        <div class="profile-tab-nav border-right">
-                            <div class="nav  nav-pills" id="v-pills-tab" role="tablist"
-                                aria-orientation="vertical">
-                                <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account"
-                                    role="tab" aria-controls="account" aria-selected="true">
-                                    <i class="fa fa-home text-center mr-1"></i>
-                                    Akun
-                                </a>
-                                <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab"
-                                    aria-controls="password" aria-selected="false">
-                                    <i class="fa fa-key text-center mr-1"></i>
-                                    Password
-                                </a>
-                                <a class="nav-link" href="/add">
-                                    <i class="fa fa-key text-center mr-1"></i>
-                                    Add Account
-                                </a>
-                            </div>
-                        </div>
-                </div>
-
-
-                {{-- <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<form action="/updatepel" method="POST">
-							@csrf
-							<h3 class="mb-4">AKUN SAYA</h3>
-							@foreach ($pelanggan as $p)
-							<input type="text" value="{{$p ->Id_Pelanggan}}" name="Id_Pelanggan" hidden>
-							<input type="text" value="{{Auth::user() -> id}}" name="user" hidden>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Username</label>
-								  	<input type="text" name="username" class="form-control" value="{{ $p->username }}" >
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Jenis Kelamin</label>
-								  	<input type="text" name="jenkel" class="form-control" value="{{ $p->jenkel }}" >
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Email</label>
-								  	<input type="email" name="email" class="form-control" value="{{ $p->email }}" >
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>No. Telepon</label>
-								  	<input type="text" name="no_Telp" class="form-control" value="{{ $p->no_Telp }}" >
-								</div>
-							</div>
-							<div class="col-md-6">
-
-							</div>
-							<div class="col-md-6">
-
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-								  	<label>Bio</label>
-									<textarea class="form-control" rows="4">Gaboleh vnbcjueqiev </textarea>
-								</div>
-							</div>
-						</div>
-                        @endforeach
-							<!-- Isi form pengeditan informasi akun di sini -->
-							<button type="submit" class="btn btn-primary">Simpan</button>
-						</form>
+<div class="container mt-5">
+	<div class="profile-card card">
+		<!-- Background Profil 16:9 -->
+		<div class="background-img" style="background-image: url('../assets/css/images/Lbellfood.png');"></div>
+		<div class="card-body">
+			<!-- Foto Profil 1:1 -->
+			<div class="profile-img-container">
+				<img class="profile-img" src="../assets/css/images/arcticlogo.png" alt="Foto Profil">
+			</div>
+			<h5 class="card-title">Nama Toko</h5>
+			<div class="row">
+				<!-- Input NIB -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nib">NIB</label>
+						<input type="text" class="form-control w-100" id="nib" placeholder="Masukkan NIB">
 					</div>
-					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-						<h3 class="mb-4">Password Settings</h3>
-						<form action="/updatepassword" method="POST">
-							@csrf
-							<div class="form-group">
-								<label for="old_password">Password Lama</label>
-								<div class="input-group">
-									<input type="password" name="old_password" id="old_password" class="form-control" required>
-									<div class="input-group-append">
-										<span class="input-group-text">
-											<i id="toggle_password" class="fas fa-eye-slash"></i>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="new_password">Password Baru</label>
-										<input type="password" name="new_password" id="new_password" class="form-control" required>
-
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="confirm_password">Konfirmasi Password Baru</label>
-										<input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
-									</div>
-								</div>
-							</div>
-							<div>
-								<button type="submit" class="btn btn-primary">Perbarui Password</button>
-								<button type="button" class="btn btn-light">Kembali</button>
-							</div>
-						</form>
+				</div>
+				<!-- Input Username -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="username">Username</label>
+						<input type="text" class="form-control w-100" id="username" placeholder="Masukkan Username">
 					</div>
-                    <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                        <h3 class="mb-4">address Settings</h3>
-                        <div class="row">
+				</div>
+				<!-- Input Email -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control w-100" id="email" placeholder="Masukkan Email">
+					</div>
+				</div>
+				<!-- Input Kota -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="kota">Kota</label>
+						<input type="text" class="form-control w-100" id="kota" placeholder="Masukkan Kota">
+					</div>
+				</div>
+				<!-- Input Phone Number -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="phone">Phone Number</label>
+						<input type="text" class="form-control w-100" id="phone" placeholder="Masukkan Phone Number">
+					</div>
+				</div>
+				<!-- Input Text Area untuk Bio -->
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="bio">Bio</label>
+						<textarea class="form-control w-100" id="bio" rows="3" placeholder="Tulis bio Anda di sini"></textarea>
+					</div>
+				</div>
+			</div>
+			<button class="btn btn-primary">Simpan</button>
+		</div>
+	</div>
+</div>
 
-                            <div class="col-md-9 mb-5">
-                                <h4 >Alamat yg sudah ada</h4>
-                                <select name="" id="">
-                                    @foreach ($alamat as $item)
-                                    <option value="{{ $item->Id_Alamat }}">{{ $item->Label }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <form action="/alamat" method="GET">
-                                @csrf
-								<div class="form-group">
-                                    <label>Label Alamat</label>
-                                    <input type="text" class="form-control" name="Label" placeholder="Contoh : Rumah, Sekolah, Kantor Saya"></input>
-                                </div>
-								<div class="form-group">
-                                    <label>Nama Penerima</label>
-                                    <input type="text" class="form-control" name="Nama_Penerima">
-                                </div>
-								<div class="form-group">
-                                    <label>No HP</label>
-                                    <input type="text" class="form-control" name="No_Hp">
-                                </div>
-                                <div class="form-group">
-                                    <label>Alamat Lengkap</label>
-                                    <textarea type="text" class="form-control" name="Alamat"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kota</label>
-                                    <input type="text" class="form-control" name="Kota">
-                                    <select name="Kota" id="Kota">
-                                        @foreach ($biaya_ship as $data)
-                                        <option value="{{$data['Kota']}}">{{$data['Kota']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kode_Pos</label>
-                                    <input type="text" class="form-control" name="Pos">
-                                </div>
-							    </div>
-						        </div>
-						    <div>
-							    <button class="btn btn-primary" >Tambah</button>
-                               </form>
-                        </div>
-                    </div>
-				</div> --}}
-            </div>
-        </div>
-    </section>
 
 @endsection
