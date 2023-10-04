@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
+
     Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
@@ -109,6 +110,8 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop/{kategori}', [ViewController::class, 'shop']);
+    Route::get('/lihat', [ViewController::class, 'lihat1']);
+    Route::get('/lihat1', [ViewController::class, 'lihat2']);
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/rincian/{Id_Barang}', [ViewController::class, 'detailorder']);
     Route::get('/barang/filter',[ViewController::class, 'filter']);

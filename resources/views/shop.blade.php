@@ -70,8 +70,8 @@
                             @endforeach
                         </div>
                     @endforeach --}}
+                    @foreach ($barang as $data)
                         <div class="barang-container">
-                            @foreach ($barang as $data)
                                 <div class="product-item col-lg-4 col-md-6 col-sm-6 barang-item">
                                     <div class="image-holder">
                                         @if ($data->Foto_Barang)
@@ -100,8 +100,8 @@
                                         <div class="item-price text-primary">{{ $data->Harga }}</div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
-                        </div>
                         {{-- @foreach ($barang as $item)
                             <div class="barang-item">
                                 <!-- Tampilkan informasi barang di sini -->
@@ -146,42 +146,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @foreach ($kategoris as $item)
-                            <div id="{{ $item -> Kategori }}" class="tab-content" data-tab-content>
-                              <div class="row d-flex flex-wrap">
-                                @foreach ($barang as $data)
-                                <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                                  <div class="image-holder">
-                                    @if ($item->Foto_Barang)
-                                      <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
-                                    @endif
-                                    <img src="../assets/images/selling-products3.jpg" alt="Books" class="product-image">
-                                  </div>
-                                  <div class="cart-concern">
-                                    <div class="cart-button d-flex justify-content-between align-items-center">
-                                      <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                                      </button>
-                                      <button type="button" class="view-btn tooltip
-                                          d-flex">
-                                        <i class="icon icon-screen-full"></i>
-                                        <span class="tooltip-text">Quick view</span>
-                                      </button>
-                                      <button type="button" class="wishlist-btn">
-                                        <i class="icon icon-heart"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                  <div class="product-detail">
-                                    <h3 class="product-title">
-                                      <a href="single-product.html">{{ $data -> Nama_Barang }}</a>
-                                    </h3>
-                                    <div class="item-price text-primary">{{ $data -> Harga }}</div>
-                                  </div>
-                                </div>
-                                @endforeach
-                              </div>
-                            </div>
-                            @endforeach
                         </div> --}}
                         <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
                             <div class="pagination loop-pagination d-flex justify-content-center">

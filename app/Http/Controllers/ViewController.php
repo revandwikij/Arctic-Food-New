@@ -21,6 +21,7 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         $barang = Barang::paginate(3);
         $kategoris = kategori::all();
+        // $cek1 = Barang::paginate(8);
         // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
         //         ->get(['barang.*', 'kategori.*']);
         return view('index', compact('kategoris'),compact('barang'), compact('pelanggan'));
@@ -321,5 +322,20 @@ class ViewController extends Controller
         $penjualan = PenjualanView::all();
         return view ('penjual.lapbar', compact('penjualan'));
     }
+
+    public function lihat1()
+    {
+        $kategoris = kategori::all();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->get();
+        return view ('shop', compact('barang', 'kategoris'));
+    }
+
+    public function lihat2()
+    {
+        $kategoris = kategori::all();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Laut')->get();
+        return view ('shop', compact('barang', 'kategoris'));
+    }
+
 
 }
