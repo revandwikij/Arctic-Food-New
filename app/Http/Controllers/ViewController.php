@@ -93,14 +93,6 @@ class ViewController extends Controller
 
     }
 
-    public function detail()
-    {
-        $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $kategoris = kategori::all();
-        return view('users.detail', compact('kategoris'), compact('barang'), compact('pelanggan'));
-    }
-
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
@@ -325,6 +317,14 @@ class ViewController extends Controller
     public function invoice()
     {
         return view ('penjual.invoice');
+    }
+
+    public function single($Id_Barang)
+    {
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('Id_Barang', $Id_Barang)->get();
+
+
+        return view ('single-post', compact('barang'));
     }
 
 }

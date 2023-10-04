@@ -68,10 +68,12 @@
             <div class="product-item col-lg-4 col-md-6 col-sm-6">
               <div class="image-holder">
                 @if($item->Foto_Barang)
-                <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
+                  <a href="/single/{{$item->Id_Barang}}">
+                    <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
+                  </a>
               </div>
               @endif
-              <div class="cart-concern">
+              {{-- <div class="cart-concern">
                 <div class="cart-button d-flex justify-content-between align-items-center">
                   <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
                   </button>
@@ -84,10 +86,10 @@
                     <i class="icon icon-heart"></i>
                   </button>
                 </div>
-              </div>
+              </div> --}}
               <div class="product-detail">
                 <h3 class="product-title">
-                  <a href="/detail/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
+                  <a href="/single/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
                 </h3>
                 <div class="item-price text-primary">{{$item->Harga}}</div>
               </div>

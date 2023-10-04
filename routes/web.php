@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop/{kategori}', [ViewController::class, 'shop']);
     Route::get('/contact', [ViewController::class, 'contact']);
@@ -151,7 +152,6 @@ Route::get('/add', [ViewController::class, 'tambahadmin']);
 
 
 
-Route::get('/error',[ViewController::class, 'error']);
 
 
 
