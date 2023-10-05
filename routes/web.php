@@ -18,6 +18,7 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\UlasanController;
 use App\Models\Barang;
 use App\Models\pelanggan;
 use App\Models\Shipping;
@@ -89,6 +90,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
     Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
+    Route::get('/invoice', [ViewController::class, 'invoice']);
+
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
 });
@@ -108,6 +111,8 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
+    Route::post('/ulasan/{Id_Barang}',[UlasanController::class, 'store']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
     Route::get('/shop/{kategori}', [ViewController::class, 'shop']);
     Route::get('/lihat', [ViewController::class, 'lihat1']);
@@ -120,6 +125,8 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
 });
+
+
 
 
 //INI LOGIN-USERS
@@ -147,7 +154,6 @@ Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 // Route::get('/detil', [ViewController::class, 'detail']);
 // Route::get('/coba', [ViewController::class, 'coba']);
-
 
 
 

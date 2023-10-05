@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('Kuantitas');
             $table->integer('Sub_Beban');
             $table->integer('Sub_Total');
+            $table->enum('Status', ['Aktif', 'Dicheckout', 'Dihapus']);
             $table->timestamps();
         });
     }

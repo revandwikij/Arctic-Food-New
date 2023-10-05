@@ -17,7 +17,7 @@
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
 						<div class="img-circle text-center mb-3">
-							<img src="assets/css/images/defprof.png" alt="Image" class="shadow">
+							<img src="assets/css/images/defprof.png" alt="Image" style="width: 10px; height: 10px;" class="shadow">
 						</div>
 						<h4 class="text-center">{{ Auth::user()->username }}</h4>
 					</div>

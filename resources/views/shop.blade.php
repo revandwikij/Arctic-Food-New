@@ -28,7 +28,7 @@
                 <section id="selling-products" class="col-md-9 product-store">
                     <div class="container">
                         <ul class="tabs list-unstyled">
-                            <li data-tab-target="#all" class="tab" active>all</li>
+                            <li data-tab-target="#all" class="tab" active>All</li>
                             @foreach ($kategoris as $item)
                                 <li data-tab-target="#{{ $item->Kategori }}" class="tab">{{ $item->Kategori }}</li>
                             @endforeach
@@ -95,13 +95,15 @@
                                     </div>
                                     <div class="product-detail">
                                         <h3 class="product-title">
-                                            <a href="/detail/{{$data->Id_Barang}}">{{ $data->Nama_Barang }}</a>
+                                            <a href="/single/{{$data->Id_Barang}}">{{ $data->Nama_Barang }}</a>
                                         </h3>
                                         <div class="item-price text-primary">{{ $data->Harga }}</div>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
+
+
                         {{-- @foreach ($barang as $item)
                             <div class="barang-item">
                                 <!-- Tampilkan informasi barang di sini -->
@@ -147,7 +149,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                        <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
+                        {{-- <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
                             <div class="pagination loop-pagination d-flex justify-content-center">
                                 <a href="#" class="pagination-arrow d-flex align-items-center">
                                     <i class="icon icon-arrow-left"></i>
@@ -159,8 +161,9 @@
                                     <i class="icon icon-arrow-right"></i>
                                 </a>
                             </div>
-                        </nav>
+                        </nav> --}}
                     </div>
+
                 </section>
 
                 <aside class="col-md-3">
@@ -244,7 +247,7 @@
             </div>
         </div>
     </div>
-
+    {{ $barang->links() }}
     <hr>
 
     <section id="brand-collection" class="padding-medium bg-light-grey">

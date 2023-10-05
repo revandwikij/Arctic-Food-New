@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        // DB::table('users')->insert([
+        // DB::table('laporan_penjualan')->insert([
         //     [
         //         'username' => 'admin',
         //         'email' => 'admin@gmail.com',

@@ -2,7 +2,7 @@
     background-color: #f5f5f5;
     padding: 10px;
   }
-  
+
   .nav-menuu {
     list-style: none;
     margin: 0;
@@ -10,15 +10,15 @@
     display: flex;
     justify-content: center; /* Add this line */
   }
-  
+
   .nav-itemm {
     margin-right: 20px;
   }
-  
+
   .nav-itemm:last-child {
     margin-right: 0;
   }
-  
+
   .nav-itemm a {
     color: #333;
     text-decoration: none;
@@ -26,27 +26,27 @@
     font-size: 16px;
     font-family: "Montserrat", sans-serif; /* Gunakan font "Montserrat" atau font serupa */
   }
-  
+
   .nav-itemm a:hover {
     text-decoration: underline;
   }
-  
-  .containerr {
+
+  .container {
     margin: 20px auto;
     max-width: 800px;
-  }
-  
-  h1 {
+}
+
+h1 {
     color: #333;
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  
-  .order-listt {
+}
+
+.order-list {
     margin-top: 30px;
-  }
-  
-  .order-itemm {
+}
+
+.order-item {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -54,49 +54,71 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  
-  .order-thumbnaill img {
+}
+
+.order-thumbnail img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 4px;
     margin-right: 20px;
-  }
-  
-  .order-detailss h2 {
+}
+
+.order-details h2 {
     margin-top: 0;
     margin-bottom: 5px;
-  }
-  
-  .order-detailss p {
+}
+
+.order-details p {
     margin: 5px 0;
-  }
-  
-  .order-buttonn {
+}
+
+.chat-button,
+.accept-button,
+.review-button,
+.view-button {
     padding: 8px 16px;
-    background-color: #005de8;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 400px;
-  }
-  
-  .order-buttonn:hover {
+}
+
+.chat-button {
+    background-color: #005de8;
+    color: white;
+}
+
+.chat-button:hover {
     background-color: #d32f2f;
-  }
-  
-  .review-buttonn {
-    padding: 8px 16px;
+}
+
+.accept-button {
     background-color: #005de8;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
     margin-left: 10px;
-  }
-  
-  .review-buttonn:hover {
+}
+
+.accept-button:hover {
     background-color: #d32f2f;
-  }
+}
+
+.review-button {
+    background-color: #005de8;
+    color: white;
+}
+
+.review-button:hover {
+    background-color: #d32f2f;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

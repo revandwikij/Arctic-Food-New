@@ -24,7 +24,7 @@
     <div class="text-right mt-4" style="margin-left: 92%">
         <button class="btn btn-danger">Hapus</button>
     </div>
-    <h2 class="mb-4">Tabel Laporan</h2>
+    <h2 class="mb-4">Informasi Laporan</h2>
     
     <table class="table table-striped">
         <thead>
@@ -34,7 +34,6 @@
                 <th>Nama Produk</th>
                 <th>Kuantitas</th>
                 <th>Total Harga</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -44,23 +43,6 @@
                 <td>Produk A</td>
                 <td>10</td>
                 <td>$100.00</td>
-                <td>Selesai</td>
-            </tr>
-            <tr>
-                <td>00221736416246294829</td>
-                <td><img src="produk2.jpg" alt="Produk B" style="width: 80px;"></td>
-                <td>Produk B</td>
-                <td>5</td>
-                <td>$50.00</td>
-                <td>Proses</td>
-            </tr>
-            <tr>
-                <td>00221736416246294829</td>
-                <td><img src="../assets" alt="Produk B" style="width: 80px;"></td>
-                <td>Produk B</td>
-                <td>5</td>
-                <td>$50.00</td>
-                <td>Proses</td>
             </tr>
         </tbody>
     </table>

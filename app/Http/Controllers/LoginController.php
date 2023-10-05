@@ -35,7 +35,7 @@ class LoginController extends Controller
             }
             else
             {
-                return 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley';
+                return view('layouting.error');
             }
 
 

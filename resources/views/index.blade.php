@@ -6,101 +6,97 @@
 
     <section id="billboard" class="overflow-hidden">
 
-        <button class="button-prev">
-            <i class="icon icon-chevron-left"></i>
-        </button>
-        <button class="button-next">
-            <i class="icon icon-chevron-right"></i>
-        </button>
-        <div class="swiper main-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"
-                    style="background-image: url('../assets/css/images/1.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
-                    <div class="banner-content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h2 class="banner-title">Arctic Food</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-                                        ipsum enim pharetra hac.</p>
-                                    <div class="btn-wrap">
-                                        <a href="/shop" class="btn btn-light btn-medium d-flex align-items-center"
-                                            tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      <button class="button-prev">
+        <i class="icon icon-chevron-left"></i>
+      </button>
+      <button class="button-next">
+        <i class="icon icon-chevron-right"></i>
+      </button>
+      <div class="swiper main-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" style="background-image: url('../assets/css/images/1.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
+            <div class="banner-content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h2 class="banner-title">Arctic Food</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
+                    <div class="btn-wrap">
+                      <a href="/shop" class="btn btn-light btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
+                      </a>
                     </div>
+                  </div>
                 </div>
-                <div class="swiper-slide"
-                    style="background-image: url('../assets/images/banner2.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
-                    <div class="banner-content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h2 class="banner-title">Our Product</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-                                        ipsum enim pharetra hac.</p>
-                                    <div class="btn-wrap">
-                                        <a href="/shop"
-                                            class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center"
-                                            tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="swiper-slide" style="background-image: url('../assets/images/banner2.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
+            <div class="banner-content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h2 class="banner-title">Our Product</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
+                    <div class="btn-wrap">
+                      <a href="/shop" class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
 
     <section id="featured-products" class="product-store padding-large">
-        <div class="container">
-            <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-                <h2 class="section-title">Featured Products</h2>
-                <div class="btn-wrap">
-                    <a href="/shop" class="d-flex align-items-center">View all products <i
-                            class="icon icon icon-arrow-io"></i></a>
-                </div>
-            </div>
-            <div class="swiper product-swiper overflow-hidden">
-                <div class="swiper-wrapper">
-                    @foreach ($barang as $item)
-                        <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                            <div class="image-holder">
-                                @if ($item->Foto_Barang)
-                                    <img src="{{ asset('uploads/' . $item->Foto_Barang) }}" alt="Books"
-                                        class="product-image">
-                            </div>
-                    @endif
-                    <div class="cart-concern">
-                        <div class="cart-button d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i
-                                    class="icon icon-arrow-io"></i>
-                            </button>
-                            <button type="button" class="view-btn tooltip
+      <div class="container">
+        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+          <h2 class="section-title">Best Selling </h2>
+          <div class="btn-wrap">
+            <a href="/shop" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
+          </div>
+        </div>
+        <div class="swiper product-swiper overflow-hidden">
+          <div class="swiper-wrapper">
+            @foreach ($produkterlaris as $item )
+
+
+
+
+            <div class="product-item col-lg-4 col-md-6 col-sm-6">
+              <div class="image-holder">
+                @if($item->Foto_Barang)
+                  <a href="/single/{{$item->Id_Barang}}">
+                    <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
+                  </a>
+              </div>
+              @endif
+              {{-- <div class="cart-concern">
+                <div class="cart-button d-flex justify-content-between align-items-center">
+                  <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                  </button>
+                  <button type="button" class="view-btn tooltip
                       d-flex">
-                                <i class="icon icon-screen-full"></i>
-                                <span class="tooltip-text">Quick view</span>
-                            </button>
-                            <button type="button" class="wishlist-btn">
-                                <i class="icon icon-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-detail">
-                        <h3 class="product-title">
-                            <a href="/detail/{{ $item->Id_Barang }}">{{ $item->Nama_Barang }}</a>
-                        </h3>
-                        <div class="item-price text-primary">{{ $item->Harga }}</div>
-                    </div>
+                    <i class="icon icon-screen-full"></i>
+                    <span class="tooltip-text">Quick view</span>
+                  </button>
+                  <button type="button" class="wishlist-btn">
+                    <i class="icon icon-heart"></i>
+                  </button>
                 </div>
-                @endforeach
-                {{-- @foreach ($barang as $b)
+              </div> --}}
+              <div class="product-detail">
+                <h3 class="product-title">
+                  <a href="/single/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
+                </h3>
+                <div class="item-price text-primary">{{$item->Harga}}</div>
+              </div>
+            </div>
+            @endforeach
+    {{-- @foreach ($barang as $b)
 
             <div class="swiper-slide">
               <div class="product-item">
@@ -129,68 +125,61 @@
             </div>
         </div>
         @endforeach --}}
-            </div>
+          </div>
         </div>
         <div class="swiper-pagination"></div>
-        </div>
+      </div>
     </section>
 
     <section id="latest-collection">
-        <div class="container">
-            <div class="product-collection row">
-                <div class="col-lg-7 col-md-12 left-content">
-                    <div class="collection-item">
-                        <div class="products-thumb">
-                            <img src="../assets/images/collection-item1.jpg" alt="collection item"
-                                class="large-image image-rounded">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
-                            <div class="categories">olahan</div>
-                            <h3 class="item-title">AYAM</h3>
-                            <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak
-                                terlupakan.</p>
-                            <div class="btn-wrap">
-                                <a href="/lihat" class="d-flex align-items-center">shop collection <i
-                                        class="icon icon-arrow-io"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+      <div class="container">
+        <div class="product-collection row">
+          <div class="col-lg-7 col-md-12 left-content">
+            <div class="collection-item">
+              <div class="products-thumb">
+                <img src="../assets/images/collection-item1.jpg" alt="collection item" class="large-image image-rounded">
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
+                <div class="categories">olahan</div>
+                <h3 class="item-title">AYAM</h3>
+                <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak terlupakan.</p>
+                <div class="btn-wrap">
+                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  </a>
                 </div>
-                <div class="col-lg-5 col-md-12 right-content flex-wrap">
-                    <div class="collection-item top-item">
-                        <div class="products-thumb">
-                            <img src="../assets/images/collection-item2.jpg" alt="collection item"
-                                class="small-image image-rounded">
-                        </div>
-                        <div class="col-md-6 product-entry">
-                            <div class="categories">Olahan</div>
-                            <h3 class="item-title">SAPI</h3>
-                            <div class="btn-wrap">
-                                <a href="/shop" class="d-flex align-items-center">shop collection <i
-                                        class="icon icon-arrow-io"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collection-item bottom-item">
-                        <div class="products-thumb">
-                            <img src="../assets/images/collection-item3.jpg" alt="collection item"
-                                class="small-image image-rounded">
-                        </div>
-                        <div class="col-md-6 product-entry">
-                            <div class="categories">Olahan</div>
-                            <h3 class="item-title">IKAN</h3>
-                            <div class="btn-wrap">
-                                <a href="/lihat1" class="d-flex align-items-center">shop collection <i
-                                        class="icon icon-arrow-io"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-5 col-md-12 right-content flex-wrap">
+            <div class="collection-item top-item">
+              <div class="products-thumb">
+                <img src="../assets/images/collection-item2.jpg" alt="collection item" class="small-image image-rounded">
+              </div>
+              <div class="col-md-6 product-entry">
+                <div class="categories">Olahan</div>
+                <h3 class="item-title">SAPI</h3>
+                <div class="btn-wrap">
+                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="collection-item bottom-item">
+              <div class="products-thumb">
+                <img src="../assets/images/collection-item3.jpg" alt="collection item" class="small-image image-rounded">
+              </div>
+              <div class="col-md-6 product-entry">
+                <div class="categories">Olahan</div>
+                <h3 class="item-title">IKAN</h3>
+                <div class="btn-wrap">
+                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     {{-- <section id="selling-products" class="product-store bg-light-grey padding-large">
@@ -375,89 +364,86 @@
 
     <section id="flash-sales" class="product-store padding-large">
 
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Flash sales</h2>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Product</h2>
+        </div>
+        <div class="swiper product-swiper flash-sales overflow-hidden">
+          <div class="swiper-wrapper">
+
+            @foreach ($barang as $data)
+
+
+            <div class="swiper-slide">
+              <div class="product-item">
+                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}"  alt="Books" class="product-image">
+                <div class="cart-concern">
+                  <div class="cart-button d-flex justify-content-between align-items-center">
+                    <a href="/single/{{ $data->Id_Barang }}" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i></button>
+                    {{-- <button type="button" class="view-btn tooltip
+                        d-flex">
+                      <i class="icon icon-screen-full"></i>
+                      <span class="tooltip-text">Quick view</span>
+                    </button> --}}
+                    {{-- <button type="button" class="wishlist-btn">
+                      <i class="icon icon-heart"></i>
+                    </button> --}}
+                  </div>
+                </div>
+                {{-- <div class="discount">10% Off</div> --}}
+                <div class="product-detail">
+                  <h3 class="product-title">
+                    <a href="/single/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
+                  </h3>
+                  <div class="item-price text-primary">
+                    <del class="prev-price">{{ $data->Harga }}</del>Rp39.999
+                  </div>
+                </div>
+              </div>
             </div>
 
 
-                <div class="swiper product-swiper flash-sales overflow-hidden" direction="horizontal">
-
-                    <div class="swiper-wrapper">
-                        @foreach ($barang as $data)
-                        <div class="swiper-slide">
-                            <div class="product-item">
-                                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="Books"
-                                    class="product-image">
-                                <div class="cart-concern">
-                                    <div class="cart-button d-flex justify-content-between align-items-center">
-                                        <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to
-                                            cart <i class="icon icon-arrow-io"></i>
-                                        </button>
-                                        <button type="button" class="view-btn tooltip d-flex">
-                                            <i class="icon icon-screen-full"></i>
-                                            <span class="tooltip-text">Quick view</span>
-                                        </button>
-                                        <button type="button" class="wishlist-btn">
-                                            <i class="icon icon-heart"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="discount">10% Off</div>
-                                <div class="product-detail">
-                                    <h3 class="product-title">
-                                        <a href="single-product.html">{{ $data->Nama_Barang }}</a>
-                                    </h3>
-                                    <div class="item-price text-primary">
-                                        <del class="prev-price">{{ $data->Harga }}</del>Rp39.999
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-
-                    <div class="swiper-pagination"></div>
-
-                </div>
 
 
+            @endforeach
+
+
+          </div>
+          <div class="swiper-pagination"></div>
 
         </div>
-
+      </div>
     </section>
 
     <section class="shoppify-section-banner">
-        <div class="container">
-            <div class="product-collection">
-                <div class="left-content collection-item">
-                    <div class="products-thumb">
-                        <img src="../assets/images/model.jpg" alt="collection item" class="large-image image-rounded">
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
-                        <div class="categories">Special nuggets</div>
-                        <h3 class="item-title">Kanzler nugget crispy</h3>
-                        <p>Kelezatan premium dalam setiap gigitan. Nugget renyah dengan rasa luar biasa yang tak terlupakan.
-                        </p>
-                        <div class="btn-wrap">
-                            <a href="/shop" class="d-flex align-items-center">shop collection <i
-                                    class="icon icon-arrow-io"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="product-collection">
+          <div class="left-content collection-item">
+            <div class="products-thumb">
+              <img src="../assets/images/model.jpg" alt="collection item" class="large-image image-rounded">
             </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
+              <div class="categories">Special nuggets</div>
+              <h3 class="item-title">Kanzler nugget crispy</h3>
+              <p>Kelezatan premium dalam setiap gigitan. Nugget renyah dengan rasa luar biasa yang tak terlupakan.</p>
+              <div class="btn-wrap">
+                <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="quotation" class="align-center padding-large">
-        <div class="inner-content">
-            <h2 class="section-title divider">Quote of the day</h2>
-            <blockquote>
-                <q>Beli frozen food, dinginkan hatiku, dan biarkan cinta kita menghangatkan microwave bersama-sama!</q>
-                <div class="author-name">- Mang Ido said</div>
-            </blockquote>
-        </div>
+      <div class="inner-content">
+        <h2 class="section-title divider">Quote of the day</h2>
+        <blockquote>
+          <q>Beli frozen food, dinginkan hatiku, dan biarkan cinta kita menghangatkan microwave bersama-sama!</q>
+          <div class="author-name">- mas iki 2023</div>
+        </blockquote>
+      </div>
     </section>
 
     <hr>
@@ -523,43 +509,43 @@
     </section> --}}
 
     <section id="shipping-information">
-        <hr>
-        <div class="container">
-            <div class="row d-flex flex-wrap align-items-center justify-content-between">
-                <div class="col-md-3 col-sm-6">
-                    <div class="icon-box">
-                        <i class="icon icon-truck"></i>
-                        <h4 class="block-title">
-                            <strong>Free shipping</strong> Over $200
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="icon-box">
-                        <i class="icon icon-return"></i>
-                        <h4 class="block-title">
-                            <strong>Money back</strong> Return within 7 days
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="icon-box">
-                        <i class="icon icon-tags1"></i>
-                        <h4 class="block-title">
-                            <strong>Buy 4 get 5th</strong> 50% off
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="icon-box">
-                        <i class="icon icon-help_outline"></i>
-                        <h4 class="block-title">
-                            <strong>Any questions?</strong> experts are ready
-                        </h4>
-                    </div>
-                </div>
+      <hr>
+      <div class="container">
+        <div class="row d-flex flex-wrap align-items-center justify-content-between">
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-truck"></i>
+              <h4 class="block-title">
+                <strong>Free shipping</strong> Over $200
+              </h4>
             </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-return"></i>
+              <h4 class="block-title">
+                <strong>Money back</strong> Return within 7 days
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-tags1"></i>
+              <h4 class="block-title">
+                <strong>Buy 4 get 5th</strong> 50% off
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-help_outline"></i>
+              <h4 class="block-title">
+                <strong>Any questions?</strong> experts are ready
+              </h4>
+            </div>
+          </div>
         </div>
-        <hr>
+      </div>
+      <hr>
     </section>
 @endsection

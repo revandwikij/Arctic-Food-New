@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan', function (Blueprint $table) {
+        Schema::create('laporan_penjualan', function (Blueprint $table) {
             $table->id();
-            $table->string('Id_Laporan');
-            $table->unsignedBigInteger('NIB');
-            $table->string('Bulan');
-            $table->integer('Jumlah_Transaksi');
-            $table->integer('Total_Penjualan');
+            $table->string('Id_LapPenjualan')->unique();
+            $table->string('Id_Pesanann');
+            $table->string('Id_Pembayaran');
             $table->timestamps();
         });
     }
