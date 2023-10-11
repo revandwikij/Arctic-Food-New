@@ -66,20 +66,19 @@
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table id="myTable" class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Id Barang</th>
-                                <th scope="col">Foto</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Nama Produk</th>
-                                <th scope="col">Stok</th>
-                                <th scope="col">Keterangan Barang</th>
-                                <th scope="col">Harga</th>
-
+                                <th class="sorting">Id Barang</th>
+                                <th class="sorting">Foto</th>
+                                <th class="sorting">Kategori</th>
+                                <th class="sorting">Nama Produk</th>
+                                <th class="sorting">Stok</th>
+                                <th class="sorting">Keterangan Barang</th>
+                                <th class="sorting">Harga</th>
+                                <th class="sorting">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
 
                             {{-- @if (isset($barang))
@@ -123,5 +122,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                // Sorting options for each column (you can enable or disable as needed)
+                "order": [
+                    [1, "desc"] // Sort the 5th column (Stok) in descending order
+                ],
+                "paging": true, // Enable pagination
+            });
+        });
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    
 
 @endsection

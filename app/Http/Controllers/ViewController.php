@@ -12,6 +12,7 @@ use App\Models\pelanggan;
 use App\Models\PenjualanView;
 use App\Models\Pesan;
 use App\Models\User;
+use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,6 +95,14 @@ class ViewController extends Controller
         auth()->user();
 
         return view('Penjual.tambahadmin');
+    }
+
+    public function profadm()
+    {
+        
+        $admin = users::where('level', 'admin')->first(); 
+        
+        return view('penjual.profileadmin', ['admin' => $admin]);
     }
 
     public function bayar()
