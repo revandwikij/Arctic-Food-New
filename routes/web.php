@@ -90,6 +90,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
     Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
+    Route::get('/lihatinvoice/{Id_Pesanan}', [PdfController::class, 'invoice']);
+    Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
 
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
