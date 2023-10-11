@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Berat<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Berat" onblur="validate(5)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Berat/gram<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Berat" onblur="validate(5)"> </div>
                     </div>
 
                     <div class="row justify-content-between text-left">

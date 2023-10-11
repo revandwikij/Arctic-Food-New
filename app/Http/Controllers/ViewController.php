@@ -11,6 +11,7 @@ use App\Models\Keranjang;
 use App\Models\pelanggan;
 use App\Models\PenjualanView;
 use App\Models\Pesan;
+use App\Models\User;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +21,20 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::paginate(3);
+        $barang = Barang::paginate(12);
         $kategoris = kategori::all();
-        // $join = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-        //         ->get(['barang.*', 'kategori.*']);
-        return view('index', compact('kategoris'),compact('barang'), compact('pelanggan'));
+        $produkterlaris = DB::table('barang')
+        ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+        ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+        ->where('pesanan.Status_Pesanan', '=', 'Selesai')
+        ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
+        ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
+        ->orderByDesc('jumlah_penjualan')
+        ->limit(3)
+        ->get();
+
+        return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkterlaris'));
     }
 
     public function admin()
@@ -59,7 +69,9 @@ class ViewController extends Controller
         $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
                 ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
-                ->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)
+                ->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)
+                ->where('detail_keranjang.Status', '=', 'Aktif')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
@@ -132,7 +144,7 @@ class ViewController extends Controller
     {
         // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
         if ($kategori == 'all') {
-            $barang = Barang::all();
+            $barang = Barang::paginate(3);
         } else {
             // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
             $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
@@ -171,7 +183,7 @@ class ViewController extends Controller
         $params = array(
             'transaction_details' => array(
                 // 'order_id' => $pesan->Id_Pesanan,
-                'order_id' => 'PREFIX_' . time(),
+                 'order_id' => $datapesan1->Id_Pesanan,
                 'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
             ),
             'customer_details' => array(
@@ -323,6 +335,21 @@ class ViewController extends Controller
         return view ('penjual.lapbar', compact('penjualan'));
     }
 
+    public function lihat1()
+    {
+        $kategoris = kategori::all();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->get();
+        return view ('shop', compact('barang', 'kategoris'));
+    }
+
+    public function lihat2()
+    {
+        $kategoris = kategori::all();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Laut')->get();
+        return view ('shop', compact('barang', 'kategoris'));
+    }
+
+
     public function invoice()
     {
         return view ('penjual.invoice');
@@ -330,10 +357,13 @@ class ViewController extends Controller
 
     public function single($Id_Barang)
     {
+        $user=auth()->user();
+
         $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('Id_Barang', $Id_Barang)->get();
+        $pelanggan = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
 
 
-        return view ('single-post', compact('barang'));
+        return view ('single-post', compact('barang', 'pelanggan', 'user'));
     }
 
 }

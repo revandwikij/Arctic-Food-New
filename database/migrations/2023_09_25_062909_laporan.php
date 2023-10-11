@@ -22,11 +22,11 @@ return new class extends Migration
         barang.Stok,
         barang.Harga,
         SUM(detail_keranjang.Kuantitas) AS total_terjual
-    FROM barang 
+    FROM barang
     JOIN detail_keranjang  ON barang.Id_Barang = detail_keranjang.Id_Barang
     JOIN keranjang  ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
     JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
-    WHERE pesanan.Status_Pesanan = 'Selesai'
+    WHERE pesanan.Status_Pesanan = 'Selesai' AND detail_keranjang.Status = 'Dicheckout'
     GROUP BY tanggal, produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;
 
 ");

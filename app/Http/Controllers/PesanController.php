@@ -81,7 +81,9 @@ class PesanController extends Controller
                             'Id_Barang' => $Barang->Id_Barang,
                             'Kuantitas' => $request->jumlah_pesan,
                             'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
-                            'Sub_Beban' => $request->jumlah_pesan * $Barang->Berat
+                            'Sub_Beban' => $request->jumlah_pesan * $Barang->Berat,
+                            'Status' => "Aktif"
+
                         ]);
                         return redirect('/cart');
                      }
@@ -96,6 +98,7 @@ class PesanController extends Controller
                 $coba->Kuantitas = $request->jumlah_pesan;
                 $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
                 $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
+                $coba->Status = "Aktif";
                 $coba->save();
 
                 return redirect('/cart');
@@ -115,6 +118,7 @@ class PesanController extends Controller
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
             $coba->Sub_Beban= $Barang->Berat * $request->jumlah_pesan;
+            $coba->Status = "Aktif";
 
             $coba->save();
 
@@ -127,7 +131,18 @@ class PesanController extends Controller
 
     public function hapus($Id_Detail_Keranjang)
     {
-	DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->delete();
+        $data = DetailKeranjang::where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->first();
+
+        DB::table('detail_keranjang')->where('Id_Detail_Keranjang',$Id_Detail_Keranjang)->update(
+        [
+            'Id_Keranjang' => $data->Id_Keranjang,
+            'Id_Barang' => $data->Id_Barang,
+            'Kuantitas' => $data->Kuantitas,
+            'Sub_Total' => $data->Sub_Total,
+            'Sub_Beban' => $data->Sub_Beban,
+            'Status' => "Dihapus"
+        ]
+    );
 	return redirect('/cart');
     }
 
@@ -139,7 +154,8 @@ class PesanController extends Controller
         $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
         $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-        ->where('users.id', '=', $user->id)->get();
+        ->where('users.id', '=', $user->id)
+        ->where('detail_keranjang.Status', '=', 'Aktif')->get();
         // $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
         // ->join('pesanan', 'pesanan.Id_Alamat', '=', 'alamat.Id_Pelanggan')
         // ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
@@ -281,6 +297,14 @@ class PesanController extends Controller
                 {
                     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
 
+
+                    DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->where('pesanan.Id_Pesanan', '=', $request->order_id)
+                    ->where('detail_keranjang.Status', '=', 'Aktif')->update(['detail_keranjang.Status' => 'Dicheckout']);
+
+
+
                     $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
                     $nextNumber1 = (int) substr($lastUid1, 1) + 1;
                     $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
@@ -292,9 +316,33 @@ class PesanController extends Controller
                     $bayar->Status_Pembayaran = 'Lunas';
                     $bayar->Tgl_Pembayaran = $request->transaction_time;
                     $bayar->save();
+
+                    $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
+
+                    if ($isPaymentSuccess) {
+                         $id_pesanan = $request->input('order_id');
+
+                         $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                            ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                            ->where('detail_keranjang.Status', '=', 'Dicheckout')
+                            ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
+                            ->get();
+
+                         foreach ($detailPesanan as $detail) {
+                            $barang = Barang::find($detail->Id_Barang);
+                            if ($barang) {
+                                 $barang->Stok -= $detail->Kuantitas;
+                                $barang->save();
+                            }
+                        }
+                    }
+
+
+
                 }
             }
-        
+
     }
 
 

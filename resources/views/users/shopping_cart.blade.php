@@ -39,7 +39,7 @@
                 @endforeach
             @endif
         </select>
-    </form>
+    
 @endforeach
 
 @if (count($alamat) === 0)

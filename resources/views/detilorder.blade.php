@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
 @foreach ($pesanan as $item)
-    
+
 
 <div class="detail-pesanan">
-    <a href=""><button class="back-button"><i class="fas fa-arrow-left"></i> Kembali</button><
-    <h2 class="dtl">Detail Pesanan</h2> 
+    <a href="/transaksi"><button class="back-button"><i class="fas fa-arrow-left"></i> Kembali</button>
+    <h2 class="dtl">Detail Pesanan</h2>
     <div class="order-info">
         <div>
             <p class="no-pesanan">No Pesanan : {{ $item->Id_Pesanan }}</p>
@@ -55,7 +55,7 @@
         <p>Metode Pembayaran: Kartu Kredit</p>
         <p>Total Harga: {{ $item->Total }}</p>
         <p>Ongkos Kirim: {{ $item->Total_Shipping }}</p>
-         
+
     </div>
     <p>Total Belanja: {{ $item->Total_Harga}}</p>
 </div>

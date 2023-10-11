@@ -1,6 +1,6 @@
 @extends('layouting.home.master')
 
-@section('title', 'Home')
+@section('title', 'Detail')
 
 @section('content')
 
@@ -10,10 +10,7 @@
           <div class="col-md-12">
             <div class="breadcrumbs">
               <span class="item">
-                <a href="index.html">Home /</a>
-              </span>
-              <span class="item">
-                <a href="blog.html">Blog /</a>
+                <a href="/">Home /</a>
               </span>
               <span class="item">Single post</span>
             </div>
@@ -130,7 +127,7 @@
           <div class="col-md-6">
             <div class="comments-wrap">
               <h3>Comments</h3>
-              {{-- <div class="comment-list">
+              <div class="comment-list">
                 <article class="d-flex">
                   <img src="images/review-image1.jpg" alt="default" class="commentor-image">
                   <div class="author-post">
@@ -142,10 +139,13 @@
                           <i class="icon icon-reply"></i>Reply </a>
                       </small>
                     </div>
-                    <p>Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.</p>
+                    <div style="height:200px;width:500px;border:0px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+                        Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.
+                        </div>
+                    {{-- <p>Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.</p> --}}
                   </div>
                 </article>
-                <div class="child-comments">
+                {{-- <div class="child-comments">
                   <article class="d-flex">
                     <img src="images/review-image2.jpg" alt="sara" class="commentor-image">
                     <div class="author-post">
@@ -174,23 +174,28 @@
                     </div>
                     <p>Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.</p>
                   </div>
-                </article>
-              </div> --}}
+                </article> --}}
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="comment-respond">
               <h3>Leave a Comment</h3>
-              <form method="post" class="form-group">
-                <input class="u-full-width" type="text" name="author" id="author" class="form-control" placeholder="Your full name">
-                <input class="u-full-width" type="email" name="email" id="email" class="form-control" placeholder="E-mail Address">
-                <textarea class="u-full-width" id="comment" class="form-control" name="comment" placeholder="Write your comment here" rows="20"></textarea>
-                <label class="example-send-yourself-copy">
-                  <input type="checkbox">
-                  <span class="label-body">Save my name, email, and website in this browser for the next time I comment.</span>
-                </label>
-                <button type="submit" name="submit" class="btn btn-dark btn-medium">Submit</button>
-              </form>
+              @foreach ($barang as $data)
+
+              <form method="post" action="/ulasan/{{ $data->Id_Barang }}" class="form-group">
+                {{ csrf_field() }}
+                @foreach ($pelanggan as $item)
+                    <input class="u-full-width" type="text" name="Username" id="author" class="form-control" value="{{ Auth::user()->username }}" >
+                    <textarea class="u-full-width" id="comment" class="form-control" name="Ulasan" placeholder="Write your comment here" rows="20"></textarea>
+                    <label class="example-send-yourself-copy">
+                    <input type="checkbox">
+                    <span class="label-body">Save my name, email, and website in this browser for the next time I comment.</span>
+                    </label>
+                    <button type="submit" name="submit" class="btn btn-dark btn-medium">Submit</button>
+                    @endforeach
+                </form>
+              @endforeach
             </div>
           </div>
         </div>
