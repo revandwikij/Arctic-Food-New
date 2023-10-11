@@ -15,7 +15,7 @@
         
         
         <div class="order-thumbnaill">
-          <img src="repan.jpg" alt="Produk D">
+          <img src="{{ asset($item->Foto_Barang) }}" alt="Produk">
         </div>
         <div class="order-detailss">
           <h2>{{ $item->Id_Pesanan }}</h2>

@@ -89,6 +89,9 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
+    
+    Route::get('/profileadmin', [ViewController::class, 'profadm']);
+
 
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
 
