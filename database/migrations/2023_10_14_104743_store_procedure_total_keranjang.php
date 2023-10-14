@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $procedure = "DROP PROCEDURE IF EXISTS `store_procedure_pelanggan`;
-        CREATE PROCEDURE `store_procedure_pelanggan` (IN idx int)
+
+        $procedure = "DROP PROCEDURE IF EXISTS `Total_Keranjang`;
+        CREATE PROCEDURE `Total_Keranjang` (IN Id_Keranjang INT)
         BEGIN
         SELECT pelanggan.username, alamat.Alamat, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
         FROM pelanggan
@@ -21,6 +22,15 @@ return new class extends Migration
         END;";
 
         \DB::unprepared($procedure);
+
+        DB::unprepared('
+            CREATE PROCEDURE Total_Keranjang(IN Id_Keranjang INT)
+            BEGIN
+                SELECT SUM(Total) as total_price
+                FROM detail_keranjang
+                WHERE Id_Keranjang = Id_Keranjang;
+            END
+        ');
     }
 
     /**
@@ -28,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('store_procedure');
+        //
     }
 };
