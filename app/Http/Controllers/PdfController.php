@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\InvoiceMail;
 use App\Models\Barang;
 use App\Models\DetailKeranjang;
+use App\Models\pelanggan;
 use App\Models\Pesan;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -79,14 +80,19 @@ class PDFController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
         ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
         $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
         ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_keranjang')
         ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->select('users.email')->first();
+
+        $email = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('pesanan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_pelanggan')
         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
-        Mail::to("dwikirevan66@gmail.com")->send(new InvoiceMail($pesanan, $databar));
+        Mail::to($email->email)->send(new InvoiceMail($pesanan, $databar));
         return redirect('/perludikirim')->with('message', 'Berhasil');
         }
         catch(\Exception $e )

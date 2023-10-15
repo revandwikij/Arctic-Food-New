@@ -71,7 +71,7 @@ class ViewController extends Controller
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
                 ->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)
-                ->where('detail_keranjang.Status', '=', 'Aktif')
+                ->where('keranjang.Status', '=', 'Aktif')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')

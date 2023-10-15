@@ -3,6 +3,12 @@
 @section('title', 'Register')
 
 @section('content')
+@if (session('errors'))
+<div class="alert alert-danger">
+    {{ session('errors') }}
+</div>
+@endif
+
     <div class="regis-container">
       <form class="regis-form" action="/regis/verif" method="POST">
         @csrf
