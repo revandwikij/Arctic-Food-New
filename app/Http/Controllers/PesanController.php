@@ -55,7 +55,7 @@ class PesanController extends Controller
             $nextNumber = (int) substr($lastUid, 1) + 1;
             $newUid = 'K' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-             if(Keranjang::where('Id_Pelanggan', $kran)->exists())
+             if(Keranjang::where('Id_Pelanggan', $kran)->where('Status', '=', 'Aktif')->exists())
              {
 
 
@@ -64,30 +64,24 @@ class PesanController extends Controller
                 $pecah2 = json_decode($cekcart, true);
                 $kran2 = $pecah2['Id_Keranjang'];
 
-                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->select('detail_keranjang.Id_Barang')->first();
-
-            if ($Barang->Stok < $request->jumlah_pesan )
-            {
-                return redirect()->back()->with('error', 'Stok barang tidak mencukupi.');
-            }
-                if($cekbarang)
-                {
-
-                     if(DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists())
-                     {
-                            DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
-                            'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
-                            // 'Id_Detail_Keranjang' => $detkran,
-                            'Id_Barang' => $Barang->Id_Barang,
-                            'Kuantitas' => $request->jumlah_pesan,
-                            'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
-                            'Sub_Beban' => $request->jumlah_pesan * $Barang->Berat,
-                            'Status' => "Aktif"
-
-                        ]);
-                        return redirect('/cart');
-                     }
-                }
+                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->first();
+                 
+                    if($cekbarang)
+                    {
+                            if(DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists())
+                            {
+                                    DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
+                                    'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
+                                    'Id_Detail_Keranjang' => $cekbarang->Id_Detail_Keranjang,
+                                    'Id_Barang' => $Barang->Id_Barang,
+                                    'Kuantitas' => $request->jumlah_pesan,
+                                    'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
+                                    'Sub_Beban' => $request->jumlah_pesan * $Barang->Berat,
+                                ]);
+                                return redirect('/cart');
+                            }
+                    }  
+                
             else
             {
 
@@ -98,7 +92,6 @@ class PesanController extends Controller
                 $coba->Kuantitas = $request->jumlah_pesan;
                 $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
                 $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
-                $coba->Status = "Aktif";
                 $coba->save();
 
                 return redirect('/cart');
@@ -108,6 +101,8 @@ class PesanController extends Controller
             $keranjang  = new Keranjang;
             $keranjang->Id_Keranjang = $newUid;
             $keranjang->Id_Pelanggan = $kran;
+            $keranjang->Status = "Aktif";
+
             $keranjang->save();
 
             $cek4 = $keranjang->Id_Keranjang;
@@ -118,8 +113,6 @@ class PesanController extends Controller
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total= $Barang->Harga * $request->jumlah_pesan;
             $coba->Sub_Beban= $Barang->Berat * $request->jumlah_pesan;
-            $coba->Status = "Aktif";
-
             $coba->save();
 
 
@@ -155,7 +148,7 @@ class PesanController extends Controller
         $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
         $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan','=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
         ->where('users.id', '=', $user->id)
-        ->where('detail_keranjang.Status', '=', 'Aktif')->get();
+        ->where('keranjang.Status', '=', 'Aktif')->get();
         // $test = Biaya_Ship::join('alamat', 'biaya_shipping.Kota', '=', 'alamat.Kota')
         // ->join('pesanan', 'pesanan.Id_Alamat', '=', 'alamat.Id_Pelanggan')
         // ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
@@ -301,7 +294,7 @@ class PesanController extends Controller
                     DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->where('pesanan.Id_Pesanan', '=', $request->order_id)
-                    ->where('detail_keranjang.Status', '=', 'Aktif')->update(['detail_keranjang.Status' => 'Dicheckout']);
+                    ->where('detail_keranjang.Status', '=', 'Aktif')->update(['keranjang.Status' => 'Dicheckout']);
 
 
 

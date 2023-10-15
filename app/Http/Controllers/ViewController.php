@@ -69,12 +69,12 @@ class ViewController extends Controller
     {
         $user = auth()->user();
         $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
-            ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')
-            ->join('users', 'pelanggan.email', '=', 'users.email')
-            ->where('users.id', '=', $user->id)
-            ->where('detail_keranjang.Status', '=', 'Aktif')
-            ->get(['barang.*', 'detail_keranjang.*', 'pelanggan.*']);
+                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
+                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
+                ->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)
+                ->where('keranjang.Status', '=', 'Aktif')
+                ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->get();
