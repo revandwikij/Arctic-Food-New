@@ -12,25 +12,25 @@ return new class extends Migration
     public function up(): void
     {
 
-        $procedure = "DROP PROCEDURE IF EXISTS `Total_Keranjang`;
-        CREATE PROCEDURE `Total_Keranjang` (IN Id_Keranjang INT)
-        BEGIN
-        SELECT pelanggan.username, alamat.Alamat, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
-        FROM pelanggan
-        JOIN alamat
-        ON pelanggan.Id_Pelanggan = alamat.Id_Pelanggan;
-        END;";
+        // $procedure = "DROP PROCEDURE IF EXISTS `Total_Keranjang`;
+        // CREATE PROCEDURE `Total_Keranjang` (IN Id_Keranjang INT)
+        // BEGIN
+        // SELECT pelanggan.username, alamat.Alamat, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
+        // FROM pelanggan
+        // JOIN alamat
+        // ON pelanggan.Id_Pelanggan = alamat.Id_Pelanggan;
+        // END;";
 
-        \DB::unprepared($procedure);
+        // \DB::unprepared($procedure);
 
-        DB::unprepared('
-            CREATE PROCEDURE Total_Keranjang(IN Id_Keranjang INT)
-            BEGIN
-                SELECT SUM(Total) as total_price
-                FROM detail_keranjang
-                WHERE Id_Keranjang = Id_Keranjang;
-            END
-        ');
+        // DB::unprepared('
+        //     CREATE PROCEDURE Total_Keranjang(IN Id_Keranjang INT)
+        //     BEGIN
+        //         SELECT SUM(Total) as total_price
+        //         FROM detail_keranjang
+        //         WHERE Id_Keranjang = Id_Keranjang;
+        //     END
+        // ');
     }
 
     /**

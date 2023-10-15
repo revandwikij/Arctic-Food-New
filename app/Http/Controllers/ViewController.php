@@ -8,6 +8,7 @@ use App\Models\Biaya_Ship;
 use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
+use App\Models\OmsetView;
 use App\Models\pelanggan;
 use App\Models\PenjualanView;
 use App\Models\Pesan;
@@ -376,5 +377,21 @@ class ViewController extends Controller
 
 
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
+    }
+
+    public function laporanOmset(Request $request)
+    {
+        $bulanawal = $request->input('bulan_awal');
+        $bulanakhir = $request->input('bulan_akhir');
+
+        $penjualan = OmsetView::whereBetween('tanggal', [$bulanawal, $bulanakhir])->get();
+
+        return view('penjual.lapset', ['penjualan' => $penjualan]);
+    }
+
+    public function lapset()
+    {
+        $penjualan = OmsetView::all();
+        return view('penjual.lapset', compact('penjualan'));
     }
 }

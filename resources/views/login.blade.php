@@ -6,7 +6,9 @@
 
     <div class="login-container">
       <form class="login-form" action="/login/verif" method="POST">
-        @csrf
+        {{-- @csrf --}}
+        {{ csrf_field() }}
+        {{-- {{ csrf_token() }} --}}
         <h2>Login</h2>
         <input type="text" placeholder="Email" name="email" required>
         <input type="password" placeholder="Kata Sandi" name="password" required />
