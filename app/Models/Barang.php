@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
+
+
 class Barang extends Model
 {
 
@@ -25,5 +27,8 @@ class Barang extends Model
         'Keterangan_Barang',
     ];
 
-
+    public $sortable = [
+        'Id_Barang', 'Nama_Barang', 'Stok', 'Harga', 'Keterangan_Barang',
+    ];
+    
 }

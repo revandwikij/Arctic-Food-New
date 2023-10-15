@@ -1,61 +1,98 @@
 @extends('layouting.layout login.master')
 
-@section('title', 'Register')
+@section('title', 'Tambah Admin')
 
 @section('content')
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Tambah Akun</h2>
-                </div>
-                <div class="card-body">
-                    <form method="post" action="/tambahadmin">
-                        @csrf
-                        {{ csrf_field() }}
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="username" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Email</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="email" name="email" required>
-                                </div>
-                            </div>
-                        </div>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, sans-serif;
+  }
+  .addmin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .addmin-form {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  .addmin-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  .addmin-form input[type="text"],
+  .addmin-form input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 
+  .addmin-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2)
+  }
 
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="password" name="password" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Role</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="level" name="level" value="penjual" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
+  .addmin-form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2323a0;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .addmin-form input[type="submit"]:hover {
+    background-color: #111;
+  }
+  .addmin-form p {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .addmin-form a {
+    color: #3180ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .addmin-form a:hover {
+    color: #111;
+  }
 
-                            <button onclick="return confirm('Beres?')" class="btn btn--radius-2 btn--red" type="submit">tambah</button>
-                            <a href="/login" class="btn btn--radius-2 btn--red" type="submit">Sudah Punya Akun?</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+</style>
+    <div class="addmin-container">
+      <form class="addmin-form" action="/tambahadmin" method="POST">
+        @csrf
+        <h2>Tambah Akun Admin</h2>
+
+        <input type="text" placeholder="Username" name="username" required>
+
+        <input type="text" placeholder="Email" name="email" required>
+
+        <input type="password" placeholder="Password" name="password" required>
+
+        <input type="text" name="level" value="admin">
+
+        <input type="submit" value="Tambah Admin" />
+        
+      </form>
     </div>
 @endsection
-

@@ -17,8 +17,8 @@
 <thead>
 <tr class="head">
   <th scope="col" class="ml-2">
-      
-       
+
+
 
   </th>
   <th scope="col">ID Pesanan</th>
@@ -34,18 +34,18 @@
 <tbody>
 
 @foreach ($pesanan as $item)
-    
+
 
 <tr class="rounded bg-white">
   <th scope="row">
        <div class="form-check">
- 
+
        </div>
   </th>
   <td class="order-color">{{$item->Id_Pesanan}}</td>
   <td>{{$item->Tgl_Pesanan}}</td>
   <td class="d-flex align-items-center">
-       
+
       <span class="ml-2">{{$item->username}}</span>
   </td>
    <td>
@@ -64,13 +64,12 @@
     <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
       {{ csrf_field() }}
     <button type="submit" class="btn btn-primary mb-2">Kirim</button>
-    </form> 
+    </form>
     @endif
     @if ($item->Status_Pesanan == 'Dikirim')
-    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
-      {{ csrf_field() }}
-    <button type="submit" class="btn btn-primary mb-2">Kirim Email</button>
-    </form> 
+    <a href="{{ url('/lihatinvoice/'.$item->Id_Pesanan) }}" target="_blank" class="btn btn-primary mb-2">Lihat Invoice</a>
+    <a href="{{ url('/kiriminvoice/'.$item->Id_Pesanan) }}"  class="btn btn-primary mb-2">Kirim Invoice</a>
+
     @endif
   </td>
 
@@ -81,7 +80,7 @@
 
 </tbody>
 </table>
-    
+
 
 </div>
 

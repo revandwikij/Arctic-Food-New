@@ -13,6 +13,7 @@ use App\Models\PenjualanView;
 use App\Models\Pesan;
 use App\Models\UlasanModel;
 use App\Models\User;
+use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,6 +98,14 @@ class ViewController extends Controller
         return view('Penjual.tambahadmin');
     }
 
+    public function profadm()
+    {
+
+        $admin = users::where('level', 'admin')->first();
+
+        return view('penjual.profileadmin', ['admin' => $admin]);
+    }
+
     public function bayar()
     {
         $user = auth()->user();
@@ -135,7 +144,7 @@ class ViewController extends Controller
     {
         // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
         if ($kategori == 'all') {
-            $barang = Barang::paginate(3);
+            $barang = Barang::paginate(12);
         } else {
             // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
             $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
@@ -228,17 +237,18 @@ class ViewController extends Controller
     }
 
     public function riwayat()
-    {
-        $user = auth()->user();
-        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-            ->join('users', 'users.email', '=', 'pelanggan.email')
-            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
-            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('users.id', '=', $user->id)->get();
+{
+    $user = auth()->user();
+    $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('users.id', '=', $user->id)
+        ->paginate(6); // Add the paginate method here
 
-
-        return view('riwayat', compact('pesanan'));
-    }
+    return view('riwayat', compact('pesanan'));
+}
 
     public function perludikirim()
     {

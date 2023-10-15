@@ -208,6 +208,12 @@ class BarangController extends Controller
         return redirect('/kategori');
     }
 
-
+    public function sorting(Request $request)
+{
+    
+    $request = Barang::sortable(['Stok' => 'asc']);
+    
+    return view('penjual.barang');
+}
 
 }

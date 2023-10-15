@@ -202,20 +202,12 @@
                         <div class="widgets widget-product-brands">
                             <h5 class="widget-title">Kategori</h5>
                             <ul class="product-tags sidebar-list list-unstyled">
+                                <li data-filter="*">Semua</li>
                                 @foreach ($kategoris as $data)
-                                    <li class="tags-item">
-                                        <a href="">{{ $data->Kategori }}</a>
-                                    </li>
+
+                                    <li data-filter=".{{ $data->id }}">{{ $data->Kategori }}</li>
+
                                 @endforeach
-                                {{-- <li class="tags-item">
-                                  <a href="">Adidas</a>
-                              </li>
-                              <li class="tags-item">
-                                  <a href="">Puma</a>
-                              </li>
-                              <li class="tags-item">
-                                  <a href="">Spike</a>
-                              </li> --}}
                             </ul>
                         </div>
 
@@ -350,6 +342,22 @@
         </div>
         <hr>
     </section>
+
+
+    <script>
+        $(".widgets widget-product-brands li").on('click', function ()
+        {
+            $(".widgets widget-product-brands li").removeClass("active");
+            $(this).addClass("active");
+
+            var selector = $(this).attr('data-filter');
+
+            $(".widgets widget-product-brands").isotope({
+                filter: selector,
+            });
+        });
+    </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
