@@ -38,10 +38,21 @@ class LoginController extends Controller
                 return back();
             }
 
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
+        if (Auth::user()->level == 'pelanggan') {
+            return redirect()->intended('/');
+        } elseif (Auth::user()->level == 'penjual') {
+            return redirect()->intended('/admin');
+        } else {
+            return view('layouting.error');
         }
-
     }
+
+    // Authentication failed, display an error message
+    return back()->with('loginError', 'Email or password is incorrect.');
+}   
 
     //logout
     public function logout(Request $request)
