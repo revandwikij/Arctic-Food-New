@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -20,7 +21,7 @@ return new class extends Migration
         ON pelanggan.Id_Pelanggan = alamat.Id_Pelanggan;
         END;";
 
-        \DB::unprepared($procedure);
+        DB::unprepared($procedure);
     }
 
     /**

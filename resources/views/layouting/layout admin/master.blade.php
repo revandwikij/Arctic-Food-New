@@ -20,6 +20,7 @@
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Title Page-->
     <title>@yield('title')</title>
