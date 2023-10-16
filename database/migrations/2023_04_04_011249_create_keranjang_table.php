@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id( );
             $table->string('Id_Keranjang')->unique();
             $table->string('Id_Pelanggan');
+            $table->enum('Status', ['Aktif', 'Dicheckout',]);
             $table->timestamps();
         });
     }

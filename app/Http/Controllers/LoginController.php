@@ -16,11 +16,27 @@ class LoginController extends Controller
 {
     //validasi login
     public function validasi(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => ['required'],
-        'password' => ['required'],
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if (Auth::user()->level == 'pelanggan')
+            {
+                return redirect()->intended('/');
+            }
+            else if (Auth::user()->level == 'penjual')
+            {
+                return redirect()->intended('/admin');
+            }
+            else
+            {
+                return back();
+            }
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
@@ -57,7 +73,11 @@ class LoginController extends Controller
         $lastUid = pelanggan::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'P000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
+        
+        if(User::where('email', $request->email)->exists())
+        {
+            return back()->with('alert', 'Email sudah digunakan');
+        }
         pelanggan::create([
             'Id_Pelanggan' => $newUid,
             'username' => $request->username,

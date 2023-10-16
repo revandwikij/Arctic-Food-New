@@ -7,7 +7,7 @@
     <title>Invoice</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="../assets/css/images/arcticlogo.png" type="image/x-icon" />
+    {{-- <link rel="icon" href="../assets/css/images/arcticlogo.png" type="image/x-icon" /> --}}
 
     <!-- Invoice styling -->
     <style>
@@ -137,6 +137,8 @@
 </head>
 
 <body>
+@foreach ($pesanan as $item )
+
 
 <div class="invoice-box">
     <table>
@@ -145,12 +147,12 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="../assets/css/images/arcticlogo.png" alt="arctic food" style="width: 100%; max-width: 100px" />
+                          <p>Arctic Food</p>
                         </td>
 
                         <td>
-                            Invoice #: 123<br />
-                            Created: January 1, 2023<br />
+                            Invoice #{{ $item->Id_Pesanan }}<br />
+                            Created:{{ $item->Tgl_Pesanan }}<br />
                             Due: February 1, 2023
                         </td>
                     </tr>
@@ -164,36 +166,43 @@
                 <table>
                     <tr>
                         <td>
-                            Sparksuite, Inc.<br />
+                            {{-- Sparksuite, Inc.<br />
                             12345 Sunny Road<br />
-                            Sunnyville, TX 12345
+                            Sunnyville, TX 12345 --}}
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
+
+        @foreach ( $databar as $barang )
+
 
         <!-- Product Card -->
         <tr class="product-card">
             <td colspan="2">
                 <table style="width: 100%;">
                     <tr>
-                        <td style="width: 13%; vertical-align: middle;">
+                        {{-- <td style="width: 13%; vertical-align: middle;">
                             <img src="../assets/css/images/rep.jpg" alt="Product Image" style="width: 55px; height: 55px" />
+                        </td> --}}
+                        <td style="text-align: left; vertical-align: left;">
+                            <strong>{{ $barang->Nama_Barang }}</strong><br />
+                            {{ $barang->Kuantitas }} x {{ $barang->Harga }}
                         </td>
-                        <td style="text-align: left; vertical-align: middle;">
-                            <strong>Nama Barang</strong><br />
-                            Kuantitas x Harga Barang
+                        <td style="text-align: middle; vertical-align: right;">
+                            <strong>{{ $barang->Sub_Total}}</strong>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <!-- End Product Card -->
+        @endforeach
 
         <tr class="heading">
             <td>Metode Pembayaran</td>
-            <td>GoPay</td>
+            <td>Kredit</td>
         </tr>
 
         <tr class="details">
@@ -206,25 +215,38 @@
         </tr>
 
         <tr class="item">
-            <td>Total Harga</td>
-            <td>$300.00</td>
+            <td>Harga Barang</td>
+            <td>{{ $item->Total}}</td>
         </tr>
 
         <tr class="item">
             <td>Total Ongkos Kirim</td>
-            <td>$75.00</td>
+            <td>{{ $item->Total_Shipping }}</td>
         </tr>
 
-        <tr class="item last">
-            <td>Domain name (1 year)</td>
-            <td>$10.00</td>
-        </tr>
+
 
         <tr class="total">
             <td></td>
-            <td>Total: $385.00</td>
+            <td>Total: {{ $item->Total_Harga }}</td>
         </tr>
+
+        <tr>
+            <td>Kode Shipping :
+                {{ $item->Id_Shipping}}
+            <td>
+        </tr>
+
+        <tr>
+            <td>More Info :
+            <a href="https://youtu.be/VuNIsY6JdUw?si=NQdl6pTX39aQdRlN">arctic food</a>
+        </td>
+        </tr>
+
     </table>
+
+    Thank You For Hatur Nuhun
 </div>
+@endforeach
 </body>
 </html>

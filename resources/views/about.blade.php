@@ -97,10 +97,7 @@
     <section id="brand-collection" class="padding-medium bg-light-grey">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between">
-         
-        </div>
-      </div>
-    </section>
+            {{-- <iframe src="https://www.retrogames.cc/embed/23087-super-billiard-championship-pool-japan.html" width="600" height="450" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>    </section> --}}
 
     <section id="instagram" class="padding-large">
         <div class="container">

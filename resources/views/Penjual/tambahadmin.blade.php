@@ -89,10 +89,10 @@
 
         <input type="password" placeholder="Password" name="password" required>
 
-        <input type="text" name="level" value="admin">
+        <input type="text" name="level" value="penjual" >
 
         <input type="submit" value="Tambah Admin" />
-        
+
       </form>
     </div>
 @endsection
