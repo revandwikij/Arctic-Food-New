@@ -31,16 +31,17 @@
     text-decoration: underline;
   }
 
+
+  .container-order {
+    margin: 20px auto;
+    max-width: 800px;
+    width: 48%;
+}
+
 h1 {
     color: #333;
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.container-order {
-    margin: 20px auto;
-    max-width: 800px;
-    width: 48%;
 }
 
 .order-list {
@@ -49,13 +50,14 @@ h1 {
 
 .order-item {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    align-items: left;
+    justify-content: space-between; /* To align buttons to the right */
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 680px;
 }
 
 .order-thumbnail img {
@@ -104,6 +106,7 @@ h1 {
     background-color: #005de8;
     color: white;
     margin-left: 10px;
+    margin-top: 30px;
 }
 
 .accept-button:hover {
@@ -155,5 +158,3 @@ h1 {
     border: 1px solid #ced4da;
     pointer-events: none;
 } */
-
-

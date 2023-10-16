@@ -33,7 +33,7 @@ class ViewController extends Controller
             ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
             ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
             ->orderByDesc('jumlah_penjualan')
-            ->limit(3)
+            ->limit(4)
             ->get();
 
         return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkterlaris'));
