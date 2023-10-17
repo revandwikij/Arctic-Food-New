@@ -3,7 +3,7 @@
 @section('title', 'detail')
 
 @section('content')
-@foreach ($Barang as $data)
+
     <div class="container mt-5">
         <div class="row">
 
@@ -12,6 +12,8 @@
                     <div class="card-header">
                         <a href="/" class="btn btn-primary">Kembali</a>
                     </div>
+@foreach ($Barang as $data)
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mt-5">
@@ -61,13 +63,13 @@
                         </div>
 
                     </div>
+                    @endforeach
                </div>
             </div>
 
         </div>
 
     </div>
-        @endforeach
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {

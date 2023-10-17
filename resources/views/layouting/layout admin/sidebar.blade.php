@@ -109,7 +109,7 @@
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="/laporanbarang">Laporan Barang</a></li>
                             {{-- <li class="submenu-item"><a class="submenu-link" href="#">Dikirim</a></li> --}}
-                            <li class="submenu-item"><a class="submenu-link" href="/laporan">Laporan Penjualan</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="/laporanomset">Laporan Omset</a></li>
                             {{-- <li class="submenu-item"><a class="submenu-link" href="404.html">404 page</a></li> --}}
                         </ul>
                     </div>

@@ -24,13 +24,13 @@
         <div class="d-flex justify-content-between">
 
             <div class="app-search-box" style="width: 50%">
-                <form action="/barang/search" method="POST">
-                    @csrf
-                    <input type="text" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
-                    <button type="submit" class="btn search-btn btn-primary" value="Search">
+                {{-- <form action="/barang/search" method="POST">
+                    @csrf --}}
+                    <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
+                    {{-- <button type="submit" class="btn search-btn btn-primary" value="Search">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
+                    </button> --}}
+                {{-- </form> --}}
             </div><!--//app-search-box-->
             <div>
                 {{-- <select id="kategori">
@@ -125,19 +125,44 @@
 
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                // Sorting options for each column (you can enable or disable as needed)
-                "order": [
-                    [1, "desc"] // Sort the 5th column (Stok) in descending order
-                ],
-                "paging": true, // Enable pagination
+            var table - $("#myTable").DataTable({
+                "pageLength" : 15,
+                // "searching" : false,
+                "lengthChange" : false,
+                "pagingType" : "simple_numbers",
+
+                columnDefs: [
+                    {
+                        searchable: false,
+                        orderable: false,
+                        targts: 0
+                    }
+                ]
+
+                order: [[3, 'asc']]
+            });
+
+            table
+            .on('order.dt search.dt', function(){
+                let i = 1;
+
+                table 
+                .cells(null, 0, { search: 'applied', order:'applied' })
+                .every(function(cell){
+                    this.data(i++)
+                });
+            })
+            .draw();
+
+            $("#myInput").on("keyup", function() {
+                table.search( this.value ).draw();
             });
         });
     </script>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     
 
 @endsection

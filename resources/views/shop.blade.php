@@ -255,7 +255,7 @@
     </section>
 
     <section id="instagram" class="padding-large">
-        <div class="container">
+        {{-- <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Follow our instagram</h2>
             </div>
@@ -299,7 +299,7 @@
                     </figure>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 
     <section id="shipping-information">

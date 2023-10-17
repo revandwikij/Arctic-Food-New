@@ -48,6 +48,37 @@ class PDFController extends Controller
 
         return $pdf->stream('penjual.laporan');
     }
+    public function generatePDF2()
+    {
+        $penjualan = DB::table('v_laporan_omset')->get();
+
+        $data = [
+            'penjualan' => $penjualan,
+        ];
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('penjual.laporan', $data);
+
+        return $pdf->download('penjual.laporanomset.pdf');
+    }
+    public function streamPDF2()
+    {
+        $penjualan = DB::table('v_laporan_omset')->get();
+        // $barang = DB::table('v_laporan_omset')
+        //     ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
+        //     ->groupBy('produk', 'total_terjual')
+        //     ->get();
+
+        $data = [
+            'penjualan' => $penjualan,
+            // 'barang' => $barang,
+        ];
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('penjual.laporan2', $data, );
+
+        return $pdf->stream('penjual.laporan2');
+    }
 
     public function invoice($Id_Pesanan)
     {
