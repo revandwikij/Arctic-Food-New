@@ -256,17 +256,44 @@ class PesanController extends Controller
     public function callback(Request $request)
     {
 
-        $serverKey = config('midtrans.server_key');
-        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
-        if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'capture') {
-                $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
+            $serverKey = config('midtrans.server_key');
+            $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+            if($hashed == $request->signature_key)
+            {
+                if($request->transaction_status == 'capture')
+                {
+                    if ($request->transaction_status === 'settlement') {
+                        // Ambil ID pesanan
+                        $id_pesanan = $request->order_id;
+        
+                        // Ambil detail pesanan yang statusnya 'Dicheckout'
+                        $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                            ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                            ->where('keranjang.Status', '=', 'Dicheckout')
+                            ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
+                            ->get();
+        
+                        // Perbarui stok barang berdasarkan kuantitas
+                        foreach ($detailPesanan as $detail) {
+                            $barang = Barang::find($detail->Id_Barang);
+                            if ($barang) {
+                                $barang->Stok -= $detail->Kuantitas;
+                                $barang->save();
+                            }
+                        }
+                    }
+                }
+                    $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
 
 
                 DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->where('pesanan.Id_Pesanan', '=', $request->order_id)
-                    ->where('detail_keranjang.Status', '=', 'Aktif')->update(['keranjang.Status' => 'Dicheckout']);
+                    ->where('keranjang.Status', '=', 'Aktif')
+                    ->update(['keranjang.Status' => 'Dicheckout']);
+
+
 
 
 
@@ -282,33 +309,37 @@ class PesanController extends Controller
                 $bayar->Tgl_Pembayaran = $request->transaction_time;
                 $bayar->save();
 
+<<<<<<< HEAD
 
                 $admin = DB::table('users')->where('role', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
                 Notification::send($admin, new NewOrderNotification($bayar));
 
                 $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
+=======
+                    // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
 
-                if ($isPaymentSuccess) {
-                    $id_pesanan = $request->input('order_id');
+                    // if ($isPaymentSuccess) {
+                    //      $id_pesanan = $request->input('order_id');
 
-                    $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                        ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                        ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
-                        ->where('detail_keranjang.Status', '=', 'Dicheckout')
-                        ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
-                        ->get();
+                          
 
-                    foreach ($detailPesanan as $detail) {
-                        $barang = Barang::find($detail->Id_Barang);
-                        if ($barang) {
-                            $barang->Stok -= $detail->Kuantitas;
-                            $barang->save();
-                        }
-                    }
+                    //      foreach ($detailPesanan as $detail) {
+                    //         $barang = Barang::find($detail->Id_Barang);
+                    //         if ($barang) {
+                    //              $barang->Stok -= $detail->Kuantitas;
+                    //             $barang->save();
+                    //         }
+                    //     }
+                    // }
+>>>>>>> 692763310a1de6185d798e4f74fc050e007ef1e4
+
+
+
                 }
             }
-        }
-    }
+        
+    
+    
 
     public function konfirm($Id_Pesanan)
     {
