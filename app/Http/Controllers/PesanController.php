@@ -137,11 +137,6 @@ class PesanController extends Controller
             // ->select('biaya_shipping.Biaya_Shipping_per_Kg')
             // ->get();
 
-
-
-
-
-
             $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
             $nextNumber = (int) substr($lastUid, 1) + 1;
             $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
@@ -286,6 +281,10 @@ class PesanController extends Controller
                 $bayar->Status_Pembayaran = 'Lunas';
                 $bayar->Tgl_Pembayaran = $request->transaction_time;
                 $bayar->save();
+
+
+                $admin = DB::table('users')->where('role', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
+                Notification::send($admin, new NewOrderNotification($bayar));
 
                 $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
 

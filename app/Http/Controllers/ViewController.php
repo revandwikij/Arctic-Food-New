@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\AdminChart;
 use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\Biaya_Ship;
@@ -48,7 +49,12 @@ class ViewController extends Controller
         // $d = DB::select('CALL store_procedure_pelanggan()');
         $barang = Barang::count();
         $kategoris = kategori::all();
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang'));
+
+        $chart = new AdminChart;
+        $chart->labels(['Jan', 'Feb', 'Mar']);
+        $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
+
+        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'chart'));
     }
 
     public function login()
@@ -374,7 +380,6 @@ class ViewController extends Controller
             ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
             ->where('ulasan.Id_Barang', $Id_Barang)
             ->orderBy('ulasan.created_at', 'desc')->get();
-
 
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }

@@ -52,7 +52,8 @@ class LoginController extends Controller
 
     // Authentication failed, display an error message
     return back()->with('loginError', 'Email or password is incorrect.');
-}   
+}
+}
 
     //logout
     public function logout(Request $request)
@@ -73,7 +74,7 @@ class LoginController extends Controller
         $lastUid = pelanggan::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'P000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-        
+
         if(User::where('email', $request->email)->exists())
         {
             return back()->with('alert', 'Email sudah digunakan');

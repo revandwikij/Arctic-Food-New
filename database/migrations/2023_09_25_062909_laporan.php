@@ -26,7 +26,7 @@ return new class extends Migration
     JOIN detail_keranjang  ON barang.Id_Barang = detail_keranjang.Id_Barang
     JOIN keranjang  ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
     JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
-    WHERE pesanan.Status_Pesanan = 'Selesai' AND detail_keranjang.Status = 'Dicheckout'
+    WHERE pesanan.Status_Pesanan = 'Selesai' AND keranjang.Status = 'Dicheckout'
     GROUP BY tanggal, produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;
 
 ");

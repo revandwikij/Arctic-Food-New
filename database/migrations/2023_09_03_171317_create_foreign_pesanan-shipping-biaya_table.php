@@ -17,6 +17,12 @@ return new class extends Migration
         Schema::table('shipping', function (Blueprint $table){
             $table->foreign('Id_Biaya')->references('Id_Biaya')->on('biaya_shipping')->onDelete('cascade')->onUpdate('cascade');
         });
+        Schema::table('pesanan', function (Blueprint $table){
+            $table->foreign('Id_Keranjang')->references('Id_Keranjang')->on('keranjang')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('pesanan', function (Blueprint $table){
+            $table->foreign('Id_Alamat')->references('Id_Alamat')->on('alamat')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**
