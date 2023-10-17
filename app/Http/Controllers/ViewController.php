@@ -367,4 +367,15 @@ class ViewController extends Controller
         return view ('single-post', compact('barang', 'pelanggan', 'user'));
     }
 
+    public function filterBarang($Id_Kategori) {
+        if ($Id_Kategori) {
+            $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
+        } else {
+            $barang = Barang::all();
+        }
+    
+        // Mengembalikan data barang hasil filter sebagai respons
+        return view('shop', compact('barang'));
+    }
+
 }
