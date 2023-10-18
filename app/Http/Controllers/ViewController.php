@@ -185,6 +185,19 @@ class ViewController extends Controller
         return view('shop', compact('barang', 'kategoris'));
     }
 
+    public function hargashop(Request $request)
+    {
+        
+        $min = $request->input('min_harga'); 
+        $max = $request->input('max_harga'); 
+         
+        $barang = Barang::whereBetween('Harga', [$min, $max])->paginate(12);
+        $kategoris = kategori::all();
+    
+         
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
     
 
     public function payment()

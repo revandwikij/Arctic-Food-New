@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/shop/', [ViewController::class, 'shop']);
     Route::get('/shop/result', [ViewController::class, 'filtershop']);
     Route::get('/shop/search', [ViewController::class, 'carishop']);
+    Route::get('/shop/price', [ViewController::class, 'hargashop']);
     Route::get('/lihat', [ViewController::class, 'lihat1']);
     Route::get('/lihat1', [ViewController::class, 'lihat2']);
     Route::get('/contact', [ViewController::class, 'contact']);

@@ -225,7 +225,16 @@
 
                         <div class="widgets widget-price-filter">
                             <h5 class="widget-title">Filter By Price</h5>
-                            <ul class="product-tags sidebar-list list-unstyled">
+                            <form method="GET" action="/shop/price/">
+                                <label for="min_harga">Harga Minimum:</label>
+                               Rp.<input type="text" name="min_harga" id="min_harga">
+
+                                <label for="max_harga">Harga Maksimum:</label>
+                              Rp.<input type="text" name="max_harga" id="max_harga">
+
+                                <button type="submit">Filter</button>
+                            </form>
+                            {{-- <ul class="product-tags sidebar-list list-unstyled">
                                 <li class="tags-item">
                                     <a href="">Less than $10</a>
                                 </li>
@@ -241,8 +250,10 @@
                                 <li class="tags-item">
                                     <a href="">$40- $50</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
+
+
                     </div>
                 </aside>
 
