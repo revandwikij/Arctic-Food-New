@@ -19,6 +19,7 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\ChartController;
 use App\Models\Barang;
 use App\Models\pelanggan;
 use App\Models\Shipping;
@@ -97,6 +98,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/lihatinvoice/{Id_Pesanan}', [PdfController::class, 'invoice']);
     Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
+    Route::get('/admin/chartpenjualan', [ChartController::class, 'chartpenjualan']);
 
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
 

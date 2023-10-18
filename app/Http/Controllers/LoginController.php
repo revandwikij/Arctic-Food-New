@@ -16,27 +16,11 @@ class LoginController extends Controller
 {
     //validasi login
     public function validasi(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            if (Auth::user()->level == 'pelanggan')
-            {
-                return redirect()->intended('/');
-            }
-            else if (Auth::user()->level == 'penjual')
-            {
-                return redirect()->intended('/admin');
-            }
-            else
-            {
-                return back();
-            }
+{
+    $credentials = $request->validate([
+        'email' => ['required'],
+        'password' => ['required'],
+    ]);
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
@@ -53,7 +37,8 @@ class LoginController extends Controller
     // Authentication failed, display an error message
     return back()->with('loginError', 'Email or password is incorrect.');
 }
-}
+
+    
 
     //logout
     public function logout(Request $request)
@@ -116,3 +101,4 @@ class LoginController extends Controller
     }
 }
 }
+
