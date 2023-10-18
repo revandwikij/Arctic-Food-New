@@ -152,21 +152,40 @@ class ViewController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function shop($kategori = 'all')
+    public function shop()
     {
-        // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
-        if ($kategori == 'all') {
-            $barang = Barang::paginate(12);
-        } else {
-            // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
-            $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-                ->where('kategori.Kategori', $kategori)
-                ->get();
-        }
+        
+        $barang = Barang::paginate(12);
         $kategoris = kategori::all();
 
         return view('shop', compact('barang', 'kategoris'));
     }
+
+    public function filtershop(Request $request)
+    {
+        
+        $kategori = $request->input('kategori'); 
+         
+        $barang = Barang::where('Id_Kategori', $kategori)->paginate(12);
+        $kategoris = kategori::all();
+    
+        // Kirim data barang ke view
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+    public function carishop(Request $request)
+    {
+        
+        $cari = $request->input('cari'); 
+         
+        $barang = Barang::where('Nama_Barang', 'LIKE', '%'. $cari. '%')->paginate(12);
+        $kategoris = kategori::all();
+    
+        // Kirim data barang ke view
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+    
 
     public function payment()
     {
