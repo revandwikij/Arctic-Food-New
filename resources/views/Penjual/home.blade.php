@@ -73,7 +73,7 @@
                             </div>
                             <div class="chart-container">
                                 {{-- <canvas id="canvas-linechart"></canvas> --}}
-                                {!! $chart->render() !!}
+                                {{-- {!! $chart->render() !!} --}}
                             </div>
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
@@ -386,6 +386,8 @@
 
         </div><!--//container-fluid-->
     </div><!--//app-content-->
+
+    <script src=""></script>
 
 
 @endsection

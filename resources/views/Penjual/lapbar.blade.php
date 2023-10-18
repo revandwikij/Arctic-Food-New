@@ -53,7 +53,7 @@
                             <tr>
 
 
-                                <td>{{ $data->tanggal }} </td>
+                                <td>{{ $data->tanggal_awal }} - {{ $data->tanggal_akhir }} </td>
                                 <td>{{ $data->produk }} </td>
                                 <td>Rp. {{ number_format($data->Harga) }} </td>
                                 <td>{{ $data->total_terjual }} </td>
