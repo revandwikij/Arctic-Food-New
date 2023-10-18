@@ -71,10 +71,13 @@
                                     <option value="3">This Year</option>
                                 </select>
                             </div>
-                            <div class="chart-container">
-                                {{-- <canvas id="canvas-linechart"></canvas> --}}
-                                {!! $chart->render() !!}
+                            <div id="g  rafik">
+
                             </div>
+                            {{-- <div class="chart-container">
+                                <canvas id="canvas-linechart"></canvas>
+                                {!! $chart->render() !!}
+                            </div> --}}
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
                 </div><!--//col-->
@@ -387,5 +390,39 @@
         </div><!--//container-fluid-->
     </div><!--//app-content-->
 
+    <script type="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+        var pendapatan = <?php echo json_encode($total_harga)?>;
+        var bulan = <?php echo json_encode($bulan)?>;
+        Highcharts.charts('grafik',
+        {
+            title : {
+                text : 'Grafik Pendapatan Perbulan '
+            },
+
+            xAxis :{
+                categories : bulan
+            },
+
+            yAxis :{
+                title: {
+                    text : Nominal Pendapatan Bulanan
+                }
+            },
+
+            plotOptions:{
+                series : {
+                    allowPointSelect: true
+                }
+            },
+
+            series: [
+                {
+                    name: 'Nominal Pendapatan',
+                    data: pendapatan
+                }
+            ]
+        })
+    </script>
 
 @endsection

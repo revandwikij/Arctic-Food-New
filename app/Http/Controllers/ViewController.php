@@ -50,11 +50,12 @@ class ViewController extends Controller
         $barang = Barang::count();
         $kategoris = kategori::all();
 
-        $chart = new AdminChart;
-        $chart->labels(['Jan', 'Feb', 'Mar']);
-        $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
+        // $chart = new AdminChart;
+        // $chart->labels(['Jan', 'Feb', 'Mar']);
+        // $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
 
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'chart'));
+        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang'));
+            // , 'chart'
     }
 
     public function login()
