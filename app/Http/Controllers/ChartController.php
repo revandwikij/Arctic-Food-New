@@ -12,14 +12,18 @@ use Termwind\Components\Raw;
 class ChartController extends Controller
 {
     public function ChartPenjualan(){
-       $totalharga = Pembayaran::select(DB::raw("CAST(SUM(Total_Harga)as int) as Total_Harga")) 
-       ->GroupBy(DB::raw("Month(created_at"))
+
+
+       $Total_Harga = Pembayaran::select(DB::raw("CAST(SUM(Total_Harga) as int) as Total_Harga"))
+       ->GroupBy(DB::raw("Month(created_at)"))
        ->pluck('Total_Harga');
 
-       $bulan = Pembayaran::select(DB::raw("MONTHNAME(created_at) as bulan"))
-       ->GroupBy(DB::raw("MONTHNAME(created_at"))
-       ->pluck('bulan');
+    //    dd($Total_Harga);
 
+       $bulan = Pembayaran::select(DB::raw("MONTHNAME(created_at) as bulan"))
+       ->GroupBy(DB::raw("MONTHNAME(created_at)"))
+       ->pluck('bulan');
+    //    dd($Total_Harga);
        return view('Penjual.home', compact('Total_Harga', 'bulan'));
     }
 }

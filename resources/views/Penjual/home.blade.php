@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
@@ -393,14 +395,14 @@
         </div><!--//container-fluid-->
     </div><!--//app-content-->
 
-    <script type="https://code.highcharts.com/highcharts.js"></script>
+    {{-- <script type="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
-        var pendapatan = <?php echo json_encode($total_harga)?>;
+        var pendapatan = <?php echo json_encode($Total_Harga)?>;
         var bulan = <?php echo json_encode($bulan)?>;
         Highcharts.charts('grafik',
         {
             title : {
-                text : 'Grafik Pendapatan Perbulan '
+                text : 'Grafik Pendapatan Perbulan'
             },
 
             xAxis :{
@@ -425,7 +427,7 @@
                     data: pendapatan
                 }
             ]
-        })
-    </script>
+        });
+    </script> --}}
 
 @endsection
