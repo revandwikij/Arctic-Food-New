@@ -1,7 +1,7 @@
 <script src="../assets/js/jquery-1.11.0.min.js"></script>
 <script src="../assets/js/plugins.js"></script>
 <script src="../assets/js/script.js"></script>
-<script>
+{{-- <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Get the current page URL
     var currentUrl = window.location.pathname;
@@ -21,4 +21,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-</script>
+</script> --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\AdminChart;
 use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\Biaya_Ship;
@@ -33,7 +34,7 @@ class ViewController extends Controller
             ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
             ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
             ->orderByDesc('jumlah_penjualan')
-            ->limit(3)
+            ->limit(4)
             ->get();
 
         return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkterlaris'));
@@ -48,7 +49,12 @@ class ViewController extends Controller
         // $d = DB::select('CALL store_procedure_pelanggan()');
         $barang = Barang::count();
         $kategoris = kategori::all();
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang'));
+
+        $chart = new AdminChart;
+        $chart->labels(['Jan', 'Feb', 'Mar']);
+        $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
+
+        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'chart'));
     }
 
     public function login()
@@ -375,7 +381,6 @@ class ViewController extends Controller
             ->where('ulasan.Id_Barang', $Id_Barang)
             ->orderBy('ulasan.created_at', 'desc')->get();
 
-
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }
 
@@ -394,4 +399,15 @@ class ViewController extends Controller
         $penjualan = OmsetView::all();
         return view('penjual.lapset', compact('penjualan'));
     }
+    public function filterBarang($Id_Kategori) {
+        if ($Id_Kategori) {
+            $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
+        } else {
+            $barang = Barang::all();
+        }
+    
+        // Mengembalikan data barang hasil filter sebagai respons
+        return view('shop', compact('barang'));
+    }
+
 }

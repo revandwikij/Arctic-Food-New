@@ -32,14 +32,14 @@ class Notif extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->greeting('Hello,')
-                ->line('Your deposit of '. $this->amount. ' was successful.')
-                ->action('View dashboard', url('/order'))
-                ->line('Thank you for using our application!');
+            ->line('Ada pesanan baru masuk.')
+            ->action('Lihat Pesanan', url('/orders'))
+            ->line('Terima kasih atas dukungan Anda!');
     }
+
 
     /**
      * Get the array representation of the notification.

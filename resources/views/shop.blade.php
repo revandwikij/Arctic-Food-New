@@ -71,6 +71,7 @@
                         </div>
                     @endforeach --}}
                     @foreach ($barang as $data)
+                    <div id="barang-list">
                         <div class="barang-container">
                                 <div class="product-item col-lg-4 col-md-6 col-sm-6 barang-item">
                                     <div class="image-holder">
@@ -101,6 +102,7 @@
                                     </div>
                                 </div>
                             </div>
+                    </div>
                             @endforeach
 
 
@@ -201,14 +203,12 @@
 
                         <div class="widgets widget-product-brands">
                             <h5 class="widget-title">Kategori</h5>
-                            <ul class="product-tags sidebar-list list-unstyled">
-                                <li data-filter="*">Semua</li>
-                                @foreach ($kategoris as $data)
-
-                                    <li data-filter=".{{ $data->id }}">{{ $data->Kategori }}</li>
-
+                            <select id="kategori-filter">
+                                <option value="">Semua Kategori</option>
+                                @foreach($kategoris as $kategori)
+                                    <option value="{{ $kategori->Id_Kategori }}">{{ $kategori->Kategori }}</option>
                                 @endforeach
-                            </ul>
+                            </select>
                         </div>
 
 
@@ -255,7 +255,7 @@
     </section>
 
     <section id="instagram" class="padding-large">
-        <div class="container">
+        {{-- <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Follow our instagram</h2>
             </div>
@@ -299,7 +299,7 @@
                     </figure>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 
     <section id="shipping-information">
@@ -342,9 +342,27 @@
         </div>
         <hr>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+    // Tambahkan event listener untuk perubahan pada dropdown
+    $('#kategori-filter').on('change', function () {
+        var selectedKategori = $(this).val();
 
-    <script>
+        // Kirim permintaan AJAX untuk memfilter barang berdasarkan kategori
+        $.ajax({
+            type: 'GET',
+            url: '/filter-barang/' + selectedKategori,
+            success: function (data) {
+                // Perbarui tampilan dengan data barang hasil filter
+                $('#barang-list').html(data);
+            }
+        });
+    });
+});
+</script>
+    {{-- <script>
         $(".widgets widget-product-brands li").on('click', function ()
         {
             $(".widgets widget-product-brands li").removeClass("active");
@@ -356,9 +374,9 @@
                 filter: selector,
             });
         });
-    </script>
+    </script> --}}
 
-
+{{-- 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll('.tab');
@@ -379,5 +397,5 @@
         });
     });
 });
-    </script>
+    </script> --}}
 @endsection
