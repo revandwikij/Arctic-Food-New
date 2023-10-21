@@ -44,9 +44,9 @@
 
                             @endforeach
 
-@if (count($alamat) === 0)
+{{-- @if (count($alamat) === 0)
     <p>No addresses available. Please <a href="/profile">update your profile</a>.</p>
-@endif
+@endif --}}
 
 
 

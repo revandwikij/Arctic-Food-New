@@ -22,6 +22,8 @@ use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 class PesanController extends Controller
 {
@@ -259,6 +261,7 @@ class PesanController extends Controller
     // }
 
     public function callback(Request $request)
+
     {
 
         $serverKey = config('midtrans.server_key');
@@ -286,6 +289,37 @@ class PesanController extends Controller
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
+                        foreach ($detailPesanan as $detail) {
+                            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                            if ($barang) {
+                                $barang->Stok -= $detail->Kuantitas;
+                                $barang->save();
+                            }
+                        }
+
+
+                    $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
+
+
+
+                    $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                    $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                    $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+
+                    $bayar = new Pembayaran();
+                    $bayar->Id_Pembayaran = $newUid1;
+                    $bayar->Id_Shipping = $order->Id_Shipping;
+                    $bayar->Total_Harga = $request->gross_amount;
+                    $bayar->Status_Pembayaran = 'Lunas';
+                    $bayar->Tgl_Pembayaran = $request->transaction_time;
+                    $bayar->save();
+
+
+                    $user = User::all();
+                    $data = "Ada pesanan baru masuk";
+
+                    $user->notify(new Notif($data));
+
                 }
 
 
@@ -328,6 +362,9 @@ class PesanController extends Controller
                 // $notification->Id_Pelanggan = $kran;
                 // $notification->message = $message;
                 // $notification->save();
+                
+
+
             }
 
 
@@ -335,14 +372,14 @@ class PesanController extends Controller
 
 
             // $admin = DB::table('users')->where('level', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
-            // Notification::send($admin, new NewOrderNotification($bayar));
+            // Notification::send($admin, new Notif($bayar));
 
             // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
 
-
-
         }
     }
+
+
 
 
 

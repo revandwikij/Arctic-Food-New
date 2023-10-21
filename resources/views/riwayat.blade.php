@@ -18,7 +18,8 @@
           </ul>
     </div> --}}
     <h1>Riwayat Pembelian</h1>
-
+    
+@if(count($pesanan) > 0)
     @foreach ($pesanan as $item)
     <div class="order-list">
         <div class="order-item">
@@ -61,6 +62,14 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="no-transaction-message">
+        <p>Kamu belum memiliki transaksi. Ayo mulai berbelanja sekarang!</p>
+        <a href="/halaman-belanja">
+            <button class="shop-button">Belanja Sekarang</button>
+        </a>
+    </div>
+@endif
     <div class="pagination-links">
         {{ $pesanan->links() }}
     </div>
