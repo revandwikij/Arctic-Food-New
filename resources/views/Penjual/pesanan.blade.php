@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">Pesanan Masuk</h1>
@@ -13,13 +12,10 @@
 
 <div class="container mt-5">
 
-
     <table class="table table-borderless main">
 <thead>
 <tr class="head">
   <th scope="col" class="ml-2">
-      
-       
 
   </th>
   <th scope="col">ID Pesanan</th>
@@ -35,29 +31,28 @@
 <tbody>
 
 @foreach ($pesanan as $item)
-    
 
 <tr class="rounded bg-white">
   <th scope="row">
        <div class="form-check">
- 
+
        </div>
   </th>
   <td class="order-color">{{$item->Id_Pesanan}}</td>
   <td>{{$item->Tgl_Pesanan}}</td>
   <td class="d-flex align-items-center">
-       
+
       <span class="ml-2">{{$item->username}}</span>
   </td>
   <td>
-    
+
       {{ $item->Status_Pesanan }}
-  
+
 </div>
   </td>
   <td>{{$item->Total_Harga}}</td>
   <td>{{$item->Kota}}</td>
-  <td>{{$item->Status_Pembayaran}}</td> 
+  <td>{{$item->Status_Pembayaran}}</td>
 </div>
   </td>
   <td>
@@ -67,21 +62,18 @@
       {{ csrf_field() }}
       {{-- {{ csrf_token() }} --}}
     <button type="submit" class="btn btn-primary mb-2">Konfirmasi</button>
-    </form> 
+    </form>
     @endif
   </td>
 </tr>
 
 @endforeach
 
-
 </tbody>
 </table>
-    
+
+{{ $pesanan->links() }}
 
 </div>
-
-
-
 
 @endsection

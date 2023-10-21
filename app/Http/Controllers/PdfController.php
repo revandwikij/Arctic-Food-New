@@ -85,13 +85,16 @@ class PDFController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
         ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
         $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_keranjang')
+        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
         ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
-        // ->where('detail_keranjang.Status', '=', 'Dicheckout')->get();
+
+
+
 
        $data = [
             'pesanan' => $pesanan,
@@ -99,7 +102,7 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.invoice', $data, );
+        $pdf->loadView('penjual.invoice', $data);
 
         return $pdf->stream('penjual.invoice');
     }
@@ -117,13 +120,13 @@ class PDFController extends Controller
         $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
         ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_keranjang')
         ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
-        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->select('users.email')->first();
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
         $email = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
         ->join('pesanan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_pelanggan')
-        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->select('users.email')->get();
 
-        Mail::to($email->email)->send(new InvoiceMail($pesanan, $databar));
+        Mail::to($email)->send(new InvoiceMail($pesanan, $databar));
         return redirect('/perludikirim')->with('message', 'Berhasil');
         }
         catch(\Exception $e )

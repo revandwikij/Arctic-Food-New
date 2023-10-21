@@ -93,8 +93,7 @@ class PesanController extends Controller
 
                     return redirect('/cart');
                 }
-            }
-            else {
+            } else {
                 $keranjang  = new Keranjang;
                 $keranjang->Id_Keranjang = $newUid;
                 $keranjang->Id_Pelanggan = $kran;
@@ -262,90 +261,88 @@ class PesanController extends Controller
     public function callback(Request $request)
     {
 
-            $serverKey = config('midtrans.server_key');
-            $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
-            if($hashed === $request->signature_key)
-            {
-                if($request->transaction_status === 'capture')
-                {
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if ($hashed === $request->signature_key) {
+            if ($request->transaction_status === 'capture') {
 
-                    DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                        ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                        ->where('pesanan.Id_Pesanan', '=', $request->order_id)
-                        ->update(['keranjang.Status' => 'Dicheckout']);
+                DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->where('pesanan.Id_Pesanan', '=', $request->order_id)
+                    ->update(['keranjang.Status' => 'Dicheckout']);
 
-                    $id_pesanan = $request->order_id;
-                    $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                            ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
-                            ->where('keranjang.Status', '=', 'Dicheckout')
-                            ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
-                            ->get();
+                $id_pesanan = $request->order_id;
+                $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                    ->where('keranjang.Status', '=', 'Dicheckout')
+                    ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
+                    ->get();
 
 
-                        foreach ($detailPesanan as $detail) {
-                            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
-                            if ($barang) {
-                                $barang->Stok -= $detail->Kuantitas;
-                                $barang->save();
-                            }
-                        }
-
-
-                    $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
-
-
-                    
-                    $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-                    $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-                    $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
-
-                    $bayar = new Pembayaran();
-                    $bayar->Id_Pembayaran = $newUid1;
-                    $bayar->Id_Shipping = $order->Id_Shipping;
-                    $bayar->Total_Harga = $request->gross_amount;
-                    $bayar->Status_Pembayaran = 'Lunas';
-                    $bayar->Tgl_Pembayaran = $request->transaction_time;
-                    $bayar->save();
-
-
-
-
-
-                    // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
-                    // $admin->notify(new Notif($bayar));
-
-                    // $lastUid2 = ModelsNotif::orderBy('id', 'desc')->first()->Id_Notif ?? 'N000';
-                    // $nextNumber2 = (int) substr($lastUid2, 1) + 1;
-                    // $newUid2 = 'N' . str_pad($nextNumber2, 3, '0', STR_PAD_LEFT);
-
-                    // $message = "Pelanggan telah melakukan pembayaran.";
-
-                    // $user = auth()->user();
-                    // $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
-                    // $pecah = json_decode($cek, true);
-                    // $kran = $pecah['Id_Pelanggan'];
-
-                    // $notification = new ModelsNotif();
-                    // $notification->Id_Notif = $newUid2;
-                    // $notification->Id_Pelanggan = $kran;
-                    // $notification->message = $message;
-                    // $notification->save();
+                foreach ($detailPesanan as $detail) {
+                    $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                    if ($barang) {
+                        $barang->Stok -= $detail->Kuantitas;
+                        $barang->save();
+                    }
                 }
 
 
+                $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
 
 
 
-                // $admin = DB::table('users')->where('level', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
-                // Notification::send($admin, new NewOrderNotification($bayar));
+                $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
-                // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
+                $bayar = new Pembayaran();
+                $bayar->Id_Pembayaran = $newUid1;
+                $bayar->Id_Shipping = $order->Id_Shipping;
+                $bayar->Total_Harga = $request->gross_amount;
+                $bayar->Status_Pembayaran = 'Lunas';
+                $bayar->Tgl_Pembayaran = $request->transaction_time;
+                $bayar->save();
 
 
 
-                }
+
+
+                // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
+                // $admin->notify(new Notif($bayar));
+
+                // $lastUid2 = ModelsNotif::orderBy('id', 'desc')->first()->Id_Notif ?? 'N000';
+                // $nextNumber2 = (int) substr($lastUid2, 1) + 1;
+                // $newUid2 = 'N' . str_pad($nextNumber2, 3, '0', STR_PAD_LEFT);
+
+                // $message = "Pelanggan telah melakukan pembayaran.";
+
+                // $user = auth()->user();
+                // $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
+                // $pecah = json_decode($cek, true);
+                // $kran = $pecah['Id_Pelanggan'];
+
+                // $notification = new ModelsNotif();
+                // $notification->Id_Notif = $newUid2;
+                // $notification->Id_Pelanggan = $kran;
+                // $notification->message = $message;
+                // $notification->save();
             }
+
+
+
+
+
+            // $admin = DB::table('users')->where('level', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
+            // Notification::send($admin, new NewOrderNotification($bayar));
+
+            // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
+
+
+
+        }
+    }
 
 
 

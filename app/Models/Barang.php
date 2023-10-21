@@ -13,7 +13,7 @@ class Barang extends Model
 
     // use Sortable;
 
-    use HasFactory;
+    use HasFactory, Sortable;
     protected $table = 'barang';
 
     protected $fillable = [
@@ -27,8 +27,4 @@ class Barang extends Model
         'Keterangan_Barang',
     ];
 
-    public $sortable = [
-        'Id_Barang', 'Nama_Barang', 'Stok', 'Harga', 'Keterangan_Barang',
-    ];
-    
 }

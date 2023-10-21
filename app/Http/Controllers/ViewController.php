@@ -11,6 +11,7 @@ use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\OmsetView;
 use App\Models\pelanggan;
+use App\Models\Pembayaran;
 use App\Models\PenjualanView;
 use App\Models\Pesan;
 use App\Models\UlasanModel;
@@ -41,22 +42,28 @@ class ViewController extends Controller
     }
 
     public function admin()
-    {
-        $pelanggan = pelanggan::count();
-        // $alamat = Alamat::all();
-        $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
-            ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
-        // $d = DB::select('CALL store_procedure_pelanggan()');
-        $barang = Barang::count();
-        $kategoris = kategori::all();
+{
+    $pelanggan = pelanggan::count();
+    $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
+        ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
+    $barang = Barang::count();
+    $kategoris = kategori::all();
 
-        // $chart = new AdminChart;
-        // $chart->labels(['Jan', 'Feb', 'Mar']);
-        // $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
+    $Total_Harga = Pembayaran::select(DB::raw("CAST(SUM(Total_Harga) as int) as Total_Harga"))
+        ->GroupBy(DB::raw("Month(created_at)"))
+        ->OrderBy(DB::raw("MONTH(created_at)"))
+        ->pluck('Total_Harga');
 
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang'));
-            // , 'chart'
-    }
+    $bulan = Pembayaran::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        ->GroupBy(DB::raw("MONTHNAME(created_at)"))
+        ->OrderBy(DB::raw("MONTH(created_at)"))
+        ->pluck('bulan');
+
+    $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
+
+    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga', 'bulan', 'totalTransaksiBulanIni'));
+}
+
 
     public function login()
     {
@@ -129,8 +136,10 @@ class ViewController extends Controller
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+        ->sortable()
+        ->paginate(3);
             // ->orderBy('Id_Barang', 'desc')
-            ->get(['barang.*', 'kategori.Kategori']);
+            // ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
         return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
@@ -154,7 +163,7 @@ class ViewController extends Controller
 
     public function shop()
     {
-        
+
         $barang = Barang::paginate(12);
         $kategoris = kategori::all();
 
@@ -163,42 +172,42 @@ class ViewController extends Controller
 
     public function filtershop(Request $request)
     {
-        
-        $kategori = $request->input('kategori'); 
-         
+
+        $kategori = $request->input('kategori');
+
         $barang = Barang::where('Id_Kategori', $kategori)->paginate(12);
         $kategoris = kategori::all();
-    
+
         // Kirim data barang ke view
         return view('shop', compact('barang', 'kategoris'));
     }
 
     public function carishop(Request $request)
     {
-        
-        $cari = $request->input('cari'); 
-         
+
+        $cari = $request->input('cari');
+
         $barang = Barang::where('Nama_Barang', 'LIKE', '%'. $cari. '%')->paginate(12);
         $kategoris = kategori::all();
-    
+
         // Kirim data barang ke view
         return view('shop', compact('barang', 'kategoris'));
     }
 
     public function hargashop(Request $request)
     {
-        
-        $min = $request->input('min_harga'); 
-        $max = $request->input('max_harga'); 
-         
+
+        $min = $request->input('min_harga');
+        $max = $request->input('max_harga');
+
         $barang = Barang::whereBetween('Harga', [$min, $max])->paginate(12);
         $kategoris = kategori::all();
-    
-         
+
+
         return view('shop', compact('barang', 'kategoris'));
     }
 
-    
+
 
     public function payment()
     {
@@ -249,7 +258,7 @@ class ViewController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->get();
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->latest('pesanan.created_at')->paginate(10);
         return view('Penjual.pesanan', compact('pesanan'));
     }
 
@@ -270,7 +279,7 @@ class ViewController extends Controller
 
     public function dataship()
     {
-        $ship = Biaya_Ship::all();
+        $ship = Biaya_Ship::sortable()->paginate(10);
         // dd($ship);
         return view('penjual.dataship', compact('ship'));
     }
@@ -331,10 +340,6 @@ class ViewController extends Controller
         return view('detilorder', compact('pesanan'));
     }
 
-
-
-
-
     public function laporan()
     {
         return view('penjual.laporan');
@@ -365,7 +370,7 @@ class ViewController extends Controller
         if ($kategoriValue) {
             $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
                 ->where('kategori.Kategori', $kategoriValue)
-                ->get();
+            ->paginate(3);
         }
 
         // Ambil semua kategori (jika diperlukan)

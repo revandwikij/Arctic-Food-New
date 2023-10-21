@@ -200,7 +200,7 @@
                         </div> --}}
 
 
-                       
+
                         <div class="widgets widget-product-brands">
                             <form action="/shop/result" method="GET">
                                 {{ csrf_field() }}
@@ -215,9 +215,9 @@
                             {{-- <h5 class="widget-title">Kategori</h5>
                             <select id="kategori-filter">
                                 <option value="">Semua Kategori</option>
-                              
+
                                     <option value="{{ $kategori->Id_Kategori }}">{{ $kategori->Kategori }}</option>
-                             
+
                             </select> --}}
                         </div>
 
@@ -363,6 +363,7 @@
         </div>
         <hr>
     </section>
+    
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -397,7 +398,7 @@
         });
     </script> --}}
 
-{{-- 
+{{--
     <script>
         document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll('.tab');

@@ -4,6 +4,14 @@
 
 @section('content')
 
+<style>
+    tr.rounded.bg-white {
+    border: 1px solid #ccafaf; /* Garis tepi 1px solid */
+    border-radius: 10px; /* Membuat sudut elemen melengkung */
+    padding: 10px; /* Padding untuk ruang di sekitar elemen */
+}
+</style>
+
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">Perlu Dikirim</h1>

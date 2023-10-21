@@ -19,13 +19,16 @@
 
 <form action="/barlap" method="GET">
     @csrf
-    <label for="tanggal_awal">Tanggal Awal:</label>
-    <input type="date" name="tanggal_awal" id="tanggal_awal">
+    <div class="d-flex justify-content-evenly">
 
-    <label for="tanggal_akhir">Tanggal Akhir:</label>
-    <input type="date" name="tanggal_akhir" id="tanggal_akhir">
+        <label for="tanggal_awal">Tanggal Awal:</label>
+        <input type="date" name="tanggal_awal" id="tanggal_awal">
 
-    <button type="submit">Tampilkan Laporan</button>
+        <label for="tanggal_akhir">Tanggal Akhir:</label>
+        <input type="date" name="tanggal_akhir" id="tanggal_akhir">
+    </div>
+
+        <button type="submit">Tampilkan Laporan</button>
 </form>
 
 <div class="container mb-4">

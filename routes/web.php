@@ -98,8 +98,6 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/lihatinvoice/{Id_Pesanan}', [PdfController::class, 'invoice']);
     Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
-    Route::get('/admin/ChartPenjualan', [ChartController::class, 'ChartPenjualan']);
-
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
 
 

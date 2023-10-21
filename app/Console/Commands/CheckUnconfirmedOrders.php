@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Pesan;
 use Illuminate\Console\Command;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 
 class CheckUnconfirmedOrders extends Command
 {
@@ -33,15 +33,15 @@ class CheckUnconfirmedOrders extends Command
 
     public function handle()
     {
-          
+
          $cutoffTime = Carbon::now()->subHours(24);
 
          $unconfirmedOrders = Pesan::where('Status_Pesanan', 'Menunggu Konfirmasi')
              ->where('created_at', '<', $cutoffTime)
              ->get();
- 
+
          foreach ($unconfirmedOrders as $order) {
-             $order->status = 'Dibatalkan';
+             $order->Status_Pesanan = 'Dibatalkan';
              $order->save();
     }
 }
