@@ -9,12 +9,14 @@ use App\Models\Biaya_Ship;
 use App\Models\DetailKeranjang;
 use App\Models\kategori;
 use App\Models\Keranjang;
+use App\Models\Notif as ModelsNotif;
 use App\Models\Pesan;
 use App\Models\User;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\Shipping;
 use App\Models\users;
+use App\Notifications\Notif;
 // use App\Notifications\Notif;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -58,7 +60,9 @@ class PesanController extends Controller
 
 
                 $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-                    ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->first();
+                    ->where('users.id', '=', $user->id)
+                    ->where('keranjang.Status', '=', 'Aktif')
+                    ->select('keranjang.Id_Keranjang')->first();
                 $pecah2 = json_decode($cekcart, true);
                 $kran2 = $pecah2['Id_Keranjang'];
 
@@ -68,7 +72,7 @@ class PesanController extends Controller
                     if (DetailKeranjang::where('Id_Barang', $cekbarang->Id_Barang)->exists()) {
                         DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
                             'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
-                            'Id_Detail_Keranjang' => $cekbarang->Id_Detail_Keranjang,
+                            // 'Id_Detail_Keranjang' => $cekbarang->Id_Detail_Keranjang,
                             'Id_Barang' => $Barang->Id_Barang,
                             'Kuantitas' => $request->jumlah_pesan,
                             'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
@@ -89,7 +93,8 @@ class PesanController extends Controller
 
                     return redirect('/cart');
                 }
-            } else {
+            }
+            else {
                 $keranjang  = new Keranjang;
                 $keranjang->Id_Keranjang = $newUid;
                 $keranjang->Id_Pelanggan = $kran;
@@ -115,7 +120,7 @@ class PesanController extends Controller
 
     public function hapus($Id_Detail_Keranjang)
     {
-        $data = DetailKeranjang::where('Id_Detail_Keranjang', $Id_Detail_Keranjang)->first();
+
 
         DB::table('detail_keranjang')->where('Id_Detail_Keranjang', $Id_Detail_Keranjang)->delete();
 
@@ -127,6 +132,7 @@ class PesanController extends Controller
         if (Auth::id()) {
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
+
             $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
             $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)
@@ -258,88 +264,91 @@ class PesanController extends Controller
 
             $serverKey = config('midtrans.server_key');
             $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
-            if($hashed == $request->signature_key)
+            if($hashed === $request->signature_key)
             {
-                if($request->transaction_status == 'capture')
+                if($request->transaction_status === 'capture')
                 {
-                    if ($request->transaction_status === 'settlement') {
-                        // Ambil ID pesanan
-                        $id_pesanan = $request->order_id;
-        
-                        // Ambil detail pesanan yang statusnya 'Dicheckout'
-                        $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+
+                    DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                        ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                        ->where('pesanan.Id_Pesanan', '=', $request->order_id)
+                        ->update(['keranjang.Status' => 'Dicheckout']);
+
+                    $id_pesanan = $request->order_id;
+                    $detailPesanan = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                             ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                             ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
                             ->where('keranjang.Status', '=', 'Dicheckout')
                             ->select('detail_keranjang.Id_Barang', 'detail_keranjang.Kuantitas')
                             ->get();
-        
-                        // Perbarui stok barang berdasarkan kuantitas
+
+
                         foreach ($detailPesanan as $detail) {
-                            $barang = Barang::find($detail->Id_Barang);
+                            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                             if ($barang) {
                                 $barang->Stok -= $detail->Kuantitas;
                                 $barang->save();
                             }
                         }
-                    }
-                }
+
+
                     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
 
 
-                DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-                    ->where('pesanan.Id_Pesanan', '=', $request->order_id)
-                    ->where('keranjang.Status', '=', 'Aktif')
-                    ->update(['keranjang.Status' => 'Dicheckout']);
+                    
+                    $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                    $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                    $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+
+                    $bayar = new Pembayaran();
+                    $bayar->Id_Pembayaran = $newUid1;
+                    $bayar->Id_Shipping = $order->Id_Shipping;
+                    $bayar->Total_Harga = $request->gross_amount;
+                    $bayar->Status_Pembayaran = 'Lunas';
+                    $bayar->Tgl_Pembayaran = $request->transaction_time;
+                    $bayar->save();
 
 
 
 
 
-                $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-                $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-                $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+                    // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
+                    // $admin->notify(new Notif($bayar));
 
-                $bayar = new Pembayaran();
-                $bayar->Id_Pembayaran = $newUid1;
-                $bayar->Id_Shipping = $order->Id_Shipping;
-                $bayar->Total_Harga = $request->gross_amount;
-                $bayar->Status_Pembayaran = 'Lunas';
-                $bayar->Tgl_Pembayaran = $request->transaction_time;
-                $bayar->save();
+                    // $lastUid2 = ModelsNotif::orderBy('id', 'desc')->first()->Id_Notif ?? 'N000';
+                    // $nextNumber2 = (int) substr($lastUid2, 1) + 1;
+                    // $newUid2 = 'N' . str_pad($nextNumber2, 3, '0', STR_PAD_LEFT);
 
-<<<<<<< HEAD
+                    // $message = "Pelanggan telah melakukan pembayaran.";
 
-                $admin = DB::table('users')->where('role', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
-                Notification::send($admin, new NewOrderNotification($bayar));
+                    // $user = auth()->user();
+                    // $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
+                    // $pecah = json_decode($cek, true);
+                    // $kran = $pecah['Id_Pelanggan'];
 
-                $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
-=======
-                    // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
+                    // $notification = new ModelsNotif();
+                    // $notification->Id_Notif = $newUid2;
+                    // $notification->Id_Pelanggan = $kran;
+                    // $notification->message = $message;
+                    // $notification->save();
+                }
 
-                    // if ($isPaymentSuccess) {
-                    //      $id_pesanan = $request->input('order_id');
 
-                          
 
-                    //      foreach ($detailPesanan as $detail) {
-                    //         $barang = Barang::find($detail->Id_Barang);
-                    //         if ($barang) {
-                    //              $barang->Stok -= $detail->Kuantitas;
-                    //             $barang->save();
-                    //         }
-                    //     }
-                    // }
->>>>>>> 692763310a1de6185d798e4f74fc050e007ef1e4
+
+
+                // $admin = DB::table('users')->where('level', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
+                // Notification::send($admin, new NewOrderNotification($bayar));
+
+                // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
 
 
 
                 }
             }
-        
-    
-    
+
+
+
 
     public function konfirm($Id_Pesanan)
     {

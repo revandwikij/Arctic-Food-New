@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
@@ -71,40 +73,17 @@
                                     <option value="3">This Year</option>
                                 </select>
                             </div>
-                            <div class="chart-container">
+                            {{-- <div class="chart-container"> --}}
                                 {{-- <canvas id="canvas-linechart"></canvas> --}}
                                 {{-- {!! $chart->render() !!} --}}
-                                <canvas id="grafikPembayaran"></canvas>
-                                <script>
-                                    var data = @json($data);
-                                    var tanggal = data.map(item => item.tanggal);
-                                    var jumlahPembayaran = data.map(item => item.jumlah_pembayaran);
-
-                                    var ctx = document.getElementById('grafikPembayaran').getContext('2d');
-                                    var myChart = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: {
-                                            labels: tanggal,
-                                            datasets: [{
-                                                label: 'Jumlah Pembayaran',
-                                                data: jumlahPembayaran,
-                                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                                borderColor: 'rgba(75, 192, 192, 1)',
-                                                borderWidth: 1
-                                            }]
-                                        },
-                                        options: {
-                                            scales: {
-                                                y: {
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        }
-                                    });
-                                </script>
+                            <div id="grafik">
 
                             </div>
-                        </div><!--//app-card-body-->
+                            {{-- <div class="chart-container">
+                                <canvas id="canvas-linechart"></canvas>
+                                {!! $chart->render() !!}
+                            </div> --}}
+                        {{-- </div><!--//app-card-body--> --}}
                     </div><!--//app-card-->
                 </div><!--//col-->
                 {{-- Jadi Ulasan Terbaru --}}
@@ -416,5 +395,39 @@
         </div><!--//container-fluid-->
     </div><!--//app-content-->
 
+    {{-- <script type="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+        var pendapatan = <?php echo json_encode($Total_Harga)?>;
+        var bulan = <?php echo json_encode($bulan)?>;
+        Highcharts.charts('grafik',
+        {
+            title : {
+                text : 'Grafik Pendapatan Perbulan'
+            },
+
+            xAxis :{
+                categories : bulan
+            },
+
+            yAxis :{
+                title: {
+                    text : Nominal Pendapatan Bulanan
+                }
+            },
+
+            plotOptions:{
+                series : {
+                    allowPointSelect: true
+                }
+            },
+
+            series: [
+                {
+                    name: 'Nominal Pendapatan',
+                    data: pendapatan
+                }
+            ]
+        });
+    </script> --}}
 
 @endsection

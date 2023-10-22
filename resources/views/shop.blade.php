@@ -172,13 +172,13 @@
                     <div class="sidebar">
                         <div class="widgets widget-menu">
                             <div class="widget-search-bar">
-                                <form role="search" method="get" class="d-flex">
-                                    <input class="search-field" placeholder="Search" type="text">
-                                    <button class="btn btn-dark"><i class="icon icon-search"></i></button>
+                                <form action="/shop/search" role="search" method="get" class="d-flex">
+                                    <input class="search-field" placeholder="Search" name="cari" type="text">
+                                    <button type="submit" class="btn btn-dark"><i class="icon icon-search"></i></button>
                                 </form>
                             </div>
                         </div>
-                        <div class="widgets widget-product-tags">
+                        {{-- <div class="widgets widget-product-tags">
                             <h5 class="widget-title">Tags</h5>
                             <ul class="product-tags sidebar-list list-unstyled">
                                 <li class="tags-item">
@@ -197,25 +197,44 @@
                                     <a href="">Simple</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
 
 
-
+                       
                         <div class="widgets widget-product-brands">
-                            <h5 class="widget-title">Kategori</h5>
+                            <form action="/shop/result" method="GET">
+                                {{ csrf_field() }}
+                               <h5> <label for="kategori" class="widget-title">Pilih Kategori:</label></h5>
+                                <select name="kategori" id="kategori">
+                                    @foreach($kategoris as $kategori)
+                                    <option value="{{$kategori->Id_Kategori}}">{{$kategori->Kategori}}</option>
+                                     @endforeach
+                                 </select>
+                                <button type="submit">Filter</button>
+                            </form>
+                            {{-- <h5 class="widget-title">Kategori</h5>
                             <select id="kategori-filter">
                                 <option value="">Semua Kategori</option>
-                                @foreach($kategoris as $kategori)
+                              
                                     <option value="{{ $kategori->Id_Kategori }}">{{ $kategori->Kategori }}</option>
-                                @endforeach
-                            </select>
+                             
+                            </select> --}}
                         </div>
 
 
 
                         <div class="widgets widget-price-filter">
                             <h5 class="widget-title">Filter By Price</h5>
-                            <ul class="product-tags sidebar-list list-unstyled">
+                            <form method="GET" action="/shop/price/">
+                                <label for="min_harga">Harga Minimum:</label>
+                               Rp.<input type="text" name="min_harga" id="min_harga">
+
+                                <label for="max_harga">Harga Maksimum:</label>
+                              Rp.<input type="text" name="max_harga" id="max_harga">
+
+                                <button type="submit">Filter</button>
+                            </form>
+                            {{-- <ul class="product-tags sidebar-list list-unstyled">
                                 <li class="tags-item">
                                     <a href="">Less than $10</a>
                                 </li>
@@ -231,8 +250,10 @@
                                 <li class="tags-item">
                                     <a href="">$40- $50</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
+
+
                     </div>
                 </aside>
 
@@ -342,7 +363,7 @@
         </div>
         <hr>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -361,7 +382,7 @@
         });
     });
 });
-</script>
+</script> --}}
     {{-- <script>
         $(".widgets widget-product-brands li").on('click', function ()
         {

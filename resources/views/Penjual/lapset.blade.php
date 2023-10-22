@@ -47,16 +47,14 @@
 
                         @foreach ($penjualan as $data)
                             <tr>
-                                <td>{{ $data->tanggal }} </td>
-                                <td>Rp. {{ number_format($data->total_harga) }} </td>
+                                <td>{{ date('F Y', strtotime($data->bulan)) }}</td>
+                                <td>Rp. {{ number_format($data->Total_Harga) }} </td>
                             </tr>
                         @endforeach
 
                         <tr>
-
-
                             <td>Jumlah</td>
-                            <td>{{ $penjualan->sum('Total_Harga') }}</td>
+                            <td>Rp. {{ number_format($penjualan->sum('Total_Harga')) }}</td>
                             {{-- <td>{{ $penjualan->sum('total_terjual * Harga') }}</td> --}}
                             {{-- <td>
                                 @php
@@ -67,9 +65,7 @@
                                     echo "Rp. " . number_format($totalPenjualan);
                                 @endphp
                             </td> --}}
-
                         </tr>
-
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">

@@ -59,7 +59,7 @@ class UlasanController extends Controller
 
             // return $ulasan;
 
-            return redirect('/single/{Id_Barang}');
+            return back();
         }
     }
 

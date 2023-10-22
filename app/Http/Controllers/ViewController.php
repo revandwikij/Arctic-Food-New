@@ -51,12 +51,12 @@ class ViewController extends Controller
         $barang = Barang::count();
         $kategoris = kategori::all();
 
-        $data = Pembayaran::selectRaw('DATE(created_at) as tanggal, COUNT(*) as jumlah_pembayaran')
-            ->groupBy('tanggal')
-            ->get();
+        // $chart = new AdminChart;
+        // $chart->labels(['Jan', 'Feb', 'Mar']);
+        // $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
 
-
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'data'));
+        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang'));
+            // , 'chart'
     }
 
     public function login()
@@ -82,10 +82,14 @@ class ViewController extends Controller
                 ->join('users', 'pelanggan.email', '=', 'users.email')
                 ->where('users.id', '=', $user->id)
                 ->where('keranjang.Status', '=', 'Aktif')
+                ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
         $pelanggan = pelanggan::all();
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-            ->where('users.id', '=', $user->id)->select('keranjang.Id_Keranjang')->get();
+            ->where('users.id', '=', $user->id)
+            ->where('keranjang.Status', '=', 'Aktif')
+            ->latest('keranjang.created_at')
+            ->select('keranjang.Id_Keranjang')->get();
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
     }
@@ -149,21 +153,53 @@ class ViewController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function shop($kategori = 'all')
+    public function shop()
     {
-        // $kategori = kategori::join('barang', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->get();
-        if ($kategori == 'all') {
-            $barang = Barang::paginate(12);
-        } else {
-            // Di sini, Anda dapat menggabungkan dan memfilter data sesuai dengan kategori
-            $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-                ->where('kategori.Kategori', $kategori)
-                ->get();
-        }
+
+        $barang = Barang::paginate(12);
         $kategoris = kategori::all();
 
         return view('shop', compact('barang', 'kategoris'));
     }
+
+    public function filtershop(Request $request)
+    {
+
+        $kategori = $request->input('kategori');
+
+        $barang = Barang::where('Id_Kategori', $kategori)->paginate(12);
+        $kategoris = kategori::all();
+
+        // Kirim data barang ke view
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+    public function carishop(Request $request)
+    {
+
+        $cari = $request->input('cari');
+
+        $barang = Barang::where('Nama_Barang', 'LIKE', '%'. $cari. '%')->paginate(12);
+        $kategoris = kategori::all();
+
+        // Kirim data barang ke view
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+    public function hargashop(Request $request)
+    {
+
+        $min = $request->input('min_harga');
+        $max = $request->input('max_harga');
+
+        $barang = Barang::whereBetween('Harga', [$min, $max])->paginate(12);
+        $kategoris = kategori::all();
+
+
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+
 
     public function payment()
     {
@@ -315,7 +351,7 @@ class ViewController extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $penjualan = PenjualanView::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
+        $penjualan = PenjualanView::where('tanggal_awal', $tanggalAwal)->where('tanggal_akhir', $tanggalAkhir)->get();
 
         return view('penjual.lapbar', ['penjualan' => $penjualan]);
     }
@@ -391,7 +427,7 @@ class ViewController extends Controller
         $bulanawal = $request->input('bulan_awal');
         $bulanakhir = $request->input('bulan_akhir');
 
-        $penjualan = OmsetView::whereBetween('tanggal', [$bulanawal, $bulanakhir])->get();
+        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
 
         return view('penjual.lapset', ['penjualan' => $penjualan]);
     }

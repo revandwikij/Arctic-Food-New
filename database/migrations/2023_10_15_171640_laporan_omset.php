@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-    CREATE VIEW v_laporan_omset AS
-    SELECT
-        DATE_FORMAT(created_at, '%Y-%m') AS tanggal,
-        Total_Harga
-    FROM pembayaran
-    WHERE Status_Pembayaran = 'Diterima'
-    GROUP BY tanggal, Total_Harga ;
+        CREATE VIEW v_laporan_omset AS
+        SELECT
+            DATE_FORMAT(created_at, '%Y-%m') AS bulan,
+            SUM(Total_Harga) AS Total_Harga
+        FROM pembayaran
+        WHERE Status_Pembayaran = 'Lunas'
+        GROUP BY bulan;
 
 ");
     // JOIN detail_keranjang  ON barang.Id_Barang = detail_keranjang.Id_Barang
