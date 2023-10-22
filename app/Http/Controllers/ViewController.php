@@ -11,6 +11,7 @@ use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\OmsetView;
 use App\Models\pelanggan;
+use App\Models\Pembayaran;
 use App\Models\PenjualanView;
 use App\Models\Pesan;
 use App\Models\UlasanModel;
@@ -50,11 +51,12 @@ class ViewController extends Controller
         $barang = Barang::count();
         $kategoris = kategori::all();
 
-        $chart = new AdminChart;
-        $chart->labels(['Jan', 'Feb', 'Mar']);
-        $chart->dataset('Users by trimester', 'line', [10, 25, 13]);
+        $data = Pembayaran::selectRaw('DATE(created_at) as tanggal, COUNT(*) as jumlah_pembayaran')
+            ->groupBy('tanggal')
+            ->get();
 
-        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'chart'));
+
+        return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'data'));
     }
 
     public function login()
@@ -405,7 +407,7 @@ class ViewController extends Controller
         } else {
             $barang = Barang::all();
         }
-    
+
         // Mengembalikan data barang hasil filter sebagai respons
         return view('shop', compact('barang'));
     }
