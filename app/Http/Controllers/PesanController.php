@@ -22,6 +22,7 @@ use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Notifications\Notification;
 
 class PesanController extends Controller
 {
@@ -260,6 +261,7 @@ class PesanController extends Controller
     // }
 
     public function callback(Request $request)
+
     {
 
             $serverKey = config('midtrans.server_key');
@@ -309,28 +311,11 @@ class PesanController extends Controller
                     $bayar->save();
 
 
+                    $user = User::all();
+                    $data = "Ada pesanan baru masuk";
+                   
+                    $user->notify(new Notif($data));
 
-
-
-                    // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
-                    // $admin->notify(new Notif($bayar));
-
-                    // $lastUid2 = ModelsNotif::orderBy('id', 'desc')->first()->Id_Notif ?? 'N000';
-                    // $nextNumber2 = (int) substr($lastUid2, 1) + 1;
-                    // $newUid2 = 'N' . str_pad($nextNumber2, 3, '0', STR_PAD_LEFT);
-
-                    // $message = "Pelanggan telah melakukan pembayaran.";
-
-                    // $user = auth()->user();
-                    // $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
-                    // $pecah = json_decode($cek, true);
-                    // $kran = $pecah['Id_Pelanggan'];
-
-                    // $notification = new ModelsNotif();
-                    // $notification->Id_Notif = $newUid2;
-                    // $notification->Id_Pelanggan = $kran;
-                    // $notification->message = $message;
-                    // $notification->save();
                 }
 
 
