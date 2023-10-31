@@ -289,13 +289,13 @@ class PesanController extends Controller
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
-                        foreach ($detailPesanan as $detail) {
-                            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
-                            if ($barang) {
-                                $barang->Stok -= $detail->Kuantitas;
-                                $barang->save();
-                            }
-                        }
+                        // foreach ($detailPesanan as $detail) {
+                        //     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                        //     if ($barang) {
+                        //         $barang->Stok -= $detail->Kuantitas;
+                        //         $barang->save();
+                        //     }
+                        // }
 
 
                     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
