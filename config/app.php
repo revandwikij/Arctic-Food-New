@@ -199,6 +199,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*
