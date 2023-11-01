@@ -389,7 +389,9 @@ public function filriwayat(Request $request)
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $penjualan = PenjualanView::where('tanggal_awal', $tanggalAwal)->where('tanggal_akhir', $tanggalAkhir)->get();
+        // $penjualan = PenjualanView::whereBetween('tanggal_awal', $tanggalAwal AND 'tanggal_akhir', $tanggalAkhir)->get();
+        $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
+
 
         return view('penjual.lapbar', ['penjualan' => $penjualan]);
     }

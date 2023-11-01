@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\kategori;
+use App\Models\Pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
@@ -181,7 +182,16 @@ class BarangController extends Controller
      */
     public function destroy($Id_Barang)
     {
-        // menghapus data Barang berdasarkan id yang dipilih
+
+    if(Pesan::join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+    ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+    ->where('detail_keranjang.Id_Barang', '=', $Id_Barang)
+    ->where('pesanan.Status_Pesanan', '=', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim']))
+    {
+        return 'Barang sedang dalam pesanan';
+    }
+
+
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
 	// alihkan halaman ke halaman Barang
@@ -210,9 +220,9 @@ class BarangController extends Controller
 
     public function sorting(Request $request)
 {
-    
+
     $request = Barang::sortable(['Stok' => 'asc']);
-    
+
     return view('penjual.barang');
 }
 
