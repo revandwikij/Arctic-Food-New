@@ -57,7 +57,7 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan', $data);
+        $pdf->loadView('penjual.laporan2', $data);
 
         return $pdf->download('penjual.laporanomset.pdf');
     }

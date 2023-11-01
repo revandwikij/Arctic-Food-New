@@ -30,8 +30,8 @@
 
                 @foreach ($penjualan as $data)
                     <tr>
-                        <td>{{ $data->tanggal }} </td>
-                        <td>Rp. {{ number_format($data->total_harga) }} </td>
+                        <td>{{ $data->bulan }} </td>
+                        <td>Rp. {{ number_format($data->Total_Harga) }} </td>
                     </tr>
                 @endforeach
 
