@@ -228,6 +228,7 @@ class PesanController extends Controller
             $bayar->Id_Shipping = $order->Id_Shipping;
             $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
             $bayar->Status_Pembayaran = 'Belum Lunas';
+            $bayar->Tgl_Pembayaran = now();
             $bayar->save();
 
             // $user = User::all();
@@ -237,7 +238,6 @@ class PesanController extends Controller
             // Notification::send($user, new Notif($data));
 
             event(new EventPembayaran(Auth()->user()->username));
-
 
             // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
@@ -476,7 +476,7 @@ class PesanController extends Controller
     {
         $user = auth()->user();
         $bayar = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pembayaran.created_at')->first(['pembayaran.Id_Pembayaran', 'pesanan.Id_Pesanan', 'shipping.Id_Shipping']);
-         
+
 
         if($bayar)
         {

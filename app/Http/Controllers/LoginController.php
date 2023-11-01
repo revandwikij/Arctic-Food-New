@@ -30,7 +30,7 @@ class LoginController extends Controller
             return redirect()->intended('/');
         } elseif (Auth::user()->level == 'penjual') {
             // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
-            return redirect()->intended('/admin');
+        return redirect()->intended('/admin');
         } else {
             return view('layouting.error');
         }
