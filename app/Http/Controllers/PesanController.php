@@ -362,7 +362,7 @@ class PesanController extends Controller
                 // $notification->Id_Pelanggan = $kran;
                 // $notification->message = $message;
                 // $notification->save();
-                
+
 
 
             }

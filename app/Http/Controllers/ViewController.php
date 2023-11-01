@@ -82,6 +82,7 @@ class ViewController extends Controller
     public function cart()
     {
         $user = auth()->user();
+        // $test = DB::select('CALL Total_Keranjang(?)', [$user->id]);
         $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
                 ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')

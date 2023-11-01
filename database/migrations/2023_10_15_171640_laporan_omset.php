@@ -12,21 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("
+    $laporan = "DROP VIEW IF EXISTS `v_laporan_omset`;
+
         CREATE VIEW v_laporan_omset AS
         SELECT
             DATE_FORMAT(created_at, '%Y-%m') AS bulan,
             SUM(Total_Harga) AS Total_Harga
         FROM pembayaran
         WHERE Status_Pembayaran = 'Lunas'
-        GROUP BY bulan;
+        GROUP BY bulan;";
 
-");
-    // JOIN detail_keranjang  ON barang.Id_Barang = detail_keranjang.Id_Barang
-    // JOIN keranjang  ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
-    // JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
-    // JOIN shipping ON pesanan.Id_Pesanan = shipping.Id_Pesanan
-    // JOIN pembayaran ON shipping.Id_Shipping = pembayaran.Id_Shipping
+    DB::unprepared($laporan);
+
     }
 
     /**
