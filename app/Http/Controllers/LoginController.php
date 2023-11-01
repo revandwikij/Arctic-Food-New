@@ -26,10 +26,10 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->level == 'pelanggan') {
-            activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
             return redirect()->intended('/');
         } elseif (Auth::user()->level == 'penjual') {
-            activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
             return redirect()->intended('/admin');
         } else {
             return view('layouting.error');
