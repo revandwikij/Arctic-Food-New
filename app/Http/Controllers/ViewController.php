@@ -303,7 +303,11 @@ class ViewController extends Controller
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
         ->where('users.id', '=', $user->id)
+        ->orderby('pesanan.created_at', 'desc')
         ->paginate(6);
+
+
+
 
     return view('riwayat', compact('pesanan'));
 }
@@ -360,7 +364,14 @@ public function filriwayat(Request $request)
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
 
-        return view('detilorder', compact('pesanan'));
+
+        $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+        ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+
+
+        return view('detilorder', compact('pesanan', 'databar'));
     }
 
     public function laporan()
