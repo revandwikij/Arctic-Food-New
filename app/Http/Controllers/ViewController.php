@@ -25,21 +25,23 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::where('Stok' > 0 )->paginate(12);
+        $barang = Barang::where('Stok', '>', 0 )->paginate(12);
         $kategoris = kategori::all();
         $produkterlaris = DB::table('barang')
             ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
             ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
             ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
             ->where('pesanan.Status_Pesanan', '=', 'Selesai')
-            ->where('barang.Stok' > 0)
+            ->where('barang.Stok', '>', 0)
             ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
             ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
             ->orderByDesc('jumlah_penjualan')
             ->limit(4)
             ->get();
 
-        return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkterlaris'));
+        $produkbaru =  Barang::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkbaru'));
     }
 
     public function admin()
@@ -92,7 +94,7 @@ class ViewController extends Controller
                 ->where('keranjang.Status', '=', 'Aktif')
                 ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
-        
+
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
@@ -167,7 +169,7 @@ class ViewController extends Controller
     public function shop()
     {
 
-        $barang = Barang::where('Stok' > 0)->paginate(12);
+        $barang = Barang::where('Stok', '>', 0)->paginate(12);
         $kategoris = kategori::all();
 
         return view('shop', compact('barang', 'kategoris'));
@@ -301,10 +303,28 @@ class ViewController extends Controller
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
         ->where('users.id', '=', $user->id)
-        ->paginate(6); // Add the paginate method here
+        ->paginate(6);
 
     return view('riwayat', compact('pesanan'));
 }
+
+public function filriwayat(Request $request)
+{
+    $user = auth()->user();
+    $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('users.id', '=', $user->id)
+        ->where('pesanan.Status_Pesanan', '=', $request->status)
+        ->paginate(6);
+
+    return view('riwayat', compact('pesanan'));
+}
+
+
+
 
     public function perludikirim()
     {

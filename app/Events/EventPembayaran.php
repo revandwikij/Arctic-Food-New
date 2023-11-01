@@ -17,9 +17,9 @@ class EventPembayaran
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -27,10 +27,14 @@ class EventPembayaran
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        return new Channel('Channel-Pembayaran');
+
+    }
+
+    public function broadcastAs()
+    {
+        return 'my-event';
     }
 }
