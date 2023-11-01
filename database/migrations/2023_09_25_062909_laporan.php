@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        DB::statement("
+    $laporan = "DROP VIEW IF EXISTS `v_laporan_barang`;
         CREATE VIEW v_laporan_barang AS
     SELECT
         barang.Nama_Barang AS produk,
@@ -28,10 +28,10 @@ return new class extends Migration
     JOIN keranjang  ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
     JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
     WHERE pesanan.Status_Pesanan = 'Selesai' AND keranjang.Status = 'Dicheckout'
-    GROUP BY produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;
+    GROUP BY produk, barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;";
 
+    DB::unprepared($laporan);
 
-");
 
     }
 
