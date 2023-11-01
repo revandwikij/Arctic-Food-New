@@ -54,14 +54,14 @@
     <section id="featured-products" class="product-store padding-large">
       <div class="container">
         <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">Best Selling </h2>
+          <h2 class="section-title">New Arrival </h2>
           <div class="btn-wrap">
             <a href="/shop" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
           </div>
         </div>
         <div class="swiper product-swiper overflow-hidden">
           <div class="swiper-wrapper">
-            @foreach ($produkterlaris as $item )
+            @foreach ($produkbaru as $item )
 
 
 

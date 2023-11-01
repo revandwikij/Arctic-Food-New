@@ -289,7 +289,8 @@ class PesanController extends Controller
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
-                        foreach ($detailPesanan as $detail) {
+                        foreach ($detailPesanan as $detail)
+                        {
                             $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                             if ($barang) {
                                 $barang->Stok -= $detail->Kuantitas;
@@ -297,11 +298,14 @@ class PesanController extends Controller
                             }
                         }
 
+                        $cek = Shipping::where('Id_Pesanan', $id_pesanan)->exists();
+
+                        if($cek)
+                        {
+                            return response()->json(['message' => 'ID pengiriman telah digunakan.'], 400);
+                        }
 
                     $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
-
-
-
                     $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
                     $nextNumber1 = (int) substr($lastUid1, 1) + 1;
                     $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
@@ -362,7 +366,7 @@ class PesanController extends Controller
                 // $notification->Id_Pelanggan = $kran;
                 // $notification->message = $message;
                 // $notification->save();
-                
+
 
 
             }

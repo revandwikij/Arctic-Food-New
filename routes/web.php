@@ -25,6 +25,7 @@ use App\Models\pelanggan;
 use App\Models\Shipping;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +107,6 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
 });
 
 
-
 Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/bayar', [ViewController::class, 'bayar']);
     Route::get('/cart', [ViewController::class, 'cart']);
@@ -134,6 +134,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/barang/filter',[ViewController::class, 'filter']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/transaksi', [ViewController::class, 'riwayat']);
+    Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
@@ -180,3 +181,13 @@ Route::get('/add', [ViewController::class, 'tambahadmin']);
 
 
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
