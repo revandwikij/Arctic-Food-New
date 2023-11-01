@@ -7,12 +7,12 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-<link rel="stylesheet" type="text/css" href="../assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="../assets/icomoon/icomoon.css">
+<link rel="stylesheet" type="text/css" href="{{asset('../assets/css/normalize.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('../assets/icomoon/icomoon.css')}}">
 <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/profile.css">
+<link rel="stylesheet" type="text/css" href="{{asset('../assets/css/vendor.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('../assets/css/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('../assets/css/profile.css')}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,6 +21,6 @@
 <!-- script ================================================== -->
 
 <!-- Icon -->
-<link rel="icon" href="../assets/css/images/aam.png" type="image">
+<link rel="icon" href="{{asset('../assets/css/images/aam.png')}}" type="image">
 
-<script src="../assets/js/modernizr.js"></script>
+<script src="{{asset('../assets/js/modernizr.js')}}"></script>

@@ -13,12 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         $procedure = "DROP PROCEDURE IF EXISTS `store_procedure_pelanggan`;
-        CREATE PROCEDURE `store_procedure_pelanggan` (IN idx int)
+        CREATE PROCEDURE `store_procedure_pelanggan` ()
         BEGIN
-        SELECT pelanggan.username, alamat.Alamat, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
+        SELECT pelanggan.username, alamat.Alamat_Lengkap, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
         FROM pelanggan
-        JOIN alamat
-        ON pelanggan.Id_Pelanggan = alamat.Id_Pelanggan;
+        JOIN users 
+        ON user.email = pelanggan.email
+        WHERE users.level = 'pelanggan';
         END;";
 
         DB::unprepared($procedure);

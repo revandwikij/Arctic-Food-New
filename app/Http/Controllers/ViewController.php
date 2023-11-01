@@ -25,18 +25,19 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::paginate(12);
+        $barang = Barang::where('Stok', '>', 0 )->paginate(12);
         $kategoris = kategori::all();
-        // $produkterlaris = DB::table('barang')
-        //     ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-        //     ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
-        //     ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-        //     ->where('pesanan.Status_Pesanan', '=', 'Selesai')
-        //     ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
-        //     ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
-        //     ->orderByDesc('jumlah_penjualan')
-        //     ->limit(4)
-        //     ->get();
+        $produkterlaris = DB::table('barang')
+            ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+            ->where('pesanan.Status_Pesanan', '=', 'Selesai')
+            ->where('barang.Stok', '>', 0)
+            ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
+            ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
+            ->orderByDesc('jumlah_penjualan')
+            ->limit(4)
+            ->get();
 
         $produkbaru =  Barang::orderBy('created_at', 'desc')->take(3)->get();
 
@@ -92,7 +93,7 @@ class ViewController extends Controller
                 ->where('keranjang.Status', '=', 'Aktif')
                 ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
-        $pelanggan = pelanggan::all();
+
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
@@ -158,15 +159,16 @@ class ViewController extends Controller
 
     public function datapelanggan()
     {
-        $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
+        // $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
 
+        $users = DB::select("CALL store_procedure_pelanggan()");
         return view('users.index', compact('users'));
     }
 
     public function shop()
     {
 
-        $barang = Barang::paginate(12);
+        $barang = Barang::where('Stok', '>', 0)->paginate(12);
         $kategoris = kategori::all();
 
         return view('shop', compact('barang', 'kategoris'));
@@ -382,16 +384,15 @@ public function filriwayat(Request $request)
 
     public function barangkategori(Request $request)
     {
-        $kategoriValue = $request->input('kategori');
+        $kategori = $request->input('kategori');
+        // $kategoriValue = DB::select("SELECT CONVERT(?, utf8mb4_general_ci) AS kategori", [$request->kategori]);
+
 
         // Lakukan query untuk mengambil data PenjualanView sesuai kategori
         $test = [];
 
-        if ($kategoriValue) {
-            $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-                ->where('kategori.Kategori', $kategoriValue)
-            ->paginate(3);
-        }
+        if ($kategori) {
+            $test = DB::select("CALL FilterKategori(CONVERT('{$kategori}' USING utf8mb4_general_ci))");        }
 
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();

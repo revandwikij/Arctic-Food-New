@@ -1,6 +1,6 @@
-<script src="../assets/js/jquery-1.11.0.min.js"></script>
-<script src="../assets/js/plugins.js"></script>
-<script src="../assets/js/script.js"></script>
+<script src="{{asset('../assets/js/jquery-1.11.0.min.js')}}"></script>
+<script src="{{asset('../assets/js/plugins.js')}}"></script>
+<script src="{{asset('../assets/js/script.js')}}"></script>
 {{-- <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Get the current page URL

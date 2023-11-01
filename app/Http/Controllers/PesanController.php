@@ -218,6 +218,20 @@ class PesanController extends Controller
             $ship->Total_Shipping = $biyship->Biaya_Shipping_per_Kg * $totalbb;
             $ship->save();
 
+            $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('shipping.Id_Shipping', $ship->Id_Shipping)->first();
+            $lastUid3 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+            $nextNumber3 = (int) substr($lastUid3, 1) + 1;
+            $newUid3 = 'M' . str_pad($nextNumber3, 3, '0', STR_PAD_LEFT);
+
+            $bayar = new Pembayaran();
+            $bayar->Id_Pembayaran = $newUid3;
+            $bayar->Id_Shipping = $order->Id_Shipping;
+            $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
+            $bayar->Status_Pembayaran = 'Belum Lunas';
+            $bayar->save();
+
+
+
 
 
             // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
@@ -283,65 +297,79 @@ class PesanController extends Controller
                     ->get();
 
 
+                     Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+                    ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+                    ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                    ->update(['pembayaran.Status_Pembayaran' => 'Lunas']);
+
+                    Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+                    ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+                    ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                    ->update(['pembayaran.Tgl_Pembayaran' => $request->transaction_time]);
+
+                     
+
+
                 foreach ($detailPesanan as $detail) {
                     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                     if ($barang) {
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
-                        foreach ($detailPesanan as $detail)
-                        {
-                            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
-                            if ($barang) {
-                                $barang->Stok -= $detail->Kuantitas;
-                                $barang->save();
-                            }
-                        }
-
-                        $cek = Shipping::where('Id_Pesanan', $id_pesanan)->exists();
-
-                        if($cek)
-                        {
-                            return response()->json(['message' => 'ID pengiriman telah digunakan.'], 400);
-                        }
-
-                    $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
-                    $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-                    $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-                    $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
-
-                    $bayar = new Pembayaran();
-                    $bayar->Id_Pembayaran = $newUid1;
-                    $bayar->Id_Shipping = $order->Id_Shipping;
-                    $bayar->Total_Harga = $request->gross_amount;
-                    $bayar->Status_Pembayaran = 'Lunas';
-                    $bayar->Tgl_Pembayaran = $request->transaction_time;
-                    $bayar->save();
 
 
-                    $user = User::all();
-                    $data = "Ada pesanan baru masuk";
+                        // foreach ($detailPesanan as $detail) {
+                        //     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                        //     if ($barang) {
+                        //         $barang->Stok -= $detail->Kuantitas;
+                        //         $barang->save();
+                        //     }
+                        // }
 
-                    $user->notify(new Notif($data));
+                        // $cek = Shipping::where('Id_Pesanan', $id_pesanan)->exists();
+
+                        // if($cek)
+                        // {
+                        //     return response()->json(['message' => 'ID pengiriman telah digunakan.'], 400);
+                        // }
+
+                    // $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
+                    // $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                    // $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                    // $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+
+                    // $bayar = new Pembayaran();
+                    // $bayar->Id_Pembayaran = $newUid1;
+                    // $bayar->Id_Shipping = $order->Id_Shipping;
+                    // $bayar->Total_Harga = $request->gross_amount;
+                    // $bayar->Status_Pembayaran = 'Lunas';
+                    // $bayar->Tgl_Pembayaran = $request->transaction_time;
+                    // $bayar->save();
+
+
+                    // $user = User::all();
+                    // $data = "Ada pesanan baru masuk";
+
+                    // $user->notify(new Notif($data));
 
                 }
 
 
-                $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
+                // $order = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->where('pesanan.Id_Pesanan', $request->order_id)->first();
 
 
 
-                $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
-                $nextNumber1 = (int) substr($lastUid1, 1) + 1;
-                $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
+                // $lastUid1 = Pembayaran::orderBy('id', 'desc')->first()->Id_Pembayaran ?? 'M000';
+                // $nextNumber1 = (int) substr($lastUid1, 1) + 1;
+                // $newUid1 = 'M' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
 
-                $bayar = new Pembayaran();
-                $bayar->Id_Pembayaran = $newUid1;
-                $bayar->Id_Shipping = $order->Id_Shipping;
-                $bayar->Total_Harga = $request->gross_amount;
-                $bayar->Status_Pembayaran = 'Lunas';
-                $bayar->Tgl_Pembayaran = $request->transaction_time;
-                $bayar->save();
+                // $bayar = new Pembayaran();
+                // $bayar->Id_Pembayaran = $newUid1;
+                // $bayar->Id_Shipping = $order->Id_Shipping;
+                // $bayar->Total_Harga = $request->gross_amount;
+                // $bayar->Status_Pembayaran = 'Lunas';
+                // $bayar->Tgl_Pembayaran = $request->transaction_time;
+                // $bayar->save();
 
 
 
