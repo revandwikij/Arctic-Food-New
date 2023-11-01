@@ -31,14 +31,14 @@
             <div>
                 <form action="/barkat" method="GET">
                     @csrf
-                    <label for="kategori">Kategori</label>
-                    <select name="kategori" id="kategori">
-                        <option value="" selected disabled>Pilih Kategori</option>
-                        @foreach ($kategori as $k)
-                            <option>{{ $k->Kategori }}</option>
-                        @endforeach
-                    </select>
-                    <button type="submit">Klik</button>
+                    <div class="form-group">
+                        <select class="form-select" name="kategori" id="kategori">
+                            <option selected>PILIH KATEGORI</option>
+                            @foreach ($kategori as $k)
+                                <option value="{{ $k->Kategori }}">{{ $k->Kategori }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </form>
             </div>
             <div>
@@ -102,5 +102,10 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('kategori').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
 
 @endsection

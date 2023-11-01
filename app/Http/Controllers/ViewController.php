@@ -441,6 +441,7 @@ class ViewController extends Controller
         $penjualan = OmsetView::all();
         return view('penjual.lapset', compact('penjualan'));
     }
+
     public function filterBarang($Id_Kategori) {
         if ($Id_Kategori) {
             $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
@@ -450,6 +451,10 @@ class ViewController extends Controller
 
         // Mengembalikan data barang hasil filter sebagai respons
         return view('shop', compact('barang'));
+    }
+
+    public function otp() {
+        return view('penjual.otp');
     }
 
 }
