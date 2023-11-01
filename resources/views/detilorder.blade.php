@@ -30,18 +30,23 @@
         <p>Alamat: {{ $item->Alamat_Lengkap }}</p>
         <p>Kota: {{ $item->Kota }}</p>
     </div>
+
+
+
     <div class="barang">
         <h2>Detail Barang</h2>
+
+        @foreach ($databar as $data)
         <div class="item card">
-            <img src="handphone.png" alt="Barang 1">
+            <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="Barang 1">
             <div class="item-details">
-                <p class="item-name">Barang 1</p>
-                <p class="item-quantity">Kuantitas: 2</p>
-                <p class="item-subtotal">Subtotal: $100.00</p>
+                <p class="item-name">{{ $data->Nama_Barang }}</p>
+                <p class="item-quantity">{{ $data->Kuantitas }}</p>
+                <p class="item-subtotal">{{ $data->Sub_Total }}</p>
             </div>
             <a class="view-product-button" href="#">Lihat Produk</a>
         </div>
-
+        @endforeach
         <p>Total Harga: {{ $item->Total }}</p>
     </div>
     <div class="rincian-pembayaran">

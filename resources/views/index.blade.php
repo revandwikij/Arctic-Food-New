@@ -54,14 +54,14 @@
     <section id="featured-products" class="product-store padding-large">
       <div class="container">
         <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">Best Selling </h2>
+          <h2 class="section-title">New Arrival </h2>
           <div class="btn-wrap">
             <a href="/shop" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
           </div>
         </div>
         <div class="swiper product-swiper overflow-hidden">
           <div class="swiper-wrapper">
-            @foreach ($produkterlaris as $item )
+            @foreach ($produkbaru as $item )
 
 
 
@@ -92,7 +92,7 @@
                 <h3 class="product-title">
                   <a href="/single/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
                 </h3>
-                <div class="item-price text-primary">{{$item->Harga}}</div>
+                <div class="item-price text-primary">Rp. {{number_format($item->Harga)}}</div>
               </div>
             </div>
             @endforeach
@@ -396,7 +396,7 @@
                     <a href="/single/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">{{ $data->Harga }}</del>Rp39.999
+                    <del class="prev-price"></del>Rp. {{number_format($data->Harga)}}
                   </div>
                 </div>
               </div>

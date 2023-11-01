@@ -25,20 +25,23 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::paginate(12);
+        $barang = Barang::where('Stok', '>', 0 )->paginate(12);
         $kategoris = kategori::all();
         $produkterlaris = DB::table('barang')
             ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
             ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
             ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
             ->where('pesanan.Status_Pesanan', '=', 'Selesai')
+            ->where('barang.Stok', '>', 0)
             ->select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga', DB::raw('COUNT(detail_keranjang.Kuantitas) AS jumlah_penjualan'))
             ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Foto_Barang', 'barang.Harga')
             ->orderByDesc('jumlah_penjualan')
             ->limit(4)
             ->get();
 
-        return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkterlaris'));
+        $produkbaru =  Barang::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('index', compact('kategoris', 'barang', 'pelanggan', 'produkbaru'));
     }
 
     public function admin()
@@ -82,6 +85,7 @@ class ViewController extends Controller
     public function cart()
     {
         $user = auth()->user();
+        // $test = DB::select('CALL Total_Keranjang(?)', [$user->id]);
         $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
                 ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
                 ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
@@ -90,7 +94,7 @@ class ViewController extends Controller
                 ->where('keranjang.Status', '=', 'Aktif')
                 ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
-        $pelanggan = pelanggan::all();
+
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
@@ -156,15 +160,16 @@ class ViewController extends Controller
 
     public function datapelanggan()
     {
-        $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
+        // $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
 
+        $users = DB::select("CALL store_procedure_pelanggan()");
         return view('users.index', compact('users'));
     }
 
     public function shop()
     {
 
-        $barang = Barang::paginate(12);
+        $barang = Barang::where('Stok', '>', 0)->paginate(12);
         $kategoris = kategori::all();
 
         return view('shop', compact('barang', 'kategoris'));
@@ -298,10 +303,32 @@ class ViewController extends Controller
         ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
         ->where('users.id', '=', $user->id)
-        ->paginate(6); // Add the paginate method here
+        ->orderby('pesanan.created_at', 'desc')
+        ->paginate(6);
+
+
+
 
     return view('riwayat', compact('pesanan'));
 }
+
+public function filriwayat(Request $request)
+{
+    $user = auth()->user();
+    $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('users.id', '=', $user->id)
+        ->where('pesanan.Status_Pesanan', '=', $request->status)
+        ->paginate(6);
+
+    return view('riwayat', compact('pesanan'));
+}
+
+
+
 
     public function perludikirim()
     {
@@ -337,7 +364,14 @@ class ViewController extends Controller
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
 
-        return view('detilorder', compact('pesanan'));
+
+        $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+        ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+
+
+        return view('detilorder', compact('pesanan', 'databar'));
     }
 
     public function laporan()
@@ -355,23 +389,24 @@ class ViewController extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $penjualan = PenjualanView::where('tanggal_awal', $tanggalAwal)->where('tanggal_akhir', $tanggalAkhir)->get();
+        // $penjualan = PenjualanView::whereBetween('tanggal_awal', $tanggalAwal AND 'tanggal_akhir', $tanggalAkhir)->get();
+        $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
+
 
         return view('penjual.lapbar', ['penjualan' => $penjualan]);
     }
 
     public function barangkategori(Request $request)
     {
-        $kategoriValue = $request->input('kategori');
+        $kategori = $request->input('kategori');
+        // $kategoriValue = DB::select("SELECT CONVERT(?, utf8mb4_general_ci) AS kategori", [$request->kategori]);
+
 
         // Lakukan query untuk mengambil data PenjualanView sesuai kategori
         $test = [];
 
-        if ($kategoriValue) {
-            $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-                ->where('kategori.Kategori', $kategoriValue)
-            ->paginate(3);
-        }
+        if ($kategori) {
+            $test = DB::select("CALL FilterKategori(CONVERT('{$kategori}' USING utf8mb4_general_ci))");        }
 
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();

@@ -33,14 +33,14 @@ class PDFController extends Controller
     public function streamPDF()
     {
         $penjualan = DB::table('v_laporan_barang')->get();
-        $barang = DB::table('v_laporan_barang')
-            ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
-            ->groupBy('produk', 'total_terjual')
-            ->get();
+        // $barang = DB::table('v_laporan_barang')
+        //     ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
+        //     ->groupBy('produk', 'total_terjual')
+        //     ->get();
 
         $data = [
             'penjualan' => $penjualan,
-            'barang' => $barang,
+            // 'barang' => $barang,
         ];
 
         $pdf = App::make('dompdf.wrapper');
@@ -57,7 +57,7 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan', $data);
+        $pdf->loadView('penjual.laporan2', $data);
 
         return $pdf->download('penjual.laporanomset.pdf');
     }

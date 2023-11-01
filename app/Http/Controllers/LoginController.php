@@ -38,7 +38,7 @@ class LoginController extends Controller
     return back()->with('loginError', 'Email or password is incorrect.');
 }
 
-    
+
 
     //logout
     public function logout(Request $request)
@@ -55,6 +55,14 @@ class LoginController extends Controller
     //register pembeli
     public function register(Request $request)
     {
+        $request->validate([
+            'username' => 'required|alpha',
+            'password' => 'required',
+            'email' => 'required|email',
+            'jenkel' => 'required',
+            'no_Telp' => 'required|numeric',
+
+        ]);
 
         $lastUid = pelanggan::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'P000';
         $nextNumber = (int) substr($lastUid, 1) + 1;

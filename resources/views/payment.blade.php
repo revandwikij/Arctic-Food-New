@@ -6,7 +6,7 @@
 
     <div class="container mt-4 p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-white pt-3 px-md-4 px-2">
-
+            <a href="/hapuspayment" class="btn btn-secondary">Back</a>
         </nav>
 
         <div class="row px-md-4 px-2 pt-4">
@@ -87,7 +87,7 @@
                         <br>
                     </div>
                 </div>
-            
+
             @endforeach
 
 
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    
+
 
 
     {{-- <section style="background-color: #eee;">
@@ -242,6 +242,8 @@
   </section> --}}
   <br><br><br>
 
+
+
     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
     <script type="text/javascript"
     src="https://app.sandbox.midtrans.com/snap/snap.js"
@@ -256,7 +258,7 @@
       window.snap.pay('{{$snapToken}}', {
         onSuccess: function(result){
           /* You may add your own implementation here */
-          // alert("payment success!"); 
+          // alert("payment success!");
           window.location.href = '/thanks'
           console.log(result);
         },
@@ -275,4 +277,7 @@
       })
     });
   </script>
+
+
+
 @endsection

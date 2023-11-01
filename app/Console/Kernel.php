@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('app:check-unconfirmed-orders')->daily();
+        $schedule->command('app:delete-unpaid-payments')->everyMinute();
     }
 
     /**
