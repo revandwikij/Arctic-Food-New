@@ -92,7 +92,7 @@
                 <h3 class="product-title">
                   <a href="/single/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
                 </h3>
-                <div class="item-price text-primary">{{$item->Harga}}</div>
+                <div class="item-price text-primary">Rp. {{number_format($item->Harga)}}</div>
               </div>
             </div>
             @endforeach
@@ -396,7 +396,7 @@
                     <a href="/single/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">{{ $data->Harga }}</del>Rp39.999
+                    <del class="prev-price"></del>Rp. {{number_format($data->Harga)}}
                   </div>
                 </div>
               </div>

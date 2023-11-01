@@ -307,7 +307,7 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
                     ->update(['pembayaran.Tgl_Pembayaran' => $request->transaction_time]);
 
-                     
+
 
 
                 foreach ($detailPesanan as $detail) {
@@ -465,5 +465,21 @@ class PesanController extends Controller
         ]);
 
         return redirect('/transaksi');
+    }
+
+    public function hapuspayment()
+    {
+        $user = auth()->user();
+        $bayar = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')->join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pembayaran.created_at')->first(['pembayaran.Id_Pembayaran', 'pesanan.Id_Pesanan', 'shipping.Id_Shipping']);
+         
+
+        if($bayar)
+        {
+            Pembayaran::where('Id_Pembayaran', $bayar->Id_Pembayaran)->delete();
+            Shipping::where('Id_Shipping', $bayar->Id_Shipping)->delete();
+            Pesan::where('Id_Pesanan', $bayar->Id_Pesanan)->delete();
+
+             return redirect('/cart');
+        }
     }
 }

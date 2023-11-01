@@ -135,6 +135,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/transaksi', [ViewController::class, 'riwayat']);
     Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
+    Route::get('/hapuspayment', [PesanController::class, 'hapuspayment']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
