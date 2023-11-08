@@ -19,6 +19,8 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\BackUpController;
+
 use App\Http\Controllers\ChartController;
 use App\Models\Barang;
 use App\Models\pelanggan;
@@ -100,6 +102,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
+    Route::get('/backupdb', [ViewController::class, 'backupdb']);
+    Route::get('/backup', [ViewController::class, 'backnya']);
 
 
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
