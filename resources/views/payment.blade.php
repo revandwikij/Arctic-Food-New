@@ -81,13 +81,8 @@
                     </div>
                     <div class="d-flex justify-content-between pb-3" id="countdown"></div>
 
-                    @if ($datapesan[0]->waktu_kadaluarsa > now())
-                        <button id="pay-button"
-                            class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
-                    @else
                     <button id="pay-button"
-                    class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px" @disabled(true)>Bayar</button>
-                    @endif
+                        class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
                     <br>
                     <br>
                 </div>
@@ -266,7 +261,7 @@
                     console.log(result);
                 },
                 onPending: function(result) {
-
+                    /* You may add your own implementation here */
                     alert("wating your payment!");
                     console.log(result);
                 },
@@ -284,7 +279,7 @@
     </script>
 
     <script>
-        var batasWaktu = new Date('{{ $datapesan[0]->waktu_kadaluarsa }}');  
+        var batasWaktu = new Date('{{ $datapesan[0]->waktu_kadaluarsa }}'); // Ambil batas waktu dari PHP
         function updateCountdown() {
             var now = new Date();
             var selisihWaktu = batasWaktu - now;
@@ -310,10 +305,10 @@
             countdown.innerHTML = countdownText;
         }
 
-
+        // Memperbarui waktu mundur setiap detik
         setInterval(updateCountdown, 1000);
 
-
+        // Memastikan waktu mundur diperbarui saat halaman dimuat
         updateCountdown();
     </script>
 
