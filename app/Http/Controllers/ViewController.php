@@ -13,11 +13,15 @@ use App\Models\OmsetView;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\PenjualanView;
+use App\Models\BarangPerAkunView;
+
 use App\Models\Pesan;
 use App\Models\UlasanModel;
 use App\Models\User;
 use App\Models\users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ViewController extends Controller
@@ -216,12 +220,14 @@ class ViewController extends Controller
 
     public function payment()
     {
+        $waktu = Carbon::now();
         $user = auth()->user();
         $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->first();
 
 
 
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
             ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
         $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
@@ -253,7 +259,7 @@ class ViewController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('payment', compact('datapesan', 'alamat', 'snapToken'));
+        return view('payment', compact('datapesan', 'alamat', 'snapToken', 'waktu'));
     }
 
 
@@ -461,21 +467,36 @@ public function filriwayat(Request $request)
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }
 
-    public function laporanOmset(Request $request)
+    // public function laporanOmset(Request $request)
+    // {
+    //     $bulanawal = $request->input('bulan_awal');
+    //     $bulanakhir = $request->input('bulan_akhir');
+
+    //     $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
+
+    //     return view('penjual.lapset', ['penjualan' => $penjualan]);
+    // }
+
+    // public function lapset()
+    // {
+    //     $penjualan = OmsetView::all();
+    //     return view('penjual.lapset', compact('penjualan'));
+    // }
+
+    public function lapbarperakun(Request $request)
     {
-        $bulanawal = $request->input('bulan_awal');
-        $bulanakhir = $request->input('bulan_akhir');
+        $barangperakun = BarangPerAkunView::all();
 
-        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
-
-        return view('penjual.lapset', ['penjualan' => $penjualan]);
+        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
-    public function lapset()
+    public function tampilanlapbarakun(Request $request)
     {
-        $penjualan = OmsetView::all();
-        return view('penjual.lapset', compact('penjualan'));
+        $barangperakun = BarangPerAkunView::all();
+
+        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
+
     public function filterBarang($Id_Kategori) {
         if ($Id_Kategori) {
             $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
@@ -487,4 +508,103 @@ public function filriwayat(Request $request)
         return view('shop', compact('barang'));
     }
 
+    public function backupdb()
+    {
+        return view('penjual.backupdb');
+    }
+
+    public function backnya()
+    {
+
+    //ENTER THE RELEVANT INFO BELOW
+    $mysqlHostName      = env('DB_HOST');
+    $mysqlUserName      = env('DB_USERNAME');
+    $mysqlPassword      = env('DB_PASSWORD');
+    $DbName             = env('DB_DATABASE');
+    $backup_name        = "mybackup.sql";
+    $tables = array(
+        "alamat",
+        "barang",
+        "biaya_shipping",
+        "detail_keranjang",
+        "failed_jobs",
+        "kategori",
+        "keranjang",
+        "laporan_penjualan",
+        "migrations",
+        "password_reset_tokens",
+        "pelanggan",
+        "pembayaran",
+        "penjual",
+        "personal_access_tokens",
+        "pesanan",
+        "riwayat_pesanan",
+        "sessions",
+        "shipping",
+        "ulasan",
+        "users"
+    );
+
+    $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword",array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    $get_all_table_query = "SHOW TABLES";
+    $statement = $connect->prepare($get_all_table_query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+
+    $output = '';
+    foreach($tables as $table)
+    {
+     $show_table_query = "SHOW CREATE TABLE " . $table . "";
+     $statement = $connect->prepare($show_table_query);
+     $statement->execute();
+     $show_table_result = $statement->fetchAll();
+
+     foreach($show_table_result as $show_table_row)
+     {
+      $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+     }
+     $select_query = "SELECT * FROM " . $table . "";
+     $statement = $connect->prepare($select_query);
+     $statement->execute();
+     $total_row = $statement->rowCount();
+
+     for($count=0; $count<$total_row; $count++)
+     {
+      $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
+      $table_column_array = array_keys($single_result);
+      $table_value_array = array_values($single_result);
+      $output .= "\nINSERT INTO $table (";
+      $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+      $output .= "'" . implode("','", $table_value_array) . "');\n";
+     }
+    }
+    $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+    $file_handle = fopen($file_name, 'w+');
+    fwrite($file_handle, $output);
+    fclose($file_handle);
+
+   // Set header untuk memberitahu browser cara menangani file
+   header('Content-Description: File Transfer');
+   header('Content-Type: application/octet-stream');
+   header('Content-Disposition: attachment; filename=' . basename($file_name));
+   header('Content-Transfer-Encoding: binary');
+   header('Expires: 0');
+   header('Cache-Control: must-revalidate');
+   header('Pragma: public');
+   header('Content-Length: ' . filesize($file_name));
+
+   // Bersihkan buffer output dan kirimkan file ke browser
+   ob_clean();
+   flush();
+   readfile($file_name);
+
+   // Hapus file setelah diunduh
+   unlink($file_name);
+   return Response::stream($file_name, $file_name, $header)->deleteFileAfterSend(true);
+    }
+
+
+
 }
+

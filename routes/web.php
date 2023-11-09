@@ -20,6 +20,8 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\BackUpController;
+
 use App\Http\Controllers\ChartController;
 use App\Models\Barang;
 use App\Models\pelanggan;
@@ -88,11 +90,10 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
 
     Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
-    Route::get('/omset', [ViewController::class, 'laporanOmset']);
+    // Route::get('/omset', [ViewController::class, 'laporanOmset']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
     Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
-    Route::get('/laporanomset', [ViewController::class, 'lapset']);
     Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
     Route::get('/generate-pdf2', [PdfController::class, 'generatePDF2']);
@@ -101,6 +102,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
+    Route::get('/backupdb', [ViewController::class, 'backupdb']);
+    Route::get('/backup', [ViewController::class, 'backnya']);
+    Route::get('/lapbarperakun', [ViewController::class, 'lapbarperakun']);
+    Route::get('/tampilanlapbarakun', [ViewController::class, 'tampilanlapbarakun']);
+
+
 
 
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);

@@ -31,22 +31,7 @@ class BarangController extends Controller
         ]);
 
 
-        // function generateUniqueCode($prefix) {
-        //     $lastBarang = Barang::latest()->first(); // Ambil data barang terakhir
-        //     if ($lastBarang)
-        //     {
-        //         $lastCode = $lastBarang->Id_Barang; // Ambil kode terakhir dari barang
-        //         $lastNumber = (int) substr($lastCode, strlen($prefix)); // Ambil nomor urut terakhir
-        //         $nextNumber = $lastNumber + 1; // Hitung nomor urut berikutnya
-        //         $newCode = $prefix . str_pad($nextNumber, 3, '0', STR_PAD_LEFT); // Gabungkan kode unik dengan nomor urut
-        //         return $newCode;
-        //     }
-        //     else
-        //     {
-        //         // Jika belum ada data barang, mulai dari B001
-        //         return $prefix . '001';
-        //     }
-        // }
+
 
         $lastUid = Barang::orderBy('id', 'desc')->first()->Id_Barang ?? 'B000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
@@ -54,24 +39,18 @@ class BarangController extends Controller
 
 
 
-        // $Foto_Barang = $request->file('Foto_Barang');
-        // $Foto_Ekstensi = $Foto_Barang->extension();
-        // $Foto_Nama = date('ymdhis').'.'. $Foto_Ekstensi;
 
-        // $Foto = Image::make($Foto_Barang);
-        // $Foto->crop(400,420);
-        // $Foto_Barang->move(public_path('Foto_Barang'), $Foto_Nama);
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
 
-            // Buat objek gambar dari file yang diunggah
+
             $image = Image::make($gambar);
 
-            // Auto crop gambar sesuai dengan ukuran yang diinginkan (misalnya 400x400)
+
             $image->fit(389, 473);
 
-            // Simpan gambar yang sudah di-crop
+
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
@@ -146,13 +125,13 @@ class BarangController extends Controller
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
 
-            // Buat objek gambar dari file yang diunggah
+
             $image = Image::make($gambar);
 
-            // Auto crop gambar sesuai dengan ukuran yang diinginkan (misalnya 400x400)
+
             $image->fit(389, 473);
 
-            // Simpan gambar yang sudah di-crop
+
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
@@ -194,7 +173,7 @@ class BarangController extends Controller
 
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
-	// alihkan halaman ke halaman Barang
+	 
 	return redirect('/barang');
     }
 

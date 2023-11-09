@@ -80,8 +80,7 @@
                                             <form action="/keranjang/{{ $data->Id_Barang }}" method="POST">
                                                 @csrf
                                                 <input type="number" name="jumlah_pesan" class="form-control" required>
-                                                <button type="submit" class="btn btn-primary mt-3">Masukan
-                                                    Keranjang</button>
+                                                <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>
                                             </form>
                                         </td>
                                     </tr>
