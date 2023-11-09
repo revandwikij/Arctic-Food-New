@@ -22,11 +22,10 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="ps-3 d-flex flex-column justify-content">
-                                                        <p class="fw-bold">{{ $data->Label }}</p> <small
-                                                            class=" d-flex">
+                                                        <p class="fw-bold">{{ $data->Label }}</p> <small class=" d-flex">
                                                             <span class=" text-muted">Nama Penerima :</span> <span
-                                                                class=" fw-bold"> {{ $data->Nama_Penerima }}</span> </small> <small
-                                                            class=""> <span class=" text-muted">No HP:</span> <span
+                                                                class=" fw-bold"> {{ $data->Nama_Penerima }}</span> </small>
+                                                        <small class=""> <span class=" text-muted">No HP:</span> <span
                                                                 class=" fw-bold">{{ $data->No_Hp }}</span> </small>
                                                     </div>
                                                 </div>
@@ -37,10 +36,9 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex align-items-center"> <span
-                                                        class="pe-3 text-muted">Alamat Lengkap</span>
-                                                        <span
-                                                        class=" fw-bold">{{ $data->Alamat_Lengkap }}</span>
+                                                <div class="d-flex align-items-center"> <span class="pe-3 text-muted">Alamat
+                                                        Lengkap</span>
+                                                    <span class=" fw-bold">{{ $data->Alamat_Lengkap }}</span>
 
                                                 </div>
                                             </td>
@@ -55,44 +53,50 @@
         </div>
         @foreach ($datapesan as $item)
             {{-- <form action="/bayar/{{$item->Id_Pesanan}}" method="POST"> --}}
-                @csrf
-                <div class="col-lg-4 payment-summary">
-                    <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
-                    <div class="card px-md-3 px-2 pt-4">
-                        <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
-                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
-                            <p class="">VC115665</p>
-                        </div>
-                        {{-- <div class="d-flex justify-content-between b-bottom">
+            @csrf
+            <div class="col-lg-4 payment-summary">
+                <p class="fw-bold pt-lg-0 pt-4 pb-2">Rincian Pembayaran</p>
+                <div class="card px-md-3 px-2 pt-4">
+                    <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
+                    <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
+                        <p class="">VC115665</p>
+                    </div>
+                    {{-- <div class="d-flex justify-content-between b-bottom">
                           <input type="radio" id="cod" name="Metod_Pembayaran" value="COD">
                           <label for="html">COD</label>
                           <input type="radio" id="gopay" name="Metod_Pembayaran" value="GoPay">
                           <label for="css">GoPay</label>
                         </div> --}}
 
-                            <div class="d-flex flex-column b-bottom">
-                                <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
-                                    <p>Rp. {{number_format($item->Total) }}</p>
-                                </div>
-                                <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
-                                    <p>Rp. {{number_format($item->Total_Shipping) }}</p>
-                                </div>
-                                <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
-                                    <p>Rp. {{number_format($item->Total + $item->Total_Shipping) }}</p>
-                                </div>
-                            </div>
-
-                        <button id="pay-button" class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
-                        <br>
-                        <br>
+                    <div class="d-flex flex-column b-bottom">
+                        <div class="d-flex justify-content-between py-3"> <small class="text-muted">Total Harga</small>
+                            <p>Rp. {{ number_format($item->Total) }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Ongkir</small>
+                            <p>Rp. {{ number_format($item->Total_Shipping) }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between"> <small class="text-muted">Total </small>
+                            <p>Rp. {{ number_format($item->Total + $item->Total_Shipping) }}</p>
+                        </div>
                     </div>
+                    <div class="d-flex justify-content-between pb-3" id="countdown"></div>
+
+                    @if ($datapesan[0]->waktu_kadaluarsa > now())
+                        <button id="pay-button"
+                            class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
+                    @else
+                    <button id="pay-button"
+                    class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px" @disabled(true)>Bayar</button>
+                    @endif
+                    <br>
+                    <br>
                 </div>
+            </div>
+        @endforeach
 
-            @endforeach
 
 
-
-        </div>
+    </div>
     </div>
 
 
@@ -240,43 +244,78 @@
       </div>
     </div>
   </section> --}}
-  <br><br><br>
+    <br><br><br>
 
 
 
     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-    <script type="text/javascript"
-    src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="{{config('midtrans.client_key')}}"></script>
-  <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
 
-  <script type="text/javascript">
-    // For example trigger on button clicked, or any time you need
-    var payButton = document.getElementById('pay-button');
-    payButton.addEventListener('click', function () {
-      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-      window.snap.pay('{{$snapToken}}', {
-        onSuccess: function(result){
-          /* You may add your own implementation here */
-          // alert("payment success!");
-          window.location.href = '/thanks'
-          console.log(result);
-        },
-        onPending: function(result){
-          /* You may add your own implementation here */
-          alert("wating your payment!"); console.log(result);
-        },
-        onError: function(result){
-          /* You may add your own implementation here */
-          alert("payment failed!"); console.log(result);
-        },
-        onClose: function(){
-          /* You may add your own implementation here */
-          alert('you closed the popup without finishing the payment');
+    <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function() {
+            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+            window.snap.pay('{{ $snapToken }}', {
+                onSuccess: function(result) {
+                    /* You may add your own implementation here */
+                    // alert("payment success!");
+                    window.location.href = '/thanks'
+                    console.log(result);
+                },
+                onPending: function(result) {
+
+                    alert("wating your payment!");
+                    console.log(result);
+                },
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
+                    console.log(result);
+                },
+                onClose: function() {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
+                }
+            })
+        });
+    </script>
+
+    <script>
+        var batasWaktu = new Date('{{ $datapesan[0]->waktu_kadaluarsa }}');  
+        function updateCountdown() {
+            var now = new Date();
+            var selisihWaktu = batasWaktu - now;
+
+            var detik = Math.floor((selisihWaktu / 1000) % 60);
+            var menit = Math.floor((selisihWaktu / 1000 / 60) % 60);
+            var jam = Math.floor((selisihWaktu / (1000 * 60 * 60)) % 24);
+            var hari = Math.floor(selisihWaktu / (1000 * 60 * 60 * 24));
+
+            var countdown = document.getElementById('countdown');
+
+            if (selisihWaktu <= 0) {
+                countdown.innerHTML = "waktu seep";
+                return;
+            }
+
+            var countdownText = "waktu tersisa : ";
+            countdownText += (hari > 0 ? hari + " hari, " : "")
+            countdownText += (jam > 0 ? jam + " jam, " : "")
+            countdownText += (menit > 0 ? menit + " menit, " : "")
+            countdownText += detik + " detik"
+
+            countdown.innerHTML = countdownText;
         }
-      })
-    });
-  </script>
+
+
+        setInterval(updateCountdown, 1000);
+
+
+        updateCountdown();
+    </script>
 
 
 

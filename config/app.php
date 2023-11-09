@@ -201,6 +201,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*
@@ -215,7 +216,6 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 

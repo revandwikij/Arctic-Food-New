@@ -13,11 +13,15 @@ use App\Models\OmsetView;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\PenjualanView;
+use App\Models\BarangPerAkunView;
+
 use App\Models\Pesan;
 use App\Models\UlasanModel;
 use App\Models\User;
 use App\Models\users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ViewController extends Controller
@@ -216,12 +220,14 @@ class ViewController extends Controller
 
     public function payment()
     {
+        $waktu = Carbon::now();
         $user = auth()->user();
         $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->first();
 
 
 
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
             ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
         $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
@@ -253,7 +259,7 @@ class ViewController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('payment', compact('datapesan', 'alamat', 'snapToken'));
+        return view('payment', compact('datapesan', 'alamat', 'snapToken', 'waktu'));
     }
 
 
@@ -461,21 +467,36 @@ public function filriwayat(Request $request)
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }
 
-    public function laporanOmset(Request $request)
+    // public function laporanOmset(Request $request)
+    // {
+    //     $bulanawal = $request->input('bulan_awal');
+    //     $bulanakhir = $request->input('bulan_akhir');
+
+    //     $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
+
+    //     return view('penjual.lapset', ['penjualan' => $penjualan]);
+    // }
+
+    // public function lapset()
+    // {
+    //     $penjualan = OmsetView::all();
+    //     return view('penjual.lapset', compact('penjualan'));
+    // }
+
+    public function lapbarperakun(Request $request)
     {
-        $bulanawal = $request->input('bulan_awal');
-        $bulanakhir = $request->input('bulan_akhir');
+        $barangperakun = BarangPerAkunView::all();
 
-        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
-
-        return view('penjual.lapset', ['penjualan' => $penjualan]);
+        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
-    public function lapset()
+    public function tampilanlapbarakun(Request $request)
     {
-        $penjualan = OmsetView::all();
-        return view('penjual.lapset', compact('penjualan'));
+        $barangperakun = BarangPerAkunView::all();
+
+        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
+
     public function filterBarang($Id_Kategori) {
         if ($Id_Kategori) {
             $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
@@ -494,7 +515,7 @@ public function filriwayat(Request $request)
 
     public function backnya()
     {
-         
+
     //ENTER THE RELEVANT INFO BELOW
     $mysqlHostName      = env('DB_HOST');
     $mysqlUserName      = env('DB_USERNAME');
@@ -583,7 +604,7 @@ public function filriwayat(Request $request)
    return Response::stream($file_name, $file_name, $header)->deleteFileAfterSend(true);
     }
 
-   
+
 
 }
 

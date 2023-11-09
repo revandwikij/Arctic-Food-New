@@ -30,6 +30,7 @@ class PDFController extends Controller
 
         return $pdf->download('penjual.laporan.pdf');
     }
+
     public function streamPDF()
     {
         $penjualan = DB::table('v_laporan_barang')->get();
@@ -48,33 +49,32 @@ class PDFController extends Controller
 
         return $pdf->stream('penjual.laporan');
     }
+
     public function generatePDF2()
     {
-        $penjualan = DB::table('v_laporan_omset')->get();
+        $barangperAkun = DB::table('v_laporan_per_akun')->get();
 
         $data = [
-            'penjualan' => $penjualan,
+            'barangperAkun' => $barangperAkun,
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan2', $data);
+        $pdf->loadView('penjual.tampilanlapbarakun', $data);
 
-        return $pdf->download('penjual.laporanomset.pdf');
+        return $pdf->download('penjual.laporanbarangperakun.pdf');
     }
+
     public function streamPDF2()
     {
-        $penjualan = DB::table('v_laporan_omset')->get();
-
+        $barangperAkun = DB::table('v_laporan_per_akun')->get();
 
         $data = [
-            'penjualan' => $penjualan,
-             
+            'barangperAkun' => $barangperAkun,
         ];
-
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan2', $data, );
+        $pdf->loadView('penjual.tampilanlapbarakun', $data);
 
-        return $pdf->stream('penjual.laporan2');
+        return $pdf->stream('penjual.tampilanlapbarakun.pdf');
     }
 
     public function invoice($Id_Pesanan)

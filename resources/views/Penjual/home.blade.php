@@ -4,6 +4,22 @@
 
 @section('content')
 
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('0fd86bb9b489a43595a4', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('Channel-Pembayaran');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
+
 
 
     <div class="app-content pt-3 p-md-3 p-lg-4">

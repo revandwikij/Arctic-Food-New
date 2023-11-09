@@ -12,15 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("
+
+        $filter = "DROP PROCEDURE IF EXISTS `FilterKategori`;
+
         CREATE PROCEDURE FilterKategori(IN kategori VARCHAR(255))
         BEGIN
             SELECT * FROM barang
             JOIN kategori ON barang.Id_Kategori = kategori.Id_Kategori
             WHERE kategori.Kategori = kategori;
-        END;
+        END;";
 
-");
+        DB::unprepared($filter);
+
     }
 
     /**
