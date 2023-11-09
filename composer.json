@@ -22,6 +22,7 @@
         "livewire/livewire": "^3.0",
         "midtrans/midtrans-php": "^2.5",
         "pusher/pusher-php-server": "^7.2",
+        "spatie/laravel-backup": "^8.4",
         "spatie/laravel-permission": "^6.0"
     },
     "require-dev": {
