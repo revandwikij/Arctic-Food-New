@@ -20,8 +20,6 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UlasanController;
-use App\Http\Controllers\BackUpController;
-
 use App\Http\Controllers\ChartController;
 use App\Models\Barang;
 use App\Models\pelanggan;
