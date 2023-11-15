@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    //validasi login
+
     public function validasi(Request $request)
 {
     $credentials = $request->validate([
@@ -26,21 +26,23 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->level == 'pelanggan') {
+            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
             return redirect()->intended('/');
         } elseif (Auth::user()->level == 'penjual') {
-            return redirect()->intended('/admin');
+            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+        return redirect()->intended('/admin');
         } else {
             return view('layouting.error');
         }
     }
 
-    // Authentication failed, display an error message
+
     return back()->with('loginError', 'Email or password is incorrect.');
 }
 
 
 
-    //logout
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -52,7 +54,7 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    //register pembeli
+
     public function register(Request $request)
     {
         $request->validate([
@@ -96,15 +98,15 @@ class LoginController extends Controller
 
     $user = User::find(Auth::user()->id);
 
-    // Memeriksa apakah password lama sesuai
+
     if (Hash::check($request->old_password, $user->password)) {
-        // Password lama cocok, lanjutkan dengan pembaruan
+
         $user->password = Hash::make($request->new_password);
         $user->save();
 
         return redirect('/profile')->with('success', 'Password berhasil diperbarui.');
     } else {
-        // Password lama tidak cocok
+         
         return redirect('/profile')->with('error', 'Password lama tidak cocok. Silakan coba lagi.');
     }
 }

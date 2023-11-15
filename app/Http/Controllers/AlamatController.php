@@ -13,8 +13,7 @@ class AlamatController extends Controller
     {
         if(Auth::id())
         {
-            // return $request;
-            // dd($request);
+             
             $request->validate([
                 'Alamat' => 'required',
                 'Kota' => 'required',

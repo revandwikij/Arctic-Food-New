@@ -77,50 +77,51 @@
                         <td> {{$data->Keterangan_Barang}}</td>
                     </tr>
 
-                        <tr style="font-size: 30px">
-                            <td>Jumlah Pesanan</td>
-                            <td>:</td>
-                            <td>
-                                <form action="/keranjang/{{$data->Id_Barang}}" method="POST">
-                                @csrf
-                                <input type="number" name="jumlah_pesan" class="form-control" required>
-                                <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>
-                                </form>
-                            </td>
-                        </tr>
-                </tbody>
-             </table>
-              <div class="post-tags">
-                <div class="block-tag">
-                  <ul class="list-unstyled d-flex">
-                    <li>
-                      <a href="#" class="btn btn-dark btn-small btn-rounded">{{ $data->Kategori }}</a>
-                    </li>
-                  </ul>
+                                    <tr style="font-size: 30px">
+                                        <td>Jumlah Pesanan</td>
+                                        <td>:</td>
+                                        <td>
+                                            <form action="/keranjang/{{ $data->Id_Barang }}" method="POST">
+                                                @csrf
+                                                <input type="number" name="jumlah_pesan" class="form-control" required>
+                                                <button type="submit" class="btn btn-primary mt-3">Masukan Keranjang</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="post-tags">
+                                <div class="block-tag">
+                                    <ul class="list-unstyled d-flex">
+                                        <li>
+                                            <a href="#"
+                                                class="btn btn-dark btn-small btn-rounded">{{ $data->Kategori }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="social-links d-flex margin-small">
+                                <div class="element-title">Share:</div>
+                                <ul class="d-flex list-unstyled">
+                                    <li>
+                                        <a href="#"><i class="icon icon-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon icon-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon icon-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon icon-youtube-play"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="social-links d-flex margin-small">
-                <div class="element-title">Share:</div>
-                <ul class="d-flex list-unstyled">
-                  <li>
-                    <a href="#"><i class="icon icon-facebook"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="icon icon-twitter"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="icon icon-instagram"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="icon icon-youtube-play"></i></a>
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
     @endforeach
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LaporanController;
@@ -87,11 +88,10 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
 
     Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
-    Route::get('/omset', [ViewController::class, 'laporanOmset']);
+    // Route::get('/omset', [ViewController::class, 'laporanOmset']);
     Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
     Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
     Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
-    Route::get('/laporanomset', [ViewController::class, 'lapset']);
     Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
     Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
     Route::get('/generate-pdf2', [PdfController::class, 'generatePDF2']);
@@ -102,6 +102,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/otp', [ViewController::class, 'otp']);
 
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
+    Route::get('/backupdb', [ViewController::class, 'backupdb']);
+    Route::get('/backup', [ViewController::class, 'backnya']);
+    Route::get('/lapbarperakun', [ViewController::class, 'lapbarperakun']);
+    Route::get('/tampilanlapbarakun', [ViewController::class, 'tampilanlapbarakun']);
+
+
 
 
     Route::post('kirim/{Id_Pesanan}', [PesanController::class, 'konfirmkirim']);
@@ -171,6 +177,10 @@ Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 // Route::get('/detil', [ViewController::class, 'detail']);
 // Route::get('/coba', [ViewController::class, 'coba']);
+
+//Backup
+Route::get('/backup', [BackupController::class, 'index']);
+Route::post('/backup/db', [BackupController::class, 'backup']);
 
 
 
