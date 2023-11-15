@@ -1,6 +1,6 @@
 @extends('layouting.layout login.master')
 
-@section('title', 'Login')
+@section('title', 'Forgor Password')
 
 @section('content')
 
@@ -47,16 +47,9 @@
 <div class="login-container">
   <form class="login-form" action="/login/verif" method="POST">
       @csrf
-      <h2>Login</h2>
+      <h2>Forgor Password</h2>
       <input type="text" placeholder="Email" name="email" required>
-      <input type="password" placeholder="Kata Sandi" name="password" required />
-      <p style="text-align: right; font-size: 5%; margin-top: -5px">
-        <a href="">Forgor Password</a>
-      </p>
       <input type="submit" value="Login" />
-      <p>
-          Belum Punya Akun? <a href="/regis">Klik Disini</a>
-      </p>
 
       @if(session('loginError'))
       <div class="error-message">
@@ -66,7 +59,7 @@
   </form>
 </div>
 
-<script>
+{{-- <script>
   // Check if there is an error message
   const errorMessage = document.querySelector('.error-message');
   if (errorMessage) {
@@ -75,7 +68,7 @@
           errorMessage.classList.add('hidden');
       }, 1000);
   }
-</script>
+</script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection
 
