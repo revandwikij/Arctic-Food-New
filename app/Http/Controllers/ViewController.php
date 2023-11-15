@@ -605,10 +605,28 @@ public function filriwayat(Request $request)
 
    // Hapus file setelah diunduh
    unlink($file_name);
-   return Response::stream($file_name, $file_name, $header)->deleteFileAfterSend(true);
+   return Response::download($file_name, $file_name)->deleteFileAfterSend(true);
     }
 
-
-
+    public function restorenya(Request $request)
+    {
+        $server_name   = "localhost";
+        $username      = "root";
+        $password      = "";
+        $database_name = "baru";
+        
+        $file = 'C:\Users\BTI2-33\Downloads'; // Ganti dengan path file SQL backup projek_umkm
+    
+        $cmd = "mysql -h {$server_name} -u {$username} {$database_name} < $file";
+    
+        
+            // Jika restore berhasil
+            return redirect()->back()->with([
+                'restore_status' => 'success',
+                'restore_message' => 'Database restored successfully.'
+            ]);
+        
 }
+}
+
 
