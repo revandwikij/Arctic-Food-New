@@ -164,9 +164,9 @@ class PesanController extends Controller
                 ->where('keranjang.Status', '=', 'Aktif')->get();
 
 
-            $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
-            $nextNumber = (int) substr($lastUid, 1) + 1;
-            $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            // $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
+            // $nextNumber = (int) substr($lastUid, 1) + 1;
+            // $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
 
             $totalbeban = 0;
@@ -178,7 +178,7 @@ class PesanController extends Controller
 
 
             $pesan = new Pesan();
-            $pesan->Id_Pesanan = $newUid;
+            $pesan->Id_Pesanan = 'ORDR' . date('Ymd') . mt_rand(1000, 9999);
             $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
             $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
             $pesan->Id_Alamat = $request->Id_Alamat;

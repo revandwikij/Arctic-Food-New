@@ -29,17 +29,18 @@
                 <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
             </div>
             <div>
-                <form action="/barkat" method="GET">
-                    @csrf
-                    <label for="kategori">Kategori</label>
-                    <select name="kategori" id="kategori">
+                <form id="kategoriForm" action="/barkat" method="GET">
+                @csrf
+                <div class="form-group">
+                    {{-- <label for="kategori">Kategori</label> --}}
+                    <select class="form-control" name="kategori" id="kategori">
                         <option value="" selected disabled>Pilih Kategori</option>
                         @foreach ($kategori as $k)
                             <option>{{ $k->Kategori }}</option>
                         @endforeach
                     </select>
-                    <button type="submit">Klik</button>
-                </form>
+                </div>
+            </form>
             </div>
             <div>
                 <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>
@@ -101,6 +102,15 @@
             {{ $test->links() }}
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#kategori').change(function () {
+            $('#kategoriForm').submit();
+        });
+    });
+</script>
 
 
 @endsection
