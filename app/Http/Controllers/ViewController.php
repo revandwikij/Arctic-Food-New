@@ -412,7 +412,8 @@ public function filriwayat(Request $request)
         $test = [];
 
         if ($kategori) {
-            $test = DB::select("CALL FilterKategori(CONVERT('{$kategori}' USING utf8mb4_general_ci))");        }
+            $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', $kategori)->paginate(5);
+        }
 
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();
