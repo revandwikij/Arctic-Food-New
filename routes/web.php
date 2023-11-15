@@ -19,8 +19,6 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UlasanController;
-use App\Http\Controllers\BackUpController;
-
 use App\Http\Controllers\ChartController;
 use App\Models\Barang;
 use App\Models\pelanggan;
@@ -176,6 +174,8 @@ Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 // Route::get('/detil', [ViewController::class, 'detail']);
 // Route::get('/coba', [ViewController::class, 'coba']);
+
+
 
 
 

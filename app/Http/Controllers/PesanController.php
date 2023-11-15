@@ -225,19 +225,9 @@ class PesanController extends Controller
             $bayar->waktu_kadaluarsa = now()->addHours(3);
             $bayar->save();
 
-            // $user = User::all();
-            // $data = "Ini adalah contoh data";
-            // //dibawah ini merupakan
-            // //contoh mengirimkan notifikasi ke semua user
-            // Notification::send($user, new Notif($data));
+            $notif = "Ada yg memesan";
 
-            event(new EventPembayaran(Auth()->user()->username));
-
-            // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-            // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
-
-            // $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
-            // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+            Notification::send($user, new Notif($notif));
 
             return redirect('/payment');
         }
