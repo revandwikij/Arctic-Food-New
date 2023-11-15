@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlamatController;
-use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LaporanController;
@@ -176,9 +175,7 @@ Route::get('/add', [ViewController::class, 'tambahadmin']);
 // Route::get('/detil', [ViewController::class, 'detail']);
 // Route::get('/coba', [ViewController::class, 'coba']);
 
-//Backup
-Route::get('/backup', [BackupController::class, 'index']);
-Route::post('/backup/db', [BackupController::class, 'backup']);
+
 
 
 
