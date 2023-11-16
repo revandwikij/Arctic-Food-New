@@ -23,6 +23,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 
 class ViewController extends Controller
 {
@@ -549,37 +551,39 @@ public function filriwayat(Request $request)
     $DbName             = env('DB_DATABASE');
     $backup_name        = "mybackup.sql";
     $tables = array(
-        "alamat",
+        // "alamat",
         "barang",
         "biaya_shipping",
         "detail_keranjang",
-        "failed_jobs",
+        // "failed_jobs",
         "kategori",
         "keranjang",
-        "laporan_penjualan",
-        "migrations",
-        "password_reset_tokens",
-        "pelanggan",
+        // "migrations",
+        // "password_reset_tokens",
+        // "pelanggan",
         "pembayaran",
-        "penjual",
-        "personal_access_tokens",
+        // "penjual",
+        // "personal_access_tokens",
         "pesanan",
         "riwayat_pesanan",
-        "sessions",
+        // "sessions",
         "shipping",
         "ulasan",
-        "users"
+        // "users"
     );
-    $procedure = array(
-        "FilterKategori",
-        "Total_Keranjang",
-        "store_procedure_pelanggan"
-    )
-    $view = array(
-        "v_laporan_barang",
-        "Total_Keranjang",
-        "store_procedure_pelanggan"
-    )
+        // $procedure = array(
+        //     "FilterKategori",
+        //     "Total_Keranjang",
+        //     "store_procedure_pelanggan"
+        // );
+        // $view = array(
+        //     "v_laporan_barang",
+        //     "v_laporan_per_akun"
+        // );
+        // $trigger = array(
+        //     "Regis_To_Login",
+        //     "kurangi_stok_barang"
+        // );
 
     $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword",array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     $get_all_table_query = "SHOW TABLES";
@@ -615,6 +619,43 @@ public function filriwayat(Request $request)
       $output .= "'" . implode("','", $table_value_array) . "');\n";
      }
     }
+
+        // Backup Triggers
+        // foreach ($trigger as $triggerName) {
+        //     $show_trigger_query = "SHOW CREATE TRIGGER " . $triggerName;
+        //     $statement = $connect->prepare($show_trigger_query);
+        //     $statement->execute();
+        //     $show_trigger_result = $statement->fetchAll();
+
+        //     foreach ($show_trigger_result as $show_trigger_row) {
+        //         $output .= "\n\n" . $show_trigger_row["SQL Original Statement"] . ";\n\n";
+        //     }
+        // }
+
+        // Backup Views
+        // foreach ($view as $viewName) {
+        //     $show_view_query = "SHOW CREATE VIEW " . $viewName;
+        //     $statement = $connect->prepare($show_view_query);
+        //     $statement->execute();
+        //     $show_view_result = $statement->fetchAll();
+
+        //     foreach ($show_view_result as $show_view_row) {
+        //         $output .= "\n\n" . $show_view_row["Create View"] . ";\n\n";
+        //     }
+        // }
+
+        // Backup Stored Procedures
+        // foreach ($procedure as $procedureName) {
+        //     $show_procedure_query = "SHOW CREATE PROCEDURE " . $procedureName;
+        //     $statement = $connect->prepare($show_procedure_query);
+        //     $statement->execute();
+        //     $show_procedure_result = $statement->fetchAll();
+
+        //     foreach ($show_procedure_result as $show_procedure_row) {
+        //         $output .= "\n\n" . $show_procedure_row["Create Procedure"] . ";\n\n";
+        //     }
+        // }
+
     $file_name = 'ArcticFood_DataBase_Ke' . '.sql'; 
     // . date('y-m-d') . 
     $file_handle = fopen($file_name, 'w+');
@@ -648,26 +689,25 @@ public function filriwayat(Request $request)
         if ($sqlFile) {
             $content = file_get_contents($sqlFile);
 
-            $tables = ["alamat",
-            "barang",
+            $tables = ["barang",
             "biaya_shipping",
             "detail_keranjang",
-            "failed_jobs",
+            // "failed_jobs",
             "kategori",
             "keranjang",
-            "laporan_penjualan",
-            "migrations",
-            "password_reset_tokens",
-            "pelanggan",
+            // "migrations",
+            // "password_reset_tokens",
+            // "pelanggan",
             "pembayaran",
-            "penjual",
-            "personal_access_tokens",
+            // "penjual",
+            // "personal_access_tokens",
             "pesanan",
             "riwayat_pesanan",
-            "sessions",
+            // "sessions",
             "shipping",
             "ulasan",
-            "users"];
+            // "users"
+            ];
             
             // Nonaktifkan kunci asing
             // Nonaktifkan kunci asing
@@ -694,8 +734,7 @@ public function filriwayat(Request $request)
         return redirect()
             ->back()
             ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
-        
-}
+    }
 }
 
 

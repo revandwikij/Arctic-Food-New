@@ -33,7 +33,7 @@
                     <form action="{{ route('restore') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="databaseFile" name="databaseFile" accept=".sql">
+                            <input type="file" class="custom-file-input" id="sql_file" name="sql_file" >
                         </div>
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-refresh"></i> Restore Database
@@ -44,4 +44,10 @@
         </div>
     </div>
 </div>
+
+@if(session('success'))
+    <script>
+        alert("Data berhasil dipulihkan dari file SQL.");
+    </script>
+@endif
 @endsection
