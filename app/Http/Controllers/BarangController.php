@@ -88,7 +88,7 @@ class BarangController extends Controller
     {
         $kategoris = kategori::all();
 	    $barang = DB::table('barang')->where('Id_Barang',$Id_Barang)->get();
-	    return view('Penjual.edit',['barang' => $barang],['kategoris' => $kategoris]);
+	    return view('penjual.edit',['barang' => $barang],['kategoris' => $kategoris]);
     }
 
     /**
@@ -165,7 +165,7 @@ class BarangController extends Controller
     public function kategori()
     {
         $kategori = kategori::all();
-        return view('Penjual.kategori', compact('kategori'));
+        return view('penjual.kategori', compact('kategori'));
     }
 
     public function addkategori(Request $request)

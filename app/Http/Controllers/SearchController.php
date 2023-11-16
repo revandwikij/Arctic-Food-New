@@ -20,7 +20,7 @@ class SearchController extends Controller
                 ->where('nama_barang','like',"%".$cari."%")->paginate();
 
         // mengirim data barang ke view index
-        return view('Penjual.cari_barang',['test' => $test, 'cari' => $cari]);
+        return view('penjual.cari_barang',['test' => $test, 'cari' => $cari]);
     }
 
     public function searchbarang(Request $request)
@@ -34,7 +34,7 @@ class SearchController extends Controller
                 ->where('nama_barang','like',"%".$cari."%")->paginate();
 
         // mengirim data barang ke view index
-        return view('Penjual.searchbarang',['test' => $test, 'cari' => $cari]);
+        return view('penjual.searchbarang',['test' => $test, 'cari' => $cari]);
     }
 
     public function searchuser(Request $request)
@@ -48,7 +48,7 @@ class SearchController extends Controller
                 ->where('pelanggan.username','like',"%".$cari."%")->paginate();
 
         // mengirim data barang ke view index
-        return view('Penjual.searchuser',['users' => $users, 'cari' => $cari]);
+        return view('penjual.searchuser',['users' => $users, 'cari' => $cari]);
     }
 
     public function searchship(Request $request)
@@ -61,6 +61,6 @@ class SearchController extends Controller
         $ship = Biaya_Ship::where('Kota','like',"%".$cari."%")->get();
 
         // mengirim data barang ke view index
-        return view('Penjual.searchship',['ship' => $ship, 'cari' => $cari]);
+        return view('penjual.searchship',['ship' => $ship, 'cari' => $cari]);
     }
 }

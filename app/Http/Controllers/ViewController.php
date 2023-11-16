@@ -68,7 +68,7 @@ class ViewController extends Controller
 
     $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
 
-    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga', 'bulan', 'totalTransaksiBulanIni'));
+    return view('penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga', 'bulan', 'totalTransaksiBulanIni'));
 }
 
 
@@ -122,7 +122,7 @@ class ViewController extends Controller
     {
         auth()->user();
 
-        return view('Penjual.tambahadmin');
+        return view('penjual.tambahadmin');
     }
 
     public function profadm()
@@ -149,7 +149,7 @@ class ViewController extends Controller
             // ->orderBy('Id_Barang', 'desc')
             // ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
-        return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
+        return view('penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()
@@ -159,7 +159,7 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         // $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('Penjual.tambah', compact('pelanggan', 'kategoris'));
+        return view('penjual.tambah', compact('pelanggan', 'kategoris'));
     }
 
     public function datapelanggan()
@@ -270,7 +270,7 @@ class ViewController extends Controller
             ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->latest('pesanan.created_at')->paginate(10);
-        return view('Penjual.pesanan', compact('pesanan'));
+        return view('penjual.pesanan', compact('pesanan'));
     }
 
     public function about()
@@ -357,9 +357,30 @@ public function filriwayat(Request $request)
         return view('Penjual.perludikirim', compact('pesanan'));
     }
 
+    public function selesai()
+    {
+        $user = auth()->user();
+        $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
+
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        // ->where('pesanan')
+        // ->get();
+
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Selesai')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
+
+        //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+        //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        return view('penjual.selesai', compact('pesanan'));
+    }
+
     public function profileadmin()
     {
-        return view('Penjual.profileadmin');
+        return view('penjual.profileadmin');
     }
 
     public function detailorder($Id_Pesanan)
