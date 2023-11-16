@@ -548,6 +548,16 @@ public function filriwayat(Request $request)
         "ulasan",
         "users"
     );
+    $procedure = array(
+        "FilterKategori",
+        "Total_Keranjang",
+        "store_procedure_pelanggan"
+    )
+    $view = array(
+        "v_laporan_barang",
+        "Total_Keranjang",
+        "store_procedure_pelanggan"
+    )
 
     $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword",array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     $get_all_table_query = "SHOW TABLES";
@@ -583,7 +593,8 @@ public function filriwayat(Request $request)
       $output .= "'" . implode("','", $table_value_array) . "');\n";
      }
     }
-    $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+    $file_name = 'ArcticFood_DataBase_Ke' . '.sql'; 
+    // . date('y-m-d') . 
     $file_handle = fopen($file_name, 'w+');
     fwrite($file_handle, $output);
     fclose($file_handle);
@@ -610,21 +621,57 @@ public function filriwayat(Request $request)
 
     public function restorenya(Request $request)
     {
-        $server_name   = "localhost";
-        $username      = "root";
-        $password      = "";
-        $database_name = "baru";
-        
-        $file = 'C:\Users\BTI2-33\Downloads'; // Ganti dengan path file SQL backup projek_umkm
-    
-        $cmd = "mysql -h {$server_name} -u {$username} {$database_name} < $file";
-    
-        
-            // Jika restore berhasil
-            return redirect()->back()->with([
-                'restore_status' => 'success',
-                'restore_message' => 'Database restored successfully.'
-            ]);
+        $sqlFile = $request->file('sql_file');
+
+        if ($sqlFile) {
+            $content = file_get_contents($sqlFile);
+
+            $tables = ["alamat",
+            "barang",
+            "biaya_shipping",
+            "detail_keranjang",
+            "failed_jobs",
+            "kategori",
+            "keranjang",
+            "laporan_penjualan",
+            "migrations",
+            "password_reset_tokens",
+            "pelanggan",
+            "pembayaran",
+            "penjual",
+            "personal_access_tokens",
+            "pesanan",
+            "riwayat_pesanan",
+            "sessions",
+            "shipping",
+            "ulasan",
+            "users"];
+            
+            // Nonaktifkan kunci asing
+            // Nonaktifkan kunci asing
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+            foreach ($tables as $table) {
+                // Periksa apakah tabel sudah ada
+                if (Schema::hasTable($table)) {
+                    // Hapus tabel yang ada
+                    Schema::dropIfExists($table);
+                }
+            }
+
+            // Jalankan perintah SQL dari file
+            DB::unprepared($content);
+
+            // Aktifkan kembali kunci asing
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+            return back()
+                ->with('success', 'Data berhasil dipulihkan dari file SQL.');
+        }
+
+        return redirect()
+            ->back()
+            ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
         
 }
 }
