@@ -40,6 +40,18 @@
                         </select>
                     </div>
                 </form>
+                <form id="kategoriForm" action="/barkat" method="GET">
+                @csrf
+                <div class="form-group">
+                    {{-- <label for="kategori">Kategori</label> --}}
+                    <select class="form-control" name="kategori" id="kategori">
+                        <option value="" selected disabled>Pilih Kategori</option>
+                        @foreach ($kategori as $k)
+                            <option>{{ $k->Kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </form>
             </div>
             <div>
                 <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>
@@ -107,5 +119,14 @@
             this.form.submit();
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#kategori').change(function () {
+            $('#kategoriForm').submit();
+        });
+    });
+</script>
+
 
 @endsection

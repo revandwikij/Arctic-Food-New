@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/edit', [ShippingController::class, 'update']);
     Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
     Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
+    Route::get('/selesai', [ViewController::class, 'selesai']);
     Route::get('/laporan', [ViewController::class, 'laporan']);
     Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
 // Route::group(['middleware' => ['auth', 'seller']], function () {
@@ -164,14 +165,6 @@ Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middlewar
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
-
-// Route::get('/tambah', [userscontrollers::class, 'create']);
-// Route::post('/bikin', [userscontrollers::class, 'store']);
-// Route::post('/hapus', [userscontrollers::class, 'destroy']);
-// Route::get('/ganti/{id}', [userscontrollers::class, 'edit']);
-// Route::get('/hapus', [userscontrollers::class, 'destroy']);
-
-
 
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);

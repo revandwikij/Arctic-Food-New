@@ -59,7 +59,7 @@
                 <div class="card px-md-3 px-2 pt-4">
                     <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
                     <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
-                        <p class="">VC115665</p>
+                        <p>{{$item->Id_Pesanan}}</p>
                     </div>
                     {{-- <div class="d-flex justify-content-between b-bottom">
                           <input type="radio" id="cod" name="Metod_Pembayaran" value="COD">
@@ -80,9 +80,12 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between pb-3" id="countdown"></div>
-
+                    {{-- @if($item->Waktu_Kadaluarsa - new Date() <= 0 ) --}}
+                    
                     <button id="pay-button"
-                        class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar</button>
+                        class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar
+                    </button>
+                    {{-- @endif --}}
                     <br>
                     <br>
                 </div>
@@ -279,7 +282,7 @@
     </script>
 
     <script>
-        var batasWaktu = new Date('{{ $datapesan[0]->waktu_kadaluarsa }}'); // Ambil batas waktu dari PHP
+        var batasWaktu = new Date('{{ $datapesan[0]->Waktu_Kadaluarsa }}'); // Ambil batas waktu dari PHP
         function updateCountdown() {
             var now = new Date();
             var selisihWaktu = batasWaktu - now;
@@ -292,7 +295,7 @@
             var countdown = document.getElementById('countdown');
 
             if (selisihWaktu <= 0) {
-                countdown.innerHTML = "waktu seep";
+                countdown.innerHTML = "Kadaluarsa";
                 return;
             }
 
@@ -305,10 +308,10 @@
             countdown.innerHTML = countdownText;
         }
 
-        // Memperbarui waktu mundur setiap detik
+        
         setInterval(updateCountdown, 1000);
 
-        // Memastikan waktu mundur diperbarui saat halaman dimuat
+        
         updateCountdown();
     </script>
 

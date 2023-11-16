@@ -47,7 +47,8 @@ class PesanController extends Controller
 
             $user = auth()->user();
             $Barang = Barang::where('Id_Barang', $Id_Barang)->first();
-            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
+            $cek = Pelanggan::join('users', 'pelanggan.email', '=', 'users.email')
+            ->where('users.id', '=', $user->id)->select('pelanggan.Id_Pelanggan')->first();
             $pecah = json_decode($cek, true);
             $kran = $pecah['Id_Pelanggan'];
 
@@ -63,14 +64,19 @@ class PesanController extends Controller
             if (Keranjang::where('Id_Pelanggan', $kran)->where('Status', '=', 'Aktif')->exists())
             {
 
-                $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
+                $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+                ->join('users', 'pelanggan.email', '=', 'users.email')
                     ->where('users.id', '=', $user->id)
                     ->where('keranjang.Status', '=', 'Aktif')
                     ->select('keranjang.Id_Keranjang')->first();
                 $pecah2 = json_decode($cekcart, true);
                 $kran2 = $pecah2['Id_Keranjang'];
 
-                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->first();
+                $cekbarang = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                ->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+                ->join('users', 'pelanggan.email', '=', 'users.email')
+                ->where('users.id', '=', $user->id)
+                ->where('detail_keranjang.Id_Barang', '=', $Barang->Id_Barang)->first();
 
                 if($cekbarang)
                 {
@@ -81,8 +87,7 @@ class PesanController extends Controller
                             return redirect()->back()->with('error', 'Stok tidak cukup');
                         }else{
                             DetailKeranjang::where('Id_Barang', $Barang->Id_Barang)->update([
-                                'Id_Keranjang' => $kran2, //masih dummy harusnya diisi pake id keranjang user
-                                // 'Id_Detail_Keranjang' => $cekbarang->Id_Detail_Keranjang,
+                                'Id_Keranjang' => $kran2,
                                 'Id_Barang' => $Barang->Id_Barang,
                                 'Kuantitas' => $request->jumlah_pesan,
                                 'Sub_Total' => $request->jumlah_pesan * $Barang->Harga,
@@ -158,15 +163,18 @@ class PesanController extends Controller
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
 
-            $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
-            $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
-                ->where('users.id', '=', $user->id)
-                ->where('keranjang.Status', '=', 'Aktif')->get();
+            $pelanggan = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->where('keranjang.Id_Keranjang', '=', $Id_Keranjang)->first();
+            $buattotal = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+            ->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('users', 'pelanggan.email', '=', 'users.email')
+            ->where('users.id', '=', $user->id)
+             ->where('keranjang.Status', '=', 'Aktif')->get();
 
 
-            $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
-            $nextNumber = (int) substr($lastUid, 1) + 1;
-            $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            // $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';
+            // $nextNumber = (int) substr($lastUid, 1) + 1;
+            // $newUid = 'O' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
 
             $totalbeban = 0;
@@ -178,7 +186,7 @@ class PesanController extends Controller
 
 
             $pesan = new Pesan();
-            $pesan->Id_Pesanan = $newUid;
+            $pesan->Id_Pesanan = 'ORDR' . date('Ymd') . mt_rand(1000, 9999);
             $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
             $pesan->Id_Pelanggan = $pelanggan->Id_Pelanggan;
             $pesan->Id_Alamat = $request->Id_Alamat;
@@ -225,9 +233,9 @@ class PesanController extends Controller
             $bayar->waktu_kadaluarsa = now()->addHours(3);
             $bayar->save();
 
-            $notif = "Ada yg memesan";
+            // $notif = "Ada yg memesan";
 
-            Notification::send($user, new Notif($notif));
+            // Notification::send($user, new Notif($notif));
 
             return redirect('/payment');
         }
@@ -277,11 +285,6 @@ class PesanController extends Controller
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
-
-
-
-
-                     ;
 
 
                     // $user = User::all();

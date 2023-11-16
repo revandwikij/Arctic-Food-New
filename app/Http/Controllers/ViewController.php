@@ -68,7 +68,7 @@ class ViewController extends Controller
 
     $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
 
-    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga', 'bulan', 'totalTransaksiBulanIni'));
+    return view('penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga', 'bulan', 'totalTransaksiBulanIni'));
 }
 
 
@@ -122,7 +122,7 @@ class ViewController extends Controller
     {
         auth()->user();
 
-        return view('Penjual.tambahadmin');
+        return view('penjual.tambahadmin');
     }
 
     public function profadm()
@@ -130,7 +130,7 @@ class ViewController extends Controller
 
         $admin = users::where('level', 'admin')->first();
 
-        return view('penjual.profileadmin', ['admin' => $admin]);
+        return view('Penjual.profileadmin', ['admin' => $admin]);
     }
 
     public function bayar()
@@ -149,7 +149,7 @@ class ViewController extends Controller
             // ->orderBy('Id_Barang', 'desc')
             // ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
-        return view('Penjual.barang', compact('kategori', 'test'), ['test' => $test]);
+        return view('penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
 
     public function tambahbarang()
@@ -159,7 +159,7 @@ class ViewController extends Controller
         $pelanggan = pelanggan::all();
         // $barang = Barang::all();
         $kategoris = kategori::all();
-        return view('Penjual.tambah', compact('pelanggan', 'kategoris'));
+        return view('penjual.tambah', compact('pelanggan', 'kategoris'));
     }
 
     public function datapelanggan()
@@ -270,7 +270,7 @@ class ViewController extends Controller
             ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->latest('pesanan.created_at')->paginate(10);
-        return view('Penjual.pesanan', compact('pesanan'));
+        return view('penjual.pesanan', compact('pesanan'));
     }
 
     public function about()
@@ -292,12 +292,12 @@ class ViewController extends Controller
     {
         $ship = Biaya_Ship::sortable()->paginate(10);
         // dd($ship);
-        return view('penjual.dataship', compact('ship'));
+        return view('Penjual.dataship', compact('ship'));
     }
 
     public function tambahship()
     {
-        return view('penjual.tambahship');
+        return view('Penjual.tambahship');
     }
 
     public function riwayat()
@@ -354,12 +354,33 @@ public function filriwayat(Request $request)
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('penjual.perludikirim', compact('pesanan'));
+        return view('Penjual.perludikirim', compact('pesanan'));
+    }
+
+    public function selesai()
+    {
+        $user = auth()->user();
+        $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
+
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        // ->where('pesanan')
+        // ->get();
+
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Selesai')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
+
+        //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+        //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        return view('penjual.selesai', compact('pesanan'));
     }
 
     public function profileadmin()
     {
-        return view('Penjual.profileadmin');
+        return view('penjual.profileadmin');
     }
 
     public function detailorder($Id_Pesanan)
@@ -382,12 +403,12 @@ public function filriwayat(Request $request)
 
     public function laporan()
     {
-        return view('penjual.laporan');
+        return view('Penjual.laporan');
     }
 
     public function rincianlaporan()
     {
-        return view('penjual.rincianlaporan');
+        return view('Penjual.rincianlaporan');
     }
 
     public function laporanPenjualan(Request $request)
@@ -399,7 +420,7 @@ public function filriwayat(Request $request)
         $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
 
 
-        return view('penjual.lapbar', ['penjualan' => $penjualan]);
+        return view('Penjual.lapbar', ['penjualan' => $penjualan]);
     }
 
     public function barangkategori(Request $request)
@@ -412,18 +433,19 @@ public function filriwayat(Request $request)
         $test = [];
 
         if ($kategori) {
-            $test = DB::select("CALL FilterKategori(CONVERT('{$kategori}' USING utf8mb4_general_ci))");        }
+            $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', $kategori)->paginate(5);
+        }
 
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();
 
-        return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
+        return view('Penjual.barang', ['test' => $test, 'kategori' => $kategori]);
     }
 
     public function lapbar()
     {
         $penjualan = PenjualanView::all();
-        return view('penjual.lapbar', compact('penjualan'));
+        return view('Penjual.lapbar', compact('penjualan'));
     }
 
     public function lihat1()
@@ -443,7 +465,7 @@ public function filriwayat(Request $request)
 
     public function invoice()
     {
-        return view('penjual.invoice');
+        return view('Penjual.invoice');
     }
 
     public function single($Id_Barang)
@@ -487,14 +509,14 @@ public function filriwayat(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function tampilanlapbarakun(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function filterBarang($Id_Kategori) {
@@ -514,7 +536,7 @@ public function filriwayat(Request $request)
 
     public function backupdb()
     {
-        return view('penjual.backupdb');
+        return view('Penjual.backupdb');
     }
 
     public function backnya()

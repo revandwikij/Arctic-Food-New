@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('Id_Pembayaran')->unique();
             $table->string('Id_Shipping');
-          // $table->enum('Metode_Pembayaran', ['COD', 'GoPay']);
+            $table->string('Metode_Pembayaran')->nullable();
             $table->integer('Total_Harga');
             $table->enum('Status_Pembayaran', ['Lunas', 'Belum Lunas', 'Kadaluarsa'])->nullable();
             $table->date('Tgl_Pembayaran');
-            $table->timestamps('Waktu_Kadaluarsa');
+            $table->dateTime('Waktu_Kadaluarsa');
             $table->timestamps();
         });
     }

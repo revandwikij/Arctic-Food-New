@@ -43,20 +43,11 @@ class BarangController extends Controller
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
-
-
             $image = Image::make($gambar);
-
-
             $image->fit(389, 473);
-
-
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
-
-
-
 
         $Barang = new Barang;
         $Barang->Id_Barang = $newUid;
@@ -97,7 +88,7 @@ class BarangController extends Controller
     {
         $kategoris = kategori::all();
 	    $barang = DB::table('barang')->where('Id_Barang',$Id_Barang)->get();
-	    return view('Penjual.edit',['barang' => $barang],['kategoris' => $kategoris]);
+	    return view('penjual.edit',['barang' => $barang],['kategoris' => $kategoris]);
     }
 
     /**
@@ -124,14 +115,8 @@ class BarangController extends Controller
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
-
-
             $image = Image::make($gambar);
-
-
             $image->fit(389, 473);
-
-
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
@@ -173,14 +158,14 @@ class BarangController extends Controller
 
 	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
 
-	 
+
 	return redirect('/barang');
     }
 
     public function kategori()
     {
         $kategori = kategori::all();
-        return view('Penjual.kategori', compact('kategori'));
+        return view('penjual.kategori', compact('kategori'));
     }
 
     public function addkategori(Request $request)
@@ -202,7 +187,7 @@ class BarangController extends Controller
 
     $request = Barang::sortable(['Stok' => 'asc']);
 
-    return view('penjual.barang');
+    return view('Penjual.barang');
 }
 
 }
