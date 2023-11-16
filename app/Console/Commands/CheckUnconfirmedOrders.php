@@ -41,8 +41,7 @@ class CheckUnconfirmedOrders extends Command
              ->get();
 
          foreach ($unconfirmedOrders as $order) {
-             $order->Status_Pesanan = 'Dibatalkan';
-             $order->save();
+            $order->update(['Status_Pesanan' => 'Dibatalkan']);
     }
 }
 }
