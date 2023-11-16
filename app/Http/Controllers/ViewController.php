@@ -255,7 +255,7 @@ class ViewController extends Controller
                 'email' => $pesan->email,
                 'phone' => $pesan->no_Telp,
             ),
-        );  
+        );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
@@ -355,6 +355,27 @@ public function filriwayat(Request $request)
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
         return view('penjual.perludikirim', compact('pesanan'));
+    }
+
+    public function selesai()
+    {
+        $user = auth()->user();
+        $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->select('pesanan.Id_Pesanan')->first();
+
+        // $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+        // ->where('pesanan')
+        // ->get();
+
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Selesai')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
+
+        //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+        //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        return view('penjual.selesai', compact('pesanan'));
     }
 
     public function profileadmin()

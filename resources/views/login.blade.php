@@ -50,9 +50,9 @@
       <h2>Login</h2>
       <input type="text" placeholder="Email" name="email" required>
       <input type="password" placeholder="Kata Sandi" name="password" required />
-      <p style="text-align: right; font-size: 5%; margin-top: -5px">
+      {{-- <p style="text-align: right; font-size: 5%; margin-top: -5px">
         <a href="">Forgor Password</a>
-      </p>
+      </p> --}}
       <input type="submit" value="Login" />
       <p>
           Belum Punya Akun? <a href="/regis">Klik Disini</a>

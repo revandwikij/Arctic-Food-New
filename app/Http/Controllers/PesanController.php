@@ -225,9 +225,9 @@ class PesanController extends Controller
             $bayar->waktu_kadaluarsa = now()->addHours(3);
             $bayar->save();
 
-            $notif = "Ada yg memesan";
+            // $notif = "Ada yg memesan";
 
-            Notification::send($user, new Notif($notif));
+            // Notification::send($user, new Notif($notif));
 
             return redirect('/payment');
         }
@@ -277,11 +277,6 @@ class PesanController extends Controller
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
-
-
-
-
-                     ;
 
 
                     // $user = User::all();
