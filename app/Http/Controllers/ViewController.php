@@ -130,7 +130,7 @@ class ViewController extends Controller
 
         $admin = users::where('level', 'admin')->first();
 
-        return view('penjual.profileadmin', ['admin' => $admin]);
+        return view('Penjual.profileadmin', ['admin' => $admin]);
     }
 
     public function bayar()
@@ -255,7 +255,7 @@ class ViewController extends Controller
                 'email' => $pesan->email,
                 'phone' => $pesan->no_Telp,
             ),
-        );  
+        );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
@@ -292,12 +292,12 @@ class ViewController extends Controller
     {
         $ship = Biaya_Ship::sortable()->paginate(10);
         // dd($ship);
-        return view('penjual.dataship', compact('ship'));
+        return view('Penjual.dataship', compact('ship'));
     }
 
     public function tambahship()
     {
-        return view('penjual.tambahship');
+        return view('Penjual.tambahship');
     }
 
     public function riwayat()
@@ -354,7 +354,7 @@ public function filriwayat(Request $request)
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('penjual.perludikirim', compact('pesanan'));
+        return view('Penjual.perludikirim', compact('pesanan'));
     }
 
     public function profileadmin()
@@ -382,12 +382,12 @@ public function filriwayat(Request $request)
 
     public function laporan()
     {
-        return view('penjual.laporan');
+        return view('Penjual.laporan');
     }
 
     public function rincianlaporan()
     {
-        return view('penjual.rincianlaporan');
+        return view('Penjual.rincianlaporan');
     }
 
     public function laporanPenjualan(Request $request)
@@ -399,7 +399,7 @@ public function filriwayat(Request $request)
         $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
 
 
-        return view('penjual.lapbar', ['penjualan' => $penjualan]);
+        return view('Penjual.lapbar', ['penjualan' => $penjualan]);
     }
 
     public function barangkategori(Request $request)
@@ -418,13 +418,13 @@ public function filriwayat(Request $request)
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();
 
-        return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
+        return view('Penjual.barang', ['test' => $test, 'kategori' => $kategori]);
     }
 
     public function lapbar()
     {
         $penjualan = PenjualanView::all();
-        return view('penjual.lapbar', compact('penjualan'));
+        return view('Penjual.lapbar', compact('penjualan'));
     }
 
     public function lihat1()
@@ -444,7 +444,7 @@ public function filriwayat(Request $request)
 
     public function invoice()
     {
-        return view('penjual.invoice');
+        return view('Penjual.invoice');
     }
 
     public function single($Id_Barang)
@@ -488,14 +488,14 @@ public function filriwayat(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function tampilanlapbarakun(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function filterBarang($Id_Kategori) {
@@ -511,7 +511,7 @@ public function filriwayat(Request $request)
 
     public function backupdb()
     {
-        return view('penjual.backupdb');
+        return view('Penjual.backupdb');
     }
 
     public function backnya()

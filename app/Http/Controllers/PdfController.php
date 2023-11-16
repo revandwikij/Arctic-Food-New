@@ -26,9 +26,9 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan', $data);
+        $pdf->loadView('Penjual.laporan', $data);
 
-        return $pdf->download('penjual.laporan.pdf');
+        return $pdf->download('Penjual.laporan.pdf');
     }
 
     public function streamPDF()
@@ -45,9 +45,9 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.laporan', $data, );
+        $pdf->loadView('Penjual.laporan', $data, );
 
-        return $pdf->stream('penjual.laporan');
+        return $pdf->stream('Penjual.laporan');
     }
 
     public function generatePDF2()
@@ -59,9 +59,9 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.tampilanlapbarakun', $data);
+        $pdf->loadView('Penjual.tampilanlapbarakun', $data);
 
-        return $pdf->download('penjual.laporanbarangperakun.pdf');
+        return $pdf->download('Penjual.laporanbarangperakun.pdf');
     }
 
     public function streamPDF2()
@@ -72,9 +72,9 @@ class PDFController extends Controller
             'barangperAkun' => $barangperAkun,
         ];
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.tampilanlapbarakun', $data);
+        $pdf->loadView('Penjual.tampilanlapbarakun', $data);
 
-        return $pdf->stream('penjual.tampilanlapbarakun.pdf');
+        return $pdf->stream('Penjual.tampilanlapbarakun.pdf');
     }
 
     public function invoice($Id_Pesanan)
@@ -99,9 +99,9 @@ class PDFController extends Controller
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('penjual.invoice', $data);
+        $pdf->loadView('Penjual.invoice', $data);
 
-        return $pdf->stream('penjual.invoice');
+        return $pdf->stream('Penjual.invoice');
     }
 
     public function kirim($Id_Pesanan)
