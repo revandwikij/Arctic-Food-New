@@ -443,7 +443,7 @@ public function filriwayat(Request $request)
     public function lihat1()
     {
         $kategoris = kategori::all();
-        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->get();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->pa();
         return view('shop', compact('barang', 'kategoris'));
     }
 
