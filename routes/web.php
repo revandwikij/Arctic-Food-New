@@ -49,6 +49,10 @@ Route::post('/regis/verif', [LoginController::class, 'register'] )->name('regist
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 
+// Admin
+Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);
+Route::get('/add', [ViewController::class, 'tambahadmin']);
+
 
 
 // VIEW
@@ -71,7 +75,6 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/selesai', [ViewController::class, 'selesai']);
     Route::get('/laporan', [ViewController::class, 'laporan']);
     Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
-// Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/kategori', [BarangController::class, 'kategori']);
     Route::post('/katadd', [BarangController::class, 'addkategori']);
     Route::get('/admin', [ViewController::class, 'admin']);
@@ -129,6 +132,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::delete('/alamat/delete', [AlamatController::class, 'deleteAddress']);
     Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
     Route::post('/ulasan/{Id_Barang}',[UlasanController::class, 'store']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
@@ -167,8 +171,7 @@ Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
-Route::post('/tambahadmin', [PenjualController::class, 'store']);
-Route::get('/add', [ViewController::class, 'tambahadmin']);
+
 // Route::get('/detil', [ViewController::class, 'detail']);
 // Route::get('/coba', [ViewController::class, 'coba']);
 

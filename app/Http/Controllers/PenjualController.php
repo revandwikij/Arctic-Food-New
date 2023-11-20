@@ -44,7 +44,6 @@ class PenjualController extends Controller
         $Penjual->email = $request->email;
         $Penjual->password = password_hash($request->password,  PASSWORD_DEFAULT);
         $Penjual->level = $request->level;
-        
         $Penjual->save();
 
         return redirect('/admin');
@@ -53,8 +52,8 @@ class PenjualController extends Controller
     public function ship(Request $request)
     {
         $biaya = new Shipping();
-        
+
 
     }
-    
+
 }

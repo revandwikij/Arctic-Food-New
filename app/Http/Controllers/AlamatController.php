@@ -13,7 +13,7 @@ class AlamatController extends Controller
     {
         if(Auth::id())
         {
-             
+
             $request->validate([
                 'Alamat' => 'required',
                 'Kota' => 'required',
@@ -43,6 +43,26 @@ class AlamatController extends Controller
 
             return redirect('/profil');
 
+        }
+    }
+
+    public function deleteAddress(Request $request)
+    {
+        $user = auth::user();
+        $addressId = $request->input('address_id');
+        $address = Alamat::join("pelanggan", 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'pelanggan.email', '=', 'users.email')
+        ->where('users.id', '=', $user->id, 'AND' ,'alamat' ,'=', $addressId)
+        ->select('alamat.*')
+        ->first();
+
+        // dd($address);
+
+        if ($address) {
+            $address->delete();
+            return redirect()->back()->with('success', 'Address deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Address not found');
         }
     }
 }

@@ -119,4 +119,38 @@ class LoginController extends Controller
     public function forgorpassword(){
 
     }
+
+    public function registeradmin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'no_Telp' => 'required|numeric',
+            'alamat' => 'required',
+        ]);
+        // dd($request);
+
+        $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'A000';
+        $nextNumber = (int) substr($lastUid, 1) + 1;
+        $newUid = 'A' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        if (Penjual::where('email', $request->email)->exists()) {
+            return back()->with('alert', 'Email sudah digunakan');
+        }
+
+        $Penjual = new Penjual;
+        $Penjual->Id_Penjual = $newUid;
+        $Penjual->Username = $request->username;
+        $Penjual->Email = $request->email;
+        $Penjual->Password = password_hash($request->password,  PASSWORD_DEFAULT);
+        $Penjual->No_Telp = $request->no_Telp;
+        $Penjual->Alamat = $request->alamat;
+        $Penjual->save();
+
+        // dd($Penjual);
+
+
+        return redirect('/login');
+    }
 }

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('penjual', function (Blueprint $table) {
             $table->id();//length nya jadi 13
-            $table->string('NIB')->unique();//length nya jadi 13
-            $table->string('Nama_Toko');
-            $table->string('Email');
+            $table->string('Id_Penjual')->unique();//length nya jadi 13
+            $table->string('Username');
+            $table->string('Email')->unique();
+            $table->string('Password');
             $table->string('No_Telp');
-            $table->string('Kategori_Usaha');
-            $table->string('Alamat_Toko');
+            $table->string('Alamat');
             $table->timestamps();
         });
     }
