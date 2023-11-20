@@ -124,7 +124,6 @@ class PesanController extends Controller
             $keranjang->Id_Keranjang = $newUid;
             $keranjang->Id_Pelanggan = $kran;
             $keranjang->Status = "Aktif";
-
             $keranjang->save();
 
             if($Barang->Stok < $request->jumlah_pesan)
@@ -140,8 +139,13 @@ class PesanController extends Controller
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total = $Barang->Harga * $request->jumlah_pesan;
             $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
+            $coba = activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "user " . auth()->user()->username . " telah memasukkan barang ke keranjang",
+                'created_at' => now()
+            ]);
             $coba->save();
-
 
                 return redirect('/cart');
             }
@@ -169,7 +173,7 @@ class PesanController extends Controller
             ->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
-             ->where('keranjang.Status', '=', 'Aktif')->get();
+            ->where('keranjang.Status', '=', 'Aktif')->get();
 
 
             // $lastUid = Pesan::orderBy('id', 'desc')->first()->Id_Pesanan ?? 'O000';

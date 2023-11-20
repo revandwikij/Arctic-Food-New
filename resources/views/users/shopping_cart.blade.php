@@ -26,14 +26,13 @@
                                     @endforeach
                                 </ul>
                             </div> --}}
-                            @foreach ($cekcart as $cart)
-                                <form action="/beli/{{ $cart->Id_Keranjang }}" method="POST">
+
                                     @csrf
+                                    @if (count($alamat) === 0)
+                                    No addresses available klik di <a href="/profile#alamat">sini </a>
+                                    @else
                                     <span style="font">Alamat</span>
-                                    <select name="Id_Alamat" id="">
-                                        @if (count($alamat) === 0)
-                                            <option value="" disabled>No addresses available</option>
-                                        @else
+                                    <select name="Id_Alamat" >
                                             @foreach ($alamat as $a)
                                                 <option value="{{ $a->Id_Alamat }}">
                                                     {{ $a->Label }}
@@ -42,7 +41,6 @@
                                         @endif
                                     </select>
 
-                            @endforeach
 
 {{-- @if (count($alamat) === 0)
     <p>No addresses available. Please <a href="/profile">update your profile</a>.</p>

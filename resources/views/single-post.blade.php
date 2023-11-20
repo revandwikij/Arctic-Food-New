@@ -175,23 +175,10 @@
                     </div>
                     <p>Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg sit he consequert.</p>
                   </div>
-                </article>
-              </div> --}}
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="comment-respond">
-              <h3>Leave a Comment</h3>
-              <form method="post" class="form-group">
-                <input class="u-full-width" type="text" name="author" id="author" class="form-control" placeholder="Your full name">
-                <input class="u-full-width" type="email" name="email" id="email" class="form-control" placeholder="E-mail Address">
-                <textarea class="u-full-width" id="comment" class="form-control" name="comment" placeholder="Write your comment here" rows="20"></textarea>
-                <label class="example-send-yourself-copy">
-                  <input type="checkbox">
-                  <span class="label-body">Save my name, email, and website in this browser for the next time I comment.</span>
-                </label>
-                <button type="submit" name="submit" class="btn btn-dark btn-medium">Submit</button>
-              </form>
+                </article> --}}
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

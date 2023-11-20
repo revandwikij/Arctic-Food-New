@@ -53,7 +53,7 @@ class ViewController extends Controller
     public function admin()
 {
     $pelanggan = pelanggan::count();
-    $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
+    $test = pelanggan::join('alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
         ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
     $barang = Barang::count();
     $kategoris = kategori::all();
@@ -307,9 +307,6 @@ class ViewController extends Controller
         ->where('users.id', '=', $user->id)
         ->orderby('pesanan.created_at', 'desc')
         ->paginate(6);
-
-
-
 
     return view('riwayat', compact('pesanan'));
 }
@@ -650,8 +647,8 @@ public function filriwayat(Request $request)
         //     }
         // }
 
-    $file_name = 'ArcticFood_DataBase_Ke' . '.sql'; 
-    // . date('y-m-d') . 
+    $file_name = 'ArcticFood_DataBase_Ke' . '.sql';
+    // . date('y-m-d') .
     $file_handle = fopen($file_name, 'w+');
     fwrite($file_handle, $output);
     fclose($file_handle);
@@ -702,7 +699,7 @@ public function filriwayat(Request $request)
             "ulasan",
             // "users"
             ];
-            
+
             // Nonaktifkan kunci asing
             // Nonaktifkan kunci asing
             DB::statement('SET FOREIGN_KEY_CHECKS=0');

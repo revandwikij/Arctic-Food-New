@@ -46,12 +46,8 @@ class UlasanController extends Controller
             $pecah = json_decode($cek, true);
             $kran = $pecah['Id_Pelanggan'];
 
-            $lastUid = UlasanModel::orderBy('id', 'desc')->first()->Id_Ulasan?? 'U000';
-            $nextNumber = (int) substr($lastUid, 1) + 1;
-            $newUid = 'U' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
             $ulasan = new UlasanModel;
-            $ulasan->Id_Ulasan = $newUid;
+            $ulasan->Id_Ulasan =  'U' . date('Ymd') . mt_rand(1000, 9999);
             $ulasan->Id_Pelanggan = $kran;
             $ulasan->Id_Barang = $Barang->Id_Barang;
             $ulasan->Ulasan = $request->Ulasan;
