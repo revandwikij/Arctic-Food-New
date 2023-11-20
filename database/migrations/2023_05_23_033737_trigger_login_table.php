@@ -24,16 +24,16 @@ return new class extends Migration
             END
         ');
 
-        // DB::unprepared('
-        // CREATE TRIGGER Regis_To_Login_Admin AFTER INSERT ON `penjual` FOR EACH ROW
-        //     BEGIN
-        //         INSERT INTO users
-        //         set username = new.username,
-        //         email = new.email,
-        //         password = new.password,
-        //         level = "pelanggan";
-        //     END
-        // ');
+        DB::unprepared('
+        CREATE TRIGGER Regis_To_Login_Admin AFTER INSERT ON `penjual` FOR EACH ROW
+            BEGIN
+                INSERT INTO users
+                set username = new.Username,
+                email = new.Email,
+                password = new.Password,
+                level = "penjual";
+            END
+        ');
     }
 
     /**

@@ -9,5 +9,13 @@ class Penjual extends Model
 {
     use HasFactory;
     protected $table = 'penjual';
-    protected $primaryKey = "NIB";
+
+    protected $fillable = [
+        'Id_Penjual',
+        'Username',
+        'Email',
+        'Password',
+        'No_Telp',
+        'Alamat',
+    ];
 }

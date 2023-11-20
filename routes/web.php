@@ -51,6 +51,10 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 
 Route::middleware([coba_session::class])->group(function () {
+// Admin
+Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);
+Route::get('/add', [ViewController::class, 'tambahadmin']);
+
 
 
     // VIEW
@@ -60,34 +64,33 @@ Route::middleware([coba_session::class])->group(function () {
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
-    //penjual kak
-    Route::group(['middleware' => ['auth', 'seller']], function () {
-        Route::get('/dataship', [ViewController::class, 'dataship']);
-        Route::post('/dataship/search', [SearchController::class, 'searchship']);
-        Route::post('/tambahship/action', [ShippingController::class, 'store']);
-        Route::get('/tambahship', [ViewController::class, 'tambahship']);
-        Route::get('/editship/{Id_Biaya}', [ShippingController::class, 'edit']);
-        Route::post('/edit', [ShippingController::class, 'update']);
-        Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
-        Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
-        Route::get('/selesai', [ViewController::class, 'selesai']);
-        Route::get('/laporan', [ViewController::class, 'laporan']);
-        Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
-        // Route::group(['middleware' => ['auth', 'seller']], function () {
-        Route::get('/kategori', [BarangController::class, 'kategori']);
-        Route::post('/katadd', [BarangController::class, 'addkategori']);
-        Route::get('/admin', [ViewController::class, 'admin']);
-        Route::get('/barang', [ViewController::class, 'barang']);
-        Route::get('/barkat', [ViewController::class, 'barangkategori']);
-        Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
-        Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
-        Route::post('/Form', [BarangController::class, 'store']);
-        Route::post('/Edit', [BarangController::class, 'update']);
-        Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
-        Route::post('/barang/search', [SearchController::class, 'searchbarang']);
-        Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
-        Route::post('/users/search', [SearchController::class, 'searchuser']);
-        Route::get('/order', [ViewController::class, 'pesanan']);
+//penjual kak
+Route::group(['middleware' => ['auth', 'seller']], function () {
+    Route::get('/dataship', [ViewController::class, 'dataship']);
+    Route::post('/dataship/search', [SearchController::class, 'searchship']);
+    Route::post('/tambahship/action', [ShippingController::class, 'store']);
+    Route::get('/tambahship', [ViewController::class, 'tambahship']);
+    Route::get('/editship/{Id_Biaya}', [ShippingController::class, 'edit']);
+    Route::post('/edit', [ShippingController::class, 'update']);
+    Route::get('/hapusship/{Id_Biaya}', [ShippingController::class, 'destroy']);
+    Route::get('/perludikirim', [ViewController::class, 'perludikirim']);
+    Route::get('/selesai', [ViewController::class, 'selesai']);
+    Route::get('/laporan', [ViewController::class, 'laporan']);
+    Route::get('/rincianlaporan', [ViewController::class, 'rincianlaporan']);
+    Route::get('/kategori', [BarangController::class, 'kategori']);
+    Route::post('/katadd', [BarangController::class, 'addkategori']);
+    Route::get('/admin', [ViewController::class, 'admin']);
+    Route::get('/barang', [ViewController::class, 'barang']);
+    Route::get('/barkat', [ViewController::class, 'barangkategori']);
+    Route::get('/Tambah', [ViewController::class, 'tambahbarang']);
+    Route::get('Ubah/{Id_Barang}', [BarangController::class, 'edit']);
+    Route::post('/Form', [BarangController::class, 'store']);
+    Route::post('/Edit', [BarangController::class, 'update']);
+    Route::get('Hapus/{Id_Barang}', [BarangController::class, 'destroy']);
+    Route::post('/barang/search', [SearchController::class, 'searchbarang']);
+    Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
+    Route::post('/users/search', [SearchController::class, 'searchuser']);
+    Route::get('/order', [ViewController::class, 'pesanan']);
 
         Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
         // Route::get('/omset', [ViewController::class, 'laporanOmset']);
@@ -130,6 +133,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
+    Route::delete('/alamat/delete', [AlamatController::class, 'deleteAddress']);
     Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
     Route::post('/ulasan/{Id_Barang}',[UlasanController::class, 'store']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
@@ -155,18 +159,31 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
 
 
 
-    //INI LOGIN-USERS
-    Route::post('/updatepel', [userscontrollers::class, 'updatepel']);
-    Route::get('/bayar', [ViewController::class, 'bayar']);
-    Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
-    Route::get('/profil', [ViewController::class, 'profil']);
-    Route::get('/payment', [ViewController::class, 'payment']);
-    Route::get('/thanks', [ViewController::class, 'thanks']);
-    Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
-    Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
-    Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
-    Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
-    Route::get('/alamat', [AlamatController::class, 'addaddress']);
+//INI LOGIN-USERS
+Route::post('/updatepel', [userscontrollers::class, 'updatepel']);
+Route::get('/bayar', [ViewController::class, 'bayar']);
+Route::get('/cart', [ViewController::class, 'cart'])->middleware('auth');
+Route::get('/profil', [ViewController::class, 'profil']);
+Route::get('/payment', [ViewController::class, 'payment']);
+Route::get('/thanks', [ViewController::class, 'thanks']);
+Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
+Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
+Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
+Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
+Route::get('/alamat', [AlamatController::class, 'addaddress']);
+
+
+// Route::get('/detil', [ViewController::class, 'detail']);
+// Route::get('/coba', [ViewController::class, 'coba']);
+
+
+
+
+
+
+
+
+
 
     Route::post('/tambahadmin', [PenjualController::class, 'store']);
     Route::get('/add', [ViewController::class, 'tambahadmin']);

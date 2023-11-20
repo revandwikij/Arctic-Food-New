@@ -14,7 +14,7 @@ use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\PenjualanView;
 use App\Models\BarangPerAkunView;
-
+use App\Models\Penjual;
 use App\Models\Pesan;
 use App\Models\UlasanModel;
 use App\Models\User;
@@ -116,17 +116,16 @@ class ViewController extends Controller
 
     public function tambahadmin()
     {
-        auth()->user();
-
         return view('penjual.tambahadmin');
     }
 
     public function profadm()
     {
-
+        $user = auth()->user();
+        $penjual = Penjual::join('users', 'penjual.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         $admin = users::where('level', 'admin')->first();
 
-        return view('Penjual.profileadmin', ['admin' => $admin]);
+        return view('Penjual.profileadmin', ['admin' => $admin, 'penjual' => $penjual]);
     }
 
     public function bayar()

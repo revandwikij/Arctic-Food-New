@@ -139,11 +139,16 @@
 
                             <div class="col-md-9 mb-5">
                                 <h4 >Existing Password</h4>
-                                <select name="" id="">
-                                    @foreach ($alamat as $item)
-                                    <option value="{{ $item->Id_Alamat }}">{{ $item->Label }}</option>
-                                    @endforeach
-                                </select>
+                                <form action="/alamat/delete" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <select name="address_id" id="address_id">
+                                        @foreach ($alamat as $item)
+                                            <option value="{{ $item->Id_Alamat }}">{{ $item->Label }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit">Delete Address</button>
+                                </form>
                             </div>
                             <div class="col-md-6">
                                 <form action="/alamat" method="GET">

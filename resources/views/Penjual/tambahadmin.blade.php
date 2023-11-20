@@ -30,7 +30,8 @@
     letter-spacing: 3px;
   }
   .addmin-form input[type="text"],
-  .addmin-form input[type="password"] {
+  .addmin-form input[type="password"],
+  .addmin-form input[type="number"] {
     width: 95%;
     padding: 10px;
     margin-bottom: 20px;
@@ -89,7 +90,9 @@
 
         <input type="password" placeholder="Password" name="password" required>
 
-        <input type="text" name="level" value="penjual" >
+        <input type="text" placeholder="No_Telp" name="no_Telp" required>
+
+        <input type="text" placeholder="Alamat" name="alamat" required>
 
         <input type="submit" value="Tambah Admin" />
 
