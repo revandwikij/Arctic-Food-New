@@ -16,29 +16,29 @@ class LoginController extends Controller
 {
 
     public function validasi(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => ['required'],
-        'password' => ['required'],
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if (Auth::user()->level == 'pelanggan') {
-            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
-            return redirect()->intended('/');
-        } elseif (Auth::user()->level == 'penjual') {
-            // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
-        return redirect()->intended('/admin');
-        } else {
-            return view('layouting.error');
+            if (Auth::user()->level == 'pelanggan') {
+                // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+                return redirect()->intended('/');
+            } elseif (Auth::user()->level == 'penjual') {
+                // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+                return redirect()->intended('/admin');
+            } else {
+                return view('layouting.error');
+            }
         }
+
+
+        return back()->with('loginError', 'Email or password is incorrect.');
     }
-
-
-    return back()->with('loginError', 'Email or password is incorrect.');
-}
 
 
 
@@ -70,8 +70,7 @@ class LoginController extends Controller
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-        if(User::where('email', $request->email)->exists())
-        {
+        if (User::where('email', $request->email)->exists()) {
             return back()->with('alert', 'Email sudah digunakan');
         }
         pelanggan::create([
@@ -90,25 +89,28 @@ class LoginController extends Controller
     public function updatepassword(Request $request)
     {
 
-    $request->validate([
-        'old_password' => 'required',
-        'new_password' => 'required',
-        'confirm_password' => 'required|same:new_password',
-    ]);
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
 
-    $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
 
 
-    if (Hash::check($request->old_password, $user->password)) {
+        if (Hash::check($request->old_password, $user->password)) {
 
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+            $user->password = Hash::make($request->new_password);
+            $user->save();
 
-        return redirect('/profile')->with('success', 'Password berhasil diperbarui.');
-    } else {
-         
-        return redirect('/profile')->with('error', 'Password lama tidak cocok. Silakan coba lagi.');
+            return redirect('/profile')->with('success', 'Password berhasil diperbarui.');
+        } else {
+
+            return redirect('/profile')->with('error', 'Password lama tidak cocok. Silakan coba lagi.');
+        }
+    }
+
+    public function forgorpassword(){
+        
     }
 }
-}
-

@@ -51,7 +51,7 @@ class ViewController extends Controller
     public function admin()
 {
     $pelanggan = pelanggan::count();
-    $test = pelanggan::join('Alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
+    $test = pelanggan::join('alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
         ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
     $barang = Barang::count();
     $kategoris = kategori::all();

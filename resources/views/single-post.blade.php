@@ -182,28 +182,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="comment-respond">
-                        <h3>Leave a Comment</h3>
-                        @foreach ($barang as $data)
-                            <form method="post" action="/ulasan/{{ $data->Id_Barang }}" class="form-group">
-                                {{ csrf_field() }}
-                                @foreach ($pelanggan as $item)
-                                    <input class="u-full-width" type="text" name="Username" id="author"
-                                        class="form-control" value="{{ Auth::user()->username }}">
-                                    <textarea class="u-full-width" id="comment" class="form-control" name="Ulasan" placeholder="Write your comment here"
-                                        rows="20"></textarea>
-                                    <label class="example-send-yourself-copy">
-                                        <input type="checkbox">
-                                        <span class="label-body">Save my name, email, and website in this browser for the
-                                            next time I comment.</span>
-                                    </label>
-                                    <button type="submit" name="submit" class="btn btn-dark btn-medium">Submit</button>
-                                @endforeach
-                            </form>
-                        @endforeach
-                    </div>
-                </div>
             </div>
         </div>
     </section>
