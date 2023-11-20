@@ -29,6 +29,17 @@
                 <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
             </div>
             <div>
+                <form action="/barkat" method="GET">
+                    @csrf
+                    <div class="form-group">
+                        <select class="form-select" name="kategori" id="kategori">
+                            <option selected>PILIH KATEGORI</option>
+                            @foreach ($kategori as $k)
+                                <option value="{{ $k->Kategori }}">{{ $k->Kategori }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
                 <form id="kategoriForm" action="/barkat" method="GET">
                 @csrf
                 <div class="form-group">
@@ -103,6 +114,11 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('kategori').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {

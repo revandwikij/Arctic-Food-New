@@ -43,20 +43,11 @@ class BarangController extends Controller
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
-
-
             $image = Image::make($gambar);
-
-
             $image->fit(389, 473);
-
-
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
-
-
-
 
         $Barang = new Barang;
         $Barang->Id_Barang = $newUid;
@@ -124,14 +115,8 @@ class BarangController extends Controller
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
-
-
             $image = Image::make($gambar);
-
-
             $image->fit(389, 473);
-
-
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);
@@ -202,7 +187,7 @@ class BarangController extends Controller
 
     $request = Barang::sortable(['Stok' => 'asc']);
 
-    return view('penjual.barang');
+    return view('Penjual.barang');
 }
 
 }

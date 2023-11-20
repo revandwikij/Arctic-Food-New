@@ -99,9 +99,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/lihatinvoice/{Id_Pesanan}', [PdfController::class, 'invoice']);
     Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
     Route::get('/invoice', [ViewController::class, 'invoice']);
+    Route::get('/otp', [ViewController::class, 'otp']);
+
     Route::get('/profileadmin', [ViewController::class, 'profadm']);
     Route::get('/backupdb', [ViewController::class, 'backupdb']);
     Route::get('/backup', [ViewController::class, 'backnya']);
+    Route::post('/restore', [ViewController::class, 'restorenya'])->name('restore');
     Route::get('/lapbarperakun', [ViewController::class, 'lapbarperakun']);
     Route::get('/tampilanlapbarakun', [ViewController::class, 'tampilanlapbarakun']);
 
@@ -140,6 +143,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/barang/filter',[ViewController::class, 'filter']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/transaksi', [ViewController::class, 'riwayat']);
+    Route::post('/ulasan/{Id_Pesanan}', [UlasanController::class, 'store']);
     Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
     Route::get('/hapuspayment', [PesanController::class, 'hapuspayment']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);
@@ -165,6 +169,21 @@ Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
 Route::post('/tambahadmin', [PenjualController::class, 'store']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
+// Route::get('/detil', [ViewController::class, 'detail']);
+// Route::get('/coba', [ViewController::class, 'coba']);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',

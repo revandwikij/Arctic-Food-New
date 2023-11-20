@@ -68,9 +68,9 @@
                 @endif
 
                 @if ($item->Status_Pesanan == 'Selesai')
-                <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
+                <form action="/ulasan/{{ $item->Id_Pesanan }}}" method="post">
                     {{ csrf_field() }}
-                    <button class="review-button">Beri Rating</button>
+                    <button class="review-button" type="submit">Beri Ulasan</button>
                 </form>
                 @endif
             </div>

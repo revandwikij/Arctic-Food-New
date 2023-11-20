@@ -23,6 +23,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 
 class ViewController extends Controller
 {
@@ -130,7 +132,7 @@ class ViewController extends Controller
 
         $admin = users::where('level', 'admin')->first();
 
-        return view('penjual.profileadmin', ['admin' => $admin]);
+        return view('Penjual.profileadmin', ['admin' => $admin]);
     }
 
     public function bayar()
@@ -292,12 +294,12 @@ class ViewController extends Controller
     {
         $ship = Biaya_Ship::sortable()->paginate(10);
         // dd($ship);
-        return view('penjual.dataship', compact('ship'));
+        return view('Penjual.dataship', compact('ship'));
     }
 
     public function tambahship()
     {
-        return view('penjual.tambahship');
+        return view('Penjual.tambahship');
     }
 
     public function riwayat()
@@ -311,9 +313,6 @@ class ViewController extends Controller
         ->where('users.id', '=', $user->id)
         ->orderby('pesanan.created_at', 'desc')
         ->paginate(6);
-
-
-
 
     return view('riwayat', compact('pesanan'));
 }
@@ -354,7 +353,7 @@ public function filriwayat(Request $request)
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('penjual.perludikirim', compact('pesanan'));
+        return view('Penjual.perludikirim', compact('pesanan'));
     }
 
     public function selesai()
@@ -403,12 +402,12 @@ public function filriwayat(Request $request)
 
     public function laporan()
     {
-        return view('penjual.laporan');
+        return view('Penjual.laporan');
     }
 
     public function rincianlaporan()
     {
-        return view('penjual.rincianlaporan');
+        return view('Penjual.rincianlaporan');
     }
 
     public function laporanPenjualan(Request $request)
@@ -420,7 +419,7 @@ public function filriwayat(Request $request)
         $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
 
 
-        return view('penjual.lapbar', ['penjualan' => $penjualan]);
+        return view('Penjual.lapbar', ['penjualan' => $penjualan]);
     }
 
     public function barangkategori(Request $request)
@@ -439,13 +438,13 @@ public function filriwayat(Request $request)
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();
 
-        return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
+        return view('Penjual.barang', ['test' => $test, 'kategori' => $kategori]);
     }
 
     public function lapbar()
     {
         $penjualan = PenjualanView::all();
-        return view('penjual.lapbar', compact('penjualan'));
+        return view('Penjual.lapbar', compact('penjualan'));
     }
 
     public function lihat1()
@@ -465,7 +464,7 @@ public function filriwayat(Request $request)
 
     public function invoice()
     {
-        return view('penjual.invoice');
+        return view('Penjual.invoice');
     }
 
     public function single($Id_Barang)
@@ -509,14 +508,14 @@ public function filriwayat(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function tampilanlapbarakun(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
+        return view('Penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function filterBarang($Id_Kategori) {
@@ -530,9 +529,13 @@ public function filriwayat(Request $request)
         return view('shop', compact('barang'));
     }
 
+    public function otp() {
+        return view('penjual.otp');
+    }
+
     public function backupdb()
     {
-        return view('penjual.backupdb');
+        return view('Penjual.backupdb');
     }
 
     public function backnya()
@@ -545,27 +548,39 @@ public function filriwayat(Request $request)
     $DbName             = env('DB_DATABASE');
     $backup_name        = "mybackup.sql";
     $tables = array(
-        "alamat",
+        // "alamat",
         "barang",
         "biaya_shipping",
         "detail_keranjang",
-        "failed_jobs",
+        // "failed_jobs",
         "kategori",
         "keranjang",
-        "laporan_penjualan",
-        "migrations",
-        "password_reset_tokens",
-        "pelanggan",
+        // "migrations",
+        // "password_reset_tokens",
+        // "pelanggan",
         "pembayaran",
-        "penjual",
-        "personal_access_tokens",
+        // "penjual",
+        // "personal_access_tokens",
         "pesanan",
         "riwayat_pesanan",
-        "sessions",
+        // "sessions",
         "shipping",
         "ulasan",
-        "users"
+        // "users"
     );
+        // $procedure = array(
+        //     "FilterKategori",
+        //     "Total_Keranjang",
+        //     "store_procedure_pelanggan"
+        // );
+        // $view = array(
+        //     "v_laporan_barang",
+        //     "v_laporan_per_akun"
+        // );
+        // $trigger = array(
+        //     "Regis_To_Login",
+        //     "kurangi_stok_barang"
+        // );
 
     $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword",array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     $get_all_table_query = "SHOW TABLES";
@@ -601,7 +616,45 @@ public function filriwayat(Request $request)
       $output .= "'" . implode("','", $table_value_array) . "');\n";
      }
     }
-    $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+
+        // Backup Triggers
+        // foreach ($trigger as $triggerName) {
+        //     $show_trigger_query = "SHOW CREATE TRIGGER " . $triggerName;
+        //     $statement = $connect->prepare($show_trigger_query);
+        //     $statement->execute();
+        //     $show_trigger_result = $statement->fetchAll();
+
+        //     foreach ($show_trigger_result as $show_trigger_row) {
+        //         $output .= "\n\n" . $show_trigger_row["SQL Original Statement"] . ";\n\n";
+        //     }
+        // }
+
+        // Backup Views
+        // foreach ($view as $viewName) {
+        //     $show_view_query = "SHOW CREATE VIEW " . $viewName;
+        //     $statement = $connect->prepare($show_view_query);
+        //     $statement->execute();
+        //     $show_view_result = $statement->fetchAll();
+
+        //     foreach ($show_view_result as $show_view_row) {
+        //         $output .= "\n\n" . $show_view_row["Create View"] . ";\n\n";
+        //     }
+        // }
+
+        // Backup Stored Procedures
+        // foreach ($procedure as $procedureName) {
+        //     $show_procedure_query = "SHOW CREATE PROCEDURE " . $procedureName;
+        //     $statement = $connect->prepare($show_procedure_query);
+        //     $statement->execute();
+        //     $show_procedure_result = $statement->fetchAll();
+
+        //     foreach ($show_procedure_result as $show_procedure_row) {
+        //         $output .= "\n\n" . $show_procedure_row["Create Procedure"] . ";\n\n";
+        //     }
+        // }
+
+    $file_name = 'ArcticFood_DataBase_Ke' . '.sql';
+    // . date('y-m-d') .
     $file_handle = fopen($file_name, 'w+');
     fwrite($file_handle, $output);
     fclose($file_handle);
@@ -623,10 +676,62 @@ public function filriwayat(Request $request)
 
    // Hapus file setelah diunduh
    unlink($file_name);
-   return Response::stream($file_name, $file_name, $header)->deleteFileAfterSend(true);
+   return Response::download($file_name, $file_name)->deleteFileAfterSend(true);
     }
 
+    public function restorenya(Request $request)
+    {
+        $sqlFile = $request->file('sql_file');
 
+        if ($sqlFile) {
+            $content = file_get_contents($sqlFile);
 
+            $tables = ["barang",
+            "biaya_shipping",
+            "detail_keranjang",
+            // "failed_jobs",
+            "kategori",
+            "keranjang",
+            // "migrations",
+            // "password_reset_tokens",
+            // "pelanggan",
+            "pembayaran",
+            // "penjual",
+            // "personal_access_tokens",
+            "pesanan",
+            "riwayat_pesanan",
+            // "sessions",
+            "shipping",
+            "ulasan",
+            // "users"
+            ];
+
+            // Nonaktifkan kunci asing
+            // Nonaktifkan kunci asing
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+            foreach ($tables as $table) {
+                // Periksa apakah tabel sudah ada
+                if (Schema::hasTable($table)) {
+                    // Hapus tabel yang ada
+                    Schema::dropIfExists($table);
+                }
+            }
+
+            // Jalankan perintah SQL dari file
+            DB::unprepared($content);
+
+            // Aktifkan kembali kunci asing
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+            return back()
+                ->with('success', 'Data berhasil dipulihkan dari file SQL.');
+        }
+
+        return redirect()
+            ->back()
+            ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
+    }
 }
+
 

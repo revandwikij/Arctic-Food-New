@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\activity_log;
 use App\Models\ModelUser;
 use App\Models\pelanggan;
 use App\Models\Penjual;
@@ -27,6 +28,12 @@ class LoginController extends Controller
 
             if (Auth::user()->level == 'pelanggan') {
                 // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+                activity_log::create([
+                    'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                    'email' => auth()->user()->email,
+                    'kegiatan' => "user " . auth()->user()->username . " telah melakukan login",
+                    'created_at' => now()
+                ]);
                 return redirect()->intended('/');
             } elseif (Auth::user()->level == 'penjual') {
                 // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
@@ -35,7 +42,6 @@ class LoginController extends Controller
                 return view('layouting.error');
             }
         }
-
 
         return back()->with('loginError', 'Email or password is incorrect.');
     }
@@ -111,6 +117,6 @@ class LoginController extends Controller
     }
 
     public function forgorpassword(){
-        
+
     }
 }
