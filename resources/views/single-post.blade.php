@@ -131,7 +131,7 @@
                 <div class="col-md-6">
                     <div class="comments-wrap">
                         <h3>Comments</h3>
-                        <div class="comment-list">
+                        {{-- <div class="comment-list">
                             <article class="d-flex">
                                 <img src="images/review-image1.jpg" alt="default" class="commentor-image">
                                 <div class="author-post">
@@ -182,7 +182,7 @@
                                         sit he consequert.</p>
                                 </div>
                             </article>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
