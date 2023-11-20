@@ -29,21 +29,21 @@
                 <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
             </div>
             <div>
-                <form action="/barkat" method="GET">
+                <form action="/barkat" id="kategoriForm" method="GET">
                     @csrf
                     <div class="form-group">
                         <select class="form-select" name="kategori" id="kategori">
                             <option selected>PILIH KATEGORI</option>
                             @foreach ($kategori as $k)
-                                <option value="{{ $k->Kategori }}">{{ $k->Kategori }}</option>
+                                <option>{{ $k->Kategori }}</option>
                             @endforeach
                         </select>
                     </div>
                 </form>
-                <form id="kategoriForm" action="/barkat" method="GET">
+                {{-- <form id="kategoriForm" action="/barkat" method="GET">
                 @csrf
                 <div class="form-group">
-                    {{-- <label for="kategori">Kategori</label> --}}
+                    <label for="kategori">Kategori</label>
                     <select class="form-control" name="kategori" id="kategori">
                         <option value="" selected disabled>Pilih Kategori</option>
                         @foreach ($kategori as $k)
@@ -51,7 +51,7 @@
                         @endforeach
                     </select>
                 </div>
-            </form>
+            </form> --}}
             </div>
             <div>
                 <a href="/Tambah" class="btn btn-primary mb-5 me-2">Tambah Produk</a>

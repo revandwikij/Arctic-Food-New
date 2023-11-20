@@ -76,17 +76,11 @@ class ViewController extends Controller
 
     public function login()
     {
-        $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $kategoris = kategori::all();
-        return view('login', compact('kategoris'), compact('barang'), compact('pelanggan'));
+        return view('login');
     }
     public function regis()
     {
-        $pelanggan = pelanggan::all();
-        $barang = Barang::all();
-        $kategoris = kategori::all();
-        return view('register', compact('kategoris'), compact('barang'), compact('pelanggan'));
+        return view('register');
     }
     public function cart()
     {

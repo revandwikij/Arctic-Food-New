@@ -14,7 +14,7 @@
       </button>
       <div class="swiper main-swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background-image: url('../assets/css/images/1.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
+          <div class="swiper-slide" style="background-image: url('../assets/css/images/gtw.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
             <div class="banner-content">
               <div class="container">
                 <div class="row">
@@ -62,10 +62,6 @@
         <div class="swiper product-swiper overflow-hidden">
           <div class="swiper-wrapper">
             @foreach ($produkbaru as $item )
-
-
-
-
             <div class="product-item col-lg-4 col-md-6 col-sm-6">
               <div class="image-holder">
                 @if($item->Foto_Barang)
@@ -419,7 +415,7 @@
       <div class="container">
         <div class="product-collection">
           <div class="left-content collection-item">
-            <div class="products-thumb">
+            {{-- <div class="products-thumb">
               <img src="../assets/images/model.jpg" alt="collection item" class="large-image image-rounded">
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
@@ -429,7 +425,7 @@
               <div class="btn-wrap">
                 <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                 </a>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
