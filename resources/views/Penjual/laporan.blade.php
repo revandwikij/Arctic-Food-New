@@ -39,7 +39,7 @@
                     <tr>
                         {{-- <td>{{ $data->tanggal }}</td> --}}
                         <td>{{ $data->produk }}</td>
-                        <td>Rp. {{ number_format($data->Harga) }}</td>
+                        <td>Rp. {{ number_format($data->Harga_Barang) }}</td>
                         <td>{{ $data->total_terjual }}</td>
                         <td>Rp. {{ number_format($data->total_terjual * $data->Harga) }}</td>
                     </tr>

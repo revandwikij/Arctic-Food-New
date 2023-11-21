@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'seller' => \App\Http\Middleware\CheckSeller::class,
         'pembeli' => \App\Http\Middleware\CheckPembeli::class,
+        'session' => \App\Http\Middleware\coba_session::class,
     ];
 }

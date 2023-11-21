@@ -122,13 +122,13 @@ class LoginController extends Controller
 
     public function registeradmin(Request $request)
     {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required|email',
-            'no_Telp' => 'required|numeric',
-            'alamat' => 'required',
-        ]);
+        // $request->validate([
+        //     'username' => 'required',
+        //     'password' => 'required',
+        //     'email' => 'required|email',
+        //     'no_Telp' => 'required|numeric',
+        //     'alamat' => 'required',
+        // ]);
 
         dd($request);
 

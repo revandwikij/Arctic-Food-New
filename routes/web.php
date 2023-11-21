@@ -50,12 +50,11 @@ Route::post('/regis/verif', [LoginController::class, 'register'])->name('registe
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 
-Route::middleware([coba_session::class])->group(function () {
-// Admin
+
 Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 
-
+Route::middleware([coba_session::class])->group(function () {
 
     // VIEW
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
