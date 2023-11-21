@@ -171,24 +171,6 @@ Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
 Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
-
-// Route::get('/detil', [ViewController::class, 'detail']);
-// Route::get('/coba', [ViewController::class, 'coba']);
-
-
-
-
-
-
-
-
-
-
-    Route::post('/tambahadmin', [PenjualController::class, 'store']);
-    Route::get('/add', [ViewController::class, 'tambahadmin']);
-    // Route::get('/detil', [ViewController::class, 'detail']);
-    // Route::get('/coba', [ViewController::class, 'coba']);
-
 });
 
 

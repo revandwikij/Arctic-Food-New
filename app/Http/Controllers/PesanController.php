@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\EventPembayaran;
+use App\Models\activity_log;
 use App\Models\Alamat;
 use App\Models\Barang;
 use App\Models\Biaya_Ship;
@@ -139,12 +140,6 @@ class PesanController extends Controller
             $coba->Kuantitas = $request->jumlah_pesan;
             $coba->Sub_Total = $Barang->Harga * $request->jumlah_pesan;
             $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
-            $coba = activity_log::create([
-                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
-                'email' => auth()->user()->email,
-                'kegiatan' => "user " . auth()->user()->username . " telah memasukkan barang ke keranjang",
-                'created_at' => now()
-            ]);
             $coba->save();
 
                 return redirect('/cart');

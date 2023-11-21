@@ -42,7 +42,11 @@
               <label for="shopAddress" class="form-label">Shop Address:</label>
               <textarea class="form-control" id="shopAddress" rows="3" readonly>{{ $p->Alamat }}</textarea>
             </div>
-          </div>
+            <div class="mb-3">
+                <a href="/add" for="shopAddress" class="form-label">Tambah Akun Admin</a>
+              </div>
+        </div>
+
           @endforeach
         </div>
       </div>

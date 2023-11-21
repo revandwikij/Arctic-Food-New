@@ -135,7 +135,7 @@ class LoginController extends Controller
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'A' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-        if (Penjual::where('email', $request->email)->exists()) {
+        if (Penjual::where('Email', $request->email)->exists()) {
             return back()->with('alert', 'Email sudah digunakan');
         }
 
@@ -149,7 +149,6 @@ class LoginController extends Controller
         $Penjual->save();
 
         // dd($Penjual);
-
 
         return redirect('/login');
     }
