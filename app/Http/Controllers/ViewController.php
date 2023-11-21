@@ -99,7 +99,7 @@ class ViewController extends Controller
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
-            ->select('keranjang.Id_Keranjang')->get();
+            ->first();
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
     }

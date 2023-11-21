@@ -26,7 +26,7 @@
                                     @endforeach
                                 </ul>
                             </div> --}}
-                            <form action="/beli/{Id_Keranjang}" method="post">
+                            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>

@@ -129,7 +129,8 @@ class LoginController extends Controller
             'no_Telp' => 'required|numeric',
             'alamat' => 'required',
         ]);
-        // dd($request);
+
+        dd($request);
 
         $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'A000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
@@ -147,9 +148,7 @@ class LoginController extends Controller
         $Penjual->No_Telp = $request->no_Telp;
         $Penjual->Alamat = $request->alamat;
         $Penjual->save();
-
         // dd($Penjual);
-
 
         return redirect('/login');
     }

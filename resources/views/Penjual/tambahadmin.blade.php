@@ -94,7 +94,7 @@
 
         <input type="text" placeholder="Alamat" name="alamat" required>
 
-        <input type="submit" value="Tambah Admin" />
+        <input type="submit" value="Tambah Admin">
 
       </form>
     </div>

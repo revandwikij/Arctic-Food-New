@@ -23,7 +23,7 @@
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>Tanggal</th>
+                    {{-- <th>Tanggal</th> --}}
                     <th>Produk</th>
                     <th>Harga Barang</th>
                     <th>Terjual</th>
@@ -37,7 +37,7 @@
                 </tr>
                 @foreach ($penjualan as $data)
                     <tr>
-                        <td>{{ $data->tanggal }}</td>
+                        {{-- <td>{{ $data->tanggal }}</td> --}}
                         <td>{{ $data->produk }}</td>
                         <td>Rp. {{ number_format($data->Harga) }}</td>
                         <td>{{ $data->total_terjual }}</td>
