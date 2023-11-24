@@ -217,9 +217,7 @@ class ViewController extends Controller
     {
         $waktu = Carbon::now();
         $user = auth()->user();
-        $pesan = Pesan::where('Id_Pesanan', );
-
-
+        $pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
 
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
@@ -546,7 +544,7 @@ public function filriwayat(Request $request)
 
     public function lapbarperakun(Request $request)
     {
-        $barangperakun = BarangPerAkunView::all();
+        $barangperakun = BarangPerAkunView::paginate(10);
 
         return view('Penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }

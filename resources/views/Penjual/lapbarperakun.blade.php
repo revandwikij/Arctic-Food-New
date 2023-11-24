@@ -8,7 +8,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Laporan Barang Per Akun</h1>
+        <h1 class="jumbotron-heading">Laporan Aktivitas Transaksi Akun</h1>
     </div>
 </section>
 
@@ -23,7 +23,8 @@
                         <tr>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Jumlah Barang yang Dibeli</th>
+                            <th scope="col">Jumlah Transaksi</th>
+                            <th scope="col">Total Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,9 +32,12 @@
                             <tr>
                                 <td>{{ $data->username }}</td>
                                 <td>{{ $data->email }}</td>
-                                <td>{{ $data->produk }} x {{ $data->TotalJumlah }}</td>
+                                <td>{{ $data->jumlah_checkout}}</td>
+                                <td>Rp. {{number_format($data->total_pembelian)}}</td>
                             </tr>
                         @endforeach
+
+                        {{ $barangperAkun->links() }}
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">

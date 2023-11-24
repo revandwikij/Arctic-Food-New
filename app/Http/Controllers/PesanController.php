@@ -276,6 +276,11 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
                     ->update(['pembayaran.Tgl_Pembayaran' => $request->transaction_time]);
 
+                    // Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+                    // ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+                    // ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
+                    // ->update(['pembayaran.Metode_Pembayaran' => $request->payment_type]);
+
 
 
 

@@ -54,7 +54,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3">Jumlah</td>
+                    <td colspan="2">Jumlah</td>
                     <td>{{ $penjualan->sum('total_terjual') }}</td>
                     <td>
                         @php
