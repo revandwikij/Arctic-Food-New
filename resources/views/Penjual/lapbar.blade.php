@@ -8,7 +8,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Laporan 1 </h1>
+        <h1 class="jumbotron-heading">Laporan Penjualan</h1>
     </div>
 </section>
 
@@ -36,7 +36,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Tanggal</th>
+                    {{-- <th scope="col">Tanggal</th> --}}
                     <th scope="col">Produk</th>
                     <th scope="col">Harga Barang</th>
                     <th scope="col">Terjual</th>
@@ -46,7 +46,7 @@
             <tbody>
                 @foreach ($penjualan as $data)
                     <tr>
-                        <td>{{ $data->tanggal_awal }} - {{ $data->tanggal_akhir }}</td>
+                        {{-- <td>{{ $data->tanggal_awal }} - {{ $data->tanggal_akhir }}</td> --}}
                         <td>{{ $data->produk }}</td>
                         <td>Rp. {{ number_format($data->Harga) }}</td>
                         <td>{{ $data->total_terjual }}</td>

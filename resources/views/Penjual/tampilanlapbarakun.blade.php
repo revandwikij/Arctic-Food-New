@@ -31,7 +31,8 @@
                     <tr>
                         <td>{{ $data->username }}</td>
                         <td>{{ $data->email }}</td>
-                        <td>{{ $data->produk }} x {{ $data->TotalJumlah }}</td>
+                        <td>{{ $data->total_pembelian }}</td>
+                        <td>{{ $data->jumlah_checkout }}</td>
                     </tr>
                 @endforeach
             </tbody>

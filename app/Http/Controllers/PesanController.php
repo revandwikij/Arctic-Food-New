@@ -229,7 +229,7 @@ class PesanController extends Controller
             $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
             $bayar->Status_Pembayaran = 'Belum Lunas';
             $bayar->Tgl_Pembayaran = now();
-            $bayar->waktu_kadaluarsa = now()->addHours(3);
+            $bayar->waktu_kadaluarsa = now()->addSeconds(30);
             $bayar->save();
 
             // $notif = "Ada yg memesan";

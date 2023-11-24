@@ -34,7 +34,7 @@ class CheckExpiredPayments extends Command
         $payment->update(['Status_Pembayaran' => 'Kadaluarsa']);
     }
 
-    $this->info('Expired payments checked and updated successfully.');
+    // $this->info('Expired payments checked and updated successfully.');
 
     }
 }

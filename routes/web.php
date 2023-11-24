@@ -49,8 +49,12 @@ Route::get('/regis', [ViewController::class, 'regis'])->name('regis');
 Route::post('/regis/verif', [LoginController::class, 'register'])->name('register.verif');
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
+Route::get('/forgot', [LoginController::class, 'showForgotPasswordForm']);
+Route::post('/send', [LoginController::class, 'sendResetLinkEmail']);
+Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
+Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 
-// Admin
+
 Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);
 Route::get('/add', [ViewController::class, 'tambahadmin']);
 
@@ -169,7 +173,6 @@ Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
 Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');
 Route::get('/clean/{Id_Barang}', [PesanController::class, 'hapus']);
 Route::post('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
-Route::get('/alamat', [AlamatController::class, 'addaddress']);
 
 });
 

@@ -59,7 +59,7 @@
                 <div class="card px-md-3 px-2 pt-4">
                     <div class="unregistered mb-4"> <span class="py-1">unregistered account</span> </div>
                     <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Transaction code</small>
-                        <p>{{$item->Id_Pesanan}}</p>
+                        <p>{{ $item->Id_Pesanan }}</p>
                     </div>
                     {{-- <div class="d-flex justify-content-between b-bottom">
                           <input type="radio" id="cod" name="Metod_Pembayaran" value="COD">
@@ -80,12 +80,17 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between pb-3" id="countdown"></div>
-                    {{-- @if($item->Waktu_Kadaluarsa - new Date() <= 0 ) --}}
-                    
-                    <button id="pay-button"
-                        class="btn btn-upper btn-primary outer-left-xs mt-3"style="margin-top: 20px">Bayar
-                    </button>
-                    {{-- @endif --}}
+                    @if (Carbon\Carbon::parse($item->Waktu_Kadaluarsa)->isFuture())
+                        <button id="pay-button" class="btn btn-upper btn-primary outer-left-xs mt-3"
+                            style="margin-top: 20px">Bayar</button>
+                    @else
+                        <button id="pay-button" class="btn btn-upper btn-danger  outer-left-xs mt-3"
+                            style="margin-top: 20px" @disabled(true)>Kadaluarsa</button>
+                        <a href ="/cart">Kembali Belanja</a>
+                    @endif
+
+
+
                     <br>
                     <br>
                 </div>
@@ -308,11 +313,36 @@
             countdown.innerHTML = countdownText;
         }
 
-        
+
         setInterval(updateCountdown, 1000);
 
-        
+
         updateCountdown();
+    </script>
+
+    <script>
+        // Function to check and update the button dynamically
+        function checkAndUpdateButton() {
+            $.ajax({
+                url: '/check-expiration', // Replace with your Laravel route or endpoint
+                method: 'GET',
+                success: function(response) {
+                    if (response.isFuture) {
+                        $('#pay-button').show();
+                    } else {
+                        $('#pay-button').hide();
+                    }
+                }
+            });
+        }
+
+        // Check and update the button on page load
+        $(document).ready(function() {
+            checkAndUpdateButton();
+        });
+
+        // Optionally, you can set an interval to periodically check and update the button
+        setInterval(checkAndUpdateButton, 10000); // Check every 10 seconds (adjust as needed)
     </script>
 
 

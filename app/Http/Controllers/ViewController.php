@@ -99,7 +99,7 @@ class ViewController extends Controller
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
-            ->select('keranjang.Id_Keranjang')->get();
+            ->first();
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
     }
@@ -213,6 +213,50 @@ class ViewController extends Controller
 
 
 
+    public function riwpayment($Id_Pesanan)
+    {
+        $waktu = Carbon::now();
+        $user = auth()->user();
+        $pesan = Pesan::where('Id_Pesanan', );
+
+
+
+        $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
+
+        $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                // 'order_id' => $pesan->Id_Pesanan,
+                'order_id' => $datapesan1->Id_Pesanan,
+                'gross_amount' => $datapesan1->Total + $datapesan1->Total_Shipping,
+            ),
+            'customer_details' => array(
+                'first_name' => $pesan->username,
+                'email' => $pesan->email,
+                'phone' => $pesan->no_Telp,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        return view('payment', compact('datapesan', 'alamat', 'snapToken', 'waktu'));
+    }
+
     public function payment()
     {
         $waktu = Carbon::now();
@@ -264,7 +308,10 @@ class ViewController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')->latest('pesanan.created_at')->paginate(10);
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+            ->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')
+            ->where('pembayaran.Status_Pembayaran', '=', 'Lunas', '&&', 'Belum Lunas')
+            ->latest('pesanan.created_at')->paginate(10);
         return view('penjual.pesanan', compact('pesanan'));
     }
 
@@ -443,7 +490,7 @@ public function filriwayat(Request $request)
     public function lihat1()
     {
         $kategoris = kategori::all();
-        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->get();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->pa();
         return view('shop', compact('barang', 'kategoris'));
     }
 

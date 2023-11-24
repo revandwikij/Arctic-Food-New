@@ -15,18 +15,19 @@ return new class extends Migration
         $laporan = "DROP VIEW IF EXISTS `v_laporan_per_akun`;
         CREATE VIEW v_laporan_per_akun AS
         SELECT
-            users.username,
-            users.email,
-            barang.Id_Barang,
-            barang.Nama_Barang AS produk,
-            barang.Stok,
-            SUM(detail_keranjang.kuantitas) AS TotalJumlah
-        FROM users
-        JOIN pelanggan ON users.email = pelanggan.email
-        JOIN keranjang ON pelanggan.Id_Pelanggan = keranjang.Id_Pelanggan
-        JOIN detail_keranjang ON keranjang.Id_Keranjang = detail_keranjang.Id_Keranjang
-        JOIN barang ON detail_keranjang.Id_Barang = barang.Id_Barang
-        GROUP BY users.username, users.email, barang.Id_Barang, barang.Nama_Barang, barang.Stok;
+            pelanggan.username,
+            pelanggan.email,
+            SUM(pembayaran.Total_Harga) AS total_pembelian,
+            COUNT(pesanan.Id_Pelanggan) AS jumlah_checkout
+        FROM pelanggan
+        JOIN users ON pelanggan.email = users.email
+        JOIN pesanan ON pelanggan.Id_Pelanggan = pesanan.Id_Pelanggan
+        JOIN shipping ON pesanan.Id_Pesanan = shipping.Id_Pesanan
+        JOIN pembayaran ON shipping.Id_Shipping = pembayaran.Id_Shipping
+        WHERE pesanan.Status_Pesanan = 'Selesai'
+        AND pembayaran.Status_Pembayaran = 'Lunas'
+        GROUP BY pelanggan.Id_Pelanggan, pelanggan.username, pelanggan.email;
+
         ";
 
     DB::unprepared($laporan);

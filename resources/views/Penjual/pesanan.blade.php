@@ -56,7 +56,7 @@
 </div>
   </td>
   <td>
-    @if ($item->Status_Pesanan == 'Menunggu Konfirmasi')
+    @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
     <form action="konfirm/{{ $item->Id_Pesanan }}" method="post">
       {{-- @csrf --}}
       {{ csrf_field() }}

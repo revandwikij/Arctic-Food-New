@@ -45,11 +45,12 @@
 </style>
 
 <div class="login-container">
-  <form class="login-form" action="/login/verif" method="POST">
+  <form class="login-form" action="/send" method="POST">
       @csrf
       <h2>Forgor Password</h2>
-      <input type="text" placeholder="Email" name="email" required>
-      <input type="submit" value="Login" />
+      <x-label for="email" value="{{ __('Email') }}" />
+      <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+      <button> {{ __('Email Password Reset Link') }}</button>
 
       @if(session('loginError'))
       <div class="error-message">
@@ -57,6 +58,21 @@
       </div>
       @endif
   </form>
+  {{-- <form class="login-form" method="POST" action="/send">
+    @csrf
+
+    <div class="block">
+
+        <x-label for="email" value="{{ __('Email') }}" />
+        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+    </div>
+
+    <div class="flex items-center justify-end mt-4">
+        <x-button>
+            {{ __('Email Password Reset Link') }}
+        </x-button>
+    </div>
+</form> --}}
 </div>
 
 {{-- <script>
