@@ -17,8 +17,10 @@ return new class extends Migration
         BEGIN
         SELECT pelanggan.username, alamat.Alamat_Lengkap, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
         FROM pelanggan
-        JOIN users 
+        JOIN users
         ON user.email = pelanggan.email
+        JOIN alamat
+        ON pelanggan.Id_Alamat = alamat>Id_Alamat
         WHERE users.level = 'pelanggan';
         END;";
 

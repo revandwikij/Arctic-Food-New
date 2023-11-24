@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/cart', [ViewController::class, 'cart']);
     Route::get('/profil', [ViewController::class, 'profil']);
     Route::get('/payment', [ViewController::class, 'payment']);
+    Route::get('/riwpayment/{Id_Pesanan}', [ViewController::class, 'riwpayment']);
     Route::get('/thanks', [ViewController::class, 'thanks']);
     Route::post('/pesan/{Id_Barang}', [PesanController::class, 'pesan']);
     Route::post('/keranjang/{id}', [PesanController::class, 'keranjang'])->middleware('auth');

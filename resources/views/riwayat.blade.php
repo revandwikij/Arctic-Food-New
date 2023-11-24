@@ -54,6 +54,12 @@
                     <button class="view-button">Lihat Detail Pesanan</button>
                 </a>
 
+                @if ($item->Status_Pembayaran == 'Belum Lunas')
+                <a href="/riwpayment/{{ $item->Id_Pesanan }}">
+                    <button class="chat-button"><i class="accept-button">Bayar</i></button>
+                </a>
+                @endif
+
                 @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' || $item->Status_Pesanan == 'Dikirim' || $item->Status_Pesanan == 'Selesai')
                 <a href="https://wa.me/6289656088434?text=Halo,%20saya%20mau%20bertanya">
                     <button class="chat-button"><i class="icon icon-phone"> Chat Penjual</i></button>
@@ -73,6 +79,7 @@
                     <button class="review-button" type="submit">Beri Ulasan</button>
                 </form>
                 @endif
+
             </div>
         </div>
     </div>
