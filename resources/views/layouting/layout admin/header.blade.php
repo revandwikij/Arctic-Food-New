@@ -33,7 +33,7 @@
                                 <span class="icon-badge">3</span>
                             </a><!--//dropdown-toggle-->
 
-                            {{-- <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+                            <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                                 <div class="dropdown-menu-header p-3">
                                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                 </div><!--//dropdown-menu-title-->
@@ -60,7 +60,7 @@
                                     <a href="notifications.html">View all</a>
                                 </div>
 
-                            </div><!--//dropdown-menu--> --}}
+                            </div><!--//dropdown-menu-->
 
 
                         </div><!--//app-utility-item-->

@@ -18,6 +18,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use App\Models\users;
 use App\Notifications\Notif;
+use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -406,4 +407,15 @@ class PesanController extends Controller
              return redirect('/cart');
         }
     }
+
+    public function notify(Request $request)
+    {
+        if ($request->transaction_status === 'capture') {
+            // Tambahkan logika yang diperlukan setelah transaksi berhasil dicapture
+    
+            // Mengirim notifikasi ke admin
+            $admin = User::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
+            $admin->notify(new PesananMasukNotification($pesan));
+    }
+}
 }
