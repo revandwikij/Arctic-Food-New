@@ -18,6 +18,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use App\Models\users;
 use App\Notifications\Notif;
+use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -265,11 +266,11 @@ class PesanController extends Controller
                     ->get();
 
 
+
                      Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
                     ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
                     ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
                     ->update(['pembayaran.Status_Pembayaran' => 'Lunas']);
-
                     Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
                     ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
                     ->where('pesanan.Id_Pesanan', '=', $id_pesanan)
@@ -298,10 +299,17 @@ class PesanController extends Controller
 
                 }
 
-
-
-
-
+                if (auth()->user() && auth()->user()->level === 'penjual') {
+                    // Ambil informasi pesanan yang masuk, misalnya dari $request
+                    $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
+                    // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
+                    $admin = users::where('level', 'penjual')->first();
+                    // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
+                
+                    // Kirim notifikasi ke admin yang sesuai
+                    if ($admin) {
+                        $admin->notify(new PesananMasukNotification($informasiPesanan));
+                    }
 
 
                 // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
@@ -328,10 +336,6 @@ class PesanController extends Controller
 
             }
 
-
-
-
-
             // $admin = DB::table('users')->where('level', 'penjual')->get(); // Ganti ini sesuai dengan logika pengambilan admin
             // Notification::send($admin, new Notif($bayar));
 
@@ -339,6 +343,7 @@ class PesanController extends Controller
 
         }
     }
+}
 
 
 
@@ -411,4 +416,22 @@ class PesanController extends Controller
              return redirect('/cart');
         }
     }
+
+    public function notify(Request $request)
+    {
+        // Misalkan ada kolom 'level' yang menandakan admin pada tabel users
+        if (auth()->user() && auth()->user()->level === 'admin') {
+        // Ambil informasi pesanan yang masuk, misalnya dari $request
+        $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
+        // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
+        $admin = users::where('level', 'admin')->first();
+        // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
+
+        // Kirim notifikasi ke admin yang sesuai
+        if ($admin) {
+            $admin->notify(new PesananMasukNotification($informasiPesanan));
+        }
+    }
 }
+}
+

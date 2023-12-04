@@ -33,11 +33,12 @@
                                 <span class="icon-badge">3</span>
                             </a><!--//dropdown-toggle-->
 
-                            {{-- <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+                            <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                                 <div class="dropdown-menu-header p-3">
                                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                 </div><!--//dropdown-menu-title-->
                                 <div class="dropdown-menu-content">
+                                    @foreach(auth()->user()->notifications as $notification)
                                     <div class="item p-3">
                                         <div class="row gx-2 justify-content-between align-items-center">
                                             <div class="col-auto">
@@ -46,21 +47,21 @@
                                             </div><!--//col-->
                                             <div class="col">
                                                 <div class="info">
-                                                    <div class="desc">Amy shared a file with you. Lorem ipsum dolor
-                                                        sit amet, consectetur adipiscing elit. </div>
-                                                    <div class="meta"> 2 hrs ago</div>
+                                                    <div class="desc">{{ $notification->data['message'] }}</div>
+                                                    <div class="meta">{{ $notification->created_at->diffForHumans() }}</div>
                                                 </div>
                                             </div><!--//col-->
                                         </div><!--//row-->
                                         <a class="link-mask" href="notifications.html"></a>
                                     </div><!--//item-->
+                                    @endforeach
                                 </div><!--//dropdown-menu-content-->
 
                                 <div class="dropdown-menu-footer p-2 text-center">
                                     <a href="notifications.html">View all</a>
                                 </div>
 
-                            </div><!--//dropdown-menu--> --}}
+                            </div><!--//dropdown-menu-->
 
 
                         </div><!--//app-utility-item-->
