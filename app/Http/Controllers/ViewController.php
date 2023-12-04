@@ -308,7 +308,8 @@ class ViewController extends Controller
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
             ->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')
-            ->where('pembayaran.Status_Pembayaran', '=', 'Lunas', '&&', 'Belum Lunas')
+            ->where('pembayaran.Status_Pembayaran', '=', 'Lunas',)
+            ->orwhere('pembayaran.Status_Pembayaran', '=', 'Belum Lunas',)
             ->latest('pesanan.created_at')->paginate(10);
         return view('penjual.pesanan', compact('pesanan'));
     }
@@ -526,21 +527,21 @@ public function filriwayat(Request $request)
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }
 
-    // public function laporanOmset(Request $request)
-    // {
-    //     $bulanawal = $request->input('bulan_awal');
-    //     $bulanakhir = $request->input('bulan_akhir');
+    public function laporanOmset(Request $request)
+    {
+        $bulanawal = $request->input('bulan_awal');
+        $bulanakhir = $request->input('bulan_akhir');
 
-    //     $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
+        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
 
-    //     return view('penjual.lapset', ['penjualan' => $penjualan]);
-    // }
+        return view('penjual.lapset', ['penjualan' => $penjualan]);
+    }
 
-    // public function lapset()
-    // {
-    //     $penjualan = OmsetView::all();
-    //     return view('penjual.lapset', compact('penjualan'));
-    // }
+    public function lapset()
+    {
+        $penjualan = OmsetView::all();
+        return view('penjual.lapset', compact('penjualan'));
+    }
 
     public function lapbarperakun(Request $request)
     {

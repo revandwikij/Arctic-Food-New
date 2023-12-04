@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/order', [ViewController::class, 'pesanan']);
 
         Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
-        // Route::get('/omset', [ViewController::class, 'laporanOmset']);
+        Route::get('/omset', [ViewController::class, 'laporanOmset']);
         Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
         Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
         Route::get('/laporanbarang', [ViewController::class, 'lapbar']);

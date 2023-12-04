@@ -113,7 +113,9 @@
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="/laporanbarang">Laporan Barang</a></li>
                             {{-- <li class="submenu-item"><a class="submenu-link" href="#">Dikirim</a></li> --}}
-                            <li class="submenu-item"><a class="submenu-link" href="/lapbarperakun">Laporan Barang Terjual Per Akun</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="/omset">Laporan Omset</a></li>
+                            {{-- <li class="submenu-item"><a class="submenu-link" href="404.html">404 page</a></li> --}}
+                            {{-- <li class="submenu-item"><a class="submenu-link" href="/lapbarperakun">Laporan Barang Terjual Per Akun</a></li> --}}
                             {{-- <li class="submenu-item"><a class="submenu-link" href="404.html">404 page</a></li> --}}
                         </ul>
                     </div>

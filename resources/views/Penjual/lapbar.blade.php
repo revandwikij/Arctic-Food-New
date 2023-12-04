@@ -37,7 +37,7 @@
             <thead>
                 <tr>
                     {{-- <th scope="col">Tanggal</th> --}}
-                    <th scope="col">Produk</th>
+                    <th scope="col">Nama Barang</th>
                     <th scope="col">Harga Barang</th>
                     <th scope="col">Terjual</th>
                     <th scope="col">Total Harga</th>

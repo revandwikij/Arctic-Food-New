@@ -23,7 +23,8 @@
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Barang yang Dibeli</th>
+                    <th>Total Pembelian</th>
+                    <th>Jumlah Checkout</th>
                 </tr>
             </thead>
             <tbody>
