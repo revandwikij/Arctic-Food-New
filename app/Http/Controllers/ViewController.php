@@ -731,6 +731,11 @@ public function filriwayat(Request $request)
    return Response::download($file_name, $file_name)->deleteFileAfterSend(true);
     }
 
+    public function error()
+    {
+        return view('layouting.error');
+    }
+
     public function restorenya(Request $request)
     {
         $sqlFile = $request->file('sql_file');

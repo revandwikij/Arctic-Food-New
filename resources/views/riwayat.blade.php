@@ -54,6 +54,12 @@
                     <button class="view-button">Lihat Detail Pesanan</button>
                 </a>
 
+                @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' || $item->Status_Pesanan == 'Selesai')
+                <a href="/refund/{{ $item->Id_Pesanan }}">
+                    <button class="cancel-button"><i class="cancel-button">Refund</i></button>
+                </a>
+                @endif
+
                 @if ($item->Status_Pembayaran == 'Belum Lunas')
                 <a href="/riwpayment/{{ $item->Id_Pesanan }}">
                     <button class="chat-button"><i class="accept-button">Bayar</i></button>

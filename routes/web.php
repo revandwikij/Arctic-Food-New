@@ -53,6 +53,7 @@ Route::get('/forgot', [LoginController::class, 'showForgotPasswordForm']);
 Route::post('/send', [LoginController::class, 'sendResetLinkEmail']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
+Route::get('/error', [ViewController::class, 'error']);
 
 
 Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);

@@ -449,5 +449,19 @@ class PesanController extends Controller
             $admin = User::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
             $admin->notify(new PesananMasukNotification($pesan));
     }
+
+        // Misalkan ada kolom 'level' yang menandakan admin pada tabel users
+        if (auth()->user() && auth()->user()->level === 'admin') {
+        // Ambil informasi pesanan yang masuk, misalnya dari $request
+        $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
+        // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
+        $admin = users::where('level', 'admin')->first();
+        // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
+
+        // Kirim notifikasi ke admin yang sesuai
+        if ($admin) {
+            $admin->notify(new PesananMasukNotification($informasiPesanan));
+        }
+    }
 }
 }
