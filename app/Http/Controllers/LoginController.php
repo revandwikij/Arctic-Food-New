@@ -67,8 +67,8 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|alpha',
-            'password' => 'required',
+            'username' =>['required', 'regex:/^[A-Za-z\s]+$/'],
+            'password' =>['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*\s).{8,}$/'],
             'email' => 'required|email',
             'jenkel' => 'required',
             'no_Telp' => 'required|numeric',
@@ -223,7 +223,7 @@ class LoginController extends Controller
         //     'alamat' => 'required',
         // ]);
 
-        // dd($request);
+         
 
         $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'A000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
