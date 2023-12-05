@@ -152,7 +152,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/barang/filter',[ViewController::class, 'filter']);
     Route::get('/about', [ViewController::class, 'about']);
     Route::get('/transaksi', [ViewController::class, 'riwayat']);
-    Route::post('/ulasan/{Id_Pesanan}', [UlasanController::class, 'store']);
+    Route::post('/ulasan', [ViewController::class, 'ulasan']);
     Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
     Route::get('/hapuspayment', [PesanController::class, 'hapuspayment']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);

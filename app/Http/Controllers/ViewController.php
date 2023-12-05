@@ -771,6 +771,20 @@ public function filriwayat(Request $request)
             ->back()
             ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
     }
+
+    public function ulasan()
+    {
+        $user = auth()->user();
+        $ulasan = Pesan::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'pesanan.Id_Pelanggan')
+        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+        ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+        ->join('users', 'pelanggan.email', '=', 'users.email')
+        ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+        ->where('users.id', '=', $user->id)
+        ->where('pesanan.Status_Pesanan', '=', 'Selesai')
+        ->select(DB::raw('DISTINCT barang.Nama_Barang'))
+        ->get();
+        // dd($ulasan);
+        return view('ulasan', compact('ulasan'));
+    }
 }
-
-
