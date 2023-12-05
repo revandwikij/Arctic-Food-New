@@ -48,8 +48,13 @@
                                             <div class="col">
                                                 <div class="info">
                                                     <div class="desc">{{ $notification->data['message'] }}</div>
-                                                    <div class="meta">{{ $notification->created_at->diffForHumans() }}</div>
+                                                    <div class="meta">ID Pesanan: {{ $notification->data['id_pesanan'] }}</div>
+                                                    <div class="meta">Status Pesanan: {{ $notification->data['status_pesanan'] }}</div>
+                                                    <div class="meta">Nama Pelanggan: {{ $notification->data['nama_pelanggan'] }}</div>
+                                                    <!-- Informasi lain yang ingin ditampilkan dalam notifikasi -->
                                                 </div>
+                                            </div>
+                                            </div>
                                             </div><!--//col-->
                                         </div><!--//row-->
                                         <a class="link-mask" href="notifications.html"></a>
