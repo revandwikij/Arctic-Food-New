@@ -342,7 +342,8 @@
         });
 
         // Optionally, you can set an interval to periodically check and update the button
-        setInterval(checkAndUpdateButton, 10000); // Check every 10 seconds (adjust as needed)
+        setInterval(checkAndUpdateButton, 10000);
+        // Check every 10 seconds (adjust as needed)
     </script>
 
 

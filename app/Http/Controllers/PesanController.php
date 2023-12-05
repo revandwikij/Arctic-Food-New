@@ -12,11 +12,10 @@ use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\Notif as ModelsNotif;
 use App\Models\Pesan;
-use App\Models\User;
+use App\Models\users;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\Shipping;
-use App\Models\users;
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -196,6 +195,32 @@ class PesanController extends Controller
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
 
+            // Mengambil data pesanan dan pelanggan yang sesuai
+            $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('users', 'pelanggan.email', '=', 'users.email')
+            ->where('users.id', '=', $user->id)
+            ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
+            ->first(); 
+            // dd($notif);// Menggunakan first() untuk mengambil satu objek dari hasil query
+
+            if ($notif) {
+            $informasiPesanan = [
+                'id_pesanan' => $notif->Id_Pesanan,
+                'status_pesanan' => $notif->Status_Pesanan,
+                'nama_pelanggan' => $notif->username, // Mengambil data username dari hasil join
+                // Informasi lain yang ingin disertakan dalam notifikasi
+            ];
+            // dd($informasiPesanan);
+            
+            $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)
+            ->first();
+            if ($admin) {
+                // Kirim notifikasi dengan data yang telah disiapkan
+                $admin->notify(ne   w PesananMasukNotification($informasiPesanan));
+            } //ini ampe notif
+}
+
+
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
@@ -299,19 +324,6 @@ class PesanController extends Controller
 
                 }
 
-                if (auth()->user() && auth()->user()->level === 'penjual') {
-                    // Ambil informasi pesanan yang masuk, misalnya dari $request
-                    $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
-                    // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
-                    $admin = users::where('level', 'penjual')->first();
-                    // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
-                
-                    // Kirim notifikasi ke admin yang sesuai
-                    if ($admin) {
-                        $admin->notify(new PesananMasukNotification($informasiPesanan));
-                    }
-
-
                 // $admin = DB::table('users')->where('role', 'penjual')->first(); // Replace with your logic to find the admin
                 // $admin->notify(new Notif($bayar));
 
@@ -343,12 +355,6 @@ class PesanController extends Controller
 
         }
     }
-}
-
-
-
-
-
 
     public function konfirm($Id_Pesanan)
     {

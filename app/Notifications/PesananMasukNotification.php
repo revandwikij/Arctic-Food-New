@@ -48,9 +48,9 @@ class PesananMasukNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'id_barang' => $this->informasiPesanan['id_barang'],
-            'kuantitas' => $this->informasiPesanan['kuantitas'],
-            'total_harga' => $this->informasiPesanan['total_harga'],
+            'id_pesanan' => $this->informasiPesanan['id_pesanan'],
+            'status_pesanan' => $this->informasiPesanan['status_pesanan'],
+            'nama_pelanggan' => $this->informasiPesanan['nama_pelanggan'],
             'message' => 'Pesanan baru telah diterima.'
             // Informasi lain yang ingin disimpan dalam notifikasi
         ];
