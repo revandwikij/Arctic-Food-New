@@ -101,6 +101,20 @@ class ViewController extends Controller
             ->latest('keranjang.created_at')
             ->first();
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
+
+        if(empty($cekcart))
+        {
+            $lastUid = Keranjang::orderBy('id', 'desc')->first()->Id_Keranjang ?? 'K000';
+            $nextNumber = (int) substr($lastUid, 1) + 1;
+            $newUid = 'K' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+            $ker = new Keranjang;
+            $ker->Id_Keranjang = $newUid;
+            $ker->Id_Pelanggan = $test->Id_Pelanggan;
+            $ker->Status = "Aktif";
+            $ker->save();
+        }
+
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
     }
     public function profil()
