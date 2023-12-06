@@ -47,7 +47,7 @@
 
                         @foreach ($penjualan as $data)
                             <tr>
-                                <td>{{ date('F Y', strtotime($data->bulan)) }}</td>
+                                <td>{{ date('F', strtotime($data->bulan)) }}</td>
                                 <td>Rp. {{ number_format($data->Total_Harga) }} </td>
                             </tr>
                         @endforeach

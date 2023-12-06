@@ -38,7 +38,7 @@
                                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                 </div><!--//dropdown-menu-title-->
                                 <div class="dropdown-menu-content">
-                                    @foreach(auth()->user()->notifications as $notification)
+                                    {{-- @foreach(auth()->user()->notifications as $notification)
                                     <div class="item p-3">
                                         <div class="row gx-2 justify-content-between align-items-center">
                                             <div class="col-auto">
@@ -59,7 +59,7 @@
                                         </div><!--//row-->
                                         <a class="link-mask" href="notifications.html"></a>
                                     </div><!--//item-->
-                                    @endforeach
+                                    @endforeach --}}
                                 </div><!--//dropdown-menu-content-->
 
                                 <div class="dropdown-menu-footer p-2 text-center">
