@@ -27,8 +27,8 @@ class DeleteUnpaidPayments extends Command
      */
     public function handle()
     {
-        $batas = Carbon::now()->subMinutes(30);
-        Pembayaran::where('Status_Pembayaran', 'Belum Lunas')
+        
+        Pembayaran::where('Status_Pembayaran', 'Kadaluarsa')
             ->where('created_at', '<=', $batas)
             ->delete();
     }
