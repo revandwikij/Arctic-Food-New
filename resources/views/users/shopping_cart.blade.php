@@ -26,7 +26,7 @@
                                     @endforeach
                                 </ul>
                             </div> --}}
-                            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
+                            <form action="/beli/{{$cekcart}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
@@ -42,9 +42,7 @@
                                     </select>
 
 
-{{-- @if (count($alamat) === 0)
-    <p>No addresses available. Please <a href="/profile">update your profile</a>.</p>
-@endif --}}
+ 
 
 
 
@@ -138,16 +136,15 @@
                                                         
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit" disabled>Bayar</button>
-                                                        </form>
-
+                                                         
                                                         @else
 
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit">Bayar</button>
-                                                        </form>
+                                                         
 
                                                         @endif
-
+                                                    </form>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->
