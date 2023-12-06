@@ -38,6 +38,7 @@
                                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                 </div><!--//dropdown-menu-title-->
                                 <div class="dropdown-menu-content">
+                                    @foreach(auth()->user()->notifications as $notification)
                                     <div class="item p-3">
                                         <div class="row gx-2 justify-content-between align-items-center">
                                             <div class="col-auto">
@@ -46,14 +47,19 @@
                                             </div><!--//col-->
                                             <div class="col">
                                                 <div class="info">
-                                                    <div class="desc">Amy shared a file with you. Lorem ipsum dolor
-                                                        sit amet, consectetur adipiscing elit. </div>
-                                                    <div class="meta"> 2 hrs ago</div>
+                                                    <div class="desc">{{ $notification->data['message'] }}</div>
+                                                    <div class="meta">ID Pesanan: {{ $notification->data['id_pesanan'] }}</div>
+                                                    <div class="meta">Status Pesanan: {{ $notification->data['status_pesanan'] }}</div>
+                                                    <div class="meta">Nama Pelanggan: {{ $notification->data['nama_pelanggan'] }}</div>
+                                                    <!-- Informasi lain yang ingin ditampilkan dalam notifikasi -->
                                                 </div>
+                                            </div>
+                                            </div>
                                             </div><!--//col-->
                                         </div><!--//row-->
                                         <a class="link-mask" href="notifications.html"></a>
                                     </div><!--//item-->
+                                    @endforeach
                                 </div><!--//dropdown-menu-content-->
 
                                 <div class="dropdown-menu-footer p-2 text-center">
