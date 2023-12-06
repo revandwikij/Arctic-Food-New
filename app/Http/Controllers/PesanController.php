@@ -197,6 +197,23 @@ class PesanController extends Controller
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
 
+           $buatkurang = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang')
+            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+            ->get();
+
+
+            foreach ($buatkurang as $detail) {
+                $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                if ($barang) {
+                    $barang->Stok -= $detail->Kuantitas;
+                    $barang->save();
+                }
+            }
+
+
+
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;

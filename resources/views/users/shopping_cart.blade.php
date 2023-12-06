@@ -38,8 +38,8 @@
                                                     {{ $a->Label }}
                                                 </option>
                                             @endforeach
-                                        @endif
-                                    </select>
+                                    @endif
+                            </select>
 
 
 {{-- @if (count($alamat) === 0)
@@ -135,7 +135,7 @@
                                                 <tr>
                                                     <td>
                                                         @if (count($alamat) === 0)
-                                                        
+
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit" disabled>Bayar</button>
                                                         </form>
