@@ -14,7 +14,7 @@ class ReturnStock extends Command
      *
      * @var string
      */
-    protected $signature = 'app:return-stock {buatkoman}';
+    protected $signature = 'app:return-stock';
 
     /**
      * The console command description.
@@ -33,12 +33,19 @@ class ReturnStock extends Command
         ->where('pembayaran.Status_Pembayaran', '=', 'Kadaluarsa')
         ->update(['pesanan.Status_Pesanan' => 'Dibatalkan']);
 
-        $buatkoman = $this->argument('buatkoman');
-        // $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-        // ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-        // ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
-        // ->get();
+        // $buatkoman = $this->argument('buatkoman');
+        $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+        ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+        ->where('pesanan.Status_Pesanan', '=', 'Dibatalkan')
+        ->get();
 
-        $this->info("Pesan yang diterima: $buatkoman");     
+        foreach ($ambil as $detail) 
+        {
+            $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+            if ($barang) {
+                $barang->Stok += $detail->Kuantitas;
+                $barang->save();
+            }
+        }   
     }
 }

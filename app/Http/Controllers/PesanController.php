@@ -202,8 +202,8 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
                     ->get();
 
-            $buatkoman = $pesan->Id_Pesanan;
-            Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+            // $buatkoman = $pesan->Id_Pesanan;
+            // Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
 
             foreach ($ambil as $detail) 
             {
