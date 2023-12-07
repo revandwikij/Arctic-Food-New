@@ -18,7 +18,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use Midtrans\Config;
 use Midtrans\Transaction;
- 
+
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -162,7 +162,7 @@ class PesanController extends Controller
     public function checkout($Id_Keranjang, Request $request)
     {
 
-        try{
+        // try{
         if (Auth::id()) {
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
@@ -202,10 +202,9 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
                     ->get();
 
-            // $buatkoman = $pesan->Id_Pesanan;
-            // Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+              
 
-            foreach ($ambil as $detail) 
+            foreach ($ambil as $detail)
             {
                 $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                 if ($barang) {
@@ -240,20 +239,7 @@ class PesanController extends Controller
 }
 
 
-           $buatkurang = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang')
-            ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
-            ->get();
-
-
-            foreach ($buatkurang as $detail) {
-                $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
-                if ($barang) {
-                    $barang->Stok -= $detail->Kuantitas;
-                    $barang->save();
-                }
-            }
+        //
 
 
 
@@ -291,7 +277,7 @@ class PesanController extends Controller
             $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
             $bayar->Status_Pembayaran = 'Belum Lunas';
             $bayar->Tgl_Pembayaran = now();
-            $bayar->waktu_kadaluarsa = now()->addHour(3);
+            $bayar->waktu_kadaluarsa = now()->addMinutes(3);
             $bayar->save();
 
             // $notif = "Ada yg memesan";
@@ -300,11 +286,11 @@ class PesanController extends Controller
 
             return redirect('/payment');
         }
-        }
-         catch(\Exception $e)
-        {
-            return back()->withError(['Ada yang salah' => 'Coba lagi']);
-        }
+        // }
+        //  catch(\Exception $e)
+        // {
+        //     return redirect('/')->withError(['Ada yang salah' => 'Coba lagi']);
+        // }
     }
 
 

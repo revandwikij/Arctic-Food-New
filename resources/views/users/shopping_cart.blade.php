@@ -12,21 +12,7 @@
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
 
-                            {{-- <div class="dropdown">
-                                <span style="font">Alamat</span>
-                                <button class="btn btn-outline-primary  dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Pilih Alamat
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach ($alamat as $a)
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div> --}}
-                            <form action="/beli/{{$cekcart}}" method="post">
+            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
@@ -40,14 +26,6 @@
                                             @endforeach
                                     @endif
                             </select>
-
-
- 
-
-
-
-
-
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -101,12 +79,7 @@
                                                         $total += $data['Kuantitas'] * $data['Harga'];
                                                     @endphp
                                                 </span></td>
-                                            {{-- <td>
-                                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value=""
-                                                    data-price="{{ $data->Sub_Total }} ">
-                                            </td>
-                                                <input type="hidden" name="selected_items[]"
-                                                    value="{{ $data->Id_Detail_Keranjang }}"> --}}
+
                                         </tr>
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
@@ -136,15 +109,15 @@
 
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit" disabled>Bayar</button>
-                                                         
+
                                                         @else
 
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit">Bayar</button>
-                                                         
+
 
                                                         @endif
-                                                    </form>
+            </form>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->
@@ -169,43 +142,6 @@
             </div> <!-- /.row -->
         </div><!-- /.body-content -->
     </div>
-
-
-    {{-- <script>
-        const checkboxes = document.querySelectorAll('.item-checkbox');
-
-        // Get the total price element
-        const totalPriceElement = document.getElementById('total-price');
-
-        // Initialize the total price
-        let totalPrice = 0;
-
-        // Function to format a number as IDR
-        function formatIDR(number) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-            }).format(number);
-        }
-
-        // Update the initial total display
-        totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-
-        // Add event listeners to the checkboxes
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                const price = parseFloat(checkbox.getAttribute('data-price'));
-                if (checkbox.checked) {
-                    totalPrice += price;
-                } else {
-                    totalPrice -= price;
-                }
-                // Update the total price display
-                totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-            });
-        });
-    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
