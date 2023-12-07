@@ -116,7 +116,6 @@ class BarangController extends Controller
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
             $image = Image::make($gambar);
-            $image->fit(389, 473);
             $path = public_path('uploads');
             $filename = time() . '.' . $gambar->getClientOriginalExtension();
             $image->save($path . '/' . $filename);

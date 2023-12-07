@@ -18,7 +18,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use Midtrans\Config;
 use Midtrans\Transaction;
-use App\Models\users;
+ 
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -26,6 +26,7 @@ use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Artisan;
 // use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification;
 
@@ -196,6 +197,23 @@ class PesanController extends Controller
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
 
+            $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+                    ->get();
+
+            // $buatkoman = $pesan->Id_Pesanan;
+            // Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+
+            foreach ($ambil as $detail) 
+            {
+                $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                if ($barang) {
+                    $barang->Stok -= $detail->Kuantitas;
+                    $barang->save();
+                }
+            }
+
             // Mengambil data pesanan dan pelanggan yang sesuai
             $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('users', 'pelanggan.email', '=', 'users.email')
@@ -217,7 +235,7 @@ class PesanController extends Controller
             ->first();
             if ($admin) {
                 // Kirim notifikasi dengan data yang telah disiapkan
-                $admin->notify(ne   w PesananMasukNotification($informasiPesanan));
+                $admin->notify(new PesananMasukNotification($informasiPesanan));
             } //ini ampe notif
 }
 
@@ -336,6 +354,8 @@ class PesanController extends Controller
                 foreach ($detailPesanan as $detail) {
                     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                     if ($barang) {
+                        $barang->Stok += $detail->Kuantitas;
+                        $barang->save();
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
@@ -478,7 +498,7 @@ class PesanController extends Controller
             // Tambahkan logika yang diperlukan setelah transaksi berhasil dicapture
 
             // Mengirim notifikasi ke admin
-            $admin = User::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
+            $admin = users::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
             $admin->notify(new PesananMasukNotification($pesan));
     }
 
