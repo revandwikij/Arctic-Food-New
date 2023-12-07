@@ -9,6 +9,17 @@
             <h1 class="jumbotron-heading">Activity Log</h1>
         </div>
     </section>
+    <form action="/barkat" id="userForm" method="GET">
+        @csrf
+        <div class="form-group">
+            <select class="form-select" name="user" id="user">
+                <option selected>PILIH USER</option>
+                @foreach ($user as $u)
+                    <option>{{ $u->username }}</option>
+                @endforeach
+            </select>
+        </div>
+    </form>
 
     <div class="container mt-5">
 
@@ -21,6 +32,7 @@
                     <th scope="col">ID Log</th>
                     <th scope="col">Email</th>
                     <th scope="col">Kegiatan</th>
+                    <th scope="col">Waktu </th>
                 </tr>
             </thead>
             <tbody>
@@ -38,14 +50,29 @@
 
                             <span class="ml-2">{{ $item->kegiatan }}</span>
                         </td>
-    </tr>
-    @endforeach
+                        <td>{{ $item->created_at }}</td>
+                    </tr>
+                @endforeach
 
-    </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    {{-- {{ $log->links() }} --}}
+        {{-- {{ $log->links() }} --}}
 
     </div>
+
+    <script>
+        document.getElementById('user').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user').change(function() {
+                $('#userForm').submit();
+            });
+        });
+    </script>
 
 @endsection

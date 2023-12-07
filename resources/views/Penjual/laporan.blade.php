@@ -51,23 +51,16 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    <div class="container">
-        <h2 class="mt-4">Laporan Penjualan Arctic Food</h2>
-        <p>Bulan :</p>
-        <p>Tahun :</p>
-=======
     <div class="container kop-surat">
         <div class="judul">Laporan Penjualan Arctic Food</div>
         <div class="info">Alamat: Jl. Contoh No. 123, Kota Contoh</div>
         <div class="info">Telepon: 123-456-789</div>
         <div class="info">Periode awal hingga </div>
-        
+
         <div>
             <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
         </div>
     </div>
->>>>>>> 104d1c88d790a5dc13c958336b4f98ce69e548c7
 
     <div class="container">
         <table class="table table-bordered mt-4">
@@ -81,10 +74,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Produk</td>
-                    <td colspan="3">:</td>
-                </tr>
+
                 @foreach ($penjualan as $data)
                     <tr>
                         {{-- <td>{{ $data->tanggal }}</td> --}}

@@ -873,7 +873,8 @@ class ViewController extends Controller
 
     public function log()
     {
+        $user = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->get();
         $log = log::all();
-        return view('penjual.log', compact('log'));
+        return view('penjual.log', compact('log', 'user'));
     }
 }
