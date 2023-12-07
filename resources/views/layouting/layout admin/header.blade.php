@@ -38,8 +38,7 @@
                                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                 </div><!--//dropdown-menu-title-->
                                 <div class="dropdown-menu-content">
-                                    @foreach(auth()->user()->notifications as $notification)
-                                    <div class="item p-3">
+                                    @foreach(auth()->user()->notifications as $notification)                                    <div class="item p-3">
                                         <div class="row gx-2 justify-content-between align-items-center">
                                             <div class="col-auto">
                                                 <img class="profile-image" src="assets/images/profiles/profile-1.png"

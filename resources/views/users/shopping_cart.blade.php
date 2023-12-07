@@ -11,21 +11,6 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-
-                            {{-- <div class="dropdown">
-                                <span style="font">Alamat</span>
-                                <button class="btn btn-outline-primary  dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Pilih Alamat
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach ($alamat as $a)
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div> --}}
                             <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
@@ -40,16 +25,6 @@
                                             @endforeach
                                         @endif
                                     </select>
-
-
-{{-- @if (count($alamat) === 0)
-    <p>No addresses available. Please <a href="/profile">update your profile</a>.</p>
-@endif --}}
-
-
-
-
-
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -165,50 +140,10 @@
                             </table><!-- /table -->
                         </div>
                     </div><!-- /.shopping-cart-table -->
-
-
-
                 </div><!-- /.shopping-cart -->
             </div> <!-- /.row -->
         </div><!-- /.body-content -->
     </div>
-
-
-    {{-- <script>
-        const checkboxes = document.querySelectorAll('.item-checkbox');
-
-        // Get the total price element
-        const totalPriceElement = document.getElementById('total-price');
-
-        // Initialize the total price
-        let totalPrice = 0;
-
-        // Function to format a number as IDR
-        function formatIDR(number) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-            }).format(number);
-        }
-
-        // Update the initial total display
-        totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-
-        // Add event listeners to the checkboxes
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                const price = parseFloat(checkbox.getAttribute('data-price'));
-                if (checkbox.checked) {
-                    totalPrice += price;
-                } else {
-                    totalPrice -= price;
-                }
-                // Update the total price display
-                totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-            });
-        });
-    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

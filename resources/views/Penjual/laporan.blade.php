@@ -4,6 +4,40 @@
 <head>
     <meta charset="utf-8">
     <title>Laporan PDF</title>
+    <style>
+        /* CSS untuk kop surat */
+        .kop-surat {
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .judul-laporan {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-laporan {
+            font-size: 18px;
+        }
+
+        .tanda-tangan {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            text-align: right;
+            width: 40%;
+        }
+
+        .tanda-tangan img {
+            max-width: 100px;
+            margin-top: 10px;
+        }
+    </style>
 
     <!-- Tambahkan link ke Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -15,10 +49,15 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2 class="mt-4">Laporan Penjualan Arctic Food</h2>
-        <p>Bulan :</p>
-        <p>Tahun:</p>
+    <!-- Kop Surat -->
+    <div class="kop-surat">
+        <div class="judul-laporan">Laporan Penjualan Arctic Food</div>
+        <div class="info-laporan">
+            <p>Bulan : [Isi bulan]</p>
+            <p>Tahun: [Isi tahun]</p>
+        </div>
+        <img src="link_ke_logo_anda.png" alt="Logo Perusahaan" width="150">
+    </div>
 
         <table class="table table-bordered mt-4">
             <thead>
@@ -59,6 +98,11 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="tanda-tangan">
+        <div>Nama Penjual</div>
+        <img src="link_ke_tanda_tangan.png" alt="Tanda Tangan Penjual">
     </div>
 </body>
 
