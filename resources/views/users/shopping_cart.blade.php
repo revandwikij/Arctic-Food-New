@@ -18,14 +18,15 @@
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
                                 @else
                                     <span style="font">Alamat</span>
-                                    <select name="Id_Alamat">
-                                        @foreach ($alamat as $a)
-                                            <option value="{{ $a->Id_Alamat }}">
-                                                {{ $a->Label }}
-                                            </option>
-                                        @endforeach
-                                @endif
-                                </select>
+                                    <select name="Id_Alamat" >
+                                            @foreach ($alamat as $a)
+                                                <option value="{{ $a->Id_Alamat }}">
+                                                    {{ $a->Label }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -127,12 +128,22 @@
                                                 </tr>
                                             </tfoot>
                                         </table><!-- /table -->
-                                    </div>
-                        </div><!-- /.shopping-cart-table -->
-                    </div><!-- /.shopping-cart -->
-                </div> <!-- /.row -->
-            </div><!-- /.body-content -->
-        </div>
+                                    </div><!-- /.cart-shopping-total -->
+                                </tbody><!-- /tbody -->
+
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                            <!-- /.shopping-cart-btn -->
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table><!-- /table -->
+                        </div>
+                    </div><!-- /.shopping-cart-table -->
+                </div><!-- /.shopping-cart -->
+            </div> <!-- /.row -->
+        </div><!-- /.body-content -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -12,7 +12,6 @@ use App\Models\kategori;
 use App\Models\Keranjang;
 use App\Models\Notif as ModelsNotif;
 use App\Models\Pesan;
-use App\Models\users;
 use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\Shipping;
@@ -168,8 +167,6 @@ class PesanController extends Controller
 
     public function checkout($Id_Keranjang, Request $request)
     {
-
-        // try{
         if (Auth::id()) {
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
@@ -180,7 +177,8 @@ class PesanController extends Controller
             ->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
-            ->where('keranjang.Status', '=', 'Aktif')->get();
+            ->where('keranjang.Status', '=', 'Aktif')
+            ->get();
 
 
             $totalbeban = 0;
@@ -189,10 +187,6 @@ class PesanController extends Controller
                 $totalbeban += $coba->Sub_Beban;
                 $totalharga += $coba->Sub_Total;
             };
-
-
-
-
             $pesan = new Pesan();
             $pesan->Id_Pesanan = 'ORDR' . date('Ymd') . mt_rand(1000, 9999);
             $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
@@ -230,7 +224,7 @@ class PesanController extends Controller
             // Mengambil data pesanan dan pelanggan yang sesuai
             $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('users', 'pelanggan.email', '=', 'users.email')
-            ->where('users.id', '=', $user->id)
+            // ->where('users.id', '=', $user->id)
             ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
             ->first();
             // dd($notif);// Menggunakan first() untuk mengambil satu objek dari hasil query
@@ -244,19 +238,14 @@ class PesanController extends Controller
             ];
             // dd($informasiPesanan);
 
-            $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)
+            $admin = users::where('level', 'penjual')
             ->first();
             if ($admin) {
                 // Kirim notifikasi dengan data yang telah disiapkan
                 $admin->notify(new PesananMasukNotification($informasiPesanan));
             } //ini ampe notif
+            dd($admin);
 }
-
-
-        //
-
-
-
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
@@ -300,15 +289,6 @@ class PesanController extends Controller
 
             return redirect('/payment');
         }
-        // }
-        //  catch(\Exception $e)
-        // {
-        //     return redirect('/')->withError(['Ada yang salah' => 'Coba lagi']);
-        // }
-    }
-
-
-
 
     public function callback(Request $request)
 

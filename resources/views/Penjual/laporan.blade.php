@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Laporan PDF</title>
+    <title>Laporan Penjualan</title>
 
     <!-- Tambahkan link ke Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,14 +12,64 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+         .kop-surat {
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            width: 100%; /* Lebarkan garis horizontal */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .judul {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            font-size: 16px;
+        }
+
+        /* Gaya untuk logo */
+        .logo {
+            max-width: 100px; /* Sesuaikan ukuran logo */
+            height: auto;
+            float: right; /* Posisikan logo di sebelah kanan */
+        }
+
+        /* Gaya untuk tanda tangan */
+        .tanda-tangan {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="container">
         <h2 class="mt-4">Laporan Penjualan Arctic Food</h2>
         <p>Bulan :</p>
         <p>Tahun :</p>
+=======
+    <div class="container kop-surat">
+        <div class="judul">Laporan Penjualan Arctic Food</div>
+        <div class="info">Alamat: Jl. Contoh No. 123, Kota Contoh</div>
+        <div class="info">Telepon: 123-456-789</div>
+        <div class="info">Periode awal hingga </div>
+        
+        <div>
+            <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
+        </div>
+    </div>
+>>>>>>> 104d1c88d790a5dc13c958336b4f98ce69e548c7
 
+    <div class="container">
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -33,7 +83,7 @@
             <tbody>
                 <tr>
                     <td>Produk</td>
-                    <td colspan="4">:</td>
+                    <td colspan="3">:</td>
                 </tr>
                 @foreach ($penjualan as $data)
                     <tr>
@@ -45,7 +95,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3">Jumlah</td>
+                    <td colspan="2">Jumlah</td>
                     <td>{{ $penjualan->sum('total_terjual') }}</td>
                     <td>
                         @php
@@ -59,6 +109,12 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="tanda-tangan">
+            <p>Tanda tangan</p>
+            <br>
+            <p>penjual</p>
+        </div>
     </div>
 </body>
 
