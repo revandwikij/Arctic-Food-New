@@ -11,7 +11,8 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-                            <form action="/beli/{{ $cekcart }}" method="post">
+
+                            <form action="/beli/{{ $cekcart->Id_Keranjang }}" method="post">
                                 @csrf
                                 @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
@@ -79,6 +80,7 @@
                                                     @endphp
                                                 </span>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
@@ -132,44 +134,6 @@
             </div><!-- /.body-content -->
         </div>
     </div>
-
-
-
-    {{-- <script>
-        const checkboxes = document.querySelectorAll('.item-checkbox');
-
-        // Get the total price element
-        const totalPriceElement = document.getElementById('total-price');
-
-        // Initialize the total price
-        let totalPrice = 0;
-
-        // Function to format a number as IDR
-        function formatIDR(number) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-            }).format(number);
-        }
-
-        // Update the initial total display
-        totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-
-        // Add event listeners to the checkboxes
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                const price = parseFloat(checkbox.getAttribute('data-price'));
-                if (checkbox.checked) {
-                    totalPrice += price;
-                } else {
-                    totalPrice -= price;
-                }
-                // Update the total price display
-                totalPriceElement.innerText = formatIDR(totalPrice); // Format as IDR
-            });
-        });
-    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

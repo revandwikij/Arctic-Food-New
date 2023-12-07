@@ -169,7 +169,7 @@ class PesanController extends Controller
     public function checkout($Id_Keranjang, Request $request)
     {
 
-        try{
+        // try{
         if (Auth::id()) {
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
@@ -216,8 +216,7 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
                     ->get();
 
-            $buatkoman = $pesan->Id_Pesanan;
-            Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+              
 
             foreach ($ambil as $detail)
             {
@@ -254,6 +253,10 @@ class PesanController extends Controller
 }
 
 
+        //
+
+
+
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
@@ -288,7 +291,7 @@ class PesanController extends Controller
             $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
             $bayar->Status_Pembayaran = 'Belum Lunas';
             $bayar->Tgl_Pembayaran = now();
-            $bayar->waktu_kadaluarsa = now()->addHour(3);
+            $bayar->waktu_kadaluarsa = now()->addMinutes(3);
             $bayar->save();
 
             // $notif = "Ada yg memesan";
@@ -297,11 +300,11 @@ class PesanController extends Controller
 
             return redirect('/payment');
         }
-        }
-         catch(\Exception $e)
-        {
-            return back()->withError(['Ada yang salah' => 'Coba lagi']);
-        }
+        // }
+        //  catch(\Exception $e)
+        // {
+        //     return redirect('/')->withError(['Ada yang salah' => 'Coba lagi']);
+        // }
     }
 
 

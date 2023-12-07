@@ -17,12 +17,16 @@ use Illuminate\Support\Facades\Mail;
 
 class PDFController extends Controller
 {
-    public function generatePDF()
+    public function generatePDF(Request $request)
     {
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
         $penjualan = DB::table('v_laporan_barang')->get();
 
         $data = [
             'penjualan' => $penjualan,
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
         ];
 
         $pdf = App::make('dompdf.wrapper');
@@ -31,8 +35,10 @@ class PDFController extends Controller
         return $pdf->download('Penjual.laporan.pdf');
     }
 
-    public function streamPDF()
+    public function streamPDF(Request $request)
     {
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
         $penjualan = DB::table('v_laporan_barang')->get();
         $barang = DB::table('v_laporan_barang')
             ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
@@ -42,10 +48,12 @@ class PDFController extends Controller
         $data = [
             'penjualan' => $penjualan,
             'barang' => $barang,
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
         ];
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Penjual.laporan', $data, );
+        $pdf->loadView('Penjual.laporan', $data);
 
         return $pdf->stream('Penjual.laporan');
     }

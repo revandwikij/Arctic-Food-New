@@ -18,7 +18,7 @@
     <div class="container">
         <h2 class="mt-4">Laporan Penjualan Arctic Food</h2>
         <p>Bulan :</p>
-        <p>Tahun:</p>
+        <p>Tahun :</p>
 
         <table class="table table-bordered mt-4">
             <thead>
