@@ -130,7 +130,7 @@ class ViewController extends Controller
 
     return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
     'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
-}
+    }
 
     public function login()
     {
@@ -152,6 +152,8 @@ class ViewController extends Controller
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
             ->get(['barang.*', 'detail_keranjang.*', 'pelanggan.*']);
+
+
 
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
@@ -289,6 +291,7 @@ class ViewController extends Controller
 
         return view('shop', compact('barang', 'kategoris'));
     }
+
 
 
 

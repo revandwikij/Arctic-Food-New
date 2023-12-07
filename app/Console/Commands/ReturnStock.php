@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 use App\Models\Barang;
 use App\Models\DetailKeranjang;
+use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 
 class ReturnStock extends Command
 {
@@ -28,23 +30,36 @@ class ReturnStock extends Command
      */
     public function handle()
     {
+
+
+        if (Auth::id()) {
+        $user = auth()->user();
+
         Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->where('pembayaran.Status_Pembayaran', '=', 'Kadaluarsa')
         ->update(['pesanan.Status_Pesanan' => 'Dibatalkan']);
 
+        $pel = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')->where('users.id', '=', $user->id)->first();
+
+
+
         $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
         ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
         ->where('pesanan.Status_Pesanan', '=', 'Dibatalkan')
-        ->get();
+        ->where('pesanan.Id_Pelanggan', '=', $pel->Id_Pelanggan)
+        ->latest('pesanan.created_at')->first();
 
         foreach ($ambil as $detail)
         {
             $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
             if ($barang) {
-                $barang->Stok += $detail->Kuantitas;
+                $barang->Stok + $detail->Kuantitas;
                 $barang->save();
             }
         }
     }
 }
+
+}
+

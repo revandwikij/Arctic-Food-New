@@ -58,7 +58,7 @@
                                         </div><!--//row-->
                                         <a class="link-mask" href="notifications.html"></a>
                                     </div><!--//item-->
-                                    @endforeach 
+                                    @endforeach
                                 </div><!--//dropdown-menu-content-->
 
                                 <div class="dropdown-menu-footer p-2 text-center">
