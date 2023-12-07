@@ -114,13 +114,15 @@ class ViewController extends Controller
                 ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
 
+               
+
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
             ->select('keranjang.Id_Keranjang')
             ->first();
-        
+
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
 
         $idpel = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
