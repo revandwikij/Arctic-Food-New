@@ -34,7 +34,7 @@ class LoginController extends Controller
                 activity_log::create([
                     'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
                     'email' => auth()->user()->email,
-                    'kegiatan' => "user " . auth()->user()->username . " telah melakukan login",
+                    'kegiatan' => "User " . auth()->user()->username . " telah melakukan login",
                     'created_at' => now()
                 ]);
                 return redirect()->intended('/');
@@ -111,6 +111,13 @@ class LoginController extends Controller
 
             $user->password = Hash::make($request->new_password);
             $user->save();
+
+            activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "User " . auth()->user()->username . " mengubah password nya yg asalnya " . $request->old_password . " jadi " . $request->new_password ,
+                'created_at' => now()
+            ]);
 
             return redirect('/profile')->with('success', 'Password berhasil diperbarui.');
         } else {
@@ -215,15 +222,13 @@ class LoginController extends Controller
 
     public function registeradmin(Request $request)
     {
-        // $request->validate([
-        //     'username' => 'required',
-        //     'password' => 'required',
-        //     'email' => 'required|email',
-        //     'no_Telp' => 'required|numeric',
-        //     'alamat' => 'required',
-        // ]);
-
-         
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'no_Telp' => 'required|numeric',
+            'alamat' => 'required',
+        ]);
 
         $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'A000';
         $nextNumber = (int) substr($lastUid, 1) + 1;

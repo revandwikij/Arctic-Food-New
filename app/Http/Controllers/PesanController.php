@@ -18,7 +18,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use Midtrans\Config;
 use Midtrans\Transaction;
- 
+
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -146,6 +146,13 @@ class PesanController extends Controller
             $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
             $coba->save();
 
+            activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "User " . auth()->user()->username . " telah memasukkan barang " . $Barang->Nama_Barang . " ke keranjang",
+                'created_at' => now()
+            ]);
+
                 return redirect('/cart');
             }
         }
@@ -197,6 +204,13 @@ class PesanController extends Controller
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
 
+            activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "Pengguna " . auth()->user()->username . " telah membuat pesanan dengan ID " . $pesan->Id_Pesanan,
+                'created_at' => now()
+            ]);
+
             $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
@@ -205,7 +219,7 @@ class PesanController extends Controller
             $buatkoman = $pesan->Id_Pesanan;
             Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
 
-            foreach ($ambil as $detail) 
+            foreach ($ambil as $detail)
             {
                 $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                 if ($barang) {
@@ -219,7 +233,7 @@ class PesanController extends Controller
             ->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
             ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
-            ->first(); 
+            ->first();
             // dd($notif);// Menggunakan first() untuk mengambil satu objek dari hasil query
 
             if ($notif) {
@@ -230,7 +244,7 @@ class PesanController extends Controller
                 // Informasi lain yang ingin disertakan dalam notifikasi
             ];
             // dd($informasiPesanan);
-            
+
             $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)
             ->first();
             if ($admin) {
