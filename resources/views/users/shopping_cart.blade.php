@@ -11,7 +11,6 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-
             <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
@@ -24,8 +23,9 @@
                                                     {{ $a->Label }}
                                                 </option>
                                             @endforeach
-                                    @endif
-                            </select>
+                                        @endif
+                                    </select>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -135,9 +135,6 @@
                             </table><!-- /table -->
                         </div>
                     </div><!-- /.shopping-cart-table -->
-
-
-
                 </div><!-- /.shopping-cart -->
             </div> <!-- /.row -->
         </div><!-- /.body-content -->

@@ -14,6 +14,7 @@ use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\PenjualanView;
 use App\Models\BarangPerAkunView;
+use App\Models\Notif;
 use App\Models\Penjual;
 use App\Models\Pesan;
 use App\Models\UlasanModel;
@@ -24,7 +25,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-
+use App\Notifications\PesananMasukNotification;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
@@ -89,8 +91,51 @@ class ViewController extends Controller
 
     $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
 
+        // Kirim notifikasi jika ada pesanan baru untuk admin
+        $user = auth()->user();
+
+        //data tampilan
+        // $notifications = Notif::where('type', 'App\Notifications\PesananMasukNotification')
+        // ->get();
+
+        // dd($notifications);
+
+
+         // Mengambil data pesanan dan pelanggan yang sesuai
+         $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+         ->join('users', 'pelanggan.email', '=', 'users.email')
+        //  ->where('users.id', '=', $user->id)
+         ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
+         ->first();
+
+         if ($notif) {
+             $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)->first();
+
+             if ($admin) {
+                 // Kirim notifikasi dengan data yang telah disiapkan
+                 $informasiPesanan = [
+                     'id_pesanan' => $notif->Id_Pesanan,
+                     'status_pesanan' => $notif->Status_Pesanan,
+                     'nama_pelanggan' => $notif->username,
+                     // Informasi lain yang ingin disertakan dalam notifikasi
+                    ];
+
+                    // dd($informasiPesanan);// Menggunakan first() untuk mengambil satu objek dari hasil query
+                $admin->notify(new PesananMasukNotification($informasiPesanan));
+            }
+        }
+
+        // dd($admin->notifications);
+
     return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
-    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));}
+    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
+
+
+    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
+    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
+
+}
+
 
 
     public function login()
@@ -114,7 +159,7 @@ class ViewController extends Controller
                 ->latest('keranjang.created_at')
                 ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
 
-               
+
 
         $cekcart = Keranjang::join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
@@ -140,6 +185,7 @@ class ViewController extends Controller
             $ker->Id_Keranjang = $newUid;
             $ker->Id_Pelanggan = $idpel->Id_Pelanggan;
             $ker->Status = "Aktif";
+            // dd($ker);
             $ker->save();
         }
 
@@ -252,6 +298,7 @@ class ViewController extends Controller
 
         return view('shop', compact('barang', 'kategoris'));
     }
+
 
 
 

@@ -17,6 +17,7 @@ class PesananMasukNotification extends Notification
     public function __construct($informasiPesanan)
     {
         $this->informasiPesanan = $informasiPesanan;
+        // dd($informasiPesanan);
     }
 
     /**
