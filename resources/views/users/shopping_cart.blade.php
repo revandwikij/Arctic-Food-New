@@ -11,23 +11,7 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-                            <form action="/beli/{{$cekcart}}" method="post">
-                            {{-- <div class="dropdown">
-                                <span style="font">Alamat</span>
-                                <button class="btn btn-outline-primary  dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Pilih Alamat
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach ($alamat as $a)
-                                        <li>
-                                            <a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div> --}}
-                            <form action="/beli/{{$cekcart}}" method="post">
-
+            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
                                     @csrf
                                     @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
@@ -95,12 +79,7 @@
                                                         $total += $data['Kuantitas'] * $data['Harga'];
                                                     @endphp
                                                 </span></td>
-                                            {{-- <td>
-                                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value=""
-                                                    data-price="{{ $data->Sub_Total }} ">
-                                            </td>
-                                                <input type="hidden" name="selected_items[]"
-                                                    value="{{ $data->Id_Detail_Keranjang }}"> --}}
+
                                         </tr>
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
@@ -127,18 +106,18 @@
                                                 <tr>
                                                     <td>
                                                         @if (count($alamat) === 0)
-                                                        
+
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit" disabled>Bayar</button>
-                                                         
+
                                                         @else
 
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit">Bayar</button>
-                                                         
+
 
                                                         @endif
-                                                    </form>
+            </form>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->

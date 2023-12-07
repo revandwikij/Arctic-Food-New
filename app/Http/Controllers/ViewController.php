@@ -87,7 +87,7 @@ class ViewController extends Controller
         ->GroupBy(DB::raw("MONTHNAME(created_at)"))
         ->OrderBy(DB::raw("MONTH(created_at)"))
         ->pluck('bulan');
-        
+
 
     $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
 
@@ -131,6 +131,10 @@ class ViewController extends Controller
     'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
 }
 
+    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
+    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));}
+
+
 
     public function login()
     {
@@ -158,13 +162,14 @@ class ViewController extends Controller
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
             ->select('keranjang.Id_Keranjang')
-            ->get();
+            ->first();
+        
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
 
         $idpel = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
         ->where('users.id', '=', $user->id)->first();
 
-         
+
 
         if(empty($cekcart))
         {
@@ -339,12 +344,12 @@ class ViewController extends Controller
         $waktu = Carbon::now();
         $user = auth()->user();
         $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->first();
-        
+
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
         ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
         // dd($datapesan);
-        
+
         $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
         ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
 

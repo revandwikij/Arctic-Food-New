@@ -17,7 +17,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use Midtrans\Config;
 use Midtrans\Transaction;
- 
+
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -196,10 +196,9 @@ class PesanController extends Controller
                     ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
                     ->get();
 
-            // $buatkoman = $pesan->Id_Pesanan;
-            // Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+              
 
-            foreach ($ambil as $detail) 
+            foreach ($ambil as $detail)
             {
                 $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                 if ($barang) {
@@ -213,7 +212,7 @@ class PesanController extends Controller
             ->join('users', 'pelanggan.email', '=', 'users.email')
             // ->where('users.id', '=', $user->id)
             ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
-            ->first(); 
+            ->first();
             // dd($notif);// Menggunakan first() untuk mengambil satu objek dari hasil query
 
             if ($notif) {
@@ -224,7 +223,7 @@ class PesanController extends Controller
                 // Informasi lain yang ingin disertakan dalam notifikasi
             ];
             // dd($informasiPesanan);
-            
+
             $admin = users::where('level', 'penjual')
             ->first();
             if ($admin) {
@@ -233,6 +232,7 @@ class PesanController extends Controller
             } //ini ampe notif
             dd($admin);
 }
+
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
             $newUid1 = 'S' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
@@ -266,7 +266,7 @@ class PesanController extends Controller
             $bayar->Total_Harga = $order->Total_Shipping + $order->Total;
             $bayar->Status_Pembayaran = 'Belum Lunas';
             $bayar->Tgl_Pembayaran = now();
-            $bayar->waktu_kadaluarsa = now()->addHour(3);
+            $bayar->waktu_kadaluarsa = now()->addMinutes(3);
             $bayar->save();
 
             // $notif = "Ada yg memesan";
@@ -274,7 +274,6 @@ class PesanController extends Controller
             // Notification::send($user, new Notif($notif));
 
             return redirect('/payment');
-        }
         }
 
     public function callback(Request $request)
