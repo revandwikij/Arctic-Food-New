@@ -11,7 +11,23 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-                            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
+                            <form action="/beli/{{$cekcart}}" method="post">
+                            {{-- <div class="dropdown">
+                                <span style="font">Alamat</span>
+                                <button class="btn btn-outline-primary  dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                    Pilih Alamat
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach ($alamat as $a)
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="selectLabel('{{$a->Label}}')">{{ $a->Label }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div> --}}
+                            <form action="/beli/{{$cekcart}}" method="post">
+
                                     @csrf
                                     @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
@@ -25,6 +41,7 @@
                                             @endforeach
                                         @endif
                                     </select>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -113,16 +130,15 @@
                                                         
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit" disabled>Bayar</button>
-                                                        </form>
-
+                                                         
                                                         @else
 
                                                         <button class="btn btn-upper btn-primary outer-left-xs"
                                                             type="submit">Bayar</button>
-                                                        </form>
+                                                         
 
                                                         @endif
-
+                                                    </form>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->

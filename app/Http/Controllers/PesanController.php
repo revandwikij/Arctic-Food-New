@@ -17,7 +17,7 @@ use App\Models\Pembayaran;
 use App\Models\Shipping;
 use Midtrans\Config;
 use Midtrans\Transaction;
-use App\Models\users;
+ 
 use App\Notifications\Notif;
 use App\Notifications\PesananMasukNotification;
 // use App\Notifications\Notif;
@@ -25,6 +25,7 @@ use illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Artisan;
 // use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification;
 
@@ -159,8 +160,6 @@ class PesanController extends Controller
 
     public function checkout($Id_Keranjang, Request $request)
     {
-
-        try{
         if (Auth::id()) {
             $user = auth()->user();
             $keranjang = Keranjang::where('Id_Keranjang', $Id_Keranjang)->first();
@@ -171,7 +170,8 @@ class PesanController extends Controller
             ->join('pelanggan', 'keranjang.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('users', 'pelanggan.email', '=', 'users.email')
             ->where('users.id', '=', $user->id)
-            ->where('keranjang.Status', '=', 'Aktif')->get();
+            ->where('keranjang.Status', '=', 'Aktif')
+            ->get();
 
 
             $totalbeban = 0;
@@ -180,10 +180,6 @@ class PesanController extends Controller
                 $totalbeban += $coba->Sub_Beban;
                 $totalharga += $coba->Sub_Total;
             };
-
-
-
-
             $pesan = new Pesan();
             $pesan->Id_Pesanan = 'ORDR' . date('Ymd') . mt_rand(1000, 9999);
             $pesan->Id_Keranjang = $keranjang->Id_Keranjang;
@@ -194,6 +190,23 @@ class PesanController extends Controller
             $pesan->Tgl_Pesanan = now();
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
+
+            $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+                    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)
+                    ->get();
+
+            // $buatkoman = $pesan->Id_Pesanan;
+            // Artisan::call('app:return-stock', ['buatkoman' => $buatkoman]);
+
+            foreach ($ambil as $detail) 
+            {
+                $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                if ($barang) {
+                    $barang->Stok -= $detail->Kuantitas;
+                    $barang->save();
+                }
+            }
 
             // Mengambil data pesanan dan pelanggan yang sesuai
             $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
@@ -220,9 +233,6 @@ class PesanController extends Controller
             } //ini ampe notif
             dd($admin);
 }
-
-
-
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
             $newUid1 = 'S' . str_pad($nextNumber1, 3, '0', STR_PAD_LEFT);
@@ -266,14 +276,6 @@ class PesanController extends Controller
             return redirect('/payment');
         }
         }
-         catch(\Exception $e)
-        {
-            return back()->withError(['Ada yang salah' => 'Coba lagi']);
-        }
-    }
-
-
-
 
     public function callback(Request $request)
 
@@ -319,6 +321,8 @@ class PesanController extends Controller
                 foreach ($detailPesanan as $detail) {
                     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
                     if ($barang) {
+                        $barang->Stok += $detail->Kuantitas;
+                        $barang->save();
                         $barang->Stok -= $detail->Kuantitas;
                         $barang->save();
                     }
@@ -454,4 +458,29 @@ class PesanController extends Controller
              return redirect('/cart');
         }
     }
+
+    public function notify(Request $request)
+    {
+        if ($request->transaction_status === 'capture') {
+            // Tambahkan logika yang diperlukan setelah transaksi berhasil dicapture
+
+            // Mengirim notifikasi ke admin
+            $admin = users::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
+            $admin->notify(new PesananMasukNotification($pesan));
+    }
+
+        // Misalkan ada kolom 'level' yang menandakan admin pada tabel users
+        if (auth()->user() && auth()->user()->level === 'admin') {
+        // Ambil informasi pesanan yang masuk, misalnya dari $request
+        $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
+        // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
+        $admin = users::where('level', 'admin')->first();
+        // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
+
+        // Kirim notifikasi ke admin yang sesuai
+        if ($admin) {
+            $admin->notify(new PesananMasukNotification($informasiPesanan));
+        }
+    }
+}
 }

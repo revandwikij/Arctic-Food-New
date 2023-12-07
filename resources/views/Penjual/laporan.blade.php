@@ -3,41 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Laporan PDF</title>
-    <style>
-        /* CSS untuk kop surat */
-        .kop-surat {
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .judul-laporan {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .info-laporan {
-            font-size: 18px;
-        }
-
-        .tanda-tangan {
-            position: absolute;
-            bottom: 50px;
-            right: 50px;
-            border-top: 1px solid #333;
-            padding-top: 10px;
-            text-align: right;
-            width: 40%;
-        }
-
-        .tanda-tangan img {
-            max-width: 100px;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Laporan Penjualan</title>
 
     <!-- Tambahkan link ke Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -46,19 +12,57 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+         .kop-surat {
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            width: 100%; /* Lebarkan garis horizontal */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .judul {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            font-size: 16px;
+        }
+
+        /* Gaya untuk logo */
+        .logo {
+            max-width: 100px; /* Sesuaikan ukuran logo */
+            height: auto;
+            float: right; /* Posisikan logo di sebelah kanan */
+        }
+
+        /* Gaya untuk tanda tangan */
+        .tanda-tangan {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Kop Surat -->
-    <div class="kop-surat">
-        <div class="judul-laporan">Laporan Penjualan Arctic Food</div>
-        <div class="info-laporan">
-            <p>Bulan : [Isi bulan]</p>
-            <p>Tahun: [Isi tahun]</p>
+    <div class="container kop-surat">
+        <div class="judul">Laporan Penjualan Arctic Food</div>
+        <div class="info">Alamat: Jl. Contoh No. 123, Kota Contoh</div>
+        <div class="info">Telepon: 123-456-789</div>
+        <div class="info">Periode awal hingga </div>
+        
+        <div>
+            <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
         </div>
-        <img src="link_ke_logo_anda.png" alt="Logo Perusahaan" width="150">
     </div>
 
+    <div class="container">
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -72,7 +76,7 @@
             <tbody>
                 <tr>
                     <td>Produk</td>
-                    <td colspan="4">:</td>
+                    <td colspan="3">:</td>
                 </tr>
                 @foreach ($penjualan as $data)
                     <tr>
@@ -84,7 +88,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3">Jumlah</td>
+                    <td colspan="2">Jumlah</td>
                     <td>{{ $penjualan->sum('total_terjual') }}</td>
                     <td>
                         @php
@@ -98,11 +102,12 @@
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <div class="tanda-tangan">
-        <div>Nama Penjual</div>
-        <img src="link_ke_tanda_tangan.png" alt="Tanda Tangan Penjual">
+        <div class="tanda-tangan">
+            <p>Tanda tangan</p>
+            <br>
+            <p>penjual</p>
+        </div>
     </div>
 </body>
 

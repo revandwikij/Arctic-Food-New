@@ -157,8 +157,14 @@ class ViewController extends Controller
             ->where('users.id', '=', $user->id)
             ->where('keranjang.Status', '=', 'Aktif')
             ->latest('keranjang.created_at')
-            ->first();
+            ->select('keranjang.Id_Keranjang')
+            ->get();
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
+
+        $idpel = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
+        ->where('users.id', '=', $user->id)->first();
+
+         
 
         if(empty($cekcart))
         {
@@ -168,11 +174,12 @@ class ViewController extends Controller
 
             $ker = new Keranjang;
             $ker->Id_Keranjang = $newUid;
-            $ker->Id_Pelanggan = $test->Id_Pelanggan;
+            $ker->Id_Pelanggan = $idpel->Id_Pelanggan;
             $ker->Status = "Aktif";
+            // dd($ker);
             $ker->save();
         }
-
+        
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
     }
     public function profil()
