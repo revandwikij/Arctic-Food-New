@@ -56,7 +56,7 @@
         <div class="info">Alamat: Jl. Contoh No. 123, Kota Contoh</div>
         <div class="info">Telepon: 123-456-789</div>
         <div class="info">Periode awal hingga </div>
-        
+
         <div>
             <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
         </div>
@@ -74,15 +74,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Produk</td>
-                    <td colspan="3">:</td>
-                </tr>
+
                 @foreach ($penjualan as $data)
                     <tr>
                         {{-- <td>{{ $data->tanggal }}</td> --}}
                         <td>{{ $data->produk }}</td>
-                        <td>Rp. {{ number_format($data->Harga_Barang) }}</td>
+                        <td>Rp. {{ number_format($data->Harga) }}</td>
                         <td>{{ $data->total_terjual }}</td>
                         <td>Rp. {{ number_format($data->total_terjual * $data->Harga) }}</td>
                     </tr>

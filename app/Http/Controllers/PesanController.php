@@ -146,6 +146,13 @@ class PesanController extends Controller
             $coba->Sub_Beban = $Barang->Berat * $request->jumlah_pesan;
             $coba->save();
 
+            activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "User " . auth()->user()->username . " telah memasukkan barang " . $Barang->Nama_Barang . " ke keranjang",
+                'created_at' => now()
+            ]);
+
                 return redirect('/cart');
             }
         }
@@ -191,6 +198,13 @@ class PesanController extends Controller
             $pesan->Tgl_Pesanan = now();
             $pesan->Status_Pesanan = 'Menunggu Konfirmasi';
             $pesan->save();
+
+            activity_log::create([
+                'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                'email' => auth()->user()->email,
+                'kegiatan' => "Pengguna " . auth()->user()->username . " telah membuat pesanan dengan ID " . $pesan->Id_Pesanan,
+                'created_at' => now()
+            ]);
 
             $ambil = DetailKeranjang::join('keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
                     ->join('pesanan', 'pesanan.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
@@ -460,28 +474,28 @@ class PesanController extends Controller
         }
     }
 
-    public function notify(Request $request)
-    {
-        if ($request->transaction_status === 'capture') {
-            // Tambahkan logika yang diperlukan setelah transaksi berhasil dicapture
+//     public function notify(Request $request)
+//     {
+//         if ($request->transaction_status === 'capture') {
+//             // Tambahkan logika yang diperlukan setelah transaksi berhasil dicapture
 
-            // Mengirim notifikasi ke admin
-            $admin = users::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
-            $admin->notify(new PesananMasukNotification($pesan));
-    }
+//             // Mengirim notifikasi ke admin
+//             $admin = users::where('role', 'admin')->first(); // Ganti ini sesuai dengan logika pengambilan admin
+//             $admin->notify(new PesananMasukNotification($pesan));
+//     }
 
-        // Misalkan ada kolom 'level' yang menandakan admin pada tabel users
-        if (auth()->user() && auth()->user()->level === 'admin') {
-        // Ambil informasi pesanan yang masuk, misalnya dari $request
-        $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
-        // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
-        $admin = users::where('level', 'admin')->first();
-        // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
+//         // Misalkan ada kolom 'level' yang menandakan admin pada tabel users
+//         if (auth()->user() && auth()->user()->level === 'admin') {
+//         // Ambil informasi pesanan yang masuk, misalnya dari $request
+//         $informasiPesanan = $request->all(); // Contoh sederhana, sesuaikan dengan struktur data pesanan Anda
+//         // Cari admin atau penjual yang sesuai berdasarkan informasi pesanan yang masuk
+//         $admin = users::where('level', 'admin')->first();
+//         // Atau jika ada relasi antara pesanan dengan admin atau penjual, Anda bisa mengambilnya dari relasi tersebut
 
-        // Kirim notifikasi ke admin yang sesuai
-        if ($admin) {
-            $admin->notify(new PesananMasukNotification($informasiPesanan));
-        }
-    }
-}
+//         // Kirim notifikasi ke admin yang sesuai
+//         if ($admin) {
+//             $admin->notify(new PesananMasukNotification($informasiPesanan));
+//         }
+//     }
+// }
 }

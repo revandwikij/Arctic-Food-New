@@ -14,6 +14,7 @@ use App\Models\pelanggan;
 use App\Models\Pembayaran;
 use App\Models\PenjualanView;
 use App\Models\BarangPerAkunView;
+use App\Models\log;
 use App\Models\Notif;
 use App\Models\Penjual;
 use App\Models\Pesan;
@@ -33,7 +34,7 @@ class ViewController extends Controller
     public function home()
     {
         $pelanggan = pelanggan::all();
-        $barang = Barang::where('Stok', '>', 0 )->paginate(12);
+        $barang = Barang::where('Stok', '>', 0)->paginate(12);
         $kategoris = kategori::all();
         $produkterlaris = DB::table('barang')
             ->join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
@@ -53,43 +54,43 @@ class ViewController extends Controller
     }
 
     public function admin()
-{
-     // Grafik barang terlaku dan tidak laku
-   $barangTerlaku = DetailKeranjang::join('barang', 'detail_keranjang.Id_Barang', '=', 'barang.Id_Barang')
-   ->select(DB::raw("SUM(detail_keranjang.Kuantitas) as terlaku"), 'barang.Nama_Barang')
-   ->groupBy('barang.Nama_Barang')
-   ->orderByDesc('terlaku')
-   ->limit(5) // Ambil 5 barang terlaku
-   ->get();
+    {
+        // Grafik barang terlaku dan tidak laku
+        $barangTerlaku = DetailKeranjang::join('barang', 'detail_keranjang.Id_Barang', '=', 'barang.Id_Barang')
+            ->select(DB::raw("SUM(detail_keranjang.Kuantitas) as terlaku"), 'barang.Nama_Barang')
+            ->groupBy('barang.Nama_Barang')
+            ->orderByDesc('terlaku')
+            ->limit(5) // Ambil 5 barang terlaku
+            ->get();
 
-   //sisa stok deng
-    $barangTidakLaku = Barang::select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
-    ->leftJoin('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-    ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
-    ->havingRaw('COUNT(detail_keranjang.Id_Barang) < 5 OR COUNT(detail_keranjang.Id_Barang) IS NULL')
-    ->limit(5)
-    ->get();
+        //sisa stok deng
+        $barangTidakLaku = Barang::select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
+            ->leftJoin('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+            ->groupBy('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
+            ->havingRaw('COUNT(detail_keranjang.Id_Barang) < 5 OR COUNT(detail_keranjang.Id_Barang) IS NULL')
+            ->limit(5)
+            ->get();
 
-    // dd($barangTidakLaku);
+        // dd($barangTidakLaku);
 
-    $pelanggan = pelanggan::count();
-    $test = pelanggan::join('alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
-        ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
-    $barang = Barang::count();
-    $kategoris = kategori::all();
+        $pelanggan = pelanggan::count();
+        $test = pelanggan::join('alamat', 'pelanggan.Id_Pelanggan', '=', 'Alamat.Id_Pelanggan')
+            ->get(['pelanggan.*', 'Alamat.Alamat_Lengkap']);
+        $barang = Barang::count();
+        $kategoris = kategori::all();
 
-    $Total_Harga = Pembayaran::select(DB::raw("CAST(SUM(Total_Harga) as int) as Total_Harga"))
-        ->GroupBy(DB::raw("Month(created_at)"))
-        ->OrderBy(DB::raw("MONTH(created_at)"))
-        ->pluck('Total_Harga');
+        $Total_Harga = Pembayaran::select(DB::raw("CAST(SUM(Total_Harga) as int) as Total_Harga"))
+            ->GroupBy(DB::raw("Month(created_at)"))
+            ->OrderBy(DB::raw("MONTH(created_at)"))
+            ->pluck('Total_Harga');
 
-    $bulan = Pembayaran::select(DB::raw("MONTHNAME(created_at) as bulan"))
-        ->GroupBy(DB::raw("MONTHNAME(created_at)"))
-        ->OrderBy(DB::raw("MONTH(created_at)"))
-        ->pluck('bulan');
+        $bulan = Pembayaran::select(DB::raw("MONTHNAME(created_at) as bulan"))
+            ->GroupBy(DB::raw("MONTHNAME(created_at)"))
+            ->OrderBy(DB::raw("MONTH(created_at)"))
+            ->pluck('bulan');
 
 
-    $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
+        $totalTransaksiBulanIni = Pembayaran::whereMonth('created_at', now()->month)->sum('Total_Harga');
 
         // Kirim notifikasi jika ada pesanan baru untuk admin
         $user = auth()->user();
@@ -129,14 +130,7 @@ class ViewController extends Controller
 
     return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
     'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
-
-
-    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
-    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
-
-}
-
-
+    }
 
     public function login()
     {
@@ -151,13 +145,13 @@ class ViewController extends Controller
         $user = auth()->user();
         // $test = DB::select('CALL Total_Keranjang(?)', [$user->id]);
         $test = DetailKeranjang::join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-                ->join('keranjang', 'keranjang.Id_Keranjang', '=' ,'detail_keranjang.Id_Keranjang')
-                ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=' ,'keranjang.Id_Pelanggan')
-                ->join('users', 'pelanggan.email', '=', 'users.email')
-                ->where('users.id', '=', $user->id)
-                ->where('keranjang.Status', '=', 'Aktif')
-                ->latest('keranjang.created_at')
-                ->get(['barang.*', 'detail_keranjang.*','pelanggan.*']);
+            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+            ->join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'keranjang.Id_Pelanggan')
+            ->join('users', 'pelanggan.email', '=', 'users.email')
+            ->where('users.id', '=', $user->id)
+            ->where('keranjang.Status', '=', 'Aktif')
+            ->latest('keranjang.created_at')
+            ->get(['barang.*', 'detail_keranjang.*', 'pelanggan.*']);
 
 
 
@@ -171,12 +165,11 @@ class ViewController extends Controller
         $alamat = Alamat::join('pelanggan', 'alamat.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
 
         $idpel = pelanggan::join('users', 'users.email', '=', 'pelanggan.email')
-        ->where('users.id', '=', $user->id)->first();
+            ->where('users.id', '=', $user->id)->first();
 
 
 
-        if(empty($cekcart))
-        {
+        if (empty($cekcart)) {
             $lastUid = Keranjang::orderBy('id', 'desc')->first()->Id_Keranjang ?? 'K000';
             $nextNumber = (int) substr($lastUid, 1) + 1;
             $newUid = 'K' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
@@ -227,10 +220,10 @@ class ViewController extends Controller
     public function barang()
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-        ->sortable()
-        ->paginate(3);
-            // ->orderBy('Id_Barang', 'desc')
-            // ->get(['barang.*', 'kategori.Kategori']);
+            ->sortable()
+            ->paginate(3);
+        // ->orderBy('Id_Barang', 'desc')
+        // ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
         return view('penjual.barang', compact('kategori', 'test'), ['test' => $test]);
     }
@@ -279,7 +272,7 @@ class ViewController extends Controller
 
         $cari = $request->input('cari');
 
-        $barang = Barang::where('Nama_Barang', 'LIKE', '%'. $cari. '%')->paginate(12);
+        $barang = Barang::where('Nama_Barang', 'LIKE', '%' . $cari . '%')->paginate(12);
         $kategoris = kategori::all();
 
         // Kirim data barang ke view
@@ -351,12 +344,12 @@ class ViewController extends Controller
         $pesan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')->join('users', 'pelanggan.email', '=', 'users.email')->where('users.id', '=', $user->id)->latest('pesanan.created_at')->first();
 
         $datapesan = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
-        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
+            ->join('pembayaran', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
         // dd($datapesan);
 
         $datapesan1 = Pesan::join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
+            ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->first();
 
         $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
             ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
@@ -396,7 +389,8 @@ class ViewController extends Controller
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
             ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
             ->where('pesanan.Status_Pesanan', '=', 'Menunggu Konfirmasi')
-            ->where('pembayaran.Status_Pembayaran', '=', 'Lunas', '&&', 'Belum Lunas')
+            ->where('pembayaran.Status_Pembayaran', '=', 'Lunas',)
+            ->orwhere('pembayaran.Status_Pembayaran', '=', 'Belum Lunas',)
             ->latest('pesanan.created_at')->paginate(10);
         return view('penjual.pesanan', compact('pesanan'));
     }
@@ -429,34 +423,34 @@ class ViewController extends Controller
     }
 
     public function riwayat()
-{
-    $user = auth()->user();
-    $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-        ->join('users', 'users.email', '=', 'pelanggan.email')
-        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
-        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
-        ->where('users.id', '=', $user->id)
-        ->orderby('pesanan.created_at', 'desc')
-        ->paginate(6);
+    {
+        $user = auth()->user();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('users', 'users.email', '=', 'pelanggan.email')
+            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+            ->where('users.id', '=', $user->id)
+            ->orderby('pesanan.created_at', 'desc')
+            ->paginate(6);
 
-    return view('riwayat', compact('pesanan'));
-}
+        return view('riwayat', compact('pesanan'));
+    }
 
-public function filriwayat(Request $request)
-{
-    $user = auth()->user();
-    $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-        ->join('users', 'users.email', '=', 'pelanggan.email')
-        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
-        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
-        ->where('users.id', '=', $user->id)
-        ->where('pesanan.Status_Pesanan', '=', $request->status)
-        ->paginate(6);
+    public function filriwayat(Request $request)
+    {
+        $user = auth()->user();
+        $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('users', 'users.email', '=', 'pelanggan.email')
+            ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+            ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+            ->where('users.id', '=', $user->id)
+            ->where('pesanan.Status_Pesanan', '=', $request->status)
+            ->paginate(6);
 
-    return view('riwayat', compact('pesanan'));
-}
+        return view('riwayat', compact('pesanan'));
+    }
 
 
 
@@ -518,9 +512,9 @@ public function filriwayat(Request $request)
 
 
         $databar = Barang::join('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-        ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
-        ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
-        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
+            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+            ->join('pesanan', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+            ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)->get();
 
 
         return view('detilorder', compact('pesanan', 'databar'));
@@ -614,21 +608,21 @@ public function filriwayat(Request $request)
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
     }
 
-    // public function laporanOmset(Request $request)
-    // {
-    //     $bulanawal = $request->input('bulan_awal');
-    //     $bulanakhir = $request->input('bulan_akhir');
+    public function laporanOmset(Request $request)
+    {
+        $bulanawal = $request->input('bulan_awal');
+        $bulanakhir = $request->input('bulan_akhir');
 
-    //     $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
+        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
 
-    //     return view('penjual.lapset', ['penjualan' => $penjualan]);
-    // }
+        return view('penjual.lapset', ['penjualan' => $penjualan]);
+    }
 
-    // public function lapset()
-    // {
-    //     $penjualan = OmsetView::all();
-    //     return view('penjual.lapset', compact('penjualan'));
-    // }
+    public function lapset()
+    {
+        $penjualan = OmsetView::all();
+        return view('penjual.lapset', compact('penjualan'));
+    }
 
     public function lapbarperakun(Request $request)
     {
@@ -644,7 +638,8 @@ public function filriwayat(Request $request)
         return view('Penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
 
-    public function filterBarang($Id_Kategori) {
+    public function filterBarang($Id_Kategori)
+    {
         if ($Id_Kategori) {
             $barang = Barang::where('Id_Kategori', $Id_Kategori)->get();
         } else {
@@ -655,7 +650,8 @@ public function filriwayat(Request $request)
         return view('shop', compact('barang'));
     }
 
-    public function otp() {
+    public function otp()
+    {
         return view('penjual.otp');
     }
 
@@ -667,33 +663,33 @@ public function filriwayat(Request $request)
     public function backnya()
     {
 
-    //ENTER THE RELEVANT INFO BELOW
-    $mysqlHostName      = env('DB_HOST');
-    $mysqlUserName      = env('DB_USERNAME');
-    $mysqlPassword      = env('DB_PASSWORD');
-    $DbName             = env('DB_DATABASE');
-    $backup_name        = "mybackup.sql";
-    $tables = array(
-        // "alamat",
-        "barang",
-        "biaya_shipping",
-        "detail_keranjang",
-        // "failed_jobs",
-        "kategori",
-        "keranjang",
-        // "migrations",
-        // "password_reset_tokens",
-        // "pelanggan",
-        "pembayaran",
-        // "penjual",
-        // "personal_access_tokens",
-        "pesanan",
-        "riwayat_pesanan",
-        // "sessions",
-        "shipping",
-        "ulasan",
-        // "users"
-    );
+        //ENTER THE RELEVANT INFO BELOW
+        $mysqlHostName      = env('DB_HOST');
+        $mysqlUserName      = env('DB_USERNAME');
+        $mysqlPassword      = env('DB_PASSWORD');
+        $DbName             = env('DB_DATABASE');
+        $backup_name        = "mybackup.sql";
+        $tables = array(
+            // "alamat",
+            "barang",
+            "biaya_shipping",
+            "detail_keranjang",
+            // "failed_jobs",
+            "kategori",
+            "keranjang",
+            // "migrations",
+            // "password_reset_tokens",
+            // "pelanggan",
+            "pembayaran",
+            // "penjual",
+            // "personal_access_tokens",
+            "pesanan",
+            "riwayat_pesanan",
+            // "sessions",
+            "shipping",
+            "ulasan",
+            // "users"
+        );
         // $procedure = array(
         //     "FilterKategori",
         //     "Total_Keranjang",
@@ -708,40 +704,37 @@ public function filriwayat(Request $request)
         //     "kurangi_stok_barang"
         // );
 
-    $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword",array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-    $get_all_table_query = "SHOW TABLES";
-    $statement = $connect->prepare($get_all_table_query);
-    $statement->execute();
-    $result = $statement->fetchAll();
+        $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword", array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+        $get_all_table_query = "SHOW TABLES";
+        $statement = $connect->prepare($get_all_table_query);
+        $statement->execute();
+        $result = $statement->fetchAll();
 
 
-    $output = '';
-    foreach($tables as $table)
-    {
-     $show_table_query = "SHOW CREATE TABLE " . $table . "";
-     $statement = $connect->prepare($show_table_query);
-     $statement->execute();
-     $show_table_result = $statement->fetchAll();
+        $output = '';
+        foreach ($tables as $table) {
+            $show_table_query = "SHOW CREATE TABLE " . $table . "";
+            $statement = $connect->prepare($show_table_query);
+            $statement->execute();
+            $show_table_result = $statement->fetchAll();
 
-     foreach($show_table_result as $show_table_row)
-     {
-      $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
-     }
-     $select_query = "SELECT * FROM " . $table . "";
-     $statement = $connect->prepare($select_query);
-     $statement->execute();
-     $total_row = $statement->rowCount();
+            foreach ($show_table_result as $show_table_row) {
+                $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+            }
+            $select_query = "SELECT * FROM " . $table . "";
+            $statement = $connect->prepare($select_query);
+            $statement->execute();
+            $total_row = $statement->rowCount();
 
-     for($count=0; $count<$total_row; $count++)
-     {
-      $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
-      $table_column_array = array_keys($single_result);
-      $table_value_array = array_values($single_result);
-      $output .= "\nINSERT INTO $table (";
-      $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
-      $output .= "'" . implode("','", $table_value_array) . "');\n";
-     }
-    }
+            for ($count = 0; $count < $total_row; $count++) {
+                $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
+                $table_column_array = array_keys($single_result);
+                $table_value_array = array_values($single_result);
+                $output .= "\nINSERT INTO $table (";
+                $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                $output .= "'" . implode("','", $table_value_array) . "');\n";
+            }
+        }
 
         // Backup Triggers
         // foreach ($trigger as $triggerName) {
@@ -779,30 +772,30 @@ public function filriwayat(Request $request)
         //     }
         // }
 
-    $file_name = 'ArcticFood_DataBase_Ke' . '.sql';
-    // . date('y-m-d') .
-    $file_handle = fopen($file_name, 'w+');
-    fwrite($file_handle, $output);
-    fclose($file_handle);
+        $file_name = 'ArcticFood_DataBase_Ke' . '.sql';
+        // . date('y-m-d') .
+        $file_handle = fopen($file_name, 'w+');
+        fwrite($file_handle, $output);
+        fclose($file_handle);
 
-   // Set header untuk memberitahu browser cara menangani file
-   header('Content-Description: File Transfer');
-   header('Content-Type: application/octet-stream');
-   header('Content-Disposition: attachment; filename=' . basename($file_name));
-   header('Content-Transfer-Encoding: binary');
-   header('Expires: 0');
-   header('Cache-Control: must-revalidate');
-   header('Pragma: public');
-   header('Content-Length: ' . filesize($file_name));
+        // Set header untuk memberitahu browser cara menangani file
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($file_name));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file_name));
 
-   // Bersihkan buffer output dan kirimkan file ke browser
-   ob_clean();
-   flush();
-   readfile($file_name);
+        // Bersihkan buffer output dan kirimkan file ke browser
+        ob_clean();
+        flush();
+        readfile($file_name);
 
-   // Hapus file setelah diunduh
-   unlink($file_name);
-   return Response::download($file_name, $file_name)->deleteFileAfterSend(true);
+        // Hapus file setelah diunduh
+        unlink($file_name);
+        return Response::download($file_name, $file_name)->deleteFileAfterSend(true);
     }
 
     public function error()
@@ -817,24 +810,25 @@ public function filriwayat(Request $request)
         if ($sqlFile) {
             $content = file_get_contents($sqlFile);
 
-            $tables = ["barang",
-            "biaya_shipping",
-            "detail_keranjang",
-            // "failed_jobs",
-            "kategori",
-            "keranjang",
-            // "migrations",
-            // "password_reset_tokens",
-            // "pelanggan",
-            "pembayaran",
-            // "penjual",
-            // "personal_access_tokens",
-            "pesanan",
-            "riwayat_pesanan",
-            // "sessions",
-            "shipping",
-            "ulasan",
-            // "users"
+            $tables = [
+                "barang",
+                "biaya_shipping",
+                "detail_keranjang",
+                // "failed_jobs",
+                "kategori",
+                "keranjang",
+                // "migrations",
+                // "password_reset_tokens",
+                // "pelanggan",
+                "pembayaran",
+                // "penjual",
+                // "personal_access_tokens",
+                "pesanan",
+                "riwayat_pesanan",
+                // "sessions",
+                "shipping",
+                "ulasan",
+                // "users"
             ];
 
             // Nonaktifkan kunci asing
@@ -863,6 +857,27 @@ public function filriwayat(Request $request)
             ->back()
             ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
     }
+
+    public function ulasan()
+    {
+        $user = auth()->user();
+        $ulasan = Pesan::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'pesanan.Id_Pelanggan')
+            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+            ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
+            ->join('users', 'pelanggan.email', '=', 'users.email')
+            ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+            ->where('users.id', '=', $user->id)
+            ->where('pesanan.Status_Pesanan', '=', 'Selesai')
+            ->select(DB::raw('DISTINCT barang.Nama_Barang'))
+            ->get();
+        // dd($ulasan);
+        return view('ulasan', compact('ulasan'));
+    }
+
+    public function log()
+    {
+        $user = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->get();
+        $log = log::all();
+        return view('penjual.log', compact('log', 'user'));
+    }
 }
-
-

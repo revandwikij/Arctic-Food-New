@@ -4,24 +4,28 @@
 
 @section('content')
 
-<style>
+    <style>
 
-</style>
+    </style>
 
-<div class="container-order">
+    <div class="container-order">
 
-    {{-- <div class="kotak">
+        {{-- <div class="kotak">
         <ul>
             <li>Item 1</li>
             <li>Item 2</li>
             <li>Item 3</li>
           </ul>
     </div> --}}
-    <h5> <label for="status" class="widget-title">Ulasan</label></h5>
-<form action="/transaksi/result" method="GET">
-    {{ csrf_field() }}
-    <input type="textarea" name="ulasan">
-    <button type="submit">Filter</button>
-</form>
+        <h2> <label for="status" class="widget-title">Ulasan</label></h2>
+        @foreach ($ulasan as $item)
+            <form action="/transaksi/result" method="GET">
+                {{ csrf_field() }}
 
-@endsection
+                <h3>{{ $item->Nama_Barang }}</h3>
+                <textarea name="ulasan"></textarea>
+                <button type="submit">Filter</button>
+            </form>
+        @endforeach
+
+    @endsection

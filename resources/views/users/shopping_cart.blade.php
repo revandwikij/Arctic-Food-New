@@ -11,11 +11,12 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="container d-flex justify-content-left align-items-left">
-            <form action="/beli/{{$cekcart->Id_Keranjang}}" method="post">
-                                    @csrf
-                                    @if (count($alamat) === 0)
+
+                            <form action="/beli/{{ $cekcart->Id_Keranjang }}" method="post">
+                                @csrf
+                                @if (count($alamat) === 0)
                                     No addresses available klik di <a href="/profile#alamat">sini </a>
-                                    @else
+                                @else
                                     <span style="font">Alamat</span>
                                     <select name="Id_Alamat" >
                                             @foreach ($alamat as $a)
@@ -78,7 +79,8 @@
                                                     @php
                                                         $total += $data['Kuantitas'] * $data['Harga'];
                                                     @endphp
-                                                </span></td>
+                                                </span>
+                                            </td>
 
                                         </tr>
                                     @endforeach
@@ -87,7 +89,8 @@
                                             <div class="shopping-cart-btn">
                                                 <span class="">
                                                     <a href="/ "
-                                                        class="btn btn-upper btn-primary outer-left-xs">Kembali Belanja</a>
+                                                        class="btn btn-upper btn-primary outer-left-xs">Kembali
+                                                        Belanja</a>
                                                 </span>
                                             </div>
                                             <thead>
@@ -106,21 +109,24 @@
                                                 <tr>
                                                     <td>
                                                         @if (count($alamat) === 0)
-
-                                                        <button class="btn btn-upper btn-primary outer-left-xs"
-                                                            type="submit" disabled>Bayar</button>
-
+                                                            <button class="btn btn-upper btn-primary outer-left-xs"
+                                                                type="submit" disabled>Bayar</button>
                                                         @else
-
-                                                        <button class="btn btn-upper btn-primary outer-left-xs"
-                                                            type="submit">Bayar</button>
-
-
+                                                            <button class="btn btn-upper btn-primary outer-left-xs"
+                                                                type="submit">Bayar</button>
                                                         @endif
-            </form>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->
+
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        <!-- /.shopping-cart-btn -->
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
                                         </table><!-- /table -->
                                     </div><!-- /.cart-shopping-total -->
                                 </tbody><!-- /tbody -->
