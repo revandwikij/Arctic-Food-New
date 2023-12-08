@@ -13,7 +13,7 @@
 
 
 <div class="detail-pesanan">
-    <a href="/transaksi"><button class="back-button"><i class="fas fa-arrow-left" ></i> Kembali</button>
+    {{-- <a href="/transaksi"><button class="back-button"><i class="fas fa-arrow-left" ></i> Kembali</button> --}}
     <h2 class="dtl">Detail Pesanan</h2>
     <div class="order-info">
         <div>
@@ -41,22 +41,22 @@
             <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="Barang 1">
             <div class="item-details">
                 <p class="item-name">{{ $data->Nama_Barang }}</p>
-                <p class="item-quantity">{{ $data->Kuantitas }}</p>
-                <p class="item-subtotal">{{ $data->Sub_Total }}</p>
+                <p class="item-quantity"> Kuantitas  : {{ $data->Kuantitas }}</p>
+                <p class="item-subtotal"> Sub Total : Rp. {{ number_format ($data->Sub_Total) }}</p>
             </div>
-            <a class="view-product-button" href="#">Lihat Produk</a>
+            <a class="view-product-button" style="margin-left: 40%" href="/single/{{$data->Id_Barang}}">Lihat Produk</a>
         </div>
         @endforeach
-        <p>Total Harga: {{ $item->Total }}</p>
+        {{-- <p>Total Harga: Rp. {{ number_format($item->Total) }}</p> --}}
     </div>
     <div class="rincian-pembayaran">
         <h2>Rincian Pembayaran</h2>
         <p>Metode Pembayaran: Kartu Kredit</p>
-        <p>Total Harga: {{ $item->Total }}</p>
-        <p>Ongkos Kirim: {{ $item->Total_Shipping }}</p>
+        <p>Total Harga: Rp. {{ number_format( $item->Total) }}</p>
+        <p>Ongkos Kirim: Rp.  {{ number_format($item->Total_Shipping) }}</p>
 
     </div>
-    <p>Total Belanja: {{ $item->Total_Harga}}</p>
+    <p>Total Belanja: Rp. {{ number_format($item->Total_Harga)}}</p>
 </div>
 @endforeach
 @endsection

@@ -877,7 +877,30 @@ class ViewController extends Controller
     public function log()
     {
         $user = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->get();
-        $log = log::all();
-        return view('penjual.log', compact('log', 'user'));
+        $log = log::join('pelanggan', 'pelanggan.email', '=', 'activity_log.email')
+        ->join('users', 'users.email', '=', 'activity_log.email')
+        ->select('activity_log.*','users.level' )
+        ->get();
+        // dd($log);
+        return view('Penjual.log', compact('log', 'user'));
+    }
+
+    public function loguser(Request $request)
+    {
+        $user = $request->input('user');
+
+        $test = [];
+
+        if ($user) {
+            $test = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.email', '=', $user)->paginate(5);
+        }
+        
+        $user = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->get();
+        $log = log::join('pelanggan', 'pelanggan.email', '=', 'activity_log.email')
+        ->join('users', 'users.email', '=', 'activity_log.email')
+        ->select('activity_log.*','users.level' )
+        ->get();
+
+        return view('Penjual.log', ['test' => $test, 'user' => $user, 'log' => $log]);
     }
 }

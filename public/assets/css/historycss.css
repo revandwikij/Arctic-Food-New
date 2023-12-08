@@ -33,7 +33,7 @@
 
 
   .container-order {
-    margin: 20px auto;
+    margin-left: 40px;
     max-width: 800px;
     width: 48%;
 }
@@ -50,83 +50,92 @@ h1 {
 
 .order-item {
     display: flex;
-    align-items: left;
-    justify-content: space-between; /* To align buttons to the right */
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px;
     margin-bottom: 20px;
-    padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 680px;
+}
+
+.order-thumbnail {
+    flex: 0 0 100px;
+    margin-right: 10px;
 }
 
 .order-thumbnail img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 4px;
-    margin-right: 20px;
 }
 
 .order-details {
-    flex: 1; /* Allow order-details to expand to take available space */
+    flex: 1;
 }
 
 .order-details h2 {
     margin-top: 0;
     margin-bottom: 5px;
+    font-size: 16px;
 }
 
 .order-details p {
     margin: 5px 0;
-}
-
-.chat-button,
-.accept-button,
-.review-button,
-.view-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1;
-    margin-right: 10px;
-}
-
-.chat-button {
-    background-color: #005de8;
-    color: white;
-}
-
-.chat-button:hover {
-    background-color: #d32f2f;
-}
-
-.accept-button {
-    background-color: #005de8;
-    color: white;
-    margin-left: 10px;
-    margin-top: 30px;
-}
-
-.accept-button:hover {
-    background-color: #d32f2f;
-}
-
-.review-button {
-    background-color: #005de8;
-    color: white;
-    margin-top: 30px;
-}
-
-.review-button:hover {
-    background-color: #d32f2f;
+    font-size: 12px;
 }
 
 .button-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end; /* Move buttons to the right */
 }
+
+.view-button,
+.cancel-button,
+.chat-button,
+.accept-button,
+.review-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.view-button {
+    background-color: #005de8;
+    color: white;
+}
+
+.view-button:hover {
+    background-color: #d32f2f;
+}
+
+.cancel-button {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #005de8;
+}
+
+.chat-button,
+.accept-button,
+.review-button {
+    background-color: #005de8;
+    color: white;
+}
+
+.chat-button:hover,
+.accept-button:hover,
+.review-button:hover {
+    background-color: #d32f2f;
+}
+
 
 
 /* .pagination {

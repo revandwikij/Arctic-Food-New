@@ -18,4 +18,14 @@ class DetailKeranjang extends Model
         'Sub_Barang',
         'Sub_Total',
     ];
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+
+    public function keranjang()
+    {
+        return $this->belongsTo(Keranjang::class);
+    }
 }

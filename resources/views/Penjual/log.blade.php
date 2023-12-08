@@ -9,13 +9,13 @@
             <h1 class="jumbotron-heading">Activity Log</h1>
         </div>
     </section>
-    <form action="/barkat" id="userForm" method="GET">
+    <form action="/loguser" id="userForm" method="GET">
         @csrf
         <div class="form-group">
             <select class="form-select" name="user" id="user">
                 <option selected>PILIH USER</option>
                 @foreach ($user as $u)
-                    <option>{{ $u->username }}</option>
+                    <option>{{ $u->email }}</option>
                 @endforeach
             </select>
         </div>
@@ -29,9 +29,9 @@
                     <th scope="col" class="ml-2">
 
                     </th>
-                    <th scope="col">ID Log</th>
                     <th scope="col">Email</th>
                     <th scope="col">Kegiatan</th>
+                    <th scope="col">Role </th>
                     <th scope="col">Waktu </th>
                 </tr>
             </thead>
@@ -44,12 +44,9 @@
 
                             </div>
                         </th>
-                        <td class="order-color">{{ $item->Id_Log }}</td>
                         <td>{{ $item->email }}</td>
-                        <td class="d-flex align-items-center">
-
-                            <span class="ml-2">{{ $item->kegiatan }}</span>
-                        </td>
+                        <td >{{ $item->kegiatan }}</td>
+                        <td>{{ $item->level }}</td>
                         <td>{{ $item->created_at }}</td>
                     </tr>
                 @endforeach

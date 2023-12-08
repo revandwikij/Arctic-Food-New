@@ -20,7 +20,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <h2 class="banner-title">Arctic Food</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
+                    <p style="color: black">Hangatkan Bersama Keluarga</p>
                     <div class="btn-wrap">
                       <a href="/shop" class="btn btn-light btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
                       </a>
@@ -36,7 +36,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <h2 class="banner-title">Our Product</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
+                    <p style="color: black">Hangatkan Bersama Keluarga</p>
                     <div class="btn-wrap">
                       <a href="/shop" class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
                       </a>

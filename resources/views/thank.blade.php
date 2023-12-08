@@ -25,10 +25,7 @@
                       <h3>Phones</h3>
                       <ul class="list-unstyled">
                         <li>
-                          <i class="icon icon-phone"></i>+1650-243-00023
-                        </li>
-                        <li>
-                          <i class="icon icon-phone"></i>+1650-243-00021
+                          <i class="icon icon-phone"></i>0896-5608-8434
                         </li>
                       </ul>
                     </div>
@@ -39,11 +36,7 @@
                       <ul class="list-unstyled">
                         <li>
                           <i class="icon icon-envelope"></i>
-                          <a href="mailto:info@yourcompany.com">info@yourcompany.com</a>
-                        </li>
-                        <li>
-                          <i class="icon icon-envelope"></i>
-                          <a href="mailto:info@yourcompany.com">info@yourcompany.com</a>
+                          <a href="arcticfood@gmail.com">arcticfood@gmail.com</a>
                         </li>
                       </ul>
                     </div>
@@ -54,7 +47,7 @@
                       <ul class="list-unstyled">
                         <li>
                           <i class="icon icon-location"></i>
-                          <span>North Melbourne VIC 3051, Australia</span>
+                          <span>Jl. Budi</span>
                         </li>
                       </ul>
                     </div>
@@ -63,7 +56,7 @@
                     <div class="detail">
                       <h3>Social Links</h3>
                       <ul class="social-links list-unstyled d-flex">
-                        <li><a href="#" class="icon icon-facebook"></a></li>
+                        <li><a href="https://www.instagram.com/arcticfood.23" class="icon icon-instagram"></a></li>
                         <li><a href="#" class="icon icon-twitter"></a></li>
                         <li><a href="#" class="icon icon-youtube-play"></a></li>
                         <li><a href="#" class="icon icon-behance-square"></a></li>
@@ -79,7 +72,7 @@
       </div>
     </section>
     
-    <section id="instagram" class="padding-large">
+    {{-- <section id="instagram" class="padding-large">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Follow our instagram</h2>
@@ -166,7 +159,7 @@
         </div>
       </div>
       <hr>
-    </section>
+    </section> --}}
 @endsection
 
     

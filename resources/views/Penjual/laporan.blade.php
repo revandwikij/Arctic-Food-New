@@ -41,21 +41,16 @@
             float: right; /* Posisikan logo di sebelah kanan */
         }
 
-        /* Gaya untuk tanda tangan */
-        .tanda-tangan {
-            text-align: right;
-            margin-top: 40px;
-            font-style: italic;
-        }
+        
     </style>
 </head>
 
 <body>
     <div class="container kop-surat">
-        <div class="judul">Laporan Penjualan Arctic Food</div>
-        <div class="info">Alamat: Jl. Contoh No. 123, Kota Contoh</div>
-        <div class="info">Telepon: 123-456-789</div>
-        <div class="info">Periode awal hingga </div>
+        <div class="judul">Laporan Omset Arctic Food</div>
+        <div class="info">Alamat: Jl. Wildan Bugi</div>
+        <div class="info">Telepon: 089656088434</div>
+        <div class="info">Periode .... hingga .... </div>
 
         <div>
             <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
@@ -100,10 +95,10 @@
             </tbody>
         </table>
 
-        <div class="tanda-tangan">
-            <p>Tanda tangan</p>
-            <br>
-            <p>penjual</p>
+        <div align="right" style="font-weight: 100; margin-top:20px">
+            Bandung, <?php echo date('d-m-Y'); ?><br><br><br>
+            <p>(......................................)</p>
+                {{$nama}}
         </div>
     </div>
 </body>

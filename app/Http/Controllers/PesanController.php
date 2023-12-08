@@ -212,6 +212,8 @@ class PesanController extends Controller
                     ->get();
 
 
+            $Id_Pesanan = $pesan->Id_Pesan;
+            Artisan::call('app:return-stock', ['Id_Pesanan' => $Id_Pesanan]);
 
             foreach ($ambil as $detail)
             {
@@ -246,7 +248,7 @@ class PesanController extends Controller
                 $admin->notify(new PesananMasukNotification($informasiPesanan));
             } //ini ampe notif
              
-}
+                }
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
             $nextNumber1 = (int) substr($lastUid1, 1) + 1;
@@ -333,14 +335,14 @@ class PesanController extends Controller
 
 
 
-                foreach ($detailPesanan as $detail) {
-                    $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
-                    if ($barang) {
-                        $barang->Stok += $detail->Kuantitas;
-                        $barang->save();
-                        $barang->Stok -= $detail->Kuantitas;
-                        $barang->save();
-                    }
+                // foreach ($detailPesanan as $detail) {
+                //     $barang = Barang::where('Id_Barang', $detail->Id_Barang)->first();
+                //     if ($barang) {
+                //         $barang->Stok += $detail->Kuantitas;
+                //         $barang->save();
+                //         $barang->Stok -= $detail->Kuantitas;
+                //         $barang->save();
+                //     }
 
 
                     // $user = User::all();
@@ -383,20 +385,26 @@ class PesanController extends Controller
             // $isPaymentSuccess = $request->input('transaction_status') === 'settlement';
 
         }
-    }
+    
     public function refundPayment($Id_Pesanan)
     {
         // Setup konfigurasi Midtrans
-        Config::$serverKey = 'SB-Mid-server-y4_APsLutSaNOfoCq5kxrJSO'; // Ganti dengan server key Midtrans Anda
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$clientKey = config('midtrans.client_key');
+        Config::$isProduction = false;
 
         $ambil = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
         ->join('pesanan', 'shipping.Id_Pesanan', '=', 'pesanan.Id_Pesanan')
-        ->where('pesanan.Id_Pesanan', '='. $Id_Pesanan)
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+        ->select('pembayaran.Total_Harga')
         ->first();
+       
 
-        $jumlahrefund = $ambil->Total_Harga;
+        $jumlahrefund = array(
+            'amount' =>  $ambil->Total_Harga,
+            'reason' => 'Permintaan User',
+        );
+       
 
         try {
             $transaction = Transaction::refund($Id_Pesanan, $jumlahrefund);
