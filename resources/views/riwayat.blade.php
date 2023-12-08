@@ -4,9 +4,7 @@
 
 @section('content')
 
-<style>
-
-</style>
+ 
 
 <div class="container-order">
 
@@ -54,9 +52,15 @@
                     <button class="view-button">Lihat Detail Pesanan</button>
                 </a>
 
-                @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' || $item->Status_Pesanan == 'Selesai')
+                @if ($item->Status_Pesanan == 'Selesai' && $item->Status_Pembayaran == 'Lunas')
                 <a href="/refund/{{ $item->Id_Pesanan }}">
-                    <button class="cancel-button"><i class="cancel-button">Refund</i></button>
+                    <button class="view-button"><i class="cancel-button">Refund</i></button>
+                </a>
+                @endif
+
+                @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
+                <a href="/refund/{{ $item->Id_Pesanan }}">
+                    <button class="view-button"><i class="cancel-button">Batalkan Pesanan</i></button>
                 </a>
                 @endif
 

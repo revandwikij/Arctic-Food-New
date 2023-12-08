@@ -231,7 +231,7 @@ class PesanController extends Controller
                 // Kirim notifikasi dengan data yang telah disiapkan
                 $admin->notify(new PesananMasukNotification($informasiPesanan));
             } //ini ampe notif
-            dd($admin);
+             
 }
 
             $lastUid1 = Shipping::orderBy('id', 'desc')->first()->Id_Shipping ?? 'S000';
