@@ -41,6 +41,12 @@ class LoginController extends Controller
                 return redirect()->intended('/');
             } elseif (Auth::user()->level == 'penjual') {
                 // activity()->causedBy(Auth::user())->log('user'. auth()->user()->username. 'telah login');
+                activity_log::create([
+                    'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+                    'email' => auth()->user()->email,
+                    'kegiatan' => "Admin " . auth()->user()->username . " telah melakukan login",
+                    'created_at' => now()
+                ]);
                 return redirect()->intended('/admin');
             } else {
                 return view('layouting.error');

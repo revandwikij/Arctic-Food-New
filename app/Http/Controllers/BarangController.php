@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\activity_log;
 use App\Models\Barang;
 use App\Models\kategori;
 use App\Models\Pesan;
@@ -30,16 +31,9 @@ class BarangController extends Controller
             'Keterangan_Barang' => 'required',
         ]);
 
-
-
-
         $lastUid = Barang::orderBy('id', 'desc')->first()->Id_Barang ?? 'B000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'B' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
-
-
-
 
         if ($request->hasFile('Foto_Barang')) {
             $gambar = $request->file('Foto_Barang');
@@ -60,6 +54,13 @@ class BarangController extends Controller
         $Barang->Harga = $request->Harga;
         $Barang->Keterangan_Barang = $request->Keterangan_Barang;
         $Barang->save();
+
+        activity_log::create([
+            'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+            'email' => auth()->user()->email,
+            'kegiatan' => "Admin " . auth()->user()->username . " telah menambah barang baru" ,
+            'created_at' => now()
+        ]);
 
 
 
@@ -134,6 +135,13 @@ class BarangController extends Controller
         'Keterangan_Barang' => $request->Keterangan_Barang
 	]);
 
+    activity_log::create([
+        'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+        'email' => auth()->user()->email,
+        'kegiatan' => "Admin " . auth()->user()->username . " telah mengubah data barang dengan Id Barang " . $request->Id_Barang,
+        'created_at' => now()
+    ]);
+
     return redirect('/barang')->with('error', 'Gagal pastikan cek apakah sudah benar');
 }}
 
@@ -155,7 +163,14 @@ class BarangController extends Controller
     }
 
 
-	DB::table('barang')->where('Id_Barang',$Id_Barang)->delete();
+	$barang = Barang::where('Id_Barang',$Id_Barang)->delete();
+
+    activity_log::create([
+        'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+        'email' => auth()->user()->email,
+        'kegiatan' => "Admin " . auth()->user()->username . " telah menghapus barang dengan Id Barang" . $barang->Id_Barang,
+        'created_at' => now()
+    ]);
 
 
 	return redirect('/barang');
@@ -177,6 +192,13 @@ class BarangController extends Controller
         $kategori->Id_Kategori = $newUid;
         $kategori->kategori = $request->kategori;
         $kategori->save();
+
+        activity_log::create([
+            'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
+            'email' => auth()->user()->email,
+            'kegiatan' => "Admin " . auth()->user()->username . " telah menambah kategori baru" ,
+            'created_at' => now()
+        ]);
 
         return redirect('/kategori');
     }
