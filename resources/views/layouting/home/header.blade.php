@@ -6,7 +6,7 @@
 <div class="search-popup">
     <div class="search-popup-container">
 
-        <form role="search" method="get" class="search-form" action="/barang/cari">
+        <form role="search" method="get" class="search-form" action="/shop/search">
             @csrf
             <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="cari" />
             <button type="submit" class="search-submit"><a href="/barang/cari"><i class="icon icon-search"></i></a></button>
