@@ -86,7 +86,7 @@
               </div> --}}
               <div class="product-detail">
                 <h3 class="product-title">
-                  <a href="/single/{{$item->Id_Barang}}">{{$item->Nama_Barang}}</a>
+                  <a href="/single/{{$item->Id_Barang}}">{{Str::limit($item->Nama_Barang, 25)}}</a>
                 </h3>
                 <div class="item-price text-primary">Rp. {{number_format($item->Harga)}}</div>
               </div>
@@ -389,7 +389,7 @@
                 {{-- <div class="discount">10% Off</div> --}}
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="/single/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
+                    <a href="/single/{{ $data->Id_Barang }}">{{Str::limit($data->Nama_Barang, 25) }}</a>
                   </h3>
                   <div class="item-price text-primary">
                     <del class="prev-price"></del>Rp. {{number_format($data->Harga)}}
@@ -510,17 +510,9 @@
         <div class="row d-flex flex-wrap align-items-center justify-content-between">
           <div class="col-md-3 col-sm-6">
             <div class="icon-box">
-              <i class="icon icon-truck"></i>
-              <h4 class="block-title">
-                <strong>Free shipping</strong> Over $200
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
               <i class="icon icon-return"></i>
               <h4 class="block-title">
-                <strong>Money back</strong> Return within 7 days
+                <strong>Uang Kembali</strong> Pengembalian dalam 7 hari
               </h4>
             </div>
           </div>
@@ -528,7 +520,7 @@
             <div class="icon-box">
               <i class="icon icon-tags1"></i>
               <h4 class="block-title">
-                <strong>Buy 4 get 5th</strong> 50% off
+                <strong>Dengan</strong> Harga Terbaik
               </h4>
             </div>
           </div>

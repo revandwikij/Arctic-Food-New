@@ -10,10 +10,7 @@ class Keranjang extends Model
     use HasFactory;
     protected $table = 'keranjang';
      
-    public function details()
-    {
-        return $this->hasMany(DetailKeranjang::class);
-    }
+    
     
     protected $fillable = [
         'Id_Keranjang',

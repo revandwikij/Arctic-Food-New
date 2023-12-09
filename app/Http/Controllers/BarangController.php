@@ -157,9 +157,10 @@ class BarangController extends Controller
     if(Pesan::join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
     ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
     ->where('detail_keranjang.Id_Barang', '=', $Id_Barang)
-    ->where('pesanan.Status_Pesanan', '=', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim']))
+    ->where('pesanan.Status_Pesanan', '=', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim'])
+    ->exists())
     {
-        return 'Barang sedang dalam pesanan';
+        return back()->with('error', 'Barang sedang dalam pesanan');
     }
 
 

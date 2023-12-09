@@ -51,14 +51,14 @@
                     <button class="view-button">Lihat Detail Pesanan</button>
                 </a>
 
-                @if ($item->Status_Pesanan == 'Selesai' && $item->Status_Pembayaran == 'Lunas')
-                <a href="/refund/{{ $item->Id_Pesanan }}">
+                @if ($item->Status_Pesanan == 'Diterima' && $item->Status_Pembayaran == 'Lunas')
+                <a href="https://wa.me/6289656088434?text=Halo,%20saya%20mau%20refund">
                     <button class="view-button"><i class="accept-button">Refund</i></button>
                 </a>
                 @endif
 
                 @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
-                <a href="/refund/{{ $item->Id_Pesanan }}">
+                <a href="/batal/{{ $item->Id_Pesanan }}">
                     <button class="view-button"><i class="cancel-button">Batalkan Pesanan</i></button>
                 </a>
                 @endif
@@ -79,6 +79,13 @@
                 <form action="/terima/{{ $item->Id_Pesanan }}" method="post">
                     {{ csrf_field() }}
                     <button onclick="return confirm('Sudah Diterima?')" class="accept-button">Pesanan Diterima</button>
+                </form>
+                @endif
+
+                @if ($item->Status_Pesanan == 'Diterima')
+                <form action="/finish/{{ $item->Id_Pesanan }}" method="post">
+                    {{ csrf_field() }}
+                    <button onclick="return confirm('Selesaikan Pesanan? ')" class="accept-button">Pesanan Diterima</button>
                 </form>
                 @endif
 

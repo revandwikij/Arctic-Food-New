@@ -14,7 +14,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Perlu Dikirim</h1>
+        <h1 class="jumbotron-heading">Telah Diterima</h1>
      </div>
 </section>
 
@@ -68,16 +68,16 @@
 </div>
   </td>
   <td>
-    @if ($item->Status_Pesanan == 'Diproses')
-    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
-      {{ csrf_field() }}
-    <button type="submit" class="btn btn-primary mb-2">Kirim</button>
+    @if ($item->Status_Pesanan == 'Diterima')
+    <a href="/refund/{{ $item->Id_Pesanan }}" onclick="(Refund Pesanan ?)"></a>
+    <form action="/tolak/{{$item->Id_Pesanan}}" method="post">
+      <button type="submit" class="btn btn-primary mb-2">Tolak</button>
+    @csrf
+    
     </form>
     @endif
-    @if ($item->Status_Pesanan == 'Dikirim')
-    <a href="{{ url('/lihatinvoice/'.$item->Id_Pesanan) }}" target="_blank" class="btn btn-primary mb-2">Lihat Invoice</a>
-    <a href="{{ url('/kiriminvoice/'.$item->Id_Pesanan) }}"  class="btn btn-primary mb-2">Kirim Invoice</a>
-
+    @if ($item->Status_Pesanan == 'Selesai')
+       <p>v</p>
     @endif
   </td>
 

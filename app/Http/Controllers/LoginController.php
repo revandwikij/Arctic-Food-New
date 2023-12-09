@@ -237,7 +237,7 @@ class LoginController extends Controller
             'alamat' => 'required',
         ]);
 
-        $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Pelanggan ?? 'A000';
+        $lastUid = Penjual::orderBy('id', 'desc')->first()->Id_Penjual ?? 'Y000';
         $nextNumber = (int) substr($lastUid, 1) + 1;
         $newUid = 'A' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 

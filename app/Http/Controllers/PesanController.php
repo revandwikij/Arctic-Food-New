@@ -106,7 +106,7 @@ class PesanController extends Controller
 
                 else {
 
-                if($Barang->Stok < $request->jumlah_pesan)
+                if($Barang->Stok < $request->jumlah_pesan  || $request->jumlah_pesan > 0)
                 {
                     return redirect()->back()->with('error', 'Stok tidak cukup');
                 }
@@ -212,8 +212,6 @@ class PesanController extends Controller
                     ->get();
 
 
-            $Id_Pesanan = $pesan->Id_Pesan;
-            Artisan::call('app:return-stock', ['Id_Pesanan' => $Id_Pesanan]);
 
             foreach ($ambil as $detail)
             {
@@ -388,7 +386,7 @@ class PesanController extends Controller
     
     public function refundPayment($Id_Pesanan)
     {
-        // Setup konfigurasi Midtrans
+         
         Config::$serverKey = config('midtrans.server_key');
         Config::$clientKey = config('midtrans.client_key');
         Config::$isProduction = false;
@@ -404,16 +402,69 @@ class PesanController extends Controller
             'amount' =>  $ambil->Total_Harga,
             'reason' => 'Permintaan User',
         );
-       
 
         try {
             $transaction = Transaction::refund($Id_Pesanan, $jumlahrefund);
-            return response()->json(['message' => 'Refund berhasil.', 'data' => $transaction]);
+
+          Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+         ->update(['pembayaran.Status_Pembayaran' => 'Direfund']);
+
+            return back()->with(['message' => 'Refund berhasil.', 'data' => $transaction]);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Refund gagal: ' . $e->getMessage()]);
+            return back()->with(['message' => 'Refund gagal: ' . $e->getMessage()]);
         }
     }
 
+    public function batal($Id_Pesanan)
+    {
+        
+        
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$clientKey = config('midtrans.client_key');
+        Config::$isProduction = false;
+
+        $ambil = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+        ->join('pesanan', 'shipping.Id_Pesanan', '=', 'pesanan.Id_Pesanan')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+        ->select('pembayaran.Total_Harga')
+        ->first();
+       
+        $tes = Pembayaran::join('shipping', 'pembayaran.Id_Shipping', '=', 'shipping.Id_Shipping')
+        ->join('pesanan', 'shipping.Id_Pesanan', '=', 'pesanan.Id_Pesanan')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+        ->select('pembayaran.Status_Pembayaran')
+        ->first();
+
+        if($tes->Status_Pembayaran == 'Belum Lunas')
+        {
+         Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+         ->update(['pesanan.Status_Pesanan' => 'Dibatalkan']);
+
+         return back();
+        }
+
+        $jumlahrefund = array(
+            'amount' =>  $ambil->Total_Harga,
+            'reason' => 'Permintaan User',
+        );
+
+        try {
+            $transaction = Transaction::refund($Id_Pesanan, $jumlahrefund);
+
+          Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+         ->update(['pembayaran.Status_Pembayaran' => 'Direfund']);
+
+            return back()->with(['message' => 'Refund berhasil.', 'data' => $transaction]);
+        } catch (\Exception $e) {
+            return back()->with(['message' => 'Refund gagal: ' . $e->getMessage()]);
+        }
+    }
 
     public function konfirm($Id_Pesanan)
     {
@@ -450,6 +501,40 @@ class PesanController extends Controller
     }
 
     public function terima($Id_Pesanan)
+    {
+
+        $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();
+
+        Pesan::where('Id_Pesanan', $Id_Pesanan)->update([
+            'Id_Pelanggan' => $Pesan->Id_Pelanggan,
+            'Id_Keranjang' => $Pesan->Id_Keranjang,
+            'Id_Alamat' => $Pesan->Id_Alamat,
+            'Total' => $Pesan->Total,
+            'Total_Beban' => $Pesan->Total_Beban,
+            'Status_Pesanan' => 'Diterima'
+        ]);
+
+        return redirect('/transaksi');
+    }
+
+    public function tolak($Id_Pesanan)
+    {
+
+         Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+         ->update(['pembayaran.Status_Pembayaran' => 'Refund Ditolak']);
+
+         Pembayaran::join('shipping', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+         ->join('pesanan', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+         ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+         ->update(['pesanan.Status_Pesanan' => 'Selesai']);
+
+         
+        return redirect('/transaksi');
+    }
+
+    public function selesai($Id_Pesanan)
     {
 
         $Pesan = Pesan::where('Id_Pesanan', $Id_Pesanan)->first();

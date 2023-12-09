@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('Id_Shipping');
             $table->string('Metode_Pembayaran')->nullable();
             $table->integer('Total_Harga');
-            $table->enum('Status_Pembayaran', ['Lunas', 'Belum Lunas', 'Kadaluarsa', ''])->nullable();
+            $table->enum('Status_Pembayaran', ['Lunas', 'Belum Lunas', 'Kadaluarsa', 'Direfund', 'Refund Ditolak'])->nullable();
             $table->date('Tgl_Pembayaran');
             $table->dateTime('Waktu_Kadaluarsa');
             $table->timestamps();

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('Total');
             $table->double('Total_Beban');
             $table->date('Tgl_Pesanan');
-            $table->enum('Status_Pesanan', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim', 'Selesai', 'Dibatalkan']);
+            $table->enum('Status_Pesanan', ['Menunggu Konfirmasi', 'Diproses', 'Dikirim', 'Diterima', 'Selesai', 'Dibatalkan']);
             $table->timestamps();
         });
     }

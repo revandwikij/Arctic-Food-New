@@ -61,7 +61,7 @@
                                             </td>
                                             <td class="cart-product-name-info">
                                                 <h4 class='cart-product-description'><a
-                                                        href="/detail/{{ $data->Id_Barang }}">{{ $data->Nama_Barang }}</a>
+                                                        href="/detail/{{ $data->Id_Barang }}">{{Str::limit($data->Nama_Barang , 25)}}</a>
                                                 </h4>
                                             </td>
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">

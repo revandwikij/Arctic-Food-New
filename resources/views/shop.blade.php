@@ -27,12 +27,7 @@
 
                 <section id="selling-products" class="col-md-9 product-store">
                     <div class="container">
-                        <ul class="tabs list-unstyled">
-                            <li data-tab-target="#all" class="tab" active>All</li>
-                            @foreach ($kategoris as $item)
-                                <li data-tab-target="#{{ $item->Kategori }}" class="tab">{{ $item->Kategori }}</li>
-                            @endforeach
-                        </ul>
+                        
 
                         {{-- @foreach ($kategoris as $kategori)
                         <div id="{{ $kategori->Kategori }}" class="barang-container" style="display: none;">
@@ -83,14 +78,11 @@
                                     <div class="cart-concern">
                                         <div class="cart-button d-flex justify-content-between align-items-center">
                                             <a href="/single/{{ $data->Id_Barang }}" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i></button>
-
-
-
                                         </div>
                                     </div>
                                     <div class="product-detail">
                                         <h3 class="product-title">
-                                            <a href="/single/{{$data->Id_Barang}}">{{ $data->Nama_Barang }}</a>
+                                            <a href="/single/{{$data->Id_Barang}}">{{Str::limit($data->Nama_Barang, 25) }}</a>
                                         </h3>
                                         <div class="item-price text-primary">Rp. {{number_format($data->Harga)}}</div>
                                     </div>

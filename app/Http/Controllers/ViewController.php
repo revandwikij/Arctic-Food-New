@@ -435,6 +435,15 @@ class ViewController extends Controller
             ->orderby('pesanan.created_at', 'desc')
             ->paginate(6);
 
+        $pembayaran = $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        ->join('users', 'users.email', '=', 'pelanggan.email')
+        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        ->where('users.id', '=', $user->id)
+        ->select('pesanan.updated_at as pesanan_updated_at')
+        ->get();
+
         return view('riwayat', compact('pesanan'));
     }
 
@@ -490,12 +499,12 @@ class ViewController extends Controller
         $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
             ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Selesai')->orwhere('pesanan.Status_Pesanan', '=', 'Dikirim')->get();
+            ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')->where('pesanan.Status_Pesanan', '=', 'Selesai')->orwhere('pesanan.Status_Pesanan', '=', 'Diterima')->get();
 
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('penjual.selesai', compact('pesanan'));
+        return view('Penjual.selesai', compact('pesanan'));
     }
 
     public function profileadmin()

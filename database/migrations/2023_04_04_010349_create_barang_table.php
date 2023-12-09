@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id( );
             $table->string('Id_Barang')->unique();
             $table->string('Id_Kategori');
-            $table->string('Nama_Barang');
+            $table->longText('Nama_Barang');
             $table->string('Foto_Barang');
             $table->integer('Berat');
             $table->string('Brand');
             $table->integer('Harga');
             $table->integer('Stok');
-            $table->string('Keterangan_Barang');
+            $table->longText('Keterangan_Barang');
             $table->timestamps();
 
 

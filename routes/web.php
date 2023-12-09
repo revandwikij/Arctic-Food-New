@@ -54,6 +54,10 @@ Route::post('/send', [LoginController::class, 'sendResetLinkEmail']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 Route::post('/updatepassword', [LoginController::class, 'updatepassword']);
 Route::get('/error', [ViewController::class, 'error']);
+Route::get('/shop', [ViewController::class, 'shop']);
+Route::get('/shop/result', [ViewController::class, 'filtershop']);
+Route::get('/shop/search', [ViewController::class, 'carishop']);
+Route::get('/shop/price', [ViewController::class, 'hargashop']);
 
 
 Route::post('/tambahadmin', [LoginController::class, 'registeradmin']);
@@ -95,6 +99,8 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
+    Route::get('/refund/{Id_Pesanan}', [PesanController::class, 'refundPayment']);
+    Route::get('/tolak/{Id_Pesanan}', [PesanController::class, 'tolak']);
     
         Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
         Route::get('/omset', [ViewController::class, 'laporanOmset']);
@@ -139,15 +145,12 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/beli/{Id_Keranjang}', [PesanController::class, 'checkout']);
     Route::post('/bayar/{Id_Pesanan}', [PesanController::class, 'pembayaran']);
     Route::post('/terima/{Id_Pesanan}', [PesanController::class, 'terima']);
+    Route::post('/finish/{Id_Pesanan}', [PesanController::class, 'selesai']);
     Route::get('/alamat', [AlamatController::class, 'addaddress']);
     Route::delete('/alamat/delete', [AlamatController::class, 'deleteAddress']);
     Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
     Route::post('/ulasan/{Id_Barang}',[UlasanController::class, 'store']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
-    Route::get('/shop', [ViewController::class, 'shop']);
-    Route::get('/shop/result', [ViewController::class, 'filtershop']);
-    Route::get('/shop/search', [ViewController::class, 'carishop']);
-    Route::get('/shop/price', [ViewController::class, 'hargashop']);
     Route::get('/lihat', [ViewController::class, 'lihat1']);
     Route::get('/lihat1', [ViewController::class, 'lihat2']);
     Route::get('/contact', [ViewController::class, 'contact']);
@@ -160,7 +163,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/review/{Id_Barang}', [ViewController::class, 'review']);
     Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
     Route::get('/hapuspayment', [PesanController::class, 'hapuspayment']);
-    Route::get('/refund/{Id_Pesanan}', [PesanController::class, 'refundPayment']);
+    Route::get('/batal/{Id_Pesanan}', [PesanController::class, 'batal']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 
