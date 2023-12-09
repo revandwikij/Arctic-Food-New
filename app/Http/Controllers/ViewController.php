@@ -64,6 +64,16 @@ class ViewController extends Controller
             ->limit(5) // Ambil 5 barang terlaku
             ->get();
 
+            $ulasan = UlasanModel::select(
+                'ulasan.*',
+                'pelanggan.username',
+                'barang.Nama_Barang',
+                DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
+            )
+                ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+                ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
+                ->orderBy('ulasan.created_at', 'desc')->limit(4)->get();
+
         //sisa stok deng
         $barangTidakLaku = Barang::select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
             ->leftJoin('detail_keranjang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
@@ -130,7 +140,7 @@ class ViewController extends Controller
         // dd($admin->notifications);
 
     return view('penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
-    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
+    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku', 'ulasan'));
     }
 
     public function login()
@@ -581,14 +591,21 @@ class ViewController extends Controller
     public function lihat1()
     {
         $kategoris = kategori::all();
-        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Daging')->pa();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Ayam')->paginate(12);
         return view('shop', compact('barang', 'kategoris'));
     }
 
     public function lihat2()
     {
         $kategoris = kategori::all();
-        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Laut')->get();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Olahan Sapi')->pagianate(12);
+        return view('shop', compact('barang', 'kategoris'));
+    }
+
+    public function lihat3()
+    {
+        $kategoris = kategori::all();
+        $barang = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')->where('kategori.Kategori', '=', 'Bumbu')->paginate(12);
         return view('shop', compact('barang', 'kategoris'));
     }
 
@@ -633,6 +650,21 @@ class ViewController extends Controller
             ->orderBy('ulasan.created_at', 'desc')->paginate(10);
 
         return view('review', compact('ulasan'));
+    }
+
+    public function ulasanpen()
+    {
+        $ulasan = UlasanModel::select(
+            'ulasan.*',
+            'pelanggan.username',
+            'barang.Nama_Barang',
+            DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
+        )
+            ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')  
+            ->orderBy('ulasan.created_at', 'desc')->paginate(10);
+
+        return view('Penjual.ulasanpenjual', compact('ulasan'));
     }
 
     public function laporanOmset(Request $request)

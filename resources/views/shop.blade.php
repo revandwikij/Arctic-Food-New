@@ -27,7 +27,8 @@
 
                 <section id="selling-products" class="col-md-9 product-store">
                     <div class="container">
-                        
+                    
+                      
 
                         {{-- @foreach ($kategoris as $kategori)
                         <div id="{{ $kategori->Kategori }}" class="barang-container" style="display: none;">

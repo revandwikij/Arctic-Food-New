@@ -116,52 +116,52 @@
     </section>
 
     <section id="instagram" class="padding-large">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Follow our instagram</h2>
-            </div>
-            <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
-            </p>
-            <div class="row d-flex flex-wrap justify-content-between">
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="container">
+          <div class="section-header">
+              <h2 class="section-title">Follow our instagram</h2>
+          </div>
+          <p>Our official Instagram account <a href="https://www.instagram.com/arcticfood.23">@arcticfood.23</a> or <a href="https://www.instagram.com/arcticfood.23">#cayank_celamanya</a>
+          </p>
+          <div class="row d-flex flex-wrap justify-content-between">
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/css/images/rep.jpg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px;">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/css/images/Wildan.jpg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/css/images/ray.jpeg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/css/images/padilmini.jpeg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/images/insta-image5.jpg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                  <figure class="zoom-effect">
+                      <img src="../assets/images/insta-image6.jpg" alt="instagram" class="insta-image" style="height:215.59px; width:215.59px">
+                      <i class="icon icon-instagram"></i>
+                  </figure>
+              </div>
+          </div>
+      </div>
+  </section>
 
     {{-- <section id="shipping-information">
       <hr>

@@ -24,9 +24,9 @@ return new class extends Migration
         DATE_FORMAT(MAX(pesanan.created_at), '%Y-%m-%d') AS tanggal_akhir,
         SUM(detail_keranjang.Kuantitas) AS total_terjual
     FROM barang
-    LEFT JOIN detail_keranjang ON barang.Id_Barang = detail_keranjang.Id_Barang
-    LEFT JOIN keranjang ON detail_keranjang.Id_Keranjang = keranjang.Id_Keranjang
-    LEFT JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
+    JOIN detail_keranjang ON barang.Id_Barang = detail_keranjang.Id_Barang
+    JOIN keranjang ON detail_keranjang.Id_Keranjang = keranjang.Id_Keranjang
+    JOIN pesanan ON keranjang.Id_Keranjang = pesanan.Id_Keranjang
     WHERE pesanan.Status_Pesanan = 'Selesai'
     GROUP BY barang.Id_Barang, barang.Nama_Barang, barang.Stok, barang.Harga;";
 

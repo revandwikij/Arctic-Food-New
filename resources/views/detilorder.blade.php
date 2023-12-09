@@ -51,7 +51,6 @@
     </div>
     <div class="rincian-pembayaran">
         <h2>Rincian Pembayaran</h2>
-        <p>Metode Pembayaran: Kartu Kredit</p>
         <p>Total Harga: Rp. {{ number_format( $item->Total) }}</p>
         <p>Ongkos Kirim: Rp.  {{ number_format($item->Total_Shipping) }}</p>
 

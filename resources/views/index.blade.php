@@ -140,7 +140,7 @@
                 <h3 class="item-title">AYAM</h3>
                 <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak terlupakan.</p>
                 <div class="btn-wrap">
-                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  <a href="/lihat" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
                 </div>
               </div>
@@ -155,7 +155,7 @@
                 <div class="categories">Olahan</div>
                 <h3 class="item-title">SAPI</h3>
                 <div class="btn-wrap">
-                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  <a href="/lihat1" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
                 </div>
               </div>
@@ -168,7 +168,7 @@
                 <div class="categories">Olahan</div>
                 <h3 class="item-title">IKAN</h3>
                 <div class="btn-wrap">
-                  <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                  <a href="/lihat2" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                   </a>
                 </div>
               </div>
