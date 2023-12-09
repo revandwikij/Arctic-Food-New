@@ -111,7 +111,35 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="comments-wrap">
-                        <h3>Comments</h3>
+                        <h3>Ulasan</h3>
+                        @foreach($ulasan as $u)
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="card card-white post">
+                                        <div class="post-heading">
+                                             
+                                            <div class="float-left meta">
+                                                <div class="title h5">
+                                                    <h4>{{$u->username }}</h4>
+                                                     
+                                                </div>
+                                                <h6 class="text-muted time">{{$u->formatted_created_at}}</h6>
+                                            </div>
+                                        </div> 
+
+                                        
+                                        <div class="post-description"> 
+                                            <p>{{$u->Ulasan}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        @endforeach
+                        <a href="/review/{{$data->Id_Barang}}">Lihat semua</a>
                         {{-- <div class="comment-list">
                             <article class="d-flex">
                                 <img src="images/review-image1.jpg" alt="default" class="commentor-image">

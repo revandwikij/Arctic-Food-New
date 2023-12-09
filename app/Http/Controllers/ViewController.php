@@ -603,9 +603,25 @@ class ViewController extends Controller
             ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
             ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
             ->where('ulasan.Id_Barang', $Id_Barang)
-            ->orderBy('ulasan.created_at', 'desc')->get();
+            ->orderBy('ulasan.created_at', 'desc')->limit(4)->get();
 
         return view('single-post', compact('barang', 'pelanggan', 'user', 'ulasan'));
+    }
+
+    public function review($Id_Barang)
+    {
+        $ulasan = UlasanModel::select(
+            'ulasan.*',
+            'pelanggan.username',
+            'barang.Nama_Barang',
+            DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
+        )
+            ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
+            ->where('ulasan.Id_Barang', $Id_Barang)
+            ->orderBy('ulasan.created_at', 'desc')->paginate(10);
+
+        return view('review', compact('ulasan'));
     }
 
     public function laporanOmset(Request $request)
@@ -858,20 +874,16 @@ class ViewController extends Controller
             ->with('error', 'Gagal memulihkan data. Pastikan Anda mengunggah file SQL yang benar.');
     }
 
-    public function ulasan()
+    public function ulasan($Id_Pesanan)
     {
-        $user = auth()->user();
-        $ulasan = Pesan::join('pelanggan', 'pelanggan.Id_Pelanggan', '=', 'pesanan.Id_Pelanggan')
-            ->join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
-            ->join('detail_keranjang', 'detail_keranjang.Id_Keranjang', '=', 'keranjang.Id_Keranjang')
-            ->join('users', 'pelanggan.email', '=', 'users.email')
-            ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-            ->where('users.id', '=', $user->id)
-            ->where('pesanan.Status_Pesanan', '=', 'Selesai')
-            ->select(DB::raw('DISTINCT barang.Nama_Barang'))
-            ->get();
-        // dd($ulasan);
-        return view('ulasan', compact('ulasan'));
+        $ulasan = Pesan::join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
+        ->join('detail_keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+        ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+        ->join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+        ->get();
+
+        return view('listulasan', compact('ulasan'));
     }
 
     public function log()

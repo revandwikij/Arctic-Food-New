@@ -83,10 +83,9 @@
                 @endif
 
                 @if ($item->Status_Pesanan == 'Selesai')
-                <form action="/ulasan" method="post">
-                    {{ csrf_field() }}
-                    <button class="review-button" type="submit">Beri Ulasan</button>
-                </form>
+                <a href="/ulasan/{{ $item->Id_Pesanan }}">
+                    <button class="chat-button"><i class="accept-button">Beri Ulasan</i></button>
+                </a>
                 @endif
 
             </div>

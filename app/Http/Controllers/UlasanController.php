@@ -8,15 +8,16 @@ use App\Models\pelanggan;
 use App\Models\UlasanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UlasanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+   
+    public function index($Id_Barang)
     {
-        
+        $data = Barang::where('Id_Barang', $Id_Barang)->get();
+
+        return view('formulasan', compact('data')); 
     }
 
     /**
@@ -53,9 +54,7 @@ class UlasanController extends Controller
             $ulasan->Ulasan = $request->Ulasan;
             $ulasan->save();
 
-             
-
-            return back();
+            return Redirect('/transaksi');
         }
     }
 
