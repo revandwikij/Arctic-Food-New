@@ -243,6 +243,7 @@ class ViewController extends Controller
         // $users = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->where('users.level', '=', 'pelanggan')->get('pelanggan.*');
 
         $users = DB::select("CALL store_procedure_pelanggan()");
+        // dd($users);
         return view('users.index', compact('users'));
     }
 

@@ -80,8 +80,15 @@
                                             <form action="/keranjang/{{ $data->Id_Barang }}" method="POST">
                                                 @csrf
                                                 <input type="number" name="jumlah_pesan" class="form-control" style="">
+                                                @if ($data->Stok == 0 )
+
+                                                <button type="submit" class="btn btn-primary mt-3" disabled>Masukan
+                                                    Keranjang</button>
+                                                @else
                                                 <button type="submit" class="btn btn-primary mt-3">Masukan
                                                     Keranjang</button>
+
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>
@@ -97,7 +104,7 @@
                                     </ul>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -172,7 +179,7 @@
         </div>
     </section>
 
-    
+
 
     <section id="shipping-information">
         <hr>

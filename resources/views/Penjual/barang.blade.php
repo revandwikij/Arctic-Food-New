@@ -26,7 +26,13 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <div class="app-search-box" style="width: 50%">
-                <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
+                <form action="/barang/search" method="POST">
+                    @csrf
+                    <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
+                    <button type="submit" class="btn search-btn btn-primary" value="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
             <div>
                 <form action="/barkat" id="kategoriForm" method="GET">

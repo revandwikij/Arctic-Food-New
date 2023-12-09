@@ -15,12 +15,10 @@ return new class extends Migration
         $procedure = "DROP PROCEDURE IF EXISTS `store_procedure_pelanggan`;
         CREATE PROCEDURE `store_procedure_pelanggan` ()
         BEGIN
-        SELECT pelanggan.username, alamat.Alamat_Lengkap, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
+        SELECT pelanggan.username, pelanggan.email, pelanggan.jenkel, pelanggan.no_Telp
         FROM pelanggan
         JOIN users
         ON users.email = pelanggan.email
-        JOIN alamat
-        ON pelanggan.Id_Pelanggan= alamat.Id_Pelanggan
         WHERE users.level = 'pelanggan';
         END;";
 
