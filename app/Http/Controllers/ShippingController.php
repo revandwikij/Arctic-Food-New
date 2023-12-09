@@ -63,7 +63,7 @@ class ShippingController extends Controller
     public function edit($Id_Bayar)
     {
 	    $Biaya_Shipping_per_Kg = DB::table('biaya_shipping')->where('Id_Biaya',$Id_Bayar)->get();
-	    return view('Penjual.editship',['biaya_shipping' => $Biaya_Shipping_per_Kg]);
+	    return view('penjual.editship',['biaya_shipping' => $Biaya_Shipping_per_Kg]);
     }
 
     /**

@@ -15,7 +15,7 @@
             <select class="form-select" name="user" id="user">
                 <option selected>PILIH USER</option>
                 @foreach ($user as $u)
-                    <option>{{ $u->email }}</option>
+                    <option>{{ $u->level }}</option>
                 @endforeach
             </select>
         </div>
@@ -29,9 +29,10 @@
                     <th scope="col" class="ml-2">
 
                     </th>
+                    {{-- <th scope="col">ID Log</th> --}}
                     <th scope="col">Email</th>
                     <th scope="col">Kegiatan</th>
-                    <th scope="col">Role </th>
+                    <th scope="col">Role</th>
                     <th scope="col">Waktu </th>
                 </tr>
             </thead>
@@ -45,7 +46,7 @@
                             </div>
                         </th>
                         <td>{{ $item->email }}</td>
-                        <td >{{ $item->kegiatan }}</td>
+                        <td>{{ $item->kegiatan }}</td>
                         <td>{{ $item->level }}</td>
                         <td>{{ $item->created_at }}</td>
                     </tr>
