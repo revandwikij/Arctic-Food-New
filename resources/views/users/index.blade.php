@@ -37,9 +37,10 @@
 
                 <tr>
 
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $no->username}}</td>
                     <td>{{ $no->email}}</td>
-                     
+
 
 
                     <td>
