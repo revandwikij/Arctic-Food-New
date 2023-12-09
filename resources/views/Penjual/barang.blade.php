@@ -97,7 +97,7 @@
                                     <td>{{ $data->Kategori }} </td>
                                     <td>{{ $data->Nama_Barang }} </td>
                                     <td>{{ $data->Stok }} </td>
-                                    <td>{{ $data->Keterangan_Barang }} </td>
+                                    <td>{{str_limit($data->Keterangan_Barang, $limit = 50, $end ='...') }} </td>
                                     <td>Rp. {{ number_format($data->Harga) }} </td>
                                     <td>
                                         <a href="Ubah/{{ $data->Id_Barang }}" class="btn btn-secondary">Edit</a>

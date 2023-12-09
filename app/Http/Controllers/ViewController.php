@@ -27,6 +27,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use App\Notifications\PesananMasukNotification;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
