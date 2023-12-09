@@ -128,7 +128,7 @@ class ViewController extends Controller
 
         // dd($admin->notifications);
 
-    return view('Penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
+    return view('penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
     'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku'));
     }
 
@@ -206,7 +206,7 @@ class ViewController extends Controller
         $penjual = Penjual::join('users', 'penjual.email', '=', 'users.email')->where('users.id', '=', $user->id)->get();
         $admin = users::where('level', 'admin')->first();
 
-        return view('Penjual.profileadmin', ['admin' => $admin, 'penjual' => $penjual]);
+        return view('penjual.profileadmin', ['admin' => $admin, 'penjual' => $penjual]);
     }
 
     public function bayar()
@@ -414,12 +414,12 @@ class ViewController extends Controller
     {
         $ship = Biaya_Ship::sortable()->paginate(10);
         // dd($ship);
-        return view('Penjual.dataship', compact('ship'));
+        return view('penjual.dataship', compact('ship'));
     }
 
     public function tambahship()
     {
-        return view('Penjual.tambahship');
+        return view('penjual.tambahship');
     }
 
     public function riwayat()
@@ -473,7 +473,7 @@ class ViewController extends Controller
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('Penjual.perludikirim', compact('pesanan'));
+        return view('penjual.perludikirim', compact('pesanan'));
     }
 
     public function selesai()
@@ -522,12 +522,12 @@ class ViewController extends Controller
 
     public function laporan()
     {
-        return view('Penjual.laporan');
+        return view('penjual.laporan');
     }
 
     public function rincianlaporan()
     {
-        return view('Penjual.rincianlaporan');
+        return view('penjual.rincianlaporan');
     }
 
     public function laporanPenjualan(Request $request)
@@ -539,7 +539,7 @@ class ViewController extends Controller
         $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
 
 
-        return view('Penjual.lapbar', ['penjualan' => $penjualan]);
+        return view('penjual.lapbar', ['penjualan' => $penjualan]);
     }
 
     public function barangkategori(Request $request)
@@ -558,13 +558,13 @@ class ViewController extends Controller
         // Ambil semua kategori (jika diperlukan)
         $kategori = kategori::all();
 
-        return view('Penjual.barang', ['test' => $test, 'kategori' => $kategori]);
+        return view('penjual.barang', ['test' => $test, 'kategori' => $kategori]);
     }
 
     public function lapbar()
     {
         $penjualan = PenjualanView::all();
-        return view('Penjual.lapbar', compact('penjualan'));
+        return view('penjual.lapbar', compact('penjualan'));
     }
 
     public function lihat1()
@@ -584,7 +584,7 @@ class ViewController extends Controller
 
     public function invoice()
     {
-        return view('Penjual.invoice');
+        return view('penjual.invoice');
     }
 
     public function single($Id_Barang)
@@ -628,14 +628,14 @@ class ViewController extends Controller
     {
         $barangperakun = BarangPerAkunView::paginate(10);
 
-        return view('Penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
+        return view('penjual.lapbarperakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function tampilanlapbarakun(Request $request)
     {
         $barangperakun = BarangPerAkunView::all();
 
-        return view('Penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
+        return view('penjual.tampilanlapbarakun', ['barangperAkun' => $barangperakun]);
     }
 
     public function filterBarang($Id_Kategori)
@@ -657,7 +657,7 @@ class ViewController extends Controller
 
     public function backupdb()
     {
-        return view('Penjual.backupdb');
+        return view('penjual.backupdb');
     }
 
     public function backnya()

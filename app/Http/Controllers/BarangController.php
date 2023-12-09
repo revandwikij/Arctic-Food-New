@@ -208,7 +208,7 @@ class BarangController extends Controller
 
     $request = Barang::sortable(['Stok' => 'asc']);
 
-    return view('Penjual.barang');
+    return view('penjual.barang');
 }
 
 }
