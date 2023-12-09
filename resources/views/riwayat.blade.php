@@ -4,9 +4,7 @@
 
 @section('content')
 
-<style>
-
-</style>
+<h1>Riwayat Pembelian</h1>
 
 <div class="container-order">
 
@@ -17,10 +15,9 @@
             <li>Item 3</li>
           </ul>
     </div> --}}
-    <h1>Riwayat Pembelian</h1>
 
 @if(count($pesanan) > 0)
-<form action="/transaksi/result" method="GET">
+<form id="filterForm" action="/transaksi/result" method="GET">
     {{ csrf_field() }}
    <h5> <label for="status" class="widget-title">Pilih Status:</label></h5>
     <select name="status" id="status">
@@ -30,7 +27,7 @@
         <option value="Dikirim">Dikirim</option>
         <option value="Dibatalkan">Dibatalkan</option>
      </select>
-    <button type="submit">Filter</button>
+    {{-- <button type="submit">Filter</button> --}}
 </form>
     @foreach ($pesanan as $item)
     <div class="order-list">
@@ -54,9 +51,15 @@
                     <button class="view-button">Lihat Detail Pesanan</button>
                 </a>
 
-                @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' || $item->Status_Pesanan == 'Selesai')
+                @if ($item->Status_Pesanan == 'Selesai' && $item->Status_Pembayaran == 'Lunas')
                 <a href="/refund/{{ $item->Id_Pesanan }}">
-                    <button class="cancel-button"><i class="cancel-button">Refund</i></button>
+                    <button class="view-button"><i class="accept-button">Refund</i></button>
+                </a>
+                @endif
+
+                @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
+                <a href="/refund/{{ $item->Id_Pesanan }}">
+                    <button class="view-button"><i class="cancel-button">Batalkan Pesanan</i></button>
                 </a>
                 @endif
 
@@ -94,7 +97,7 @@
     <div class="no-transaction-message">
         <p>Kamu belum memiliki transaksi. Ayo mulai berbelanja sekarang!</p>
         <a href="/halaman-belanja">
-            <button class="shop-button">Belanja Sekarang</button>
+            <button class="btn btn-primary">Belanja Sekarang</button>
         </a>
     </div>
 @endif
@@ -104,6 +107,28 @@
 </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        // Listen for changes in the select element
+        $('#status').change(function() {
+            // Submit the form when the select value changes
+            $('#filterForm').submit();
+        });
+    });
+</script>
+
+<style>
+    <script>
+    $(document).ready(function () {
+        // Target the select element by its ID
+        $('#status').change(function () {
+            // Submit the form when the select value changes
+            $('#filterForm').submit();
+        });
+    });
+</script>
+</style>
 
 @endsection

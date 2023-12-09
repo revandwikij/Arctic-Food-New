@@ -5,11 +5,15 @@ body {
 
 }
 
+p{
+    color: black;
+}
+
 .detail-pesanan {
-    max-width: 800px;
+    max-width: 90%;
     margin: 20px auto;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     font-size: 10px;
@@ -54,10 +58,6 @@ h2 {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
-
-.item, name{
-
 }
 
 p {
@@ -116,7 +116,7 @@ tr:nth-child(even) {
     align-items: center;
     margin-bottom: 20px;
     width: auto;
-    height: 170px;
+    height: 100px;
 }
 
 
@@ -137,12 +137,14 @@ tr:nth-child(even) {
 }
 
 .card .item-name {
+    color: black;
     font-size: 18px;
     font-weight: bold;
 }
 
 .card .item-quantity, .card .item-subtotal {
     font-size: 14px;
+    color: black;
 }
 
 .view-product-button {
@@ -179,6 +181,7 @@ tr:nth-child(even) {
     outline: none; /* Menghapus outline */
     cursor: pointer; /* Menambahkan efek kursor tangan saat dihover */
     border: none; /* Menghapus border */
+    margin-left: auto;
     transition: background-color 0.3s ease; /* Efek perubahan warna latar belakang saat dihover */
 }
 

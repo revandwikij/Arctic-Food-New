@@ -86,13 +86,13 @@
                                     @endforeach
                                     <div class=" col-sm-12 fixed-bottom cart-shopping-total ">
                                         <table class="table float-end">
-                                            <div class="shopping-cart-btn">
+                                            {{-- <div class="shopping-cart-btn">
                                                 <span class="">
                                                     <a href="/ "
                                                         class="btn btn-upper btn-primary outer-left-xs">Kembali
                                                         Belanja</a>
                                                 </span>
-                                            </div>
+                                            </div> --}}
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -116,6 +116,11 @@
                                                                 type="submit">Bayar</button>
                                                         @endif
                                                         </form>
+                                                        <span class="">
+                                                            <a href="/ "
+                                                                class="btn btn-upper btn-primary outer-left-xs" style="margin-left: 70%; margin-top:0px;">Kembali
+                                                                Belanja</a>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             </tbody><!-- /tbody -->

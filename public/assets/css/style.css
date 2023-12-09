@@ -1986,7 +1986,7 @@ blockquote cite {
     padding: 10px;
     cursor: pointer;
     margin-bottom: 20px;
-    width: 100%;
+    width: 60%;
 }
 .product-item .cart-concern {
     background: var(--light-color);
@@ -2024,11 +2024,11 @@ i.icon.icon-arrow-io {
     padding-left: 25px;
 }
 .product-item h3.product-title {
-    font-size: 1.4em;
+    font-size: 1.0em;
     margin: 0;
 }
 .product-item .item-price {
-    font-size: 1.8em;
+    font-size: 1.2em;
 }
 .swiper.product-swiper {
     position: relative;

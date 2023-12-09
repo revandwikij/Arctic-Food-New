@@ -22,24 +22,24 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="ps-3 d-flex flex-column justify-content">
-                                                        <p class="fw-bold">{{ $data->Label }}</p> <small class=" d-flex">
-                                                            <span class=" text-muted">Nama Penerima :</span> <span
-                                                                class=" fw-bold"> {{ $data->Nama_Penerima }}</span> </small>
-                                                        <small class=""> <span class=" text-muted">No HP:</span> <span
-                                                                class=" fw-bold">{{ $data->No_Hp }}</span> </small>
+                                                        <p class="fw-bold">{{ $data->Label }}</p> 
+                                                        <small class="d-flex">
+                                                            <span class=" text-muted">Nama Penerima :</span> 
+                                                            <span class=" fw-bold"> {{ $data->Nama_Penerima }}</span> 
+                                                        </small>
+                                                        <small class="d-flex"> 
+                                                          <span class=" text-muted">No HP :</span> 
+                                                          <span class=" fw-bold">{{ $data->No_Hp }}</span> 
+                                                        </small>
+                                                        <small class="d-flex"> 
+                                                          <span class=" text-muted">Kota  :</span> 
+                                                          <span class=" fw-bold">{{ $data->Kota }}</span> 
+                                                        </small>
+                                                        <small class="d-flex"> 
+                                                          <span class=" text-muted">Alamat Lengkap  :</span> 
+                                                          <span class=" fw-bold">{{ $data->Alamat_Lengkap}}</span> 
+                                                        </small>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <p class="pe-3"><span class="red">{{ $data->Kota }}</span></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center"> <span class="pe-3 text-muted">Alamat
-                                                        Lengkap</span>
-                                                    <span class=" fw-bold">{{ $data->Alamat_Lengkap }}</span>
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -270,7 +270,7 @@
                 },
                 onPending: function(result) {
                     /* You may add your own implementation here */
-                    alert("wating your payment!");
+                    alert("waiting your payment!");
                     console.log(result);
                 },
                 onError: function(result) {

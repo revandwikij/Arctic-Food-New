@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
     Route::get('/order', [ViewController::class, 'pesanan']);
-
+    
         Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
         Route::get('/omset', [ViewController::class, 'laporanOmset']);
         Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
@@ -158,6 +158,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::post('/ulasan', [ViewController::class, 'ulasan']);
     Route::get('/transaksi/result', [ViewController::class, 'filriwayat']);
     Route::get('/hapuspayment', [PesanController::class, 'hapuspayment']);
+    Route::get('/refund/{Id_Pesanan}', [PesanController::class, 'refundPayment']);
     Route::get('/filter-barang/{Id_Kategori}', [ViewController::class, 'filterBarang']);
     Route::get('/profile', [ViewController::class, 'profil'])->middleware('auth')->name('profile');
 

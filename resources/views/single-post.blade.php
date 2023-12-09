@@ -10,10 +10,7 @@
                 <div class="col-md-12">
                     <div class="breadcrumbs">
                         <span class="item">
-                            <a href="index.html">Home /</a>
-                        </span>
-                        <span class="item">
-                            <a href="blog.html">Blog /</a>
+                            <a href="/">Home /</a>
                         </span>
                         <span class="item">Single post</span>
                     </div>
@@ -27,10 +24,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1 class="page-title">{{ $data->Nama_Barang }}</h1>
+                        <h1 class="page-title" style="font-size: 40px">{{ $data->Nama_Barang }}</h1>
                         <div class="feature-image">
                             @if ($data->Foto_Barang)
-                                <img style="width: 500px; height:500px" src="{{ asset('uploads/' . $data->Foto_Barang) }}">
+                                <img style="width: 350px; height:350px; margin-left: 60px" src="{{ asset('uploads/' . $data->Foto_Barang) }}">
                             @endif
                         </div>
                     </div>
@@ -55,34 +52,34 @@
                             <br>
                             <table class="table">
                                 <tbody style="font-weight: bold">
-                                    <tr style="font-size: 35px">
+                                    <tr style="font-size: 20px; color:black">
                                         <td>Harga</td>
                                         <td>:</td>
                                         <td>Rp. {{ number_format($data->Harga) }}</td>
                                     </tr>
-                                    <tr style="font-size: 35px">
+                                    <tr style="font-size: 20px; color:black">
                                         <td>Stok</td>
                                         <td>:</td>
                                         <td id="stok">{{ $data->Stok }}</td>
                                     </tr>
-                                    <tr style="font-size: 35px">
+                                    <tr style="font-size: 20px; color:black">
                                         <td>Berat</td>
                                         <td>:</td>
                                         <td>{{ $data->Berat }} G</td>
                                     </tr>
-                                    <tr style="font-size: 35px">
+                                    <tr style="font-size: 20px; color:black">
                                         <td>Keterangan</td>
                                         <td>:</td>
                                         <td> {{ $data->Keterangan_Barang }}</td>
                                     </tr>
 
-                                    <tr style="font-size: 30px">
+                                    <tr style="font-size: 20px; color:black">
                                         <td>Jumlah Pesanan</td>
                                         <td>:</td>
                                         <td>
                                             <form action="/keranjang/{{ $data->Id_Barang }}" method="POST">
                                                 @csrf
-                                                <input type="number" name="jumlah_pesan" class="form-control" required>
+                                                <input type="number" name="jumlah_pesan" class="form-control" style="">
                                                 <button type="submit" class="btn btn-primary mt-3">Masukan
                                                     Keranjang</button>
                                             </form>
@@ -100,23 +97,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="social-links d-flex margin-small">
-                                <div class="element-title">Share:</div>
-                                <ul class="d-flex list-unstyled">
-                                    <li>
-                                        <a href="#"><i class="icon icon-facebook"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="icon icon-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="icon icon-instagram"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="icon icon-youtube-play"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -191,137 +172,7 @@
         </div>
     </section>
 
-    <section id="latest-blog" class="padding-large">
-        <div class="container">
-            <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-                <h2 class="section-title">Related Posts</h2>
-                <div class="btn-wrap align-right">
-                    <a href="#" class="d-flex align-items-center">Read All Articles <i
-                            class="icon icon icon-arrow-io"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="row d-flex flex-wrap">
-                <article class="col-md-4 post-item">
-                    <div class="image-holder zoom-effect">
-                        <a href="#">
-                            <img src="images/post-img1.jpg" alt="post" class="post-image">
-                        </a>
-                    </div>
-                    <div class="post-content d-flex">
-                        <div class="meta-date">
-                            <div class="meta-day text-primary">22</div>
-                            <div class="meta-month">Aug-2021</div>
-                        </div>
-                        <div class="post-header">
-                            <h3 class="post-title">
-                                <a href="#">top 10 casual look ideas to dress up your kids</a>
-                            </h3>
-                            <a href="blog.html" class="blog-categories">Fashion</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="col-md-4 post-item">
-                    <div class="image-holder zoom-effect">
-                        <a href="#">
-                            <img src="images/post-img2.jpg" alt="post" class="post-image">
-                        </a>
-                    </div>
-                    <div class="post-content d-flex">
-                        <div class="meta-date">
-                            <div class="meta-day text-primary">25</div>
-                            <div class="meta-month">Aug-2021</div>
-                        </div>
-                        <div class="post-header">
-                            <h3 class="post-title">
-                                <a href="#">Latest trends of wearing street wears supremely</a>
-                            </h3>
-                            <a href="blog.html" class="blog-categories">Trending</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="col-md-4 post-item">
-                    <div class="image-holder zoom-effect">
-                        <a href="#">
-                            <img src="images/post-img3.jpg" alt="post" class="post-image">
-                        </a>
-                    </div>
-                    <div class="post-content d-flex">
-                        <div class="meta-date">
-                            <div class="meta-day text-primary">28</div>
-                            <div class="meta-month">Aug-2021</div>
-                        </div>
-                        <div class="post-header">
-                            <h3 class="post-title">
-                                <a href="#">types of comfortable clothes ideas for women</a>
-                            </h3>
-                            <a href="blog.html" class="blog-categories">Inspiration</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="brand-collection" class="padding-medium bg-light-grey">
-        <div class="container">
-            <div class="d-flex flex-wrap justify-content-between">
-                <img src="images/brand1.png" alt="phone" class="brand-image">
-                <img src="images/brand2.png" alt="phone" class="brand-image">
-                <img src="images/brand3.png" alt="phone" class="brand-image">
-                <img src="images/brand4.png" alt="phone" class="brand-image">
-                <img src="images/brand5.png" alt="phone" class="brand-image">
-            </div>
-        </div>
-    </section>
-
-    <section id="instagram" class="padding-large">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Follow our instagram</h2>
-            </div>
-            <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
-            </p>
-            <div class="row d-flex flex-wrap justify-content-between">
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image1.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image2.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image3.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image4.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image5.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <figure class="zoom-effect">
-                        <img src="images/insta-image6.jpg" alt="instagram" class="insta-image">
-                        <i class="icon icon-instagram"></i>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <section id="shipping-information">
         <hr>
