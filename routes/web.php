@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
         Route::get('/backupdb', [ViewController::class, 'backupdb']);
         Route::get('/backup', [ViewController::class, 'backnya']);
         Route::get('/log', [ViewController::class, 'log']);
+        Route::get('/loguser', [ViewController::class, 'loguser']);
         Route::post('/restore', [ViewController::class, 'restorenya'])->name('restore');
         Route::get('/lapbarperakun', [ViewController::class, 'lapbarperakun']);
         Route::get('/tampilanlapbarakun', [ViewController::class, 'tampilanlapbarakun']);

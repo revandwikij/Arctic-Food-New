@@ -876,8 +876,33 @@ class ViewController extends Controller
 
     public function log()
     {
-        $user = pelanggan::join('users', 'pelanggan.email', '=', 'users.email')->get();
-        $log = log::all();
+        $user = User::select('level')->distinct()->get();
+        // dd($user);/
+        $log = log::join('users', 'users.email', '=', 'activity_log.email')
+        ->select('users.level', 'activity_log.*')
+        ->get();
+        // dd($log);
+        return view('penjual.log', compact('log', 'user'));
+    }
+
+    public function loguser(Request $request)
+    {
+        $user = $request->input('user');
+        // $kategoriValue = DB::select("SELECT CONVERT(?, utf8mb4_general_ci) AS user", [$request->user]);
+
+
+        // Lakukan query untuk mengambil data PenjualanView sesuai user
+        $test = [];
+
+        if ($user) {
+            $log = log::join('users', 'users.email', '=', 'activity_log.email')
+            ->select('users.level', 'activity_log.*')
+            ->where('users.level', '=', $user)->paginate(5);
+        }
+
+
+        $user = User::select('level')->distinct()->get();
+        // dd($log);
         return view('penjual.log', compact('log', 'user'));
     }
 }
