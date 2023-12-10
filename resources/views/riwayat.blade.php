@@ -108,7 +108,7 @@
     </div>
 @endif
     <div class="pagination-links">
-        {{ $pesanan->links() }}
+        {{-- {{ $pesanan->links() }} --}}
     </div>
 </div>
 </div>

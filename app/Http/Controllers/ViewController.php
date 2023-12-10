@@ -64,15 +64,15 @@ class ViewController extends Controller
             ->limit(5) // Ambil 5 barang terlaku
             ->get();
 
-            $ulasan = UlasanModel::select(
-                'ulasan.*',
-                'pelanggan.username',
-                'barang.Nama_Barang',
-                DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
-            )
-                ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-                ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
-                ->orderBy('ulasan.created_at', 'desc')->limit(4)->get();
+        $ulasan = UlasanModel::select(
+            'ulasan.*',
+            'pelanggan.username',
+            'barang.Nama_Barang',
+            DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
+        )
+            ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
+            ->orderBy('ulasan.created_at', 'desc')->limit(4)->get();
 
         //sisa stok deng
         $barangTidakLaku = Barang::select('barang.Id_Barang', 'barang.Nama_Barang', 'barang.Stok')
@@ -113,34 +113,44 @@ class ViewController extends Controller
         // dd($notifications);
 
 
-         // Mengambil data pesanan dan pelanggan yang sesuai
-         $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-         ->join('users', 'pelanggan.email', '=', 'users.email')
-        //  ->where('users.id', '=', $user->id)
-         ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
-         ->first();
+        // Mengambil data pesanan dan pelanggan yang sesuai
+        $notif = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+            ->join('users', 'pelanggan.email', '=', 'users.email')
+            //  ->where('users.id', '=', $user->id)
+            ->select('pelanggan.username', 'pesanan.Id_Pesanan', 'pesanan.Status_Pesanan')
+            ->first();
 
-         if ($notif) {
-             $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)->first();
+        if ($notif) {
+            $admin = users::where('level', 'penjual')->where('users.id', '=', $user->id)->first();
 
-             if ($admin) {
-                 // Kirim notifikasi dengan data yang telah disiapkan
-                 $informasiPesanan = [
-                     'id_pesanan' => $notif->Id_Pesanan,
-                     'status_pesanan' => $notif->Status_Pesanan,
-                     'nama_pelanggan' => $notif->username,
-                     // Informasi lain yang ingin disertakan dalam notifikasi
-                    ];
+            if ($admin) {
+                // Kirim notifikasi dengan data yang telah disiapkan
+                $informasiPesanan = [
+                    'id_pesanan' => $notif->Id_Pesanan,
+                    'status_pesanan' => $notif->Status_Pesanan,
+                    'nama_pelanggan' => $notif->username,
+                    // Informasi lain yang ingin disertakan dalam notifikasi
+                ];
 
-                    // dd($informasiPesanan);// Menggunakan first() untuk mengambil satu objek dari hasil query
+                // dd($informasiPesanan);// Menggunakan first() untuk mengambil satu objek dari hasil query
                 $admin->notify(new PesananMasukNotification($informasiPesanan));
             }
         }
 
         // dd($admin->notifications);
 
-    return view('penjual.home', compact('kategoris', 'test', 'pelanggan', 'barang', 'Total_Harga',
-    'bulan', 'totalTransaksiBulanIni', 'barangTerlaku', 'barangTidakLaku', 'ulasan'));
+        return view('penjual.home', compact(
+            'kategoris',
+            'test',
+            'pelanggan',
+            'barang',
+            'Total_Harga',
+            'bulan',
+            'totalTransaksiBulanIni',
+            'barangTerlaku',
+            'barangTidakLaku',
+            'ulasan'
+        ));
     }
 
     public function login()
@@ -446,14 +456,14 @@ class ViewController extends Controller
             ->orderby('pesanan.created_at', 'desc')
             ->paginate(6);
 
-        $pembayaran = $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-        ->join('users', 'users.email', '=', 'pelanggan.email')
-        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
-        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
-        ->where('users.id', '=', $user->id)
-        ->select('pesanan.updated_at as pesanan_updated_at')
-        ->get();
+        // $pembayaran = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
+        //     ->join('users', 'users.email', '=', 'pelanggan.email')
+        //     ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
+        //     ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
+        //     ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
+        //     ->where('users.id', '=', $user->id)
+        //     ->select('pesanan.updated_at as pesanan_updated_at')
+        //     ->get();
 
         return view('riwayat', compact('pesanan'));
     }
@@ -515,7 +525,7 @@ class ViewController extends Controller
         //     $alamat = Alamat::join('pesanan', 'alamat.Id_Alamat', '=', 'pesanan.Id_Alamat')
         //    ->where('pesanan.Id_Pesanan', '=', $pesan->Id_Pesanan)->get();
 
-        return view('Penjual.selesai', compact('pesanan'));
+        return view('penjual.selesai', compact('pesanan'));
     }
 
     public function profileadmin()
@@ -661,7 +671,7 @@ class ViewController extends Controller
             DB::raw("DATE_FORMAT(ulasan.created_at, '%m-%d-%Y') as formatted_created_at")
         )
             ->join('pelanggan', 'ulasan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-            ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')  
+            ->join('barang', 'barang.Id_Barang', '=', 'ulasan.Id_Barang')
             ->orderBy('ulasan.created_at', 'desc')->paginate(10);
 
         return view('Penjual.ulasanpenjual', compact('ulasan'));
@@ -920,11 +930,11 @@ class ViewController extends Controller
     public function ulasan($Id_Pesanan)
     {
         $ulasan = Pesan::join('keranjang', 'keranjang.Id_Keranjang', '=', 'pesanan.Id_Keranjang')
-        ->join('detail_keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
-        ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
-        ->join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
-        ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
-        ->get();
+            ->join('detail_keranjang', 'keranjang.Id_Keranjang', '=', 'detail_keranjang.Id_Keranjang')
+            ->join('barang', 'barang.Id_Barang', '=', 'detail_keranjang.Id_Barang')
+            ->join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
+            ->where('pesanan.Id_Pesanan', '=', $Id_Pesanan)
+            ->get();
 
         return view('listulasan', compact('ulasan'));
     }
@@ -934,8 +944,8 @@ class ViewController extends Controller
         $user = User::select('level')->distinct()->get();
         // dd($user);/
         $log = log::join('users', 'users.email', '=', 'activity_log.email')
-        ->select('users.level', 'activity_log.*')
-        ->get();
+            ->select('users.level', 'activity_log.*')
+            ->get();
         // dd($log);
         return view('penjual.log', compact('log', 'user'));
     }
@@ -951,8 +961,8 @@ class ViewController extends Controller
 
         if ($user) {
             $log = log::join('users', 'users.email', '=', 'activity_log.email')
-            ->select('users.level', 'activity_log.*')
-            ->where('users.level', '=', $user)->paginate(5);
+                ->select('users.level', 'activity_log.*')
+                ->where('users.level', '=', $user)->paginate(5);
         }
 
 
