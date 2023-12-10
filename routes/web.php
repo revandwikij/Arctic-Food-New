@@ -101,11 +101,12 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
     Route::post('/barang/search', [SearchController::class, 'searchbarang']);
     Route::get('/users', [Viewcontroller::class, 'datapelanggan']);
     Route::post('/users/search', [SearchController::class, 'searchuser']);
+    Route::post('/selesai/search', [SearchController::class, 'searchpesanan']);
     Route::get('/order', [ViewController::class, 'pesanan']);
     Route::get('/daftarulasan', [ViewController::class, 'ulasanpen']);
     Route::get('/refund/{Id_Pesanan}', [PesanController::class, 'refundPayment']);
     Route::get('/tolak/{Id_Pesanan}', [PesanController::class, 'tolak']);
-    
+
         Route::get('/barlap', [ViewController::class, 'laporanPenjualan']);
         Route::get('/omset', [ViewController::class, 'laporanOmset']);
         Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
@@ -155,7 +156,7 @@ Route::group(['middleware' => ['auth', 'pembeli']], function () {
     Route::get('/single/{Id_Barang}',[ViewController::class, 'single']);
     Route::post('/ulasan/{Id_Barang}',[UlasanController::class, 'store']);
     Route::get('/detail/{Id_Barang}', [PesanController::class, 'index']);
-    
+
     Route::get('/contact', [ViewController::class, 'contact']);
     Route::get('/rincian/{Id_Barang}', [ViewController::class, 'detailorder']);
     Route::get('/barang/filter',[ViewController::class, 'filter']);

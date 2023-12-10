@@ -20,6 +20,16 @@
 
 <div class="container mt-5">
 
+    <div class="app-search-box" style="width: 50%">
+        <form action="/selesai/search" method="POST">
+            @csrf
+            <input type="text" id="myInput" placeholder="Search..." style="width: 50%" name="cari" class="form-control search-input">
+            <button type="submit" class="btn search-btn btn-primary" value="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
 
     <table class="table table-borderless main">
 <thead>
@@ -73,7 +83,7 @@
     <form action="/tolak/{{$item->Id_Pesanan}}" method="post">
       <button type="submit" class="btn btn-primary mb-2">Tolak</button>
     @csrf
-    
+
     </form>
     @endif
     @if ($item->Status_Pesanan == 'Selesai')
