@@ -945,8 +945,7 @@ class ViewController extends Controller
         // dd($user);/
         $log = log::join('users', 'users.email', '=', 'activity_log.email')
             ->select('users.level', 'activity_log.*')
-            ->get();
-        // dd($log);
+            ->paginate(10);        // dd($log);
         return view('penjual.log', compact('log', 'user'));
     }
 
@@ -957,13 +956,14 @@ class ViewController extends Controller
 
 
         // Lakukan query untuk mengambil data PenjualanView sesuai user
-        $test = [];
+        $log = log::join('users', 'users.email', '=', 'activity_log.email')
+            ->select('users.level', 'activity_log.*');
 
         if ($user) {
-            $log = log::join('users', 'users.email', '=', 'activity_log.email')
-                ->select('users.level', 'activity_log.*')
-                ->where('users.level', '=', $user)->paginate(5);
+            $log = $log->where('users.level', '=', $user);
         }
+
+        $log = $log->paginate(10);
 
 
         $user = User::select('level')->distinct()->get();

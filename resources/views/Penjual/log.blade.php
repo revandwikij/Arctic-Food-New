@@ -12,7 +12,7 @@
     <form action="/loguser" id="userForm" method="GET">
         @csrf
         <div class="form-group">
-            <select class="form-select" name="user" id="user">
+            <select class="form-select" style="width: 40%" name="user" id="user">
                 <option selected>PILIH USER</option>
                 @foreach ($user as $u)
                     <option>{{ $u->level }}</option>
@@ -55,7 +55,7 @@
             </tbody>
         </table>
 
-        {{-- {{ $log->links() }} --}}
+        {{ $log->links() }}
 
     </div>
 
