@@ -17,7 +17,7 @@
 
 
 
-<form action="/omset" method="GET">
+<form action="/omsetpdf" method="GET">
     @csrf
     <label for="bulan_awal">Bulan Awal:</label>
     <input type="month" name="bulan_awal" id="bulan_awal">
@@ -25,14 +25,15 @@
     <label for="bulan_akhir">Bulan Akhir:</label>
     <input type="month" name="bulan_akhir" id="bulan_akhir">
 
-    <button type="submit">Tampilkan Laporan</button>
+    <button type="submit" name="action" value="lihat" class="btn btn-primary">Tampilkan Laporan</button>
+    <button type="submit" name="action" value="download" class="btn btn-primary">Download Laporan</button>
 </form>
 
 <div class="container mb-4">
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-striped">
+                {{-- <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Bulan</th>
@@ -68,10 +69,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-end">
-                    <a href="{{ url('/stream-pdf2') }}" target="_blank" class="btn btn-primary">Lihat</a>
-                    <a href="{{ url('/generate-pdf2') }}" class="btn btn-success">Download</a>
-                </div>
             </div>
         </div>
     </div>

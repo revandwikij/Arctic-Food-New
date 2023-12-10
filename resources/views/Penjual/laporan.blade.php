@@ -47,14 +47,12 @@
 
 <body>
     <div class="container kop-surat">
-        <div class="judul">Laporan Omset Arctic Food</div>
-        <div class="info">Alamat: Jl. Wildan Bugi</div>
+        <div class="judul">Laporan Penjualan Arctic Food</div>
+        <div class="info">Alamat: Jl. Marga Asih</div>
         <div class="info">Telepon: 089656088434</div>
-        <div class="info">Periode .... hingga .... </div>
+        <div class="info">Periode {{$tanggalAwal}} hingga {{$tanggalAkhir}} </div>
 
-        <div>
-            <img class="logo" src="	..assets/css/images/arcticlogo.png" alt="Logo Arctic Food" >
-        </div>
+       
     </div>
 
     <div class="container">
