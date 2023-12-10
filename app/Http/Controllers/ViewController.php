@@ -189,8 +189,9 @@ class ViewController extends Controller
             $ker->Id_Keranjang = $newUid;
             $ker->Id_Pelanggan = $idpel->Id_Pelanggan;
             $ker->Status = "Aktif";
-            // dd($ker);
             $ker->save();
+
+            return redirect('/cart');
         }
 
         return view('users.shopping_cart', compact('test', 'cekcart', 'alamat'));
@@ -232,7 +233,7 @@ class ViewController extends Controller
     {
         $test = Barang::join('kategori', 'barang.Id_Kategori', '=', 'kategori.Id_Kategori')
             ->sortable()
-            ->paginate(3);
+            ->paginate(10);
         // ->orderBy('Id_Barang', 'desc')
         // ->get(['barang.*', 'kategori.Kategori']);
         $kategori = kategori::all();
@@ -446,14 +447,6 @@ class ViewController extends Controller
             ->orderby('pesanan.created_at', 'desc')
             ->paginate(6);
 
-        $pembayaran = $pesanan = Pesan::join('pelanggan', 'pesanan.Id_Pelanggan', '=', 'pelanggan.Id_Pelanggan')
-        ->join('users', 'users.email', '=', 'pelanggan.email')
-        ->join('alamat', 'pesanan.Id_Alamat', '=', 'alamat.Id_Alamat')
-        ->join('shipping', 'pesanan.Id_Pesanan', '=', 'shipping.Id_Pesanan')
-        ->join('pembayaran', 'shipping.Id_Shipping', '=', 'pembayaran.Id_Shipping')
-        ->where('users.id', '=', $user->id)
-        ->select('pesanan.updated_at as pesanan_updated_at')
-        ->get();
 
         return view('riwayat', compact('pesanan'));
     }
@@ -551,16 +544,9 @@ class ViewController extends Controller
         return view('penjual.rincianlaporan');
     }
 
-    public function laporanPenjualan(Request $request)
-    {
-        $tanggalAwal = $request->input('tanggal_awal');
-        $tanggalAkhir = $request->input('tanggal_akhir');
-
-        // $penjualan = PenjualanView::whereBetween('tanggal_awal', $tanggalAwal AND 'tanggal_akhir', $tanggalAkhir)->get();
-        $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
-
-
-        return view('penjual.lapbar', ['penjualan' => $penjualan]);
+    public function laporanPenjualan()
+    { 
+        return view('penjual.lapbar');
     }
 
     public function barangkategori(Request $request)
@@ -669,12 +655,8 @@ class ViewController extends Controller
 
     public function laporanOmset(Request $request)
     {
-        $bulanawal = $request->input('bulan_awal');
-        $bulanakhir = $request->input('bulan_akhir');
-
-        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
-
-        return view('penjual.lapset', ['penjualan' => $penjualan]);
+        
+        return view('penjual.lapset');
     }
 
     public function lapset()

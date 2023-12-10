@@ -85,7 +85,7 @@
                 @if ($item->Status_Pesanan == 'Diterima')
                 <form action="/finish/{{ $item->Id_Pesanan }}" method="post">
                     {{ csrf_field() }}
-                    <button onclick="return confirm('Selesaikan Pesanan? ')" class="accept-button">Pesanan Diterima</button>
+                    <button onclick="return confirm('Selesaikan Pesanan? ')" class="accept-button">Selesaikan Pesanan</button>
                 </form>
                 @endif
 

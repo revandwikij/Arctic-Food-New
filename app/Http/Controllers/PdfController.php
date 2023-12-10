@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\DetailKeranjang;
 use App\Models\OmsetView;
 use App\Models\pelanggan;
+use App\Models\PenjualanView;
 use App\Models\Pesan;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -18,11 +19,11 @@ use Illuminate\Support\Facades\Mail;
 
 class PDFController extends Controller
 {
-    public function generatePDF(Request $request)
+    public function generatePDF($tanggalAwal, $tanggalAkhir)
     {
-        $tanggalAwal = $request->input('tanggal_awal');
-        $tanggalAkhir = $request->input('tanggal_akhir');
-        $penjualan = DB::table('v_laporan_barang')->get();
+        
+        $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
+
 
         $nama = auth()->user()->username;
         // dd($nama);
@@ -44,38 +45,47 @@ class PDFController extends Controller
     {
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
-        $penjualan = DB::table('v_laporan_barang')->get();
-        $barang = DB::table('v_laporan_barang')
-            ->select('produk', 'total_terjual', DB::raw('SUM(total_terjual) as total_kuantitas'))
-            ->groupBy('produk', 'total_terjual')
-            ->get();
-
-            $nama = auth()->user()->username;
-            // dd($nama);
-
-        $data = [
-            'nama' => $nama,
-            'penjualan' => $penjualan,
-            'barang' => $barang,
-            'tanggalAwal' => $tanggalAwal,
-            'tanggalAkhir' => $tanggalAkhir,
-        ];
-
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Penjual.laporan', $data);
-
-        return $pdf->stream('Penjual.laporan');
-    }
-
-    public function generatePDF2()
-    {
-        $penjualan = DB::table('v_laporan_omset')->get();
+        $penjualan = PenjualanView::whereBetween('tanggal_awal', [$tanggalAwal, $tanggalAkhir])->get();
 
         $nama = auth()->user()->username;
 
         $data = [
             'nama' => $nama,
             'penjualan' => $penjualan,
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
+        ];
+
+        if($request->action == 'lihat')
+        {
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('Penjual.laporan', $data);
+
+        return $pdf->stream('Penjual.laporan');
+        }
+
+        if($request->action == 'download')
+        {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('Penjual.laporan', $data);
+
+        return $pdf->download('Penjual.laporan.pdf');
+        }
+    }
+
+    public function generatePDF2($bulanawal, $bulanakhir)
+    {
+        $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
+
+        $nama = auth()->user()->username;
+
+        $data = [
+
+            'nama' => $nama,
+            'penjualan' => $penjualan,
+            'bulanawal' => $bulanawal,
+            'bulanakhir' => $bulanakhir,
         ];
 
         $pdf = App::make('dompdf.wrapper');
@@ -86,23 +96,37 @@ class PDFController extends Controller
 
     public function streamPDF2(Request $request)
     {
-        $penjualan = DB::table('v_laporan_omset')->get();
         $bulanawal = $request->input('bulan_awal');
         $bulanakhir = $request->input('bulan_akhir');
-
+         
         $penjualan = OmsetView::whereBetween('bulan', [$bulanawal, $bulanakhir])->get();
 
         $nama = auth()->user()->username;
-        // dd($nama);
 
         $data = [
             'nama'  => $nama,
             'penjualan' => $penjualan,
+            'bulanawal' => $bulanawal,
+            'bulanakhir' => $bulanakhir,
         ];
+
+        if($request->action == 'lihat')
+        {
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Penjual.laporan2', $data)->setOptions(['defaultFont' => 'sans-serif']);
 
         return $pdf->stream('Penjual.laporan2.pdf');
+        }
+
+        if($request->action == 'download')
+        {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('Penjual.laporan2', $data)->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Penjual.laporan2.pdf');
+        }
+
+
     }
 
     public function invoice($Id_Pesanan)

@@ -69,7 +69,8 @@
   </td>
   <td>
     @if ($item->Status_Pesanan == 'Diterima')
-    <a href="/refund/{{ $item->Id_Pesanan }}" onclick="(Refund Pesanan ?)"></a>
+    <a href="/refund/{{ $item->Id_Pesanan }}" onclick="(Refund Pesanan ?)" class="btn btn-primary mb-2"> Refund</a>
+
     <form action="/tolak/{{$item->Id_Pesanan}}" method="post">
       <button type="submit" class="btn btn-primary mb-2">Tolak</button>
     @csrf

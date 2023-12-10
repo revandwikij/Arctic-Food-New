@@ -111,10 +111,10 @@ Route::group(['middleware' => ['auth', 'seller']], function () {
         Route::post('konfirm/{Id_Pesanan}', [PesanController::class, 'konfirm']);
         Route::get('/profileadmin', [ViewController::class, 'profileadmin']);
         Route::get('/laporanbarang', [ViewController::class, 'lapbar']);
-        Route::get('/generate-pdf', [PdfController::class, 'generatePDF']);
-        Route::get('/stream-pdf', [PdfController::class, 'streamPDF']);
-        Route::get('/generate-pdf2', [PdfController::class, 'generatePDF2']);
-        Route::get('/stream-pdf2', [PdfController::class, 'streamPDF2']);
+        Route::get('/generate-pdf/{tanggalawal}/{tanggalakhir}', [PdfController::class, 'generatePDF']);
+        Route::get('/penjualanpdf', [PdfController::class, 'streamPDF']);
+        Route::get('/generate-pdf2/{bulanawal}/{bulanakhir}', [PdfController::class, 'generatePDF2']);
+        Route::get('/omsetpdf', [PdfController::class, 'streamPDF2']);
         Route::get('/lihatinvoice/{Id_Pesanan}', [PdfController::class, 'invoice']);
         Route::get('/kiriminvoice/{Id_Pesanan}', [PdfController::class, 'kirim']);
         Route::get('/invoice', [ViewController::class, 'invoice']);

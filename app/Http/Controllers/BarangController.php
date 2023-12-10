@@ -164,14 +164,16 @@ class BarangController extends Controller
     }
 
 
-	$barang = Barang::where('Id_Barang',$Id_Barang)->delete();
-
     activity_log::create([
         'Id_Log' => 'L' . date('Ymd') . mt_rand(1000, 9999),
         'email' => auth()->user()->email,
-        'kegiatan' => "Admin " . auth()->user()->username . " telah menghapus barang dengan Id Barang" . $barang->Id_Barang,
+        'kegiatan' => "Admin " . auth()->user()->username . " telah menghapus barang dengan Id Barang" . $Id_Barang,
         'created_at' => now()
     ]);
+
+	Barang::where('Id_Barang',$Id_Barang)->delete();
+
+    
 
 
 	return redirect('/barang');

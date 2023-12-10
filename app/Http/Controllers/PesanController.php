@@ -106,7 +106,7 @@ class PesanController extends Controller
 
                 else {
 
-                if($Barang->Stok < $request->jumlah_pesan  || $request->jumlah_pesan > 0)
+                if($Barang->Stok < $request->jumlah_pesan  || $request->jumlah_pesan < 0)
                 {
                     return redirect()->back()->with('error', 'Stok tidak cukup');
                 }
