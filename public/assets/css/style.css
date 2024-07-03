@@ -1894,82 +1894,82 @@ blockquote cite {
 /*----- Billboard
 --------------------------------------------------------------*/
 #billboard {
-    position: relative;
+  position: relative;
 }
 #billboard .button-prev,
-#billboard .button-next{
-    font-size: 24px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    padding: 12px;
-    height: fit-content;
-    z-index: 2;
-    margin: auto;
-    padding: 10px;
-    background: rgba(255,255,255,0.4);
-    color: #191919;
+#billboard .button-next {
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 12px;
+  height: fit-content;
+  z-index: 2;
+  margin: auto;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  color: #191919;
 }
-#billboard .button-prev{
-    left: 0;
+#billboard .button-prev {
+  left: 0;
 }
-#billboard .button-next{
-    right: 0;
+#billboard .button-next {
+  right: 0;
 }
 #billboard .button-prev:hover,
 #billboard .button-next:hover {
-    color: var(--light-color);
-    background-color: var(--primary-color);
+  color: var(--light-color);
+  background-color: var(--primary-color);
 }
-#billboard .image-holder img.banner-image {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
+.swiper-container {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px; /* Memberikan jarak pada container agar gambar tidak menempel */
+  padding-top: 30px; /* Menambahkan jarak atas */
 }
-.main-swiper .banner-content {
-    position: absolute;
-    top: 145px;
-    z-index: 5;
-    width: 100%;
+
+.main-swiper .swiper-wrapper {
+  display: flex;
+  transition: transform 0.3s ease;
 }
-.banner-content h2.banner-title {
-    font-size: 7.1em;
-    font-weight: 800;
-    line-height: 1em;
-    letter-spacing: -0.02em;
-    text-transform: capitalize;
-    color: var(--dark-color);
-}
-.banner-content p {
-    margin: 35px 0 60px;
-}
+
 .main-swiper .swiper-slide {
-    height: 90vh;
-    min-height: 100px;
+  flex: 0 0 40%; /* Mengatur lebar slide agar menjadi 40% dari container */
+  height: calc(40vw * 3 / 4); /* Mengatur tinggi slide dengan rasio 3:4 */
+  max-height: 300px; /* Membatasi tinggi maksimal */
+  min-height: 100px;
+  margin: 10px; /* Memberikan jarak antar slide */
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-.main-swiper .container {
-    max-width: 1400px;
-}
+
+/* Responsive adjustments */
 @media screen and (max-width: 1400px) {
-  .banner-content h2.banner-title {
-      font-size: 5.2em;
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 / 4);
   }
 }
+
 @media screen and (max-width: 1099px) {
-  .banner-content h2.banner-title {
-      font-size: 4.9em;
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 / 4);
   }
 }
 
 @media screen and (max-width: 768px) {
-  .banner-content h2.banner-title {
-      font-size: 4.5em;
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 / 4);
+    margin: 5px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .banner-content h2.banner-title {
-      font-size: 3.1em;
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 / 4);
+    margin: 2px;
   }
 }
 

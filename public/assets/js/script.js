@@ -101,16 +101,25 @@
         el: "#billboard .swiper-pagination",
         clickable: true,
       },
-    });
-
-    var swiper = new Swiper(".two-column-swiper", {
+      autoplay: {
+        delay: 3000, // Durasi delay dalam milidetik (3000ms = 3 detik)
+        disableOnInteraction: false, // Swipe otomatis tetap berlanjut meskipun pengguna berinteraksi
+      },
+    });    
+    
+    var swiper2 = new Swiper(".two-column-swiper", {
       speed: 500,
       loop: true,
+      loopFillGroupWithBlank: true,
       navigation: {
         nextEl: ".button-next",
         prevEl: ".button-prev",
       },
-    });
+      autoplay: {
+        delay: 3000, // Durasi delay dalam milidetik (3000ms = 3 detik)
+        disableOnInteraction: false, // Swipe otomatis tetap berlanjut meskipun pengguna berinteraksi
+      },
+    });    
 
     var swiper = new Swiper("#featured-products .product-swiper", {
       pagination: {

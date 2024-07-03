@@ -4,52 +4,24 @@
 
 @section('content')
 
-    <section id="billboard" class="overflow-hidden">
-
-      <button class="button-prev">
-        <i class="icon icon-chevron-left"></i>
-      </button>
-      <button class="button-next">
-        <i class="icon icon-chevron-right"></i>
-      </button>
-      <div class="swiper main-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background-image: url('../assets/css/images/gtw.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
-            <div class="banner-content">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h2 class="banner-title">Arctic Food</h2>
-                    <p style="color: black">Hangatkan Bersama Keluarga</p>
-                    <div class="btn-wrap">
-                      <a href="/shop" class="btn btn-light btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide" style="background-image: url('../assets/images/banner2.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
-            <div class="banner-content">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h2 class="banner-title">Our Product</h2>
-                    <p style="color: black">Hangatkan Bersama Keluarga</p>
-                    <div class="btn-wrap">
-                      <a href="/shop" class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+<section id="billboard" class="overflow-hidden">
+  <button class="button-prev">
+    <i class="icon icon-chevron-left"></i>
+  </button>
+  <button class="button-next">
+    <i class="icon icon-chevron-right"></i>
+  </button>
+  
+  <div class="swiper-container main-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image: url('../assets/css/images/logobanner.png');"></div>
+      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner1.jpg');"></div>
+      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner4.jpg');"></div>
+      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner5.jpg');"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
 
     <section id="featured-products" class="product-store padding-large">
       <div class="container">

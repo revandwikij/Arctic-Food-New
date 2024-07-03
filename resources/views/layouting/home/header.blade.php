@@ -61,7 +61,7 @@
                     <div class="col-lg-2 col-md-2">
                         <div class="main-logo">
                             <a href="/">
-                                <img style="width: 100px" src="../assets/css/images/arcticlogo.png" alt="logo">
+                                <img style="width: 100px" src="../assets/css/images/arcticremove.png" alt="logo">
                             </a>
                         </div>
                     </div>
