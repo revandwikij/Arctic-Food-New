@@ -4,45 +4,53 @@
 
 @section('content')
 
-<section id="billboard" class="overflow-hidden">
-  <button class="button-prev">
-    <i class="icon icon-chevron-left"></i>
-  </button>
-  <button class="button-next">
-    <i class="icon icon-chevron-right"></i>
-  </button>
-  
-  <div class="swiper-container main-swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background-image: url('../assets/css/images/logobanner.png');"></div>
-      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner1.jpg');"></div>
-      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner4.jpg');"></div>
-      <div class="swiper-slide" style="background-image: url('../assets/css/images/banner5.jpg');"></div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
+    <section id="billboard" class="overflow-hidden">
+        <button class="button-prev">
+            <i class="icon icon-chevron-left"></i>
+        </button>
+        <button class="button-next">
+            <i class="icon icon-chevron-right"></i>
+        </button>
+        <!-- HTML -->
+        <div class="swiper-container main-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/logobanner.png') }}');">
+                </div>
+                <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/banner1.jpg') }}');">
+                </div>
+                <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/banner4.jpg') }}');">
+                </div>
+                <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/banner5.jpg') }}');">
+                </div>
+                <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/rep.jpg') }}');"></div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
     <section id="featured-products" class="product-store padding-large">
-      <div class="container">
-        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-          <h2 class="section-title">New Arrival </h2>
-          <div class="btn-wrap">
-            <a href="/shop" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
-          </div>
-        </div>
-        <div class="swiper product-swiper overflow-hidden">
-          <div class="swiper-wrapper">
-            @foreach ($produkbaru as $item )
-            <div class="product-item col-lg-4 col-md-6 col-sm-6">
-              <div class="image-holder">
-                @if($item->Foto_Barang)
-                  <a href="/single/{{$item->Id_Barang}}">
-                    <img src="{{ asset('uploads/' . $item->Foto_Barang) }}"  alt="Books" class="product-image">
-                  </a>
-              </div>
-              @endif
-              {{-- <div class="cart-concern">
+        <div class="container">
+            <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+                <h2 class="section-title">New Arrival </h2>
+                <div class="btn-wrap">
+                    <a href="/shop" class="d-flex align-items-center">View all products <i
+                            class="icon icon icon-arrow-io"></i></a>
+                </div>
+            </div>
+            <div class="swiper product-swiper overflow-hidden">
+                <div class="swiper-wrapper">
+                    @foreach ($produkbaru as $item)
+                        <div class="product-item col-lg-4 col-md-6 col-sm-6">
+                            <div class="image-holder">
+                                @if ($item->Foto_Barang)
+                                    <a href="/single/{{ $item->Id_Barang }}">
+                                        <img src="{{ asset('uploads/' . $item->Foto_Barang) }}" alt="Books"
+                                            class="product-image">
+                                    </a>
+                            </div>
+                    @endif
+                    {{-- <div class="cart-concern">
                 <div class="cart-button d-flex justify-content-between align-items-center">
                   <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
                   </button>
@@ -56,15 +64,15 @@
                   </button>
                 </div>
               </div> --}}
-              <div class="product-detail">
-                <h3 class="product-title">
-                  <a href="/single/{{$item->Id_Barang}}">{{Str::limit($item->Nama_Barang, 25)}}</a>
-                </h3>
-                <div class="item-price text-primary">Rp. {{number_format($item->Harga)}}</div>
-              </div>
-            </div>
-            @endforeach
-    {{-- @foreach ($barang as $b)
+                    <div class="product-detail">
+                        <h3 class="product-title">
+                            <a href="/single/{{ $item->Id_Barang }}">{{ Str::limit($item->Nama_Barang, 25) }}</a>
+                        </h3>
+                        <div class="item-price text-primary">Rp. {{ number_format($item->Harga) }}</div>
+                    </div>
+                </div>
+                @endforeach
+                {{-- @foreach ($barang as $b)
 
             <div class="swiper-slide">
               <div class="product-item">
@@ -93,61 +101,68 @@
             </div>
         </div>
         @endforeach --}}
-          </div>
+            </div>
         </div>
         <div class="swiper-pagination"></div>
-      </div>
+        </div>
     </section>
 
     <section id="latest-collection">
-      <div class="container">
-        <div class="product-collection row">
-          <div class="col-lg-7 col-md-12 left-content">
-            <div class="collection-item">
-              <div class="products-thumb">
-                <img src="../assets/images/collection-item1.jpg" alt="collection item" class="large-image image-rounded">
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
-                <div class="categories">olahan</div>
-                <h3 class="item-title">AYAM</h3>
-                <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak terlupakan.</p>
-                <div class="btn-wrap">
-                  <a href="/lihat" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
-                  </a>
+        <div class="container">
+            <div class="product-collection row">
+                <div class="col-lg-7 col-md-12 left-content">
+                    <div class="collection-item">
+                        <div class="products-thumb">
+                            <img src="../assets/images/collection-item1.jpg" alt="collection item"
+                                class="large-image image-rounded">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
+                            <div class="categories">olahan</div>
+                            <h3 class="item-title">AYAM</h3>
+                            <p>Ayam goreng istimewa dengan rempah khas, renyah di luar, lembut di dalam, cita rasa tak
+                                terlupakan.</p>
+                            <div class="btn-wrap">
+                                <a href="/lihat" class="d-flex align-items-center">shop collection <i
+                                        class="icon icon-arrow-io"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5 col-md-12 right-content flex-wrap">
-            <div class="collection-item top-item">
-              <div class="products-thumb">
-                <img src="../assets/images/collection-item2.jpg" alt="collection item" class="small-image image-rounded">
-              </div>
-              <div class="col-md-6 product-entry">
-                <div class="categories">Olahan</div>
-                <h3 class="item-title">SAPI</h3>
-                <div class="btn-wrap">
-                  <a href="/lihat1" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
-                  </a>
+                <div class="col-lg-5 col-md-12 right-content flex-wrap">
+                    <div class="collection-item top-item">
+                        <div class="products-thumb">
+                            <img src="../assets/images/collection-item2.jpg" alt="collection item"
+                                class="small-image image-rounded">
+                        </div>
+                        <div class="col-md-6 product-entry">
+                            <div class="categories">Olahan</div>
+                            <h3 class="item-title">SAPI</h3>
+                            <div class="btn-wrap">
+                                <a href="/lihat1" class="d-flex align-items-center">shop collection <i
+                                        class="icon icon-arrow-io"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collection-item bottom-item">
+                        <div class="products-thumb">
+                            <img src="../assets/images/collection-item3.jpg" alt="collection item"
+                                class="small-image image-rounded">
+                        </div>
+                        <div class="col-md-6 product-entry">
+                            <div class="categories">Olahan</div>
+                            <h3 class="item-title">IKAN</h3>
+                            <div class="btn-wrap">
+                                <a href="/lihat2" class="d-flex align-items-center">shop collection <i
+                                        class="icon icon-arrow-io"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="collection-item bottom-item">
-              <div class="products-thumb">
-                <img src="../assets/images/collection-item3.jpg" alt="collection item" class="small-image image-rounded">
-              </div>
-              <div class="col-md-6 product-entry">
-                <div class="categories">Olahan</div>
-                <h3 class="item-title">IKAN</h3>
-                <div class="btn-wrap">
-                  <a href="/lihat2" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     {{-- <section id="selling-products" class="product-store bg-light-grey padding-large">
@@ -332,62 +347,60 @@
 
     <section id="flash-sales" class="product-store padding-large">
 
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Our Product</h2>
-        </div>
-        <div class="swiper product-swiper flash-sales overflow-hidden">
-          <div class="swiper-wrapper">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Product</h2>
+            </div>
+            <div class="swiper product-swiper flash-sales overflow-hidden">
+                <div class="swiper-wrapper">
 
-            @foreach ($barang as $data)
-
-
-            <div class="swiper-slide">
-              <div class="product-item">
-                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}"  alt="Books" class="product-image">
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <a href="/single/{{ $data->Id_Barang }}" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i></button>
-                    {{-- <button type="button" class="view-btn tooltip
+                    @foreach ($barang as $data)
+                        <div class="swiper-slide">
+                            <div class="product-item">
+                                <img src="{{ asset('uploads/' . $data->Foto_Barang) }}" alt="Books"
+                                    class="product-image">
+                                <div class="cart-concern">
+                                    <div class="cart-button d-flex justify-content-between align-items-center">
+                                        <a href="/single/{{ $data->Id_Barang }}"
+                                            class="btn-wrap cart-link d-flex align-items-center">add to cart <i
+                                                class="icon icon-arrow-io"></i></button>
+                                            {{-- <button type="button" class="view-btn tooltip
                         d-flex">
                       <i class="icon icon-screen-full"></i>
                       <span class="tooltip-text">Quick view</span>
                     </button> --}}
-                    {{-- <button type="button" class="wishlist-btn">
+                                            {{-- <button type="button" class="wishlist-btn">
                       <i class="icon icon-heart"></i>
                     </button> --}}
-                  </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="discount">10% Off</div> --}}
+                                <div class="product-detail">
+                                    <h3 class="product-title">
+                                        <a
+                                            href="/single/{{ $data->Id_Barang }}">{{ Str::limit($data->Nama_Barang, 25) }}</a>
+                                    </h3>
+                                    <div class="item-price text-primary">
+                                        <del class="prev-price"></del>Rp. {{ number_format($data->Harga) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
                 </div>
-                {{-- <div class="discount">10% Off</div> --}}
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="/single/{{ $data->Id_Barang }}">{{Str::limit($data->Nama_Barang, 25) }}</a>
-                  </h3>
-                  <div class="item-price text-primary">
-                    <del class="prev-price"></del>Rp. {{number_format($data->Harga)}}
-                  </div>
-                </div>
-              </div>
+                <div class="swiper-pagination"></div>
+
             </div>
-
-
-
-
-            @endforeach
-
-
-          </div>
-          <div class="swiper-pagination"></div>
-
         </div>
-      </div>
     </section>
 
     <section class="shoppify-section-banner">
-      <div class="container">
-        <div class="product-collection">
-          <div class="left-content collection-item">
-            {{-- <div class="products-thumb">
+        <div class="container">
+            <div class="product-collection">
+                <div class="left-content collection-item">
+                    {{-- <div class="products-thumb">
               <img src="../assets/images/model.jpg" alt="collection item" class="large-image image-rounded">
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
@@ -398,20 +411,20 @@
                 <a href="/shop" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
                 </a>
               </div> --}}
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <section id="quotation" class="align-center padding-large">
-      <div class="inner-content">
-        <h2 class="section-title divider">Quote of the day</h2>
-        <blockquote>
-          <q>Beli frozen food, dinginkan hatiku, dan biarkan cinta kita menghangatkan microwave bersama-sama!</q>
-          <div class="author-name">- mas iki 2023</div>
-        </blockquote>
-      </div>
+        <div class="inner-content">
+            <h2 class="section-title divider">Quote of the day</h2>
+            <blockquote>
+                <q>Beli frozen food, dinginkan hatiku, dan biarkan cinta kita menghangatkan microwave bersama-sama!</q>
+                <div class="author-name">- mas iki 2023</div>
+            </blockquote>
+        </div>
     </section>
 
     <hr>
@@ -477,35 +490,35 @@
     </section> --}}
 
     <section id="shipping-information">
-      <hr>
-      <div class="container">
-        <div class="row d-flex flex-wrap align-items-center justify-content-between">
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-return"></i>
-              <h4 class="block-title">
-                <strong>Uang Kembali</strong> Pengembalian dalam 7 hari
-              </h4>
+        <hr>
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center justify-content-between">
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-return"></i>
+                        <h4 class="block-title">
+                            <strong>Uang Kembali</strong> Pengembalian dalam 7 hari
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-tags1"></i>
+                        <h4 class="block-title">
+                            <strong>Dengan</strong> Harga Terbaik
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="icon-box">
+                        <i class="icon icon-help_outline"></i>
+                        <h4 class="block-title">
+                            <strong>Any questions?</strong> experts are ready
+                        </h4>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-tags1"></i>
-              <h4 class="block-title">
-                <strong>Dengan</strong> Harga Terbaik
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="icon-box">
-              <i class="icon icon-help_outline"></i>
-              <h4 class="block-title">
-                <strong>Any questions?</strong> experts are ready
-              </h4>
-            </div>
-          </div>
         </div>
-      </div>
-      <hr>
+        <hr>
     </section>
 @endsection

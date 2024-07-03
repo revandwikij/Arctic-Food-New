@@ -1,5 +1,6 @@
 <script src="{{asset('../assets/js/jquery-1.11.0.min.js')}}"></script>
 <script src="{{asset('../assets/js/plugins.js')}}"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{asset('../assets/js/script.js')}}"></script>
 {{-- <script>
 document.addEventListener('DOMContentLoaded', function () {

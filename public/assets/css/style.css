@@ -1891,41 +1891,44 @@ blockquote cite {
     border-bottom: solid 3px var(--light-color);
 }
 
-/*----- Billboard
---------------------------------------------------------------*/
+/* CSS */
+/*----- Billboard -----*/
 #billboard {
   position: relative;
 }
+
 #billboard .button-prev,
 #billboard .button-next {
-  font-size: 24px;
+  font-size: 20px;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 12px;
-  height: fit-content;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
-  margin: auto;
-  padding: 10px;
   background: rgba(255, 255, 255, 0.4);
   color: #191919;
+  cursor: pointer;
 }
+
 #billboard .button-prev {
   left: 0;
 }
+
 #billboard .button-next {
   right: 0;
 }
+
 #billboard .button-prev:hover,
 #billboard .button-next:hover {
   color: var(--light-color);
   background-color: var(--primary-color);
 }
+
 .swiper-container {
   overflow: hidden;
-  width: 100%;
+  width: calc(100% - 100px); /* Menyesuaikan lebar untuk memperhitungkan margin kiri dan kanan */
+  margin: 0 auto; /* Memusatkan swiper-container secara horizontal */
   border-radius: 10px;
-  padding: 10px; /* Memberikan jarak pada container agar gambar tidak menempel */
+  padding: 20px; /* Memberikan jarak pada container agar gambar tidak menempel */
   padding-top: 30px; /* Menambahkan jarak atas */
 }
 
@@ -1940,36 +1943,37 @@ blockquote cite {
   max-height: 300px; /* Membatasi tinggi maksimal */
   min-height: 100px;
   margin: 10px; /* Memberikan jarak antar slide */
+  margin-left: 20px; /* Menambahkan margin kiri */
+  margin-right: 20px; /* Menambahkan margin kanan */
   border-radius: 10px;
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 /* Responsive adjustments */
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 600px) {
   .main-swiper .swiper-slide {
-    height: calc(40vw * 3 / 4);
-  }
-}
-
-@media screen and (max-width: 1099px) {
-  .main-swiper .swiper-slide {
-    height: calc(40vw * 3 / 4);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .main-swiper .swiper-slide {
-    height: calc(40vw * 3 / 4);
-    margin: 5px;
+    height: calc(40vw * 3 / 3);
   }
 }
 
 @media screen and (max-width: 600px) {
   .main-swiper .swiper-slide {
-    height: calc(40vw * 3 / 4);
-    margin: 2px;
+    height: calc(40vw * 3 / 3);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 /3);
+    margin: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-swiper .swiper-slide {
+    height: calc(40vw * 3 / 3);
+    margin: 10px;
   }
 }
 

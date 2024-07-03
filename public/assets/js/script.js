@@ -90,30 +90,37 @@
       $(".search-box").toggleClass('active');
     });
 
-    var swiper = new Swiper(".main-swiper", {
-      speed: 500,
-      loop: true,
-      navigation: {
-        nextEl: ".button-next",
-        prevEl: ".button-prev",
-      },
-      pagination: {
-        el: "#billboard .swiper-pagination",
-        clickable: true,
-      },
-      autoplay: {
-        delay: 3000, // Durasi delay dalam milidetik (3000ms = 3 detik)
-        disableOnInteraction: false, // Swipe otomatis tetap berlanjut meskipun pengguna berinteraksi
-      },
-    });    
+    // //ini bagian swipe
+    // var swiper = new Swiper(".main-swiper", {
+    //   speed: 500,
+    //   loop: true,
+    //   navigation: {
+    //     nextEl: ".button-next",
+    //     prevEl: ".button-prev",
+    //   },
+    //   pagination: {
+    //     el: ".swiper-pagination",
+    //     clickable: true,
+    //   },
+    //   autoplay: {
+    //     delay: 3000, // Durasi delay dalam milidetik (3000ms = 3 detik)
+    //     disableOnInteraction: false, // Swipe otomatis tetap berlanjut meskipun pengguna berinteraksi
+    //   },
+    // });    
     
-    var swiper2 = new Swiper(".two-column-swiper", {
+    var swiper2 = new Swiper(".main-swiper", {
       speed: 500,
+      slidesPerView: 3,
+      spaceBetween:10,
       loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: ".button-next",
         prevEl: ".button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
       autoplay: {
         delay: 3000, // Durasi delay dalam milidetik (3000ms = 3 detik)
