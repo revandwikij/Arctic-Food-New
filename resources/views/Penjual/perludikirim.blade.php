@@ -4,93 +4,93 @@
 
 @section('content')
 
-<style>
-    tr.rounded.bg-white {
-    border: 1px solid #ccafaf; /* Garis tepi 1px solid */
-    border-radius: 10px; /* Membuat sudut elemen melengkung */
-    padding: 10px; /* Padding untuk ruang di sekitar elemen */
-}
-</style>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Perlu Dikirim</h1>
-     </div>
-</section>
+    <br>
 
-<div class="container mt-5">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Perlu Dikirim</h3>
+        </div>
+    </section>
 
+    <br>
 
-    <table class="table table-borderless main">
-<thead>
-<tr class="head">
-  <th scope="col" class="ml-2">
+    <div class="container mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="myTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID Pesanan</th>
+                                        <th scope="col">Tanggal Pesan</th>
+                                        <th scope="col">Pembeli</th>
+                                        <th scope="col">Status Pesanan</th>
+                                        <th scope="col">Total Bayar</th>
+                                        <th scope="col">Kota Pengiriman</th>
+                                        <th scope="col">Status Pembayaran</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($pesanan as $item)
+                                        <tr>
+                                            <td class="order-color">{{ $item->Id_Pesanan }}</td>
+                                            <td>{{ $item->Tgl_Pesanan }}</td>
+                                            <td class="d-flex align-items-center">
+                                                <span class="ml-2">{{ $item->username }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="ml-2">{{ $item->Status_Pesanan }}</span>
+                                            </td>
+                                            <td>{{ $item->Total_Harga }}</td>
+                                            <td>{{ $item->Kota }}</td>
+                                            <td>{{ $item->Status_Pembayaran }}</td>
+                                            <td>
+                                                @if ($item->Status_Pesanan == 'Diproses')
+                                                    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-primary mb-2">Kirim</button>
+                                                    </form>
+                                                @endif
+                                                @if ($item->Status_Pesanan == 'Dikirim')
+                                                    <a href="{{ url('/lihatinvoice/' . $item->Id_Pesanan) }}"
+                                                        target="_blank" class="btn btn-primary mb-2">Lihat Invoice</a>
+                                                    <a href="{{ url('/kiriminvoice/' . $item->Id_Pesanan) }}"
+                                                        class="btn btn-primary mb-2">Kirim Invoice</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "order": [
+                    [0, "desc"]
+                ] 
+            });
+        });
+    </script>
 
-
-  </th>
-  <th scope="col">ID Pesanan</th>
-  <th scope="col">Tanggal Pesan</th>
-  <th scope="col">Pembeli</th>
-  <th scope="col">Status Pesanan</th>
-  <th scope="col">Total Bayar</th>
-  <th scope="col">Kota Pengiriman</th>
-  <th scope="col">Status Pembayaran</th>
-  <th scope="col">Aksi</th>
-</tr>
-</thead>
-<tbody>
-
-@foreach ($pesanan as $item)
-
-
-<tr class="rounded bg-white">
-  <th scope="row">
-       <div class="form-check">
-
-       </div>
-  </th>
-  <td class="order-color">{{$item->Id_Pesanan}}</td>
-  <td>{{$item->Tgl_Pesanan}}</td>
-  <td class="d-flex align-items-center">
-
-      <span class="ml-2">{{$item->username}}</span>
-  </td>
-   <td>
-    <span class="ml-2">{{$item->Status_Pesanan}}</span>
-
-</div>
-  </td>
-  <td>{{$item->Total_Harga}}</td>
-  <td>{{$item->Kota}}</td>
-  <td>
-     {{ $item->Status_Pembayaran}}
-</div>
-  </td>
-  <td>
-    @if ($item->Status_Pesanan == 'Diproses')
-    <form action="kirim/{{ $item->Id_Pesanan }}" method="post">
-      {{ csrf_field() }}
-    <button type="submit" class="btn btn-primary mb-2">Kirim</button>
-    </form>
-    @endif
-    @if ($item->Status_Pesanan == 'Dikirim')
-    <a href="{{ url('/lihatinvoice/'.$item->Id_Pesanan) }}" target="_blank" class="btn btn-primary mb-2">Lihat Invoice</a>
-    <a href="{{ url('/kiriminvoice/'.$item->Id_Pesanan) }}"  class="btn btn-primary mb-2">Kirim Invoice</a>
-
-    @endif
-  </td>
-
-</tr>
-
-@endforeach
-
-
-</tbody>
-</table>
-
-
-</div>
-
+    <style>
+        .table-responsive {
+            font-size: 12px;
+        }
+    </style>
 
 @endsection
