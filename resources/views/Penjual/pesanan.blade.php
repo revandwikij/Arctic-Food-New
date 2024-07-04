@@ -4,74 +4,81 @@
 
 @section('content')
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+    <br>
+
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Pesanan Masuk</h1>
+            <h3 class="jumbotron-heading">Pesanan Masuk</h3>
         </div>
     </section>
 
-    <div class="container mt-5">
+    <br>
 
-        <table class="table table-borderless main">
-            <thead>
-                <tr class="head">
-                    <th scope="col" class="ml-2">
-
-                    </th>
-                    <th scope="col">ID Pesanan</th>
-                    <th scope="col">Tanggal Pesan</th>
-                    <th scope="col">Pembeli</th>
-                    <th scope="col">Status Pesanan</th>
-                    <th scope="col">Total Bayar</th>
-                    <th scope="col">Kota Pengiriman</th>
-                    <th scope="col">Status Pembayaran</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach ($pesanan as $item)
-                    <tr class="rounded bg-white">
-                        <th scope="row">
-                            <div class="form-check">
-
-                            </div>
-                        </th>
-                        <td class="order-color">{{ $item->Id_Pesanan }}</td>
-                        <td>{{ $item->Tgl_Pesanan }}</td>
-                        <td class="d-flex align-items-center">
-
-                            <span class="ml-2">{{ $item->username }}</span>
-                        </td>
-                        <td>
-
-                            {{ $item->Status_Pesanan }}
-
-    </div>
-    </td>
-    <td>{{ $item->Total_Harga }}</td>
-    <td>{{ $item->Kota }}</td>
-    <td>{{ $item->Status_Pembayaran }}</td>
-    </div>
-    </td>
-    <td>
-        @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
-            <form action="konfirm/{{ $item->Id_Pesanan }}" method="post">
-                {{-- @csrf --}}
-                {{ csrf_field() }}
-                {{-- {{ csrf_token() }} --}}
-                <button type="submit" class="btn btn-primary mb-2">Konfirmasi</button>
-            </form>
-        @endif
-    </td>
-    </tr>
-    @endforeach
-
-    </tbody>
-    </table>
-
-    {{ $pesanan->links() }}
-
+    <div class="container mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="sorting">ID Pesanan</th>
+                                    <th class="sorting">Tanggal Pesan</th>
+                                    <th class="sorting">Pembeli</th>
+                                    <th class="sorting">Status Pesanan</th>
+                                    <th class="sorting">Total Bayar</th>
+                                    <th class="sorting">Kota Pengiriman</th>
+                                    <th class="sorting">Status Pembayaran</th>
+                                    <th class="sorting">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pesanan as $item)
+                                    <td class="order-color">{{ $item->Id_Pesanan }}</td>
+                                    <td>{{ $item->Tgl_Pesanan }}</td>
+                                    <td class="d-flex align-items-center">
+                                        <span class="ml-2">{{ $item->username }}</span>
+                                    </td>
+                                    <td>{{ $item->Status_Pesanan }}</td>
+                                    <td>{{ $item->Total_Harga }}</td>
+                                    <td>{{ $item->Kota }}</td>
+                                    <td>{{ $item->Status_Pembayaran }}</td>
+                                    <td>
+                                        @if ($item->Status_Pesanan == 'Menunggu Konfirmasi' && $item->Status_Pembayaran == 'Lunas')
+                                            <form action="konfirm/{{ $item->Id_Pesanan }}" method="post">
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-primary mb-2">Konfirmasi</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "order": [
+                    [0, "desc"]
+                ] 
+            });
+        });
+    </script>
+
+    <style>
+        .table-responsive{
+            font-size: 12px;
+        }
+    </style>
 @endsection
