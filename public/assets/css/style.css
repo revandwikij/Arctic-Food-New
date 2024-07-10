@@ -1000,7 +1000,7 @@ img.image-circle {
     padding-bottom: 20px;
 }
 .section-title {
-    font-size: 2.6em;
+    font-size: 1.75em;
     font-weight: 700;
 }
 
@@ -1899,7 +1899,7 @@ blockquote cite {
 
 #billboard .button-prev,
 #billboard .button-next {
-  font-size: 20px;
+  font-size: 15px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1907,14 +1907,15 @@ blockquote cite {
   background: rgba(255, 255, 255, 0.4);
   color: #191919;
   cursor: pointer;
+  border-radius: 60%;
 }
 
 #billboard .button-prev {
-  left: 0;
+  left: 50px;
 }
 
 #billboard .button-next {
-  right: 0;
+  right: 50px;
 }
 
 #billboard .button-prev:hover,
@@ -1939,7 +1940,7 @@ blockquote cite {
 
 .main-swiper .swiper-slide {
   flex: 0 0 40%; /* Mengatur lebar slide agar menjadi 40% dari container */
-  height: calc(40vw * 3 / 4); /* Mengatur tinggi slide dengan rasio 3:4 */
+  height: calc(20vw); /* Mengatur tinggi slide dengan rasio 3:4 */
   max-height: 300px; /* Membatasi tinggi maksimal */
   min-height: 100px;
   margin: 10px; /* Memberikan jarak antar slide */
