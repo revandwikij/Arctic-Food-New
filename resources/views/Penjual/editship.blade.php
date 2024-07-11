@@ -1,49 +1,70 @@
 @extends('layouting.layout admin.master')
 
-@section('title', 'editship')
+@section('title', 'Edit Shipping')
 
 @section('content')
-@if(session('errors'))
-    <div class="alert alert-danger">
-        {{ session('errors') }}
-    </div>
-@endif
+    @if (session('errors'))
+        <div class="alert alert-danger">
+            {{ session('errors') }}
+        </div>
+    @endif
 
-<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            <h3>Edit Shipping</h3>
-            <div class="card">
-                <h5 class="text-center mb-4"></h5>
-                @foreach ($biaya_shipping as $S)
-                <form action="/edit" class="form-card" method="POST" enctype="multipart/form-data">
-                    @csrf
+    <br>
 
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Id Biaya<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Id_Biaya" placeholder="Id_Biaya" 
-                            onblur="validate(5)"  value="{{ $S->Id_Biaya }}" readonly> 
-                        </div>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Edit Produk</h3>
+        </div>
+    </section>
+
+    <br>
+
+    <div class="container-fluid mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-11 col-lg-11 col-md-11 col-11">
+                <div class="card shadow-lg p-3">
+                    <div class="card-body">
+                        @foreach ($biaya_shipping as $S)
+                            <form action="/edit" class="form-card" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row mb-3">
+                                    <div class="form-group col-12">
+                                        <label for="Id_Biaya" class="form-label" style="color: black; font-weight: 500;">ID
+                                            Biaya<span class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control" id="Id_Biaya" name="Id_Biaya"
+                                            placeholder="Id_Biaya" value="{{ $S->Id_Biaya }}" disabled readonly
+                                            style="color: black;">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="form-group col-sm-6">
+                                        <label for="Kota" class="form-label"
+                                            style="color: black; font-weight: 500;">Kota<span class="text-danger">
+                                                *</span></label>
+                                        <input type="text" class="form-control" id="Kota" name="Kota"
+                                            placeholder="Kota" value="{{ $S->Kota }}" style="color: black;">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="Biaya_Shipping_per_Kg" class="form-label"
+                                            style="color: black; font-weight: 500;">Biaya/gram<span class="text-danger">
+                                                *</span></label>
+                                        <input type="text" class="form-control" id="Biaya_Shipping_per_Kg"
+                                            name="Biaya_Shipping_per_Kg" placeholder=""
+                                            value="{{ $S->Biaya_Shipping_per_Kg }}" style="color: black;">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 text-end">
+                                        <button type="submit" class="btn btn-primary">Ubah</button>
+                                    </div>
+                                </div>
+                            </form>
+                        @endforeach
                     </div>
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Kota<span class="text-danger"> *</span></label> <input type="text" id="Berat" name="Kota" placeholder="Kota" 
-                            onblur="validate(5)"  value="{{ $S->Kota }}"> 
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3 mb-2">Biaya/gram<span class="text-danger"> *</span></label> <input type="text" id="Stok" name="Biaya_Shipping_per_Kg" placeholder="" 
-                            onblur="validate(5)" value="{{ $S->Biaya_Shipping_per_Kg }}"> 
-                        </div>
-                    </div>
-
-
-                    <div class="row justify-content-end">
-                        <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Edit</button> </div>
-                    </div>
-                </form>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endsection

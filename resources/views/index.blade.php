@@ -25,87 +25,43 @@
                 <div class="swiper-slide" style="background-image: url('{{ asset('assets/css/images/rep.jpg') }}');"></div>
 
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" style="top: 90%"></div>
         </div>
     </section>
 
     <section id="featured-products" class="product-store padding-large">
-        <div class="container">
-            <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-                <h2 class="section-title">New Arrival </h2>
-                <div class="btn-wrap">
-                    <a href="/shop" class="d-flex align-items-center">View all products <i
-                            class="icon icon icon-arrow-io"></i></a>
-                </div>
-            </div>
-            <div class="swiper product-swiper overflow-hidden">
-                <div class="swiper-wrapper">
-                    @foreach ($produkbaru as $item)
-                        <div class="product-item col-lg-4 col-md-6 col-sm-6">
-                            <div class="image-holder">
-                                @if ($item->Foto_Barang)
-                                    <a href="/single/{{ $item->Id_Barang }}">
-                                        <img src="{{ asset('uploads/' . $item->Foto_Barang) }}" alt="Books"
-                                            class="product-image">
-                                    </a>
-                            </div>
-                    @endif
-                    {{-- <div class="cart-concern">
-                <div class="cart-button d-flex justify-content-between align-items-center">
-                  <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                  </button>
-                  <button type="button" class="view-btn tooltip
-                      d-flex">
-                    <i class="icon icon-screen-full"></i>
-                    <span class="tooltip-text">Quick view</span>
-                  </button>
-                  <button type="button" class="wishlist-btn">
-                    <i class="icon icon-heart"></i>
-                  </button>
-                </div>
-              </div> --}}
-                    <div class="product-detail">
-                        <h3 class="product-title">
-                            <a href="/single/{{ $item->Id_Barang }}">{{ Str::limit($item->Nama_Barang, 25) }}</a>
-                        </h3>
-                        <div class="item-price text-primary">Rp. {{ number_format($item->Harga) }}</div>
-                    </div>
-                </div>
-                @endforeach
-                {{-- @foreach ($barang as $b)
-
-            <div class="swiper-slide">
-              <div class="product-item">
-                <div class="image-holder">
-                    @if ($b->Foto_Barang)
-                        <img class="product-image" style="max-width: 400px; max-height:420px" alt="Books" src="{{ url('Foto_barang'). '/'. $b->Foto_Barang }}">
-                    @endif
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <form action="/detail/{{$b->Id_Barang}}" method="get">
-                        <button type="submit" class="view-btn tooltip
-                            d-flex">
-                        <i class="icon icon-screen-full"></i>
-                        <span class="tooltip-text">Quick view</span>
-                        </button>
-                    </form>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="/detail/{{ $b->Id_Barang }}">{{ $b->Nama_Barang }}</a>
-                  </h3>
-                  <span class="item-price text-primary">Rp.{{number_format($b->Harga)}}</span>
-                </div>
+    <div class="container">
+        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+            <h2 class="section-title">New Arrival</h2>
+            <div class="btn-wrap">
+                <a href="/shop" class="d-flex align-items-center">View all products <i class="icon icon-arrow-io"></i></a>
             </div>
         </div>
-        @endforeach --}}
+        <div class="swiper product-swiper overflow-hidden">
+            <div class="swiper-wrapper row">
+                @foreach ($produkbaru as $item)
+                    <div class="product-item">
+                        <div class="image-holder">
+                            @if ($item->Foto_Barang)
+                                <a href="/single/{{ $item->Id_Barang }}">
+                                    <img src="{{ asset('uploads/' . $item->Foto_Barang) }}" alt="Books" class="product-image">
+                                </a>
+                            @endif
+                        </div>
+                        <div class="product-detail">
+                            <h3 class="product-title">
+                                <a href="/single/{{ $item->Id_Barang }}">{{ Str::limit($item->Nama_Barang, 25) }}</a>
+                            </h3>
+                            <div class="item-price text-primary">Rp. {{ number_format($item->Harga) }}</div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         <div class="swiper-pagination"></div>
-        </div>
-    </section>
+    </div>
+</section>
+
 
     <section id="latest-collection">
         <div class="container">
