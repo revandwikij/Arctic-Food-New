@@ -59,7 +59,7 @@
                                         <th class="sorting">Stok</th>
                                         <th class="sorting">Keterangan Barang</th>
                                         <th class="sorting">Harga</th>
-                                        <th class="sorting" style="width: 50px">Action</th>
+                                        <th class="sorting" style="width: 50px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

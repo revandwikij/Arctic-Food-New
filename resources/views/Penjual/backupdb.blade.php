@@ -8,7 +8,7 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h3 class="jumbotron-heading">Backup Database</h3>
+            <h3 class="jumbotron-heading">Cadangkan dan Pulihkan Data</h3>
         </div>
     </section>
 
@@ -21,10 +21,9 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Backup Database</h4>
-                        <p class="card-text">Click the button below to backup the database.</p>
+                        <h4 class="card-title">Cadangkan Data</h4>
                         <a href="/backup" class="btn btn-primary">
-                            <i class="fa fa-database"></i> Backup Database
+                            <i class="fa fa-database"></i> Cadangkan
                         </a>
                     </div>
                 </div>
@@ -38,15 +37,14 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Restore Database</h4>
-                        <p class="card-text">Click the button below to restore the database.</p>
+                        <h4 class="card-title">Memulihkan Data</h4>
                         <form action="{{ route('restore') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="custom-file mb-3">
                                 <input type="file" class="custom-file-input" id="sql_file" name="sql_file">
                             </div>
                             <button type="submit" class="btn btn-success">
-                                <i class="fa fa-refresh"></i> Restore Database
+                                <i class="fa fa-refresh"></i> Pulihkan
                             </button>
                         </form>
                     </div>
